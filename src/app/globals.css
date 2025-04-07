@@ -24,3 +24,44 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+/* Animación para alternar entre Before y After */
+@keyframes beforeAfterAnimation {
+  0% {
+    opacity: 1; /* Before visible */
+  }
+  25% {
+    opacity: 0; /* Before desaparece */
+  }
+  25.01% {
+    opacity: 0; /* After empieza a aparecer */
+  }
+  100% {
+    opacity: 0; /* After visible durante el resto del tiempo */
+  }
+}
+
+@keyframes afterBeforeAnimation {
+  0% {
+    opacity: 0; /* After invisible */
+  }
+  25% {
+    opacity: 0; /* After invisible */
+  }
+  25.01% {
+    opacity: 1; /* After aparece */
+  }
+  100% {
+    opacity: 1; /* After visible durante el resto del tiempo */
+  }
+}
+
+.before-animation {
+  animation: beforeAfterAnimation 8s infinite;
+}
+
+.after-animation {
+  animation: afterBeforeAnimation 8s infinite;
+}
