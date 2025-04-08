@@ -3,7 +3,9 @@ import Image from 'next/image'
 import BeforeAfterAnimation from './BeforeAfterAnimation'
 import Card from './Card'
 import InputDesign from './Frame66Card'
-import SvgWithVideoBackground from './SVG'
+import CardReview from './CardReview'
+import Form from './ContactForm/Form'
+import FooterSection from './FooterSection'
 
 function Body() {
     return (
@@ -167,7 +169,7 @@ function Body() {
             </section>
 
 
-            <section id='Frame64' className='overflow-hidden flex h-full max-h-[1127px] w-full max-w-[1622px] py-[120px] flex-col items-center gap-[41px]'>
+            <section id='Frame64' className='overflow-hidden flex max-h-[1127px] w-full max-w-[1622px] py-[120px] flex-col items-center gap-[41px]'>
 
                 <div id='Frame65' className='flex px-[320px] flex-col items-center gap-5 self-stretch'>
                     <p className='text-[#0F172A] text-center font-plus_jakarta_sans text-4xl font-bold leading-[60px] w-[726.25px]'>
@@ -250,67 +252,42 @@ function Body() {
 
             </section>
 
-            {/* 
-            <div className='bg-[#512AFF] w-full h-[370.171px]'>TEXTO</div> */}
 
-            <section id='Frame8' className='overflow-hidden w-full max-w-[1600px] h-full max-h-[1415px] flex flex-col items-center gap-[10px] self-stretch'>
-                <div id='Group28' className='relative overflow-hidden w-full max-w-[1600px] h-full max-h-[1415px]'>
-                    <div id='Frame12' className='absolute top-0 left-0 w-full max-w-[1600px] h-full max-h-[843px] flex-shrink-0 bg-[#485AFF]'>
-                        <div id='Content' className='w-[966px] h-[682px] shrink-0'>
-                            <div id='Frame5' className='z-[-5] mt-[113px] ml-[80px] flex w-[966px] flex-col items-start gap-[38px]'>
-                                <p className='text-[#F5F9FF] font-inter text-[80px] font-bold leading-[86px] tracking-[-4px] self-stretch'>Transform Your Pool Experience</p>
-                                <p className='text-[#FFF] font-inter text-[24px] font-normal leading-[40px] self-stretch'>We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations.  </p>
-                                <button className='flex p-[16px_20px] flex-col justify-center items-center gap-[10px] rounded-[8px] bg-[#F5F9FF]'>
-                                    <div id='Frame1' className='flex justify-center items-center gap-[9px]'>
-                                        <p className='text-[#485AFF] text-center font-inter text-[18px] font-extrabold leading-[28px]'>Start with a Free Estimate</p>
-                                    </div>
-                                </button>
+            {/* <section id='Frame 8' style={{ backgroundImage: "url('/svgs/Group_28.svg')" }} className='overflow-hidden w-full max-w-[1600px] h-full max-h-[1415px] flex flex-col items-center gap-[10px] self-stretch'>
+                
+                <div id='Content' className='ml-[-300px] mt-[113px]  w-[966px] h-[682px] shrink-0'>
+                    <div id='Frame5' className='flex w-[966px] flex-col items-start gap-[38px]'>
+                        <p className='text-[#F5F9FF] font-inter text-[80px] font-bold leading-[86px] tracking-[-4px] self-stretch'>Transform Your Pool Experience</p>
+                        <p className='text-[#FFF] font-inter text-[24px] font-normal leading-[40px] self-stretch'>We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations.  </p>
+                        <button className='flex p-[16px_20px] flex-col justify-center items-center gap-[10px] rounded-[8px] bg-[#F5F9FF]'>
+                            <div id='Frame1' className='flex justify-center items-center gap-[9px]'>
+                                <p className='text-[#485AFF] text-center font-inter text-[18px] font-extrabold leading-[28px]'>Start with a Free Estimate</p>
                             </div>
-
-                        </div>
-
-
-
+                        </button>
                     </div>
 
-                    <div id='vector7' className='absolute top-[16.5%] right-[-15.5%] w-[893.011px] h-[571.264px] flex-shrink-0 fill-[#0F172A] stroke-[#FFF] stroke-[26px] z-10'>
-                        <Image src={'/svgs/vector_7.svg'} alt='vector7'
-                            width={893.011}
-                            height={571.264}
-                            className='w-full h-full'
-                        />
+                </div>
+            </section> */}
+
+            <section id='Frame8' style={{ backgroundImage: "url('/svgs/Group_28.svg')" }}
+                className='overflow-hidden w-full max-w-[1600px] h-[1415px] flex flex-col items-center gap-[10px] self-stretch'>
+                <div id='Content' className='ml-[-300px] mt-[113px]  w-[966px] h-[682px] shrink-0'>
+                    <div id='Frame5' className='flex w-[966px] flex-col items-start gap-[38px]'>
+                        <p className='text-[#F5F9FF] font-inter text-[80px] font-bold leading-[86px] tracking-[-4px] self-stretch'>Transform Your Pool Experience</p>
+                        <p className='text-[#FFF] font-inter text-[24px] font-normal leading-[40px] self-stretch'>We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations.  </p>
+                        <button className='flex p-[16px_20px] flex-col justify-center items-center gap-[10px] rounded-[8px] bg-[#F5F9FF]'>
+                            <div id='Frame1' className='flex justify-center items-center gap-[9px]'>
+                                <p className='text-[#485AFF] text-center font-inter text-[18px] font-extrabold leading-[28px]'>Start with a Free Estimate</p>
+                            </div>
+                        </button>
                     </div>
-
-                    <Image src={'/images/piscina_1.png'} alt={'piscina'}
-                        width={1202.779}
-                        height={571.666}
-                        className='absolute top-[59.43%] left-0 shrink-0'
-                    />
-                    <Image src={'/svgs/rectangle_5.svg'} alt='rectangle5'
-                        width={437.273}
-                        height={571.666}
-                        className='absolute overflow-hidden top-[59.646%] right-0 shrink-0 z-10'
-                    />
-
-                    <Image src={'/svgs/rectangle_6.svg'} alt='rectangle6'
-                        width={437.273}
-                        height={37.266}
-                        className='absolute top-[56.94%] right-0 shrink-0 z-10'
-                    />
-
-                    <Image src={'/svgs/cleaner-man.svg'} alt='cleaner-man'
-                        width={1230.69}
-                        height={812.598}
-                        className='absolute bottom-[40.4%] right-[10px] shrink-0 z-10'
-                    />
 
                 </div>
             </section>
 
-            <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-full max-h-[644px] flex-shrink-0 relative'>
-
-                {/* Sección de texto */}
-                <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
+            <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-[644px] flex-shrink-0 relative'>
+                 {/* Sección de texto */}
+                 <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
                     <p className='text-[#F5F9FF] font-inter text-[64px] font-extrabold leading-[76px]'>Customers say About Us</p>
                     <p className='text-[#F5F9FF] font-inter text-[24px] font-normal self-stretch leading-[38px]'>
                         Trust is built through results. Here you can read what our clients say about their experience with our service. Their words reflect our commitment to quality and excellence.
@@ -320,26 +297,86 @@ function Body() {
                 {/* Contenedor relativo para posicionar los comentarios */}
                 <div className='absolute top-[100px] left-0 w-full h-full'>
 
-                    <div id='Comentario1' className='absolute left-[673px] z-20 flex bg-black h-[443.791px] w-[443.791px] rotate-[-2.653deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'></div>
+                    <div id='Comentario1' className='mt-[58px] rounded-2xl absolute left-[694px] z-20 flex bg-black h-[348px] w-[400px] rotate-[-1.97deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
+                        <CardReview
+                            name={'Rick'}
+                            profession={'Consultant'}
+                            avatar={'/images/avatar.png'}
+                            description={'Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they are coming with me! Highly recommend!'} />
+                    </div>
 
-                    <div id='Comentario2' className='absolute left-[1091px] z-10 flex bg-black h-[406.404px] w-[406.404px] rotate-[6.036deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'></div>
+                    <div id='Comentario2' className='rounded-2xl absolute mt-[159.57px] left-[1091px] z-10 flex bg-black h-[318.575px] w-[396.277px] rotate-[6.036deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
+                        <CardReview
+                            name={'Joe'}
+                            profession={'Profesional Manager'}
+                            avatar={'/images/avatar.png'}
+                            description={'“Great service! My pool looks fantastic, and I trust the water is safe thanks to their expertise. Highly recommend!”'} />
+                    </div>
+
+                </div>
+            </section>
+
+            {/* <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-full max-h-[644px] flex-shrink-0 relative'>
+
+                
+                <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
+                    <p className='text-[#F5F9FF] font-inter text-[64px] font-extrabold leading-[76px]'>Customers say About Us</p>
+                    <p className='text-[#F5F9FF] font-inter text-[24px] font-normal self-stretch leading-[38px]'>
+                        Trust is built through results. Here you can read what our clients say about their experience with our service. Their words reflect our commitment to quality and excellence.
+                    </p>
+                </div>
+
+                
+                <div className='absolute top-[100px] left-0 w-full h-full'>
+
+                    <div id='Comentario1' className='mt-[58px] rounded-2xl absolute left-[694px] z-20 flex bg-black h-[348px] w-[400px] rotate-[-1.97deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
+                        <CardReview
+                            name={'Rick'}
+                            profession={'Consultant'}
+                            avatar={'/images/avatar.png'}
+                            description={'Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they are coming with me! Highly recommend!'} />
+                    </div>
+
+                    <div id='Comentario2' className='rounded-2xl absolute mt-[159.57px] left-[1091px] z-10 flex bg-black h-[318.575px] w-[396.277px] rotate-[6.036deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
+                        <CardReview
+                            name={'Joe'}
+                            profession={'Profesional Manager'}
+                            avatar={'/images/avatar.png'}
+                            description={'“Great service! My pool looks fantastic, and I trust the water is safe thanks to their expertise. Highly recommend!”'} />
+                    </div>
 
                 </div>
 
+            </section> */}
+
+            <section id='contact' className='flex flex-row h-[1200px] mx-auto overflow-hidden w-full w-max-[1600px]'>
+                <Image
+                    src={'/images/poolcontact.png'}
+                    alt={'poolcontact'}
+                    width={800}
+                    height={1000}
+                    className='h-full w-1/2 object-cover'
+                />
+                <div id='form' className='h-full w-1/2'>
+                    <div id='section' className='py-96 flex py-[96px] items-center gap-[64px] self-stretch'>
+                        <div id='container' className='flex px-[32px] h-full w-full justify-center items-start flex-[1_0_0]'>
+                            <div id='content' className='flex w-[512px] flex-col items-start gap-[48px]'>
+
+                                <div id='heading' className='flex flex-col items-start gap-[24px] self-stretch'>
+                                    <p className='self-stretch text-[#101828] font-inter text-[48px] font-semibold leading-[60px] tracking-[-0.96px]'>"Let's elevate your pool care, together."</p>
+                                    <p className='text-[#667085] font-inter text-[20px] font-normal leading-[30px]'>You can reach us anytime via email@hosting.com</p>
+                                </div>
+
+                                <Form />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
+            <section id='contfooter' className='h-[466px] overflow-hidden w-full w-max-[1600px]'>
+                <FooterSection />
+            </section>
 
         </div>
 
