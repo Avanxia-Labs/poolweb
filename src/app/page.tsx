@@ -1,16 +1,13 @@
-import Image from "next/image";
-import AnimatedWave from '../../public/svgs/waveFront.svg'
-import NavBar from "@/components/NavBar";
-import Body from "@/components/Body";
+//import { useIsMobile } from '@/hooks/useIsMobile'
+import DesktopPage from '@/components/DesktopPage'
+import MobilePage from '@/components/MobilePage'
 
-export default function Home() {
-  return (
-    <div className="w-full max-w-[1600px] mx-auto h-[8696px] bg-[#F5F9FF]">
-      
-      <NavBar/>
-      <Body/>
+export default function Page() {
+  
+  //const isMobile = useIsMobile()
 
-      
-    </div>
-  );
+  // Set isMobile to true to work in MobilePage
+  const isMobile = false;
+
+  return isMobile ? <MobilePage /> : <DesktopPage />
 }

@@ -1,4 +1,4 @@
-import NavBar from '@/components/NavBar'
+import NavBar from '@/components/Desktop/NavBar'
 import React from 'react'
 
 function Form() {

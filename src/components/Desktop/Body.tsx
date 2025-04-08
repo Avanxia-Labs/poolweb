@@ -307,24 +307,27 @@ function Body() {
                 </div>
             </section>
 
-            <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-full max-h-[644px] flex-shrink-0 flex'>
+            <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-full max-h-[644px] flex-shrink-0 relative'>
 
                 {/* Sección de texto */}
-                <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px]'>
+                <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
                     <p className='text-[#F5F9FF] font-inter text-[64px] font-extrabold leading-[76px]'>Customers say About Us</p>
                     <p className='text-[#F5F9FF] font-inter text-[24px] font-normal self-stretch leading-[38px]'>
                         Trust is built through results. Here you can read what our clients say about their experience with our service. Their words reflect our commitment to quality and excellence.
                     </p>
                 </div>
 
-                {/* Contenedor flexible de comentarios */}
-                <div className='ml-[92px] mt-[100px] flex gap-[60px]'>
-                    <div id='Comentario1' className='flex bg-black h-[443.791px] w-[443.791px] rotate-[-2.653deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'></div>
+                {/* Contenedor relativo para posicionar los comentarios */}
+                <div className='absolute top-[100px] left-0 w-full h-full'>
 
-                    <div id='Comentario2' className='flex bg-black h-[406.404px] w-[406.404px] rotate-[6.036deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'></div>
+                    <div id='Comentario1' className='absolute left-[673px] z-20 flex bg-black h-[443.791px] w-[443.791px] rotate-[-2.653deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'></div>
+
+                    <div id='Comentario2' className='absolute left-[1091px] z-10 flex bg-black h-[406.404px] w-[406.404px] rotate-[6.036deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'></div>
+
                 </div>
 
             </section>
+
 
 
 
