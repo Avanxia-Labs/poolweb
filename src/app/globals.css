@@ -59,9 +59,23 @@ body {
 }
 
 .before-animation {
-  animation: beforeAfterAnimation 8s infinite;
+  animation: beforeAfterAnimation 9s infinite;
 }
 
 .after-animation {
-  animation: afterBeforeAnimation 8s infinite;
+  animation: afterBeforeAnimation 9s infinite;
+}
+
+#GGroup22 * {
+  outline: 1px solid red;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+#BG {
+  mask-image: url('/svgs/vector7.svg');
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: bottom left;
 }
