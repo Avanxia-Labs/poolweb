@@ -2,7 +2,7 @@ import React from 'react';
 
 const BeforeAfterAnimation = () => {
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full h-full overflow-hidden">
       <div 
         id='Before' 
         className='absolute inset-0 flex w-full max-w-[1356px] mx-auto h-[564px] justify-center items-center shrink-0 before-animation'
