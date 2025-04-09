@@ -30,13 +30,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Cargando el script de la fuente Foster */}
-        {/* <script
-          src="https://c.webfontfree.com/c.js?f=Foster"
-          type="text/javascript"
-        ></script> */}
-      </head>
       <body
         
         className={`${inter.variable} ${poppins.variable} ${kanit.variable} ${plus_jakarta_sans.variable} antialiased`}>

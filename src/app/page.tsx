@@ -1,13 +1,21 @@
-//import { useIsMobile } from '@/hooks/useIsMobile'
+"use client"
+import { useIsMobile } from '@/hooks/useIsMobile'
 import DesktopPage from '@/components/DesktopPage'
 import MobilePage from '@/components/MobilePage'
 
+/**
+ * Renders either the mobile or desktop version of the page
+ * depending on the viewport width. Rendering is deferred until
+ * hydration to avoid visual flickering during initial load.
+ */
 export default function Page() {
-  
-  //const isMobile = useIsMobile()
+  const [isMobile, hydrated] = useIsMobile();
 
-  // Set isMobile to true to work in MobilePage
-  const isMobile = false;
+  // Avoids rendering until hydration is complete and screen size is determined
+  if (!hydrated || isMobile === null) {
+    return null;
+  }
 
-  return isMobile ? <MobilePage /> : <DesktopPage />
+  // Conditionally renders based on the screen size
+  return isMobile ? <MobilePage /> : <DesktopPage />;
 }

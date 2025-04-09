@@ -26,20 +26,18 @@ body {
 }
 
 
-
-/* Animación para alternar entre Before y After */
 @keyframes beforeAfterAnimation {
   0% {
     opacity: 1; /* Before visible */
   }
-  25% {
-    opacity: 0; /* Before desaparece */
+  29% {
+    opacity: 1; /* Still visible */
   }
-  25.01% {
-    opacity: 0; /* After empieza a aparecer */
+  29.05% {
+    opacity: 0; /* Disappear */
   }
   100% {
-    opacity: 0; /* After visible durante el resto del tiempo */
+    opacity: 0; /* Remain invisible */
   }
 }
 
@@ -47,14 +45,14 @@ body {
   0% {
     opacity: 0; /* After invisible */
   }
-  25% {
-    opacity: 0; /* After invisible */
+  29% {
+    opacity: 0; /* Still invisible */
   }
-  25.01% {
-    opacity: 1; /* After aparece */
+  29.05% {
+    opacity: 1; /* Appear */
   }
   100% {
-    opacity: 1; /* After visible durante el resto del tiempo */
+    opacity: 1; /* Remain visible */
   }
 }
 
@@ -66,12 +64,8 @@ body {
   animation: afterBeforeAnimation 9s infinite;
 }
 
-#GGroup22 * {
-  outline: 1px solid red;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block !important;
-}
+
+
 
 #BG {
   mask-image: url('/svgs/vector7.svg');

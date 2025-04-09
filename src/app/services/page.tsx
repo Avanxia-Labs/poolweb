@@ -1,13 +1,14 @@
-import NavBar from '@/components/Desktop/NavBar'
 import React from 'react'
+import NavBar from "@/components/Desktop/NavBar";
+import ServicesBody from './ServicesBody';
 
-function Services() {
+function DesktopServicePage() {
   return (
-    <>
-        Services
-        <NavBar/>
-    </>
+    <div className="w-full max-w-[1600px] mx-auto bg-[#F5F9FF]">
+      <NavBar/>
+      <ServicesBody/>
+    </div>
   )
 }
 
-export default Services
+export default DesktopServicePage
