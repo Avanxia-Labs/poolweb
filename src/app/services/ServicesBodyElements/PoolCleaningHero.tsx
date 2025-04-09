@@ -56,7 +56,7 @@ export const PoolCleaningHero: React.FC = () => {
       aria-label="Pool cleaning service showcase"
     >
       <div
-        className="flex overflow-hidden relative flex-col items-center pb-16 w-full min-h-[683px] max-md:max-w-full"
+        className="flex overflow-hidden relative flex-col items-center pb-16 w-full h-[683px] max-md:max-w-full"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
