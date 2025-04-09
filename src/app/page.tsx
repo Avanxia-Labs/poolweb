@@ -7,7 +7,7 @@ export default function Page() {
   //const isMobile = useIsMobile()
 
   // Set isMobile to true to work in MobilePage
-  const isMobile = false;
+  const isMobile = true;
 
   return isMobile ? <MobilePage /> : <DesktopPage />
 }

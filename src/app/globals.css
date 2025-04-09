@@ -79,3 +79,14 @@ body {
   mask-size: contain;
   mask-position: bottom left;
 }
+
+
+/* Oculta la barra de scroll sin desactivar el scroll táctil */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE y Edge */
+  scrollbar-width: none; /* Firefox */
+}
