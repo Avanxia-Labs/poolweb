@@ -32,28 +32,91 @@ function Body() {
                         </div>
                     </div>
 
+                    {/* BeforeAfterAnimation ahora está colocado con top-0 para alinearse con el borde superior del padre */}
+                    <div className="absolute z-5 top-[429px] left-0 right-0">
+                        <BeforeAfterAnimation />
+                    </div>
+
                     <div id='Group23' className='relative w-full max-w-[1600px] mx-auto h-[877.731px] flex-shrink-0'>
 
-                        {/* BeforeAfterAnimation ahora está colocado con top-0 para alinearse con el borde superior del padre */}
-                        <div className="absolute z-5 inset-0">
-                            <BeforeAfterAnimation />
-                        </div>
 
-                        <div id='Group22' className='overflow-hidden relative w-full max-w-[1600px] mx-auto h-[646.376px] flex-shrink-0'>
+                        <div id='Group22' className=' overflow-hidden relative w-full max-w-[1600px] mx-auto h-[646.376px] flex-shrink-0'>
 
 
                             {/* Cuarta capa: Fondo */}
-                            <div id='vector1' className='absolute bottom-15 z-10 w-full max-w-[3372.599px] h-[283.225px] mx-auto'>
-                                <Image src={'/svgs/vector1.svg'} alt={'vector'} width={3372} height={283} />
+                            <div id='vector1' className='absolute bottom-0 z-10 w-full max-w-[1600px] h-[324px] mx-auto'>
+                                <svg width="0" height="0">
+                                    <defs>
+                                        <filter id="filter0_f_3_15" x="-902.2" y="0.250635" width="3404.4" height="315.025" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                                            <feGaussianBlur stdDeviation="7.95" result="effect1_foregroundBlur_3_15" />
+                                        </filter>
+
+                                        <clipPath id="vector1-clip" clipPathUnits="userSpaceOnUse">
+                                            <path d="M-886.3 204.085L-835.711 182.909C-785.122 161.734 -681.133 119.382 -579.955 87.6187C-478.777 55.8551 -374.789 34.6794 -273.611 24.0915C-169.622 13.5037 -68.4443 13.5037 32.7336 24.0915C136.722 34.6794 237.9 55.8551 339.078 82.3248C443.066 108.794 544.245 140.558 645.422 172.322C749.411 204.085 850.589 235.849 954.577 209.379C1055.76 182.909 1156.93 98.2066 1260.92 55.8551C1362.1 13.5037 1463.28 13.5037 1567.27 34.6794C1668.44 55.8551 1769.62 98.2066 1873.61 119.382C1974.79 140.558 2078.78 140.558 2179.96 135.264C2281.13 129.97 2385.12 119.382 2435.71 114.088L2486.3 108.794V299.376H2435.71C2385.12 299.376 2281.13 299.376 2179.96 299.376C2078.78 299.376 1974.79 299.376 1873.61 299.376C1769.62 299.376 1668.44 299.376 1567.27 299.376C1463.28 299.376 1362.1 299.376 1260.92 299.376C1156.93 299.376 1055.76 299.376 954.577 299.376C850.589 299.376 749.411 299.376 645.422 299.376C544.245 299.376 443.066 299.376 339.078 299.376C237.9 299.376 136.722 299.376 32.7336 299.376C-68.4443 299.376 -169.622 299.376 -273.611 299.376C-374.789 299.376 -478.777 299.376 -579.955 299.376C-681.133 299.376 -785.122 299.376 -835.711 299.376H-886.3V204.085Z" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                                <div className="relative w-full h-full">
+                                    <video
+                                        src="/videos/videoHD.mp4"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                        style={{
+                                            clipPath: 'url(#vector1-clip)',
+                                            filter: 'blur(7.95px)'
+                                        }}
+                                    />
+
+                                    {/* Capa de video sin filtro encima para tener mejor control sobre el desenfoque */}
+                                    <video
+                                        src="/videos/videoHD.mp4"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="absolute top-0 left-0 w-full h-full object-cover"
+                                        style={{
+                                            clipPath: 'url(#vector1-clip)',
+                                            opacity: 0.25  // Ajusta la opacidad para controlar la intensidad del desenfoque
+                                        }}
+                                    />
+                                </div>
                             </div>
+                            
+
+                            {/* <div className="relative max-w-[1600px] mx-auto">
+                                <div className="w-full bg-blue-200">Contenido principal centrado</div>
+                            </div> */}
 
                             {/* Tercera capa: agua más brillante */}
                             <div id='vector2' className='absolute bottom-0 z-20 w-full max-w-[1615.075px] h-[225.499px] mx-auto'>
-                                <Image src={'/svgs/vector2.svg'} alt={'vector'} width={1615} height={225} />
+                                <svg width="0" height="0">
+                                    <defs>
+                                        <clipPath id="video-clip" clipPathUnits="userSpaceOnUse">
+                                            <path d="M-7.53723 150.507L16.6889 133.648C40.915 116.788 90.7131 83.0684 139.165 57.7788C187.618 32.4893 237.416 15.6296 285.868 7.19971C335.666 -1.23014 384.118 -1.23014 432.571 7.19971C482.369 15.6296 530.821 32.4893 579.273 53.5639C629.071 74.6385 677.524 99.9281 725.976 125.218C775.774 150.507 824.226 175.797 874.024 154.722C922.477 133.648 970.929 66.2087 1020.73 32.4893C1069.18 -1.23014 1117.63 -1.23015 1167.43 15.6296C1215.88 32.4893 1264.33 66.2087 1314.13 83.0684C1362.58 99.9281 1412.38 99.9281 1460.83 95.7132C1509.29 91.4982 1559.09 83.0684 1583.31 78.8535L1607.54 74.6385V226.376H1583.31C1559.09 226.376 1509.29 226.376 1460.83 226.376C1412.38 226.376 1362.58 226.376 1314.13 226.376C1264.33 226.376 1215.88 226.376 1167.43 226.376C1117.63 226.376 1069.18 226.376 1020.73 226.376C970.929 226.376 922.477 226.376 874.024 226.376C824.226 226.376 775.774 226.376 725.976 226.376C677.524 226.376 629.071 226.376 579.273 226.376C530.821 226.376 482.369 226.376 432.571 226.376C384.118 226.376 335.666 226.376 285.868 226.376C237.416 226.376 187.618 226.376 139.165 226.376C90.7131 226.376 40.915 226.376 16.6889 226.376H-7.53723L-7.53723 150.507Z" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+
+                                <video
+                                    src="/videos/videoHD.mp4"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover"
+                                    style={{ clipPath: 'url(#video-clip)' }}
+                                />
                             </div>
 
                             {/* Segunda capa: video en pantalla */}
-                            <div id='image' className='absolute inset-0 z-30 flex justify-center items-center'>
+                            <div id='image' className='absolute bottom-0 inset-0 z-30 flex justify-center items-center'>
                                 <div className='w-[354.463px] h-[437px] rounded-t-[30px] overflow-hidden'>
                                     <video
                                         autoPlay
@@ -66,10 +129,60 @@ function Body() {
                             </div>
 
                             {/* Primer plano: ola encima del video - ahora posicionada para alinearse con la parte inferior del video */}
-                            <div id='vector4' className='absolute z-40 flex justify-center w-full' style={{
-                                bottom: 'calc(50% - (437px/2) - 7px )',  // Calcula la posición inferior basada en la altura del video
+
+                            <div id='vector4' className='absolute h-[33px] z-40 flex justify-center w-full' style={{
+                                bottom: 'calc(50% - (437px/2) - 7px )',
                             }}>
-                                <Image src={'/svgs/vector4.svg'} alt={'vector'} width={386} height={24} />
+                                <div className="relative" style={{ width: '395px', height: '32px' }}>
+                                    {/* Definiciones SVG para clipPath */}
+                                    <svg width="0" height="0">
+                                        <defs>
+                                            <clipPath id="vector4-clip-1" clipPathUnits="userSpaceOnUse">
+                                                <path d="M322.566 7.36448C247.919 -6.13106 211.013 23.0371 162.814 27.9589H384.35C395.731 26.875 399.308 21.2386 322.566 7.36448Z" />
+                                            </clipPath>
+                                            <clipPath id="vector4-clip-2" clipPathUnits="userSpaceOnUse">
+                                                <path d="M117.706 24.7071C57.4402 9.96586 16.7213 18.5649 3.89502 24.7071L29.367 27.9589H136.231C130.319 27.3414 124.166 26.2873 117.706 24.7071Z" />
+                                            </clipPath>
+                                            <filter id="filter0_f_3_59" x="0.0950196" y="0.0312989" width="394.233" height="31.7276" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                                <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                                                <feGaussianBlur stdDeviation="1.9" result="effect1_foregroundBlur_3_59" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+
+                                    {/* Primera forma con video */}
+                                    <div className="absolute right-0 top-0" style={{ width: '222px', height: '28px' }}>
+                                        <video
+                                            src="/videos/videoHD.mp4"
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            className="w-full h-full object-cover"
+                                            style={{
+                                                clipPath: 'url(#vector4-clip-1)',
+                                                filter: 'blur(1.9px)'
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Segunda forma con video */}
+                                    <div className="absolute left-0 top-0" style={{ width: '133px', height: '28px' }}>
+                                        <video
+                                            src="/videos/videoHD.mp4"
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            className="w-full h-full object-cover"
+                                            style={{
+                                                clipPath: 'url(#vector4-clip-2)',
+                                                filter: 'blur(2.5px)'
+                                            }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -90,9 +203,9 @@ function Body() {
 
                     <div id='Frame7' className='mb-[50px] flex w-full max-w-[858.176px] flex-col items-center gap-[23px]'>
                         <div id='Group2' className='mb-[23px] w-full max-w-[858.176px] h-[287.835px]'>
-                            <p className='text-[#0F172A] text-center font-foster text-[218.629px] font-normal leading-[235.026px] tracking-[-10.931px] w-[858.176px]'>
-                                DEEP
-                            </p>
+                            <div id='Deep' className='mx-auto mb-[30px] w-full max-w-[364px] max-h-[154px]'>
+                                <Image src={'/svgs/Deep.svg'} alt={'Deep'} width={364} height={154} />
+                            </div>
                             <p className='text-[#0F172A] text-center font-inter text-[80px] font-bold leading-[86px] tracking-[-4px]'>
                                 Into our Services
                             </p>
@@ -286,8 +399,8 @@ function Body() {
             </section>
 
             <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-[644px] flex-shrink-0 relative'>
-                 {/* Sección de texto */}
-                 <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
+                {/* Sección de texto */}
+                <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
                     <p className='text-[#F5F9FF] font-inter text-[64px] font-extrabold leading-[76px]'>Customers say About Us</p>
                     <p className='text-[#F5F9FF] font-inter text-[24px] font-normal self-stretch leading-[38px]'>
                         Trust is built through results. Here you can read what our clients say about their experience with our service. Their words reflect our commitment to quality and excellence.
@@ -350,13 +463,15 @@ function Body() {
             </section> */}
 
             <section id='contact' className='flex flex-row h-[1200px] mx-auto overflow-hidden w-full w-max-[1600px]'>
-                <Image
-                    src={'/images/poolcontact.png'}
-                    alt={'poolcontact'}
-                    width={800}
-                    height={1000}
-                    className='h-full w-1/2 object-cover'
-                />
+
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    className='h-full w-1/2 object-cover'>
+                    <source src='/videos/videoHD.mp4' type='video/mp4' />
+                </video>
+
                 <div id='form' className='h-full w-1/2'>
                     <div id='section' className='py-96 flex py-[96px] items-center gap-[64px] self-stretch'>
                         <div id='container' className='flex px-[32px] h-full w-full justify-center items-start flex-[1_0_0]'>
@@ -378,6 +493,9 @@ function Body() {
             <section id='contfooter' className='h-[466px] overflow-hidden w-full w-max-[1600px]'>
                 <FooterSection />
             </section>
+
+
+
 
 
         </div>
