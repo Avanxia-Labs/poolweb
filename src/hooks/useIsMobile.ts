@@ -1,7 +1,9 @@
 "use client"
 import { useState, useEffect } from "react";
 
-const MOBILE_BREAKPOINT = 1280;
+
+//const MOBILE_BREAKPOINT = 1280;
+const MOBILE_BREAKPOINT = 720
 
 /**
  * Custom hook that determines if the current viewport width is considered "mobile".

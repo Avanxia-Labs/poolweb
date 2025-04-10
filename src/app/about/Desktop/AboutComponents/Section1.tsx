@@ -70,44 +70,59 @@ import React from 'react'
 function Section1() {
     return (
         <div>
-        
-        <div className='bg-sky-500'>Separador</div>
 
-        <section className="w-full w-max-[1600px] h-full h-max-[868px] bg-indigo-300 inline-flex justify-start items-start gap-28">
-            
-            <img className="w-[818] h-[818px]" src="/svgs/AboutHome.svg" />
-            
-            <div className="w-full inline-flex flex-col justify-start items-start gap-40">
-                
-                <div className="flex flex-col justify-start items-start gap-8">
-                    <div className="w-80 h-96 flex flex-col justify-start items-start gap-7">
-                        <div className="self-stretch justify-start text-slate-900 text-6xl font-bold font-inter leading-[69px]">Let's work
-                            <br />together!</div>
-                        <div className="w-80 flex-1 justify-start text-indigo-600 text-xl font-bold font-inter capitalize">The Pool Quality Cleaning Difference</div>
-                        <div className="self-stretch justify-start text-gray-800 text-2xl font-normal font-inter leading-9">We're here to help you enjoy your pool again.<br />Complete the form and we'll be in touch within the next 24 hours.</div>
-                    </div>
-                    <div className="px-5 py-4 bg-indigo-500 rounded-lg flex flex-col justify-center items-center gap-2.5">
-                        <div className="inline-flex justify-center items-center gap-2">
-                            <div className="text-center justify-center text-white text-lg font-semibold font-inter leading-7">GET YOUR FREE ESTIMATE</div>
+            <section className="w-full w-max-[1600px] h-max-[818px] inline-flex justify-start items-start gap-28">
+
+                <img className="w-[818px] h-full" src="/svgs/AboutHome.svg" />
+
+                <div className="flex flex-col items-start gap-[85px] h-full w-[459.26px]">
+
+                    <div className="flex flex-col items-start gap-8">
+
+                        <div className="flex flex-col items-start gap-[27px] w-[343.44px] h-[436px]">
+                            <p className="text-[#0F172A] font-inter text-[64px] not-italic font-bold leading-[69px] self-stretch">Let's work
+                                <br />together!</p>
+                            <p className="w-[336.438px] flex-[1_0_0] text-[#3E57DA] font-inter text-[22px] not-italic font-bold leading-none capitalize">The Pool Quality Cleaning Difference</p>
+                            <p className="self-stretch text-[#212939] font-inter text-[24px] not-italic font-normal leading-[38px]">We're here to help you enjoy your pool again.<br />Complete the form and we'll be in touch within the next 24 hours.</p>
+                        </div>
+
+                        <div className="flex p-[16px_20px] flex-col justify-center items-center gap-2 rounded-[8px] bg-[#485AFF]">
+                            <div className="flex justify-center items-center gap-[9px]">
+                                <p className="text-white text-center font-inter text-[18px] not-italic font-semibold leading-[28px]">GET YOUR FREE ESTIMATE</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="self-stretch inline-flex justify-start items-center gap-16">
-                    <div className="w-52 inline-flex flex-col justify-start items-start">
-                        <div className="w-16 justify-start text-sky-500 text-4xl font-semibold font-['Montserrat']">30+</div>
-                        <div className="self-stretch opacity-70 justify-start text-stone-950 text-lg font-medium font-['Montserrat']">Years Providing Quality Pool Services</div>
+
+
+
+
+                    <div className="w-full inline-flex flex-row justify-start items-start gap-[145px]">
+
+                        <div className="flex flex-col items-start" style={{ width: '212.115px' }}>
+                            <p className="text-[36px] font-semibold text-[#0082F8]"
+                                style={{ width: '62.884px', fontFamily: 'Montserrat' }}>30<br/>+
+                            </p>
+                            <p className="text-[18px] font-medium text-[#0E0E0E] opacity-70 self-stretch"
+                                style={{ fontFamily: 'Montserrat' }}>Years Providing Quality Pool Services
+                            </p>
+                        </div>
+
+                        <div className='flex w-[212.115px] flex-col items-start'>
+                            <p className='text-[#0082F8] font-montserrat text-[36px] not-italic font-semibold leading-normal w-[82.593px]'>750<br/>+</p>
+                            <p className='text-[#0E0E0E] font-montserrat text-[18px] not-italic font-medium leading-normal self-stretch opacity-70'>High-Quality Pools Constructed</p>
+                        </div>
+
+
+
                     </div>
-                    <div className="w-52 inline-flex flex-col justify-start items-start">
-                        <div className="w-20 justify-start text-sky-500 text-4xl font-semibold font-['Montserrat']">750+</div>
-                        <div className="self-stretch opacity-70 justify-start text-stone-950 text-lg font-medium font-['Montserrat']">High-Quality Pools Constructed</div>
-                    </div>
+
                 </div>
-            </div>
-        </section>
-        
-        
+            </section>
+
+
+
         </div>
-        
+
     )
 }
 
