@@ -2,8 +2,7 @@
 import React from 'react'
 import { useIsMobile } from '@/hooks/useIsMobile';
 import DesktopAboutPage from './DesktopAboutPage';
-import DesktopMobilePage from './MobileAboutPage';
-
+import MobileAboutPage from './MobileAboutPage';
 
 /**
  * Renders either the mobile or desktop version of the page About
@@ -20,7 +19,7 @@ function Page() {
   }
 
   // Conditionally renders based on the screen size
-  return isMobile ? <DesktopMobilePage /> : <DesktopAboutPage />;
+  return isMobile ? <MobileAboutPage /> : <DesktopAboutPage />; 
 
 }
 

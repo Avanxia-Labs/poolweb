@@ -1,16 +1,26 @@
+"use client"
 import React from 'react'
-import NavBar from "@/components/Desktop/NavBar";
-import ServicesBody from './ServicesBody';
-import FooterSection from '@/components/Desktop/FooterSection';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import DesktopServicePage from './DesktopServicePage';
+import MobileServicePage from './MobileServicePage';
 
-function DesktopServicePage() {
-  return (
-    <div className="w-full max-w-[1600px] mx-auto bg-[#F5F9FF]">
-      <NavBar/>
-      <ServicesBody/>
-      <FooterSection/>
-    </div>
-  )
+/**
+ * Renders either the mobile or desktop version of the page Service
+ * depending on the viewport width. Rendering is deferred until
+ * hydration to avoid visual flickering during initial load.
+ */
+function Page() {
+
+  const [isMobile, hydrated] = useIsMobile();
+
+  // Avoids rendering until hydration is complete and screen size is determined
+  if (!hydrated || isMobile === null) {
+    return null;
+  }
+
+  // Conditionally renders based on the screen size
+  return isMobile ? <MobileServicePage /> : <DesktopServicePage />;
+
 }
 
-export default DesktopServicePage
+export default Page

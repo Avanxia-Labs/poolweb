@@ -4,7 +4,7 @@ import DesktopPage from '@/components/DesktopPage'
 import MobilePage from '@/components/MobilePage'
 
 /**
- * Renders either the mobile or desktop version of the page
+ * Renders either the mobile or desktop version of the Home Page
  * depending on the viewport width. Rendering is deferred until
  * hydration to avoid visual flickering during initial load.
  */

@@ -1,9 +1,13 @@
 "use client"
 import React from 'react'
-import ServiceConnectCarrousel from './ServiceConnectElements/ServiceConnectCarrousel'
+//import ServiceConnectCarrousel from './ServiceConnectElements/ServiceConnectCarrousel'
 import Image from 'next/image'
 import SocialMediaButtons from './ServiceConnectElements/SocialMediaButtons'
 import CustomCarousel from './ServiceConnectElements/ServiceConnectCarrousel'
+//import SocialMediaButtons from './ServiceConnectElements/SocialMediaButtons'
+//import CustomCarousel from './ServiceConnectElements/ServiceConnectCarrousel'
+//import CustomCarousel from './ServiceConnectElements/ServiceConnectCarrousel'
+//import CustomCarousel from './ServiceConnectElements/ServiceConnectCarrousel'
 
 function ServicesConnect() {
   return (
