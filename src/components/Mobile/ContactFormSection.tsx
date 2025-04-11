@@ -101,13 +101,14 @@ const ContactFormSection = () => {
 
   {/* Submit */}
   <div className="w-full flex justify-center">
-    <button
-      type="submit"
-      className="w-[151px] h-[36px] px-[20px] py-[12px] bg-[#485AFF] border border-[#7F56D9] text-white text-[12px] font-bold rounded-[8px] shadow-sm flex justify-center items-center gap-2"
-    >
-      Get in Touch
-    </button>
-  </div>
+  <button
+    type="submit"
+    className="inline-flex items-center justify-center gap-2 px-[20px] py-[12px] bg-[#485AFF] border border-[#7F56D9] text-white text-[12px] font-bold rounded-[8px] shadow-sm"
+  >
+    Get started
+  </button>
+</div>
+
 
 </form>
 

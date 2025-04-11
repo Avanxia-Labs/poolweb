@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
 import MobileFooter from '@/components/Mobile/MobileFooter';
 
 const MobileHeroContent = () => {
+  const [showFullText, setShowFullText] = useState(false);
+
+  const toggleText = () => {
+    setShowFullText(!showFullText);
+  };
+
+  
   return (
   <main>
     <section
@@ -52,32 +59,35 @@ const MobileHeroContent = () => {
 
       {/* Imagen comparativa */}
       <div className="w-full mt-4">
-          <Image
-            src="/images/services_comparative.png"
-            alt="Before"
-            width={160}
-            height={160}
-            className="w-full rounded-md"
-          />
-        </div>
+        <Image
+          src="/images/services_comparative.png"
+          alt="Before"
+          width={160}
+          height={160}
+          className="w-full rounded-md"
+        />
+      </div>
 
       {/* Descripción */}
-      <p className="text-justify mb-4">
-        Keeping your pool visually appealing is just the start. Our professional pool cleaning
-        service ensures your water is not only sparkling clear but also healthy and safe for
-        swimming, reflecting our commitment to meticulous care backed by scientific understanding.
-        We go beyond a simple surface skim. Our comprehensive cleaning includes thoroughly brushing
-        pool walls, steps, and waterlines to dislodge algae and buildup, meticulous vacuuming of
-        the pool floor to remove settled debris, emptying skimmer and pump baskets to maintain
-        proper flow, and ensuring ove...
+      <p
+        className={`text-justify mb-4 text-[14px] text-[#0B0858] leading-[30px] font-[400] font-inter capitalize 
+        overflow-hidden text-ellipsis ${showFullText ? '' : 'line-clamp-[12]'}`}
+      >
+        Keeping your pool visually appealing is just the start. Our professional Pool Cleaning service ensures your water is not only sparkling clear but also healthy and safe for swimming, reflecting our commitment to meticulous care backed by scientific understanding. We go beyond a simple surface skim. Our comprehensive cleaning includes thoroughly brushing pool walls, steps, and waterlines to dislodge algae and buildup, meticulous vacuuming of the pool floor to remove settled debris, emptying skimmer and pump baskets to maintain proper flow, and ensuring overall cleanliness.
+
+        Whether you need a one-time deep clean after a party or storm, require seasonal opening or closing services, or are dealing with the challenge of recovering a green pool, Pool Quality Solutions has the specialized tools and expertise required. Even during routine cleaning, our knowledge of water chemistry – driven by our founder's Chemical Engineering background – ensures we help maintain the delicate water balance, protecting both swimmers and your valuable pool equipment from potential issues caused by neglect. Let us handle the hard work with precision and care, so you can simply relax and enjoy your pristine, healthy pool environment.
+
       </p>
 
       {/* Botón */}
-      <div className="flex justify-center mb-4">
-        <button className="bg-[#485AFF] text-white font-medium text-[12px] rounded-md px-4 py-2">
-          See more...
-        </button>
-      </div>
+      <div className="flex justify-start mb-4">
+  <button
+    onClick={toggleText}
+    className="w-[136px] px-[10px] py-[8px] bg-[#485AFF] text-white text-[12px] font-medium rounded-[8px] shadow-sm flex flex-col items-center justify-center gap-[10px]"
+  >
+    {showFullText ? 'See less...' : 'See more...'}
+  </button>
+</div>
 
       {/* Imagen adicional */}
       <div className="w-full mt-4">
@@ -90,35 +100,7 @@ const MobileHeroContent = () => {
         />
       </div>
     </section>
-
-
-    <section className="w-full flex justify-center items-center px-4 py-10 bg-[#F7FAFE]">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-[240px] text-[#0F172A]">
-        <h2 className="text-xl font-bold mb-6 text-left">Services</h2>
-
-        <ul className="space-y-4 text-base font-medium text-left">
-          <li>Pool Maintenance</li>
-
-          <li className="text-[#485AFF] font-bold underline underline-offset-2">
-            Pool Cleaning
-          </li>
-
-          <li>
-            Equipment <br />
-            Repair & Installation
-          </li>
-
-          <li>Pool Automation</li>
-
-          <li>
-            Diagnostics & <br />
-            Troubleshooting
-          </li>
-        </ul>
-      </div>
-    </section>
-
-
+    
     <section className="relative w-full flex justify-center pt-10 pb-16 overflow-hidden bg-[#f7fafe]">
       {/* Tarjeta reutilizable */}
       <SubscriptionCalculatorCard />
