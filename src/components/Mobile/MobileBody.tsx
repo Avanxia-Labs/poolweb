@@ -5,6 +5,8 @@ import { Frame } from "@/components/Mobile/Frame";
 import { Box } from "./Box";
 import MobileCard from "./MobileCard";
 import { Facebook, Instagram, Music2 } from "lucide-react";
+import ContactFormSection from '@/components/Mobile/ContactFormSection';
+
 
   const MobileBody = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -65,24 +67,26 @@ import { Facebook, Instagram, Music2 } from "lucide-react";
   />
 
   {/* Contenido sobre la imagen */}
-  <div className="relative z-20 w-full max-w-screen-sm mx-auto flex flex-col items-center text-center px-4">
-    {/* Título como SVG */}
-    <img
-      src="/svgs/deep_text.svg"
-      alt="Deep Into our Services"
-      className="w-full max-w-[280px] mb-6"
-    />
+  <div className="relative z-20 w-full max-w-screen-sm mx-auto flex flex-col items-center text-center px-4 -mt-4">
 
-    {/* Botón */}
-    <button className="bg-[#485AFF] text-white text-xs sm:text-sm px-4 py-2 rounded mb-6 font-semibold">
-      View All Services
-    </button>
+  <img
+  src="/svgs/deep_text.svg"
+  alt="Deep Into our Services"
+  className="w-full max-w-[280px] mb-3"
+/>
 
-    {/* Texto descriptivo */}
-    <p className="text-white text-xs sm:text-sm mb-10 max-w-xs">
-      We combine expertise with dedication to deliver exceptional pool
-      services that exceed expectations.
-    </p>
+{/* Botón */}
+<button className="bg-[#485AFF] text-white text-[12px] leading-[28px] font-semibold text-center rounded-[8px] px-[10px] py-[8px] mb-2">
+  View All Services
+</button>
+
+
+{/* Texto descriptivo */}
+<p className="text-[#F5F9FF] text-[12px] leading-[20px] font-normal text-center max-w-[268px] px-[12px] mx-auto mb-4">
+  We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
+</p>
+
+
 
     {/* Carrusel de tarjetas */}
     <div className="relative w-full overflow-hidden">
@@ -145,17 +149,21 @@ import { Facebook, Instagram, Music2 } from "lucide-react";
       </div>
 
       {/* Paginación */}
-      <div className="flex justify-center gap-2 mt-6">
-        {[...Array(6)].map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollToIndex(index)}
-            className={`w-3 h-3 rounded-full ${
-              index === activeIndex ? "bg-[#6D5DFB]" : "bg-[#ccc]"
-            }`}
-          ></button>
-        ))}
-      </div>
+     {/* Paginación personalizada */}
+<div className="mt-6 flex justify-center">
+  <div className="bg-[#485AFF] px-4 py-2 rounded-full flex items-center gap-2">
+    {[...Array(6)].map((_, index) => (
+      <button
+        key={index}
+        onClick={() => scrollToIndex(index)}
+        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+          index === activeIndex ? "bg-white" : "bg-[#3B37AA]"
+        }`}
+      ></button>
+    ))}
+  </div>
+</div>
+
     </div>
   </div>
 </section>
@@ -169,21 +177,21 @@ import { Facebook, Instagram, Music2 } from "lucide-react";
     className="absolute inset-0 w-full h-full object-cover z-0"
   />
 
-<div className="w-full max-w-screen-sm relative flex flex-col items-center rounded-none px-0 py-10 z-10">
-    <div className="relative w-full max-w-[250px] px-4">
-      <header className="text-center">
-        <h1 className="text-2xl font-bold leading-10 text-slate-900">
-          Get Your Instant Pool Service Estimate
-        </h1>
-        <p className="mt-3 text-xs font-extrabold leading-7 text-indigo-500">
-          Enter Your Pool Details Below
-        </p>
-      </header>
+<div className="w-full max-w-screen-sm relative flex flex-col items-center px-6 sm:px-4 py-10 z-10">
+  <div className="w-full max-w-sm mx-auto">
+    <header className="text-center px-2">
+      <h1 className="text-xl font-bold leading-8 text-slate-900">
+        Get Your Instant Pool <br /> Service Estimate
+      </h1>
+      <p className="mt-3 text-xs font-extrabold leading-6 text-indigo-500">
+        Enter Your Pool Details Below
+      </p>
+    </header>
 
-      <div className="mt-6 bg-white p-6 rounded-3xl shadow-lg">
-        <h2 className="text-lg font-bold text-center text-slate-900 mb-4">
-          Calculate Your Subscription Price
-        </h2>
+    <div className="mt-6 bg-white p-6 rounded-3xl shadow-lg w-full">
+      <h2 className="text-base font-bold text-center text-slate-900 mb-4">
+        Calculate Your Subscription Price
+      </h2>
 
         <div className="mb-4">
           <label htmlFor="gallons" className="block text-xs font-bold text-slate-900">
@@ -283,37 +291,40 @@ import { Facebook, Instagram, Music2 } from "lucide-react";
 </section>
 
 <section className="relative w-full px-0 pb-10 text-xs overflow-hidden min-h-[850px]">
-  {/* Imagen de fondo que reemplaza color e ilustraciones */}
+  {/* Imagen de fondo */}
   <img
     src="/images/pool_mobile.png"
     alt="Pool Mobile Background"
     className="absolute inset-0 w-full h-full object-cover z-0"
   />
 
-  {/* Contenido sobre la imagen */}
+  {/* Contenedor del texto alineado */}
   <div className="relative z-10 max-w-screen-sm mx-auto px-4 flex flex-col justify-end min-h-[500px] pb-10">
-    <article className="flex flex-col text-white">
-      <h1 className="text-3xl font-bold tracking-tighter leading-10 text-white mb-6">
-        Transform Your Pool Experience
-      </h1>
-      <p className="leading-5 text-white mb-6">
-        We combine expertise with dedication to deliver exceptional pool services
-        that exceed expectations. We combine expertise with dedication to deliver
-        exceptional pool services that exceed expectations.
-        <br /><br />
-        Exceptional pool services that exceed expectations. We combine expertise
-        with dedication to deliver exceptional pool services that exceed
-        expectations.
-      </p>
-      <button
-        className="self-start px-4 py-2 mt-4 font-semibold text-indigo-500 text-xs bg-white rounded-lg"
-        onClick={() => console.log("CTA clicked")}
-      >
-        GET YOUR FREE ESTIMATE
-      </button>
-    </article>
+    <div className="w-full max-w-[260px]"> {/* ← Aquí el ajuste importante */}
+      <article className="flex flex-col text-white">
+        <h1 className="text-3xl font-bold tracking-tighter leading-10 text-white mb-6">
+          Transform Your Pool Experience
+        </h1>
+        <p className="leading-5 text-white mb-6">
+          We combine expertise with dedication to deliver exceptional pool services
+          that exceed expectations. We combine expertise with dedication to deliver
+          exceptional pool services that exceed expectations.
+          <br /><br />
+          Exceptional pool services that exceed expectations. We combine expertise
+          with dedication to deliver exceptional pool services that exceed
+          expectations.
+        </p>
+        <button
+          className="self-start px-4 py-2 mt-4 font-semibold text-indigo-500 text-xs bg-white rounded-lg"
+          onClick={() => console.log("CTA clicked")}
+        >
+          GET YOUR FREE ESTIMATE
+        </button>
+      </article>
+    </div>
   </div>
 </section>
+
 
 
 
@@ -391,107 +402,9 @@ import { Facebook, Instagram, Music2 } from "lucide-react";
       </p>
     </div>
 
-    <form className="mt-10 w-full space-y-6">
-      {/* Name */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-        <input
-          type="text"
-          placeholder="Your name"
-          className="w-full px-4 py-3 text-sm border border-[#D0D5DD] rounded-lg shadow-sm outline-none"
-        />
-      </div>
+    <ContactFormSection />
 
-      {/* Experience */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
-          Do you have previous experience in pool maintenance?
-        </label>
-        <div className="flex items-center px-4 py-3 border border-[#D0D5DD] rounded-lg shadow-sm bg-white">
-          <input
-            type="text"
-            placeholder="Type"
-            className="w-full text-sm outline-none bg-transparent"
-          />
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4955cbd56d3ae8e38d75b0cf00fec870501a07a2?placeholderIfAbsent=true&apiKey=06e3f92e1e524befb11420293ad988ac"
-            className="w-4 h-4 ml-2"
-            alt=""
-          />
-        </div>
-      </div>
-
-      {/* Company */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Company</label>
-        <input
-          type="text"
-          placeholder="Your Company"
-          className="w-full px-4 py-3 text-sm border border-[#D0D5DD] rounded-lg shadow-sm outline-none"
-        />
-      </div>
-
-      {/* Email */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-        <input
-          type="email"
-          placeholder="email@hosting.com"
-          className="w-full px-4 py-3 text-sm border border-[#D0D5DD] rounded-lg shadow-sm outline-none"
-        />
-      </div>
-
-      {/* Phone */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Phone number</label>
-        <div className="flex items-center px-4 py-3 border border-[#D0D5DD] rounded-lg shadow-sm bg-white">
-          <span className="text-sm text-gray-900">US</span>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/19a05e667b0aed46d40248ea2d71c3cd3611d63d?placeholderIfAbsent=true&apiKey=06e3f92e1e524befb11420293ad988ac"
-            className="w-5 h-5 mx-2"
-            alt=""
-          />
-          <input
-            type="tel"
-            placeholder="+1 (555) 000-0000"
-            className="flex-1 text-sm text-gray-500 outline-none bg-transparent"
-          />
-        </div>
-      </div>
-
-      {/* Message */}
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">How can we help?</label>
-        <textarea
-          rows={4}
-          placeholder="Write your message..."
-          className="w-full px-4 py-3 text-sm border border-[#D0D5DD] rounded-lg shadow-sm outline-none resize-none"
-        ></textarea>
-      </div>
-
-      {/* Services */}
-      <div className="bg-slate-50 px-4 py-4 rounded-xl">
-        <h3 className="text-sm font-bold text-slate-700 mb-4">Services</h3>
-        <div className="flex flex-col space-y-3">
-          {["Regular Maintenance", "Deep and Routine Cleaning", "Repair and Installation", "Content creation", "Pool System Automation", "Other"].map((service) => (
-            <label key={service} className="flex items-center gap-3 text-xs font-bold text-slate-700">
-              <input type="checkbox" className="w-4 h-4 rounded border border-[#D0D5DD]" />
-              {service}
-            </label>
-          ))}
-        </div>
-      </div>
-
-      {/* Submit */}
-      <div>
-        <button
-          type="submit"
-          className="w-full bg-[#6941C6] text-white text-sm font-semibold py-3 rounded-lg"
-        >
-          Get started
-        </button>
-      </div>
-    </form>
+    
   </div>
 </section>
 
