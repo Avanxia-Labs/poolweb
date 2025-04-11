@@ -14,7 +14,8 @@ export default {
         poppins: ['var(--font-poppins)'],
         foster: ['Foster', 'cursive'],
         kanit: ['var(--font-kanit)'],
-        plus_jakarta_sans: ['var(--font-plus_jakarta_sans)']
+        plus_jakarta_sans: ['var(--font-plus_jakarta_sans)'],
+        montserrat: ['var(--font-montserrat)']
       },
       blur: {
         '7.95': '7.95px',

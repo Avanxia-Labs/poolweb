@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 function NavBar() {
     return (
-        <nav id='nav' className='flex w-full max-w-[1600px] mx-auto h-[171px] pt-[30px] flex-col items-center gap-[10px] shrink-0'>
+        <nav id='nav' className='flex w-full max-w-[1600px] mx-auto h-[171px] pt-[30px] flex-col items-center gap-[10px] shrink-0 bg-[#F5F9FF]'>
             <div id='Group25' className='mx-auto w-full max-w-[1286.477px] h-[55.805px] shrink-0'>
                 <div id='Header' className='mx-auto w-full max-w-[1286.477px] h-[55.805px] shrink-0'>
                     <div id='Frame2' className='flex mx-auto w-full max-w-[1286.477px] justify-between items-start'>

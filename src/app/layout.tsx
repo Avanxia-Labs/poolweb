@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, Poppins, Kanit, Plus_Jakarta_Sans } from "next/font/google"
+import { Inter, Poppins, Kanit, Plus_Jakarta_Sans, Montserrat } from "next/font/google"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +23,11 @@ const plus_jakarta_sans = Plus_Jakarta_Sans({
   subsets: ["latin"]
 })
 
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"]
+})
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,7 +37,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         
-        className={`${inter.variable} ${poppins.variable} ${kanit.variable} ${plus_jakarta_sans.variable} antialiased`}>
+        className={`
+            ${inter.variable} 
+            ${poppins.variable} 
+            ${kanit.variable} 
+            ${plus_jakarta_sans.variable}
+            ${montserrat.variable} 
+            antialiased`}>
         {children}
       </body>
     </html>
