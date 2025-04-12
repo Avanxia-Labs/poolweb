@@ -1,7 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
 import MobileFooter from '@/components/Mobile/MobileFooter';
+import { RefCallback } from 'react';
+
+const services = [
+  {
+    title: 'Diagnostics & Troubleshooting',
+    description:
+      'Identify and solve pool issues with our expert diagnostic services.',
+  },
+  {
+    title: 'Pool Maintenance',
+    description:
+      'Keep your pool pristine with regular chemical checks and debris removal.',
+  },
+  {
+    title: 'Pool Cleaning',
+    description:
+      "Restore your pool's sparkle. We provide thorough one-time or regular cleaning, including brushing, vacuuming, and stain/algae treatment.",
+  },
+  {
+    title: 'Equipment Repair & Installation',
+    description:
+      'We fix or install filters, pumps, heaters and more to keep your system efficient.',
+  },
+  {
+    title: 'Pool Automation',
+    description:
+      'Control your pool systems remotely with modern automation solutions.',
+  },
+  {
+    title: 'Other',
+    description:
+      'Have a special request? Let us tailor a solution just for you.',
+  },
+];
+
+const videoSources = ['REEL1.mp4', 'REEL2.mp4', 'REEL3.mp4'];
+
+
 
 const MobileHeroContent = () => {
   const [showFullText, setShowFullText] = useState(false);
@@ -10,52 +48,116 @@ const MobileHeroContent = () => {
     setShowFullText(!showFullText);
   };
 
+  const [activeIndex, setActiveIndex] = useState(2); // Pool Cleaning por defecto
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const setTabRef = (index: number): RefCallback<HTMLButtonElement> => {
+    return (el) => {
+      tabsRef.current[index] = el;
+    };
+  };
+
+  // Auto-scroll to active tab
+  useEffect(() => {
+    const current = tabsRef.current[activeIndex];
+    if (current) {
+      current.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [activeIndex]);
+
   
+  
+
   return (
   <main>
-    <section
-      className="relative w-full min-h-[667px] bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/servicesHero.png')" }}
-    >
-      {/* Vector decorativo SVG */}
-      <div className="absolute top-0 w-full h-[127px] z-10">
-        <img
-          src="/svgs/vectorHeroServices.svg"
-          alt="Decorative vector"
-          className="w-full h-full object-cover"
-        />
-      </div>
+<section
+  className="relative w-full min-h-[390px] bg-cover bg-center"
+  style={{ backgroundImage: "url('/images/servicesHero.png')" }}
+>
+  {/* Vector decorativo */}
+  <div className="absolute top-0 w-full h-[127px] z-10">
+    <img
+      src="/svgs/vectorHeroServices.svg"
+      alt="Decorative vector"
+      className="w-full h-full object-cover"
+    />
+  </div>
 
-      {/* Contenido centrado */}
-      <div className="relative z-20 flex flex-col items-center justify-start text-center px-4 pt-[88px]">
-        <h1 className="text-[32px] font-bold leading-none tracking-tighter text-slate-900">
-          Pool Cleaning
-        </h1>
-        <p className="mt-6 text-sm font-medium leading-6 text-zinc-600 max-w-xs">
-          Restore your pool's sparkle. We provide thorough one-time or regular
-          cleaning, including brushing, vacuuming, and stain/algae treatment.
-        </p>
+  {/* Contenido agrupado (h1 + p + controles) */}
+  <div className="relative z-20 pt-[110px] flex flex-col items-center">
+    <div className="flex flex-col items-center gap-6 w-[288px] mx-auto text-center">
+      <h1 className="text-[32px] font-bold text-black leading-[38px] tracking-[-1.127px] font-inter">
+        {services[activeIndex].title}
+      </h1>
 
-        {/* Puntos del carrusel */}
-        <div className="mt-10 bg-indigo-500 rounded-3xl px-4 py-2 flex gap-2 justify-center">
-          {[...Array(6)].map((_, index) => (
+      <p className="text-[12px] font-semibold leading-[16.901px] text-[#2A2FA4] font-inter">
+        {services[activeIndex].description}
+      </p>
+
+      {/* Controles: flechas + puntos */}
+      <div className="flex items-center justify-center gap-4">
+        <button
+          onClick={() =>
+            setActiveIndex((prev) => (prev - 1 + services.length) % services.length)
+          }
+          className="bg-black/30 text-white w-8 h-8 rounded-full flex items-center justify-center"
+        >
+          ←
+        </button>
+
+        <div className="bg-[#5F41FF] rounded-3xl px-4 py-2 flex gap-2 justify-center">
+          {services.map((_, index) => (
             <button
               key={index}
+              onClick={() => setActiveIndex(index)}
               className={`w-3 h-3 rounded-full transition-colors ${
-                index === 2 ? "bg-white" : "bg-[#5000f3]"
+                index === activeIndex
+                  ? 'bg-white shadow-md'
+                  : 'bg-[#3A1CF5]'
               }`}
             ></button>
           ))}
         </div>
+
+        <button
+          onClick={() =>
+            setActiveIndex((prev) => (prev + 1) % services.length)
+          }
+          className="bg-black/30 text-white w-8 h-8 rounded-full flex items-center justify-center"
+        >
+          →
+        </button>
       </div>
-    </section>
+    </div>
+  </div>
+
+  {/* Tabs como carrusel */}
+  <div className="absolute bottom-0 w-full overflow-x-auto scrollbar-none">
+    <div className="flex gap-2 px-4 py-3 min-w-fit w-max">
+      {services.map((service, index) => (
+        <button
+        key={index}
+        ref={setTabRef(index)}
+        onClick={() => setActiveIndex(index)}
+        className={`shrink-0 px-4 py-2 text-[10px] font-medium whitespace-nowrap transition-colors ${
+          activeIndex === index
+            ? 'text-white bg-[#3A47F1] rounded-md'
+            : 'text-black'
+        }`}
+        >
+          {service.title}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
 
 
     <section className="w-full px-4 pt-10 pb-8 bg-[#F7FAFE] text-[#212939] text-[12px] leading-[20px]">
       {/* Título */}
-      <h2 className="text-center text-[14px] font-bold text-[#485AFF] leading-[20px] mb-4">
+      <h2 className="text-[22px] font-bold text-[#3E57DA] text-center capitalize font-inter">
         The Pool Quality Cleaning Difference
       </h2>
+
 
       {/* Imagen comparativa */}
       <div className="w-full mt-4">
@@ -100,7 +202,7 @@ const MobileHeroContent = () => {
         />
       </div>
     </section>
-    
+
     <section className="relative w-full flex justify-center pt-10 pb-16 overflow-hidden bg-[#f7fafe]">
       {/* Tarjeta reutilizable */}
       <SubscriptionCalculatorCard />
@@ -118,14 +220,13 @@ const MobileHeroContent = () => {
 
   {/* Contenido principal */}
   <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-24 pb-6">
-    <h2 className="text-white font-bold text-[28px] leading-tight mb-4">
+    <h2 className="text-[#F5F9FF] text-center font-inter text-[32px] font-bold leading-[37px] tracking-[-1px] mb-4">
       Connect With <br /> Us Online
     </h2>
-
-    <p className="text-white text-[14px] leading-relaxed max-w-xs mb-6">
-      Check out our latest videos showcasing pristine pools, helpful advice, and the science behind sparkling water. Connect with us!
-    </p>
-
+    <p className="text-white text-center font-inter text-[12px] font-normal leading-[22px] max-w-xs mb-6">
+      Check out our latest videos showcasing <br />
+      pristine pools, helpful advice, and the science <br />
+      behind sparkling water. Connect with us!    </p>
     {/* Botones */}
     <div className="flex w-full justify-between gap-2 max-w-[320px] mb-10">
       <button className="flex-1 bg-white text-[#0F172A] font-semibold text-sm rounded-md px-2 py-2 flex items-center justify-center gap-1">

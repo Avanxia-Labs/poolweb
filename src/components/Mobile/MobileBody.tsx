@@ -6,6 +6,7 @@ import { Box } from "./Box";
 import MobileCard from "./MobileCard";
 import { Facebook, Instagram, Music2 } from "lucide-react";
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
+import SubscriptionCalculatorCard from "./SubscriptionCalculatorCard";
 
 
   const MobileBody = () => {
@@ -188,62 +189,8 @@ import ContactFormSection from '@/components/Mobile/ContactFormSection';
       </p>
     </header>
 
-    <div className="mt-6 bg-white p-6 rounded-3xl shadow-lg w-full">
-      <h2 className="text-base font-bold text-center text-slate-900 mb-4">
-        Calculate Your Subscription Price
-      </h2>
-
-        <div className="mb-4">
-          <label htmlFor="gallons" className="block text-xs font-bold text-slate-900">
-            How many gallons is your pool?
-          </label>
-          <input
-            id="gallons"
-            type="text"
-            value={gallons}
-            onChange={(e) => setGallons(e.target.value)}
-            className="w-full px-4 py-2 mt-2 text-sm border border-gray-300 rounded-md"
-          />
-          <button className="text-indigo-500 text-xs mt-1">Don't know?</button>
-        </div>
-
-        <div className="space-y-3">
-          <div className="flex justify-between items-center">
-            <label className="flex items-center text-xs font-bold text-slate-900">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9d822ca79ee490d9a78474d45bc5baa4b7e7c8c?placeholderIfAbsent=true&apiKey=06e3f92e1e524befb11420293ad988ac"
-                className="w-4 h-4 mr-2"
-                alt="Vacuuming"
-              />
-              Additional vacuuming
-            </label>
-            <span className="text-xs font-bold text-slate-900">+5</span>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <label className="flex items-center text-xs font-bold text-slate-900">
-              <div className="w-4 h-4 border border-blue-600 mr-2" />
-              Extra filter wash
-            </label>
-            <span className="text-xs font-bold text-slate-900">+5</span>
-          </div>
-        </div>
-
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/28b5e33c3932e21a2282a031f0ecda738dcd6f28?placeholderIfAbsent=true&apiKey=06e3f92e1e524befb11420293ad988ac"
-          alt="Divider"
-          className="my-4 w-full"
-        />
-
-        <div className="text-left">
-          <h3 className="text-xs font-medium text-slate-500">ESTIMATED PRICE:</h3>
-          <p className="text-xl font-black text-sky-950 mt-1">${calculatePrice()} / MONTH</p>
-        </div>
-
-        <button className="w-full mt-4 px-4 py-2 text-xs font-extrabold text-white bg-indigo-500 rounded">
-          Request Subscription
-        </button>
-      </div>
+     {/* Tarjeta reutilizable */}
+     <SubscriptionCalculatorCard />
     </div>
   </div>
 </section>
@@ -326,11 +273,6 @@ import ContactFormSection from '@/components/Mobile/ContactFormSection';
 </section>
 
 
-
-
-
-
-
 <section className="w-full bg-indigo-900 pt-10 pb-28">
   <div className="w-full max-w-screen-sm mx-auto flex flex-col items-center gap-8 rounded-2xl">
     <header className="text-left text-white w-full px-2">
@@ -364,26 +306,25 @@ import ContactFormSection from '@/components/Mobile/ContactFormSection';
       </article>
 
       {/* Second Testimonial */}
-<article
-  className="p-6 bg-white rounded-xl shadow-md w-[300px] absolute z-0"
-  style={{ top: "200px", left: "calc(100% - 300px)", transform: "rotate(-8deg)" }}
->
-  <header className="flex gap-3 items-center mb-4">
-    <img
-      src="https://cdn.builder.io/api/v1/image/assets/TEMP/59d028035c64030c072b1d18f07438853103c7cb"
-      className="object-cover w-10 h-10 rounded-full"
-      alt="Profile"
-    />
-    <div className="flex flex-col">
-      <h2 className="text-base font-bold text-zinc-800">Mostafa Hussein</h2>
-      <p className="text-sm text-stone-500">Client</p>
-    </div>
-  </header>
-  <blockquote className="text-sm leading-relaxed text-zinc-800">
-    Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they're coming with me! Highly recommend!
-  </blockquote>
-</article>
-
+      <article
+        className="p-6 bg-white rounded-xl shadow-md w-[300px] absolute z-0"
+        style={{ top: "200px", left: "calc(100% - 300px)", transform: "rotate(-8deg)" }}
+      >
+        <header className="flex gap-3 items-center mb-4">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/59d028035c64030c072b1d18f07438853103c7cb"
+            className="object-cover w-10 h-10 rounded-full"
+            alt="Profile"
+          />
+          <div className="flex flex-col">
+            <h2 className="text-base font-bold text-zinc-800">Mostafa Hussein</h2>
+            <p className="text-sm text-stone-500">Client</p>
+          </div>
+        </header>
+        <blockquote className="text-sm leading-relaxed text-zinc-800">
+          Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they're coming with me! Highly recommend!
+        </blockquote>
+      </article>
     </div>
   </div>
 </section>
