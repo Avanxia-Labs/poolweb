@@ -1,0 +1,133 @@
+import React from 'react'
+import Card from './Card'
+import Image from 'next/image'
+import FancyButton from './FancyButton'
+
+function Section2() {
+    return (
+        // <section id='Frame4' className='overflow-hidden flex flex-col items-center self-stretch bg-gradient-to-b from-[#4CF7FB] to-[#206680] px-6 sm:px-10 md:px-16 lg:px-[77px] pb-6 lg:pb-[28.165px]'>
+
+        //     {/* Background blur element */}
+        //     <div id='image' className='mb-12 w-[300px] md:w-[354.463px] h-[144px] md:h-[170.171px] blur-[19.5px]'>
+        //         <div id='video' className='flex w-full h-full justify-center items-center rounded-t-[30px] bg-[#0F172A]'></div>
+        //     </div>
+
+        //     <div id='Frame10' className='flex w-full max-w-[1428px] flex-col items-center gap-12 px-4'>
+
+        //         {/* Title and Description */}
+        //         <div id='Frame7' className='flex w-full max-w-[900px] flex-col items-center gap-6 text-center'>
+        //             <div id='Group2' className='w-full max-w-[858px]'>
+        //                 <div id='Deep' className='mx-auto mb-5 w-full max-w-[300px] md:max-w-[364px]'>
+        //                     <Image src={'/svgs/Deep.svg'} alt={'Deep'} width={364} height={154} />
+        //                 </div>
+        //                 <p className='text-[#0F172A] text-[40px] sm:text-[56px] md:text-[80px] font-bold leading-[1.1] tracking-[-2px] md:tracking-[-4px]'>
+        //                     Into our Services
+        //                 </p>
+        //             </div>
+
+        //             {/* CTA Button */}
+        //             <div id='Button' className='bg-[#485AFF] rounded-md px-6 py-4 text-white font-semibold text-[16px] sm:text-[18px]'>
+        //                 GET YOUR FREE ESTIMATE
+        //             </div>
+
+        //             {/* Subtitle */}
+        //             <p className='max-w-[600px] text-[#212939] text-[18px] sm:text-[20px] md:text-[24px] leading-[1.6]'>
+        //                 We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
+        //             </p>
+        //         </div>
+
+        //         {/* Service Grid */}
+        //         <div id='Frame9' className='w-full bg-white/50 backdrop-blur-[2px] rounded-[20px] px-4 sm:px-6 md:px-10 py-6'>
+
+        //             <div id='Frame8' className='flex flex-col items-center gap-10'>
+
+        //                 <div id='List' className='relative w-full max-w-[1296px] mx-auto'>
+
+        //                     {/* Horizontal line between rows (hidden on small screens) */}
+        //                     <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-[#E4E4E7]" />
+
+        //                     {/* Vertical lines between columns (hidden on small screens) */}
+        //                     <div className="hidden md:block absolute top-0 left-1/3 w-[1px] h-full bg-[#E4E4E7]" />
+        //                     <div className="hidden md:block absolute top-0 left-2/3 w-[1px] h-full bg-[#E4E4E7]" />
+
+        //                     {/* Responsive grid layout */}
+        //                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center">
+        //                         {/* Replace these with your real <Card /> components */}
+        //                         <Card icon="/svgs/headphones.svg" title="Support" description="Lorem ipsum..." />
+        //                         <Card icon="/svgs/charbar.svg" title="Sales" description="Lorem ipsum..." />
+        //                         <Card icon="/svgs/headphones.svg" title="Support" description="Lorem ipsum..." />
+        //                         <Card icon="/svgs/charbar.svg" title="Sales" description="Lorem ipsum..." />
+        //                         <Card icon="/svgs/headphones.svg" title="Support" description="Lorem ipsum..." />
+        //                         <Card icon="/svgs/charbar.svg" title="Sales" description="Lorem ipsum..." />
+        //                     </div>
+
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </section>
+
+        <section id="Frame4" className="overflow-hidden flex flex-col items-center self-stretch bg-gradient-to-b from-[#4CF7FB] to-[#206680] px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-6 lg:pb-10">
+
+            {/* Background blur */}
+            <div className="mb-10 w-3/4 max-w-md aspect-[2.5] blur-[14.5px] w-[22rem] h-[10rem] mb-[4.05rem]">
+                <div className="w-full h-full flex justify-center items-center rounded-[1.875rem 1.875rem 0rem 0rem] bg-[#0F172A]"></div>
+            </div>
+
+            <div className="w-full max-w-screen-xl flex flex-col items-center text-center">
+
+                {/* Título y Descripción */}
+                <div className="flex flex-col items-center gap-[1.14rem] px-4 mb-[3.12rem]">
+                    <div className="flex justify-center w-full max-w-md mx-auto">
+                        <Image src="/svgs/Deep.svg" alt="Deep" width={200} height={160} className="w-auto h-auto" />
+                    </div>
+
+                    <h2 className="text-[#0F172A] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                        Into our Services
+                    </h2>
+
+                    {/* <button className="mt-2 bg-[#485AFF] rounded-md px-6 py-3 text-white font-semibold text-base sm:text-lg">
+                        GET YOUR FREE ESTIMATE
+                    </button> */}
+                    <FancyButton
+                        text={'View All Services'} 
+                    />
+
+                    <p className="mt-2 max-w-2xl text-[#212939] text-base sm:text-lg md:text-xl leading-relaxed">
+                        We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
+                    </p>
+                </div>
+
+                {/* Cuadro con cards */}
+                <div className="w-full bg-white/50 backdrop-blur-sm rounded-2xl px-4 sm:px-6 md:px-10 py-6">
+
+                    <div className="flex flex-col items-center gap-10">
+
+                        <div className="relative w-full">
+
+                            {/* Líneas divisorias (solo en pantallas grandes) */}
+                            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-[#E4E4E7]" />
+                            <div className="hidden md:block absolute top-0 left-1/3 w-px h-full bg-[#E4E4E7]" />
+                            <div className="hidden md:block absolute top-0 left-2/3 w-px h-full bg-[#E4E4E7]" />
+
+                            {/* Grid responsive */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center">
+                                <Card icon="/svgs/clock.svg" title="Regular Maintenance" description=" Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly." />
+                                <Card icon="/svgs/bubble.svg" title="Deep and Routine Cleaning" description="We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy." />
+                                <Card icon="/svgs/tools.svg" title="Repair and Installation" description="We install and repair essential equipment for efficient and safe pool operation." />
+                                <Card icon="/svgs/balde.svg" title="Pool System Automation" description="Control your pool from your phone with smart technology that makes daily management easy." />
+                                <Card icon="/svgs/bulb.svg" title="Diagnosis and Troubleshooting" description="We quickly identify any pool issue and provide precise, effective solutions." />
+                                <Card icon="/svgs/helmet.svg" title="Custom Pool Design &Construction" description="Coming soon: custom pool construction using quality materials and exceptional finishes." />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    )
+}
+
+export default Section2

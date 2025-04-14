@@ -8,12 +8,12 @@ import Section4 from './Desktop/AboutComponents/Section4'
 
 function DesktopAboutPage() {
   return (
-      <div className='w-full max-w-[1600px] mx-auto bg-[#F5F9FF]'>
+      <div className='w-full max-w-[1920px] mx-auto bg-[#F5F9FF]'>
           <NavBar/>
           <Section1/>
           <Section2/>
           <Section3/>
-          <Section4/>
+          <Section4/> 
           <FooterSection/>
       </div>
     )

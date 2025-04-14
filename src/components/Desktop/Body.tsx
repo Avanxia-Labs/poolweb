@@ -9,9 +9,11 @@ import FooterSection from './FooterSection'
 
 function Body() {
     return (
-        <div className='flex w-full max-w-[1600px] mx-auto h-full flex-col items-start shrink-0'>
-            <section id='Frame25' className='w-full flex flex-col items-center gap-2.5 self-stretch'>
-                <div id='Group24' className=' w-full  max-w-[1600px] mx-auto h-[1051.376px]'>
+        <div className='flex w-full max-w-[1920px] mx-auto h-full flex-col items-start shrink-0'>
+            
+            {/* Section 1 */}
+            <section id='Frame25' className='w-full max-w-[1920px] flex flex-col items-center gap-2.5 self-stretch'>
+                <div id='Group24' className='w-full  max-w-[1920px] mx-auto h-[1051.376px]'>
 
                     <div id='Content' className='relative w-full max-w-[650px] mx-auto h-[405px] flex-shrink-0'>
                         <div id='Frame5' className='relative flex flex-col items-center gap-[23px] w-full max-w-[650px] mx-auto'>
@@ -37,14 +39,14 @@ function Body() {
                         <BeforeAfterAnimation />
                     </div>
 
-                    <div id='Group23' className='relative w-full max-w-[1600px] mx-auto h-[877.731px] flex-shrink-0'>
+                    <div id='Group23' className='bg-indigo-200 overflow-hidden relative w-full max-w-[1920px] mx-auto h-[877.731px] flex-shrink-0'>
 
 
-                        <div id='Group22' className=' overflow-hidden relative w-full max-w-[1600px] mx-auto h-[646.376px] flex-shrink-0'>
+                        <div id='Group22' className=' overflow-hidden relative w-full max-w-[1920px] mx-auto h-[646.376px] flex-shrink-0'>
 
 
                             {/* Cuarta capa: Fondo */}
-                            <div id='vector1' className='absolute bottom-0 z-10 w-full max-w-[1600px] h-[324px] mx-auto'>
+                            <div id='vector1' className='absolute bottom-0 z-10 w-full max-w-[1920px] h-[324px] mx-auto'>
                                 <svg width="0" height="0">
                                     <defs>
                                         <filter id="filter0_f_3_15" x="-902.2" y="0.250635" width="3404.4" height="315.025" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -88,14 +90,10 @@ function Body() {
                                     />
                                 </div>
                             </div>
-                            
-
-                            {/* <div className="relative max-w-[1600px] mx-auto">
-                                <div className="w-full bg-blue-200">Contenido principal centrado</div>
-                            </div> */}
+    
 
                             {/* Tercera capa: agua más brillante */}
-                            <div id='vector2' className='absolute bottom-0 z-20 w-full max-w-[1615.075px] h-[225.499px] mx-auto'>
+                            <div id='vector2' className='absolute bottom-0 z-20 w-full max-w-[1920px] h-[225.499px] mx-auto'>
                                 <svg width="0" height="0">
                                     <defs>
                                         <clipPath id="video-clip" clipPathUnits="userSpaceOnUse">
@@ -193,6 +191,7 @@ function Body() {
 
             </section>
 
+            {/* Section 2 */}
             <section id='Frame4' className='overflow-hidden flex flex-col items-center gap-[64.829px] self-stretch px-[77px] pb-[28.165px] pt-0 bg-gradient-to-b from-[#4CF7FB] to-[#206680]'>
 
                 <div id='image' className='mb-[64px] w-[354.463px] h-[170.171px] blur-[19.5px]'>
@@ -281,7 +280,7 @@ function Body() {
 
             </section>
 
-
+            {/* Section 3 */}
             <section id='Frame64' className='overflow-hidden flex max-h-[1127px] w-full max-w-[1622px] py-[120px] flex-col items-center gap-[41px]'>
 
                 <div id='Frame65' className='flex px-[320px] flex-col items-center gap-5 self-stretch'>
@@ -316,6 +315,7 @@ function Body() {
                 </div>
             </section>
 
+            {/* Section 4 */}
             <section id='Frame29' className='overflow-hidden flex flex-col items-center gap-[10px] self-stretch bg-white'>
 
                 <div id='Group26' className='relative w-full max-w-[3284.265px] max-h-[664.377px]'>
@@ -365,23 +365,7 @@ function Body() {
 
             </section>
 
-
-            {/* <section id='Frame 8' style={{ backgroundImage: "url('/svgs/Group_28.svg')" }} className='overflow-hidden w-full max-w-[1600px] h-full max-h-[1415px] flex flex-col items-center gap-[10px] self-stretch'>
-                
-                <div id='Content' className='ml-[-300px] mt-[113px]  w-[966px] h-[682px] shrink-0'>
-                    <div id='Frame5' className='flex w-[966px] flex-col items-start gap-[38px]'>
-                        <p className='text-[#F5F9FF] font-inter text-[80px] font-bold leading-[86px] tracking-[-4px] self-stretch'>Transform Your Pool Experience</p>
-                        <p className='text-[#FFF] font-inter text-[24px] font-normal leading-[40px] self-stretch'>We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations.  </p>
-                        <button className='flex p-[16px_20px] flex-col justify-center items-center gap-[10px] rounded-[8px] bg-[#F5F9FF]'>
-                            <div id='Frame1' className='flex justify-center items-center gap-[9px]'>
-                                <p className='text-[#485AFF] text-center font-inter text-[18px] font-extrabold leading-[28px]'>Start with a Free Estimate</p>
-                            </div>
-                        </button>
-                    </div>
-
-                </div>
-            </section> */}
-
+            {/* Section 5 */}
             <section id='Frame8' style={{ backgroundImage: "url('/svgs/Group_28.svg')" }}
                 className='overflow-hidden w-full max-w-[1600px] h-[1415px] flex flex-col items-center gap-[10px] self-stretch'>
                 <div id='Content' className='ml-[-300px] mt-[113px]  w-[966px] h-[682px] shrink-0'>
@@ -398,6 +382,7 @@ function Body() {
                 </div>
             </section>
 
+            {/* Section 6 */}
             <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-[644px] flex-shrink-0 relative'>
                 {/* Sección de texto */}
                 <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
@@ -429,39 +414,8 @@ function Body() {
                 </div>
             </section>
 
-            {/* <section id='6' className='w-full bg-[#161F7B] max-w-[1600px] h-full max-h-[644px] flex-shrink-0 relative'>
-
-                
-                <div id='Customers' className='ml-[110px] mt-[160px] flex w-[471px] flex-col items-start gap-[40px] z-10'>
-                    <p className='text-[#F5F9FF] font-inter text-[64px] font-extrabold leading-[76px]'>Customers say About Us</p>
-                    <p className='text-[#F5F9FF] font-inter text-[24px] font-normal self-stretch leading-[38px]'>
-                        Trust is built through results. Here you can read what our clients say about their experience with our service. Their words reflect our commitment to quality and excellence.
-                    </p>
-                </div>
-
-                
-                <div className='absolute top-[100px] left-0 w-full h-full'>
-
-                    <div id='Comentario1' className='mt-[58px] rounded-2xl absolute left-[694px] z-20 flex bg-black h-[348px] w-[400px] rotate-[-1.97deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
-                        <CardReview
-                            name={'Rick'}
-                            profession={'Consultant'}
-                            avatar={'/images/avatar.png'}
-                            description={'Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they are coming with me! Highly recommend!'} />
-                    </div>
-
-                    <div id='Comentario2' className='rounded-2xl absolute mt-[159.57px] left-[1091px] z-10 flex bg-black h-[318.575px] w-[396.277px] rotate-[6.036deg] flex-col items-start gap-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]'>
-                        <CardReview
-                            name={'Joe'}
-                            profession={'Profesional Manager'}
-                            avatar={'/images/avatar.png'}
-                            description={'“Great service! My pool looks fantastic, and I trust the water is safe thanks to their expertise. Highly recommend!”'} />
-                    </div>
-
-                </div>
-
-            </section> */}
-
+            
+            {/* Section 7 */}
             <section id='contact' className='flex flex-row h-[1200px] mx-auto overflow-hidden w-full w-max-[1600px]'>
 
                 <video
@@ -487,11 +441,6 @@ function Body() {
                         </div>
                     </div>
                 </div>
-            </section>
-
-
-            <section id='contfooter' className='h-[466px] overflow-hidden w-full w-max-[1600px]'>
-                <FooterSection />
             </section>
 
 
