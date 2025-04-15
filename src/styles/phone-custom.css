@@ -1,0 +1,32 @@
+/* styles/phone-custom.css */
+
+/* Fondo del dropdown */
+.react-tel-input .country-list {
+    background-color: #fff;
+    font-family: 'Inter', sans-serif;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Estilo de cada país */
+  .react-tel-input .country-list .country {
+    color: #667085 !important;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 8px 12px;
+  }
+  
+  /* Hover al pasar el mouse */
+  .react-tel-input .country-list .country:hover {
+    background-color: #f0f4ff;
+    color: #485AFF !important;
+  }
+  
+  /* Código del país */
+  .react-tel-input .dial-code {
+    color: #667085 !important;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  
