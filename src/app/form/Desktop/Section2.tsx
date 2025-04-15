@@ -2,7 +2,7 @@ import React from 'react'
 
 function Section2() {
     return (
-        <section className='relative overflow-hidden w-full w-max-[1600] h-[258px]'>
+        <section className='relative overflow-hidden w-full w-max-[1920px] h-[258px]'>
             <video
                 autoPlay
                 loop

@@ -8,14 +8,14 @@ const PoolQualityComponent = () => {
                 {/* Before/After Section */}
                 <div className="w-3/5">
                     <div className="w-full mb-[58px]">
-                        <img
+                        <img id='poolBeforeAndAfter'
                             src="/images/poolBeforeAndAfter.png"
                             alt="Pool before and after cleaning service"
                             className="rounded-lg w-full h-auto"
                         />
                     </div>
 
-                    <div className="w-full mb-[58px]">
+                    <div id='serviceDescription' className="w-full mb-[58px]">
                         <h2 className="text-3xl font-bold text-blue-600 mb-4">The Pool Quality Cleaning Difference</h2>
                         <p className="text-gray-700 mb-4">
                             Keeping Your Pool Visually Appealing Is Just The Start. Our Professional Pool Cleaning Service Ensures
@@ -40,14 +40,14 @@ const PoolQualityComponent = () => {
 
                     {/* Before/After Pool Images */}
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-blue-200 rounded-lg overflow-hidden">
+                        <div id='beforeImage' className="border border-blue-200 rounded-lg overflow-hidden">
                             <img
                                 src="/images/pooldirty2.png"
                                 alt="Pool before cleaning"
                                 className="w-full h-auto"
                             />
                         </div>
-                        <div className="border border-blue-200 rounded-lg overflow-hidden">
+                        <div id='afterImage' className="border border-blue-200 rounded-lg overflow-hidden">
                             <img
                                 src="/images/poolclean2.png"
                                 alt="Pool after cleaning"
@@ -61,7 +61,7 @@ const PoolQualityComponent = () => {
                 {/* Services and Calculator Section */}
                 <div className="flex flex-col w-2/5 gap-12">
                     {/* Services Column */}
-                    <div className="w-[485px] mt-[110px] bg-white">
+                    <div id='Services' className="w-[485px] mt-[110px] bg-white">
                         <div className="mb-12">
                             <h3 className="text-2xl font-semibold text-gray-800 ml-[60px] mt-[68px]">Services</h3>
                             <ul className="space-y-4 ml-[60px] mt-[24.5px]">

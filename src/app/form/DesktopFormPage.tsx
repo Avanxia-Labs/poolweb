@@ -6,13 +6,13 @@ import Section2 from './Desktop/Section2'
 
 function DesktopFormPage() {
   return (
-     <>
+     <div className='w-full mx-auto'>
       <NavBar/>
       <Section1/>
       <Section2/>
       <FooterSection/>
 
-     </>
+     </div>
   )
 }
 

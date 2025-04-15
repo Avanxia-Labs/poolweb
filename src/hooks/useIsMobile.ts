@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 
 
 //const MOBILE_BREAKPOINT = 1280;
-const MOBILE_BREAKPOINT = 720
+//const MOBILE_BREAKPOINT = 1024
+const MOBILE_BREAKPOINT = 768
 
 /**
  * Custom hook that determines if the current viewport width is considered "mobile".
