@@ -2,12 +2,12 @@ import React from 'react'
 
 function Section2() {
     return (
-        <section className='relative overflow-hidden w-full w-max-[1920px] h-[258px]'>
+        <section className='relative overflow-hidden w-full h-[458px]'>
             <video
                 autoPlay
                 loop
                 muted
-                className='h-[258px] w-full w-max-[1600px] object-cover'>
+                className='h-[458px] w-full object-cover'>
                 <source src='/videos/videoHD.mp4' type='video/mp4' />
             </video>
 

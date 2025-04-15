@@ -28,32 +28,30 @@ function Section3() {
                 </div>
 
                 {/* Contenedor Principal con Formulario e Imagen */}
-                <div id="Frame67" className=" relative flex flex-col lg:flex-row items-center justify-center gap-y-[4.75rem] gap-x-10 w-full  mx-auto">
+                <div id="Frame67" className="relative flex flex-col lg:flex-row items-center justify-center gap-y-8 lg:gap-y-[4.75rem] gap-x-10 w-full mx-auto">
 
                     {/* Fondo vector ajustado al contenedor y con borde inferior alineado */}
-                    <div id="Vector12" className="absolute top-[50%] inset-x-0 bottom-0 w-full max-h-[1127px] fill-[#007FBE]">
+                    <div id="Vector12" className="absolute top-[77%] lg:top-[50%] inset-x-0 w-full max-h-[1127px] fill-[#007FBE]">
                         <Image
                             src={'/svgs/vector12.svg'}
                             alt={'vector'}
-                            layout="intrinsic" 
-                            width={2645}
+                            layout="intrinsic"
+                            width={3000}
                             height={514}
                             objectFit="cover"
                         />
                     </div>
 
-
-
                     {/* Input Form */}
                     <div
                         id="Frame66"
-                        className="z-5 w-full mr-[4.75rem] max-w-md h-auto rounded-[2.5rem] bg-[#F6FEFF] shadow-lg hover:shadow-xl transition-all"
+                        className="z-5 w-full lg:mr-[4.75rem] max-w-md h-auto rounded-[2.5rem] bg-[#F6FEFF] shadow-lg hover:shadow-xl transition-all"
                     >
                         <InputDesign />
                     </div>
 
                     {/* Imagen de la piscina */}
-                    <div id="Image" className="  w-full max-w-md h-[400px] sm:h-[500px] lg:h-[643px] rounded-[2.5rem] overflow-hidden bg-[#F6FEFF] relative">
+                    <div id="Image" className="w-full max-w-md h-[400px] sm:h-[500px] lg:h-[643px] rounded-[2.5rem] overflow-hidden bg-[#F6FEFF] relative">
                         <Image
                             src="/images/pool.png"
                             alt="pool"
@@ -61,7 +59,6 @@ function Section3() {
                             className="object-cover scale-110"
                         />
                     </div>
-
                 </div>
             </section>
 

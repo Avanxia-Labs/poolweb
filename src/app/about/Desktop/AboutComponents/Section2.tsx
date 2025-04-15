@@ -39,7 +39,7 @@ function Section2() {
 
                     <div className="w-full max-w-[498px]">
                         <Image
-                            src="/svgs/chica.svg"
+                            src="/images/yosbaniServicesDesktop.png"
                             alt="chica"
                             width={498}
                             height={382}

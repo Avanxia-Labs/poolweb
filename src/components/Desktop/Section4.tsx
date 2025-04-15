@@ -49,10 +49,10 @@ function Section4() {
                     </div>
 
                     {/* Image: centered bubble portrait */}
-                    <div className='relative  left-[40%] top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[23.7vw] aspect-square rounded-full overflow-hidden'>
-                        <div id="circle" className='z-20 absolute inset-0 rounded-full bg-[#0B0B0B]'></div>
-                        <div id='shadow' className='z-25 absolute bottom-0 w-full h-[55%] opacity-60 blur-[2.7vw] bg-[linear-gradient(135deg,_#44BCFF_-0.55%,_#44B0FF_22.86%,_#485AFF_48.36%,_#485AFF_73.33%,_#000_99.34%)]'></div>
-                        <div id="woman" className="z-30 absolute inset-0 bg-[url('/images/woman.png')] bg-cover bg-no-repeat"></div>
+                    <div className='relative  left-[40%] top-1/2 h-full transform -translate-x-1/2 -translate-y-1/2 w-[23.7vw] aspect-square rounded-full overflow-hidden'>
+                        <div id="circle" className='z-20 absolute inset-0 rounded-full'></div>
+                        <div id='shadow' className='z-25 absolute top-[70%] w-full h-[55%] opacity-60 blur-[2.7vw] bg-[linear-gradient(135deg,_#44BCFF_-0.55%,_#44B0FF_22.86%,_#485AFF_48.36%,_#485AFF_73.33%,_#000_99.34%)]'></div>
+                        <div id="yosbani" className="z-30 absolute inset-0 bg-[url('/images/yosbaniDesktop.png')] bg-cover bg-no-repeat"></div>
                     </div>
                 </div>
             </div>

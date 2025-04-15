@@ -39,6 +39,13 @@
 
 // export default Section6
 
+
+
+
+
+
+
+
 import React, { useState } from 'react';
 import CardReview from './CardReview';
 
@@ -71,7 +78,7 @@ function Section6() {
   return (
     <section 
       id='6' 
-      className='w-full flex flex-col sm:flex-row relative py-8 sm:py-10 lg:py-[2.75rem] px-4 sm:px-6 lg:px-[4.38rem] gap-6 sm:gap-[1.56rem] bg-[#161F7B] max-w-[1920px] h-auto sm:h-[32rem] lg:h-[42rem] flex-shrink-0 overflow-hidden'
+      className='w-full flex flex-col sm:flex-row relative py-8 sm:py-10 lg:py-[2.75rem] px-4 sm:px-6 lg:px-[4.38rem] gap-6 sm:gap-[1.56rem] bg-[#161F7B] h-auto sm:h-[32rem] lg:h-[42rem] flex-shrink-0 overflow-hidden'
     >
       {/* Text section */}
       <div 
@@ -157,3 +164,5 @@ function Section6() {
 }
 
 export default Section6;
+
+

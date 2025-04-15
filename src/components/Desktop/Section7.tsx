@@ -3,9 +3,9 @@ import Form from './ContactForm/Form'
 
 function Section7() {
     return (
-        <section id='contact' className='flex flex-col sm:flex-row h-auto sm:h-[700px] md:h-[900px] lg:h-[1200px] mx-auto overflow-hidden w-full max-w-[1920px]'>
+        <section id='contact' className='flex flex-col sm:flex-row h-auto md:h-[1450px] mx-auto overflow-hidden w-full'>
             {/* Video background - full screen on mobile, half on desktop */}
-            <div className='relative h-full sm:h-full w-full sm:w-4/7  overflow-hidden'>
+            <div className='relative h-full sm:h-full w-full sm:w-4/7 overflow-hidden'>
                 <video
                     autoPlay
                     loop
@@ -34,8 +34,7 @@ function Section7() {
                 </div>
 
                 {/* Form */}
-
-                <div className='overflow-auto'>
+                <div className=''>
                     <Form />
                 </div>
                 
