@@ -14,12 +14,41 @@ const MobileBody = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleScroll = () => {
-    if (!containerRef.current) return;
-    const scrollLeft = containerRef.current.scrollLeft;
-    const width = containerRef.current.offsetWidth;
-    const index = Math.round(scrollLeft / width);
-    setActiveIndex(index);
+    const container = containerRef.current;
+    if (!container) return;
+  
+    const cards = Array.from(container.children) as HTMLElement[];
+    const containerRect = container.getBoundingClientRect();
+    const center = containerRect.left + containerRect.width / 2;
+  
+    let closestIndex = 0;
+    let minDistance = Infinity;
+  
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(center - cardCenter);
+  
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+  
+    setActiveIndex(closestIndex);
   };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+  
+    container.addEventListener("scroll", handleScroll, { passive: true });
+  
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  
 
   const scrollToIndex = (index: number) => {
     if (containerRef.current) {
@@ -190,40 +219,38 @@ const MobileBody = () => {
         </div>
       </div>
     </section>
-
-    <section className="relative w-full px-0 overflow-hidden min-h-[1250px]">
-      {/* Imagen de fondo */}
+    <section className="relative w-full px-0 overflow-hidden min-h-screen">
+      {/* Imagen de fondo Fija */}
       <img
-        src="/images/women_mobil.png"
-        alt="Yosbani Martinez background"
-        className="absolute inset-0 w-full h-full object-cover object-top z-0"
-      />
+    src="/images/man_mobile.png"
+    alt="Yosbani Martinez background"
+    className="absolute top-0 left-0 w-full h-full object-cover object-[left_top] z-0"
+  />
 
-      {/* Contenedor del texto en la parte inferior */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 px-4 pb-12 text-white max-w-[380px] mx-auto">
-        <h1 className="text-[32px] leading-[28px] font-semibold text-[#F5F9FF] font-inter h-[37px] w-full">
-          Yosbani Martinez
-        </h1>
+  {/* Contenido debajo de la imagen */}
+  <div className="relative z-10 px-4 pt-[95vh] pb-8 text-white max-w-[380px] mx-auto">
+    <h1 className="text-[32px] leading-[28px] font-semibold text-[#F5F9FF] font-inter h-[37px] w-full">
+      Yosbani Martinez
+    </h1>
 
-        <p className="text-[16px] leading-[28px] font-medium text-[#485AFF] font-inter w-full h-[29px]">
-          Founder & Chemical Engineer
-        </p>
+    <p className="text-[16px] leading-[28px] font-medium text-[#485AFF] font-inter w-full h-[29px]">
+      Founder & Chemical Engineer
+    </p>
 
-        <article className="mt-4 w-full">
-          <p className="text-[18.823px] leading-[25.614px] font-normal text-white font-inter">
-            I founded Pool Quality Solutions to bring a higher level of scientific precision to pool care. As a Chemical Engineer, with a degree evaluated as equivalent to a U.S. Bachelor of Science, I understand that water chemistry is crucial. It's not just about having a pool that looks clean – it's about ensuring a safe, balanced, and healthy swimming environment for your family and friends. Our commitment is to apply this expertise accurately and consistently, delivering quality service you can trust.
-          </p>
-        </article>
+    <article className="mt-4 w-full">
+      <p className="text-[18.823px] leading-[25.614px] font-normal text-white font-inter">
+        I founded Pool Quality Solutions to bring a higher level of scientific precision to pool care. As a Chemical Engineer, with a degree evaluated as equivalent to a U.S. Bachelor of Science, I understand that water chemistry is crucial. It's not just about having a pool that looks clean – it's about ensuring a safe, balanced, and healthy swimming environment for your family and friends. Our commitment is to apply this expertise accurately and consistently, delivering quality service you can trust.
+      </p>
+    </article>
 
-        <button
-          onClick={handleScroll}
-          className="text-[#F5F9FF] text-[12px] leading-[24.614px] font-extrabold italic underline decoration-solid [text-decoration-skip-ink:none] font-['Plus_Jakarta_Sans'] mt-4 hover:text-indigo-300 transition-colors"
-        >
-          View Verified Credentials
-        </button>
-      </div>
+    <button
+      onClick={handleScroll}
+      className="text-[#F5F9FF] text-[12px] leading-[24.614px] font-extrabold italic underline decoration-solid [text-decoration-skip-ink:none] font-['Plus_Jakarta_Sans'] mt-4 hover:text-indigo-300 transition-colors"
+    >
+      View Verified Credentials
+    </button>
+  </div>
     </section>
-
 
     <section className="relative w-full px-0 pb-10 text-xs overflow-hidden min-h-[850px]">
       {/* Imagen de fondo */}

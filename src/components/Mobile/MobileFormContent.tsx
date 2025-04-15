@@ -9,12 +9,12 @@ const MobileFormContent = () => {
   return (
   <main>
 <section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-[470px] text-center text-[#0F172A] overflow-hidden">
-{/* Título principal */}
+  {/* Título principal */}
   <h2 className="text-2xl font-bold mb-2 z-10 relative">Let's work together!</h2>
 
   {/* Subtítulo */}
   <p className="text-sm leading-6 max-w-xs mx-auto mb-3 z-10 relative">
-    We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the next 24 hours.
+    We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the <br />next 24 hours.
   </p>
 
   {/* Fondo curvo azul encima de la imagen */}
@@ -26,15 +26,18 @@ const MobileFormContent = () => {
     />
   </div>
 
-  {/* Imagen de la chica detrás del azul */}
-  <div className="w-full flex justify-center absolute bottom-[100px] z-10">
-  <img
+  {/* Imagen centrada y más grande */}
+  <div className="absolute bottom-[145px] left-1/2 transform -translate-x-1/2 z-10">
+    <img
       src="/images/contact_image.png"
       alt="Person Contact"
-      className="w-[200px] h-auto object-contain"
+      className="max-w-[250px] h-auto object-contain"
     />
   </div>
 </section>
+
+
+
 
 
 {/* Sección Contact us */}

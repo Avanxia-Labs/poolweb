@@ -183,65 +183,65 @@ const MobileAboutContent = () => {
 
 
 
-<section className="w-full bg-[#F7FAFE] px-4 py-10 text-[#0F172A] text-[13px] leading-[20px] flex flex-col gap-6">
-  {/* Encabezado y texto introductorio */}
-  <div>
-    <h2 className="text-lg font-bold mb-2">Sparkling Pools, <br />Worry-Free Service</h2>
-    <p>
-      Our expert team takes care of every detail—so you don’t have to. From deep cleaning and precise chemical balancing to filter maintenance and equipment checks, we ensure your pool is always ready for you. Whether it’s for residential weekends with family, or impressing your guests, we make sure your pool stays sparkling and hassle-free. Relax, dive in, and leave the work to us.
-    </p>
-  </div>
-
-  {/* Tarjetas de servicios */}
-  <div className="flex flex-col gap-3">
-    <div className="bg-white rounded-xl p-4 shadow text-[13px] leading-5">
-      <ul className="list-disc list-inside space-y-1">
-        <li>Weekly or one-time service</li>
-        <li>Residential and commercial pools</li>
-        <li>Eco-friendly cleaning products</li>
-      </ul>
+  <section className="w-full bg-[#F7FAFE] px-4 py-10 text-[#0F172A] text-[13px] leading-[20px] flex flex-col gap-6">
+    {/* Encabezado y texto introductorio */}
+    <div>
+      <h2 className="text-lg font-bold mb-2">Sparkling Pools, <br />Worry-Free Service</h2>
+      <p>
+        Our expert team takes care of every detail—so you don’t have to. From deep cleaning and precise chemical balancing to filter maintenance and equipment checks, we ensure your pool is always ready for you. Whether it’s for residential weekends with family, or impressing your guests, we make sure your pool stays sparkling and hassle-free. Relax, dive in, and leave the work to us.
+      </p>
     </div>
 
-    <div className="bg-white rounded-xl p-4 shadow text-[13px] leading-5">
-      <ul className="list-disc list-inside space-y-1">
-        <li>Filter and pump maintenance</li>
-        <li>Fast and professional service</li>
-        <li>Personalized service</li>
-      </ul>
+    {/* Tarjetas de servicios */}
+    <div className="flex flex-col gap-3">
+      <div className="bg-white rounded-xl p-4 shadow text-[13px] leading-5">
+        <ul className="list-disc list-inside space-y-1">
+          <li>Weekly or one-time service</li>
+          <li>Residential and commercial pools</li>
+          <li>Eco-friendly cleaning products</li>
+        </ul>
+      </div>
+
+      <div className="bg-white rounded-xl p-4 shadow text-[13px] leading-5">
+        <ul className="list-disc list-inside space-y-1">
+          <li>Filter and pump maintenance</li>
+          <li>Fast and professional service</li>
+          <li>Personalized service</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
- {/* Imágenes comparativas alineadas */}
-<div className="flex gap-[10px] w-full">
-  <img
-    src="/images/about_image3.png"
-    alt="Pool Before"
-    className="w-1/2 aspect-[3/5] rounded-[20px] object-cover shadow-lg"
-  />
-  <img
-    src="/images/about_image4.png"
-    alt="Pool After"
-    className="w-1/2 aspect-[3/5] rounded-[20px] object-cover shadow-lg"
-  />
-</div>
-
-
-{/* Destacado exacto según Figma y centrado */}
-<div className="flex flex-col justify-center items-center w-[167px] h-[48px] px-[18px] py-0 bg-[#485AFF] rounded-[10px] text-white self-center">
-  <span className="text-[20px] font-extrabold leading-none">30+</span>
-  <span className="text-[12px] font-semibold leading-none">Years of experience</span>
-</div>
+    {/* Imágenes comparativas alineadas */}
+    <div className="flex gap-[10px] w-full">
+      <img
+        src="/images/about_image3.png"
+        alt="Pool Before"
+        className="w-1/2 aspect-[3/5] rounded-[20px] object-cover shadow-lg"
+      />
+      <img
+        src="/images/about_image4.png"
+        alt="Pool After"
+        className="w-1/2 aspect-[3/5] rounded-[20px] object-cover shadow-lg"
+      />
+    </div>
 
 
-</section>
+    {/* Destacado exacto según Figma y centrado */}
+    <div className="flex flex-col justify-center items-center w-[167px] h-[48px] px-[18px] py-0 bg-[#485AFF] rounded-[10px] text-white self-center">
+      <span className="text-[20px] font-extrabold leading-none">30+</span>
+      <span className="text-[12px] font-semibold leading-none">Years of experience</span>
+    </div>
 
+
+  </section>
 
 
 
 
-    <section className="w-full bg-slate-900 px-4 py-10">
+
+  <section className="w-full bg-slate-900 px-4 py-10">
         <MobileFooter />
-        </section>
+  </section>
 
 
   </main>
