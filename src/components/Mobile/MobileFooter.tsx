@@ -1,5 +1,6 @@
 import React from "react";
 import { Facebook, Instagram, Music2 } from "lucide-react";
+import Link from 'next/link';
 
 const MobileFooter = () => {
   return (
@@ -47,10 +48,18 @@ const MobileFooter = () => {
           <hr className="w-full h-px bg-zinc-600" />
 
           <nav className="flex flex-wrap gap-6 justify-center">
-            <span className="text-xs font-medium leading-6 text-white">Home</span>
-            <span className="text-xs font-medium leading-6 text-white">Services</span>
-            <span className="text-xs font-medium leading-6 text-white">About Us</span>
-            <span className="text-xs font-medium leading-6 text-white">Contact</span>
+            <Link href="/">
+              <span className="text-xs font-medium leading-6 text-white cursor-pointer">Home</span>
+            </Link>
+            <Link href="/services">
+              <span className="text-xs font-medium leading-6 text-white cursor-pointer">Services</span>
+            </Link>
+            <Link href="/about">
+              <span className="text-xs font-medium leading-6 text-white cursor-pointer">About Us</span>
+            </Link>
+            <Link href="/form">
+              <span className="text-xs font-medium leading-6 text-white cursor-pointer">Contact</span>
+            </Link>
           </nav>
 
           <div className="mt-5 text-sm leading-6 text-white">

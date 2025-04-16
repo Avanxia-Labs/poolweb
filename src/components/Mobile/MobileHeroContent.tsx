@@ -104,20 +104,20 @@ const MobileHeroContent = () => {
     <main>
 <section className="relative w-full min-h-[500px] overflow-hidden">
   {/* Video de fondo */}
-  <div className="absolute inset-0 flex justify-center z-0">
+  <div className="absolute inset-0 z-0">
     <video
       autoPlay
       loop
       muted
       playsInline
-      className="w-full max-w-[400px] h-full object-cover"
+      className="w-full h-full object-cover"
     >
       <source src="/videos/pool-background.mp4" type="video/mp4" />
     </video>
   </div>
 
   {/* Vector decorativo encima del video - ahora centrado, más ancho y pegado */}
-  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10 w-[110%] max-w-[700px] h-[65px] overflow-hidden -mt-[1px]">
+  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10 w-[100%] h-[65px] overflow-hidden -mt-[1px]">
   <img
     src="/svgs/vectorHeroServices.svg"
     alt="Decorative vector"
@@ -129,7 +129,7 @@ const MobileHeroContent = () => {
 
 
   {/* Contenido principal */}
-  <div className="relative z-20 pt-[150px] flex flex-col items-center">
+  <div className="relative z-20 pt-[100px] flex flex-col items-center">
     <div className="flex flex-col items-center gap-4 w-[288px] mx-auto text-center min-h-[130px]">
       <h1 className="text-[32px] text-black text-center font-inter font-bold leading-[38px] tracking-[-1.127px]">
         {services[activeServiceIndex].title}
@@ -279,59 +279,77 @@ const MobileHeroContent = () => {
           </div>
         </div>
 
-        <div className="relative z-10 px-6">
-          <div ref={containerRef} className="flex snap-x snap-mandatory overflow-x-auto no-scrollbar gap-4 pb-4">
-            {videoSources.map((src, index) => (
-              <div key={index} className={`flex-shrink-0 snap-center transition-all duration-500 ${index === activeVideoIndex ? 'w-[220px] h-[400px] rounded-[32px]' : 'w-[180px] h-[340px] rounded-2xl opacity-70'} overflow-hidden bg-black`}>
-               <video
-                ref={(el: HTMLVideoElement | null) => {
-                  videoRefs.current[index] = el;
-                }}
-                data-index={index}
-                src={`/videos/${src}`}
-                className="w-full h-full object-cover"
-                muted
-                loop
-                playsInline
-                controls={false}
-                onClick={(e) => {
-                  if (index === activeVideoIndex) {
-                    const video = e.currentTarget;
-                    if (video.paused) {
-                      video.muted = false;
-                      video.play();
-                    } else {
-                      video.pause();
-                      video.muted = true;
-                    }
-                  }
-                }}
-              />
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center mt-2 mb-12"> {/* <-- más espacio abajo con mb-6 */}
-            <div className="flex items-center justify-center gap-[19.545px] w-[164px] px-[13.03px] py-[13.03px] rounded-[20px] bg-[#485AFF] shadow-[0px_4px_10px_rgba(0,0,0,0.25)]">
-              {videoSources.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setActiveVideoIndex(i); // 🔁 actualiza el punto blanco
-                    const video = videoRefs.current[i];
-                    if (video) {
-                      video.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                      setTimeout(() => {
-                        video.muted = false;
-                        video.play().catch(() => {}); // silencioso si no hay interacción previa
-                      }, 300);
-                    }
-                  }}
-                  className={`w-3 h-3 rounded-full transition-colors ${i === activeVideoIndex ? 'bg-white' : 'bg-[#5000F3]'}`}
-                ></button>
-              ))}
-            </div>
-          </div>
-        </div>
+        <div className="relative z-10 w-full flex justify-center px-4 sm:px-6 md:px-8">
+  {/* Carrusel de videos */}
+  <div
+    ref={containerRef}
+    className="flex snap-x snap-mandatory overflow-x-auto no-scrollbar gap-4 pb-4"
+  >
+    {videoSources.map((src, index) => (
+      <div
+        key={index}
+        className={`flex-shrink-0 snap-center transition-all duration-500 ${
+          index === activeVideoIndex
+            ? 'w-[220px] h-[400px] rounded-[32px]'
+            : 'w-[180px] h-[340px] rounded-2xl opacity-70'
+        } overflow-hidden bg-black`}
+      >
+        <video
+          ref={(el) => (videoRefs.current[index] = el)}
+          data-index={index}
+          src={`/videos/${src}`}
+          className="w-full h-full object-cover"
+          muted
+          loop
+          playsInline
+          onClick={(e) => {
+            if (index === activeVideoIndex) {
+              const video = e.currentTarget;
+              if (video.paused) {
+                video.muted = false;
+                video.play();
+              } else {
+                video.pause();
+                video.muted = true;
+              }
+            }
+          }}
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* ⬇️ Este bloque va fuera para que esté centrado debajo */}
+<div className="flex justify-center mt-4 mb-12">
+  <div className="relative flex items-center justify-center gap-5 px-4 py-2 bg-[#485AFF] rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.25)]">
+    {videoSources.map((_, i) => (
+      <button
+        key={i}
+        onClick={() => {
+          setActiveVideoIndex(i);
+          const video = videoRefs.current[i];
+          if (video) {
+            video.scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center',
+              block: 'nearest',
+            });
+            setTimeout(() => {
+              video.muted = false;
+              video.play().catch(() => {});
+            }, 300);
+          }
+        }}
+        className={`w-3 h-3 rounded-full transition-colors ${
+          i === activeVideoIndex ? 'bg-white' : 'bg-[#5000F3]'
+        }`}
+      ></button>
+    ))}
+  </div>
+</div>
+
+
       </section>
 
       <section className="w-full bg-slate-900 px-4 py-10">
