@@ -7,6 +7,7 @@ import MobileCard from "./MobileCard";
 import { Facebook, Instagram, Music2 } from "lucide-react";
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
 import SubscriptionCalculatorCard from "./SubscriptionCalculatorCard";
+import MobileFooter from "./MobileFooter";
 
 const MobileBody = () => {
   // Ref y estado para scroll horizontal (slider)
@@ -84,12 +85,53 @@ const MobileBody = () => {
       }
     };
   }, []);
+
+
+  const cards = [
+    {
+      icon: "/svgs/Clock_mobile.svg",
+      title: "Regular Maintenance",
+      description:
+        "Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly.",
+    },
+    {
+      icon: "/svgs/routine_.svg",
+      title: "Deep and Routine Cleaning",
+      description:
+        "We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy.",
+    },
+    {
+      icon: "/svgs/repair.svg",
+      title: "Repair and Installation",
+      description:
+        "We install and repair essential equipment for efficient and safe pool operation.",
+    },
+    {
+      icon: "/svgs/pool_sistem.svg",
+      title: "Pool System Automation",
+      description:
+        "Control your pool from your phone with smart technology that makes daily management easy.",
+    },
+    {
+      icon: "/svgs/diagnosis.svg",
+      title: "Diagnosis and Troubleshooting",
+      description:
+        "We quickly identify any pool issue and provide precise, effective solutions.",
+    },
+    {
+      icon: "/svgs/custom_pool.svg",
+      title: "Custom Pool Design & Construction",
+      description:
+        "Coming soon: custom pool construction using quality materials and exceptional finishes.",
+    },
+  ];
+  
   return (
   <main className="w-full bg-[#f7fafe]">      
     {/* Sección del título y estimación */}
     <Frame />
     <Box />
-    <section className="relative w-full px-4 pt-10 pb-16 overflow-hidden min-h-[750px]">
+    <section className="relative w-full pt-10 pb-16 overflow-hidden min-h-[750px]">
       {/* Imagen de fondo */}
       <img
         src="/images/deep.jpg"
@@ -98,7 +140,7 @@ const MobileBody = () => {
       />
 
       {/* Contenido sobre la imagen */}
-      <div className="relative z-20 w-full max-w-screen-sm mx-auto flex flex-col items-center text-center px-4 -mt-12">
+      <div className="relative z-20 w-full flex flex-col items-center text-center -mt-12">
 
         <img
         src="/svgs/deep_text.svg"
@@ -121,52 +163,15 @@ const MobileBody = () => {
         <div className="relative w-full overflow-hidden mt-12">
           <div
             ref={containerRef}
-            className="flex snap-x snap-mandatory overflow-x-auto no-scrollbar scroll-smooth"
+            className="flex snap-x snap-mandatory overflow-x-auto no-scrollbar scroll-smooth px-4 justify-start"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
-            {[ 
-              {
-                icon: "/svgs/clock.svg",
-                title: "Regular Maintenance",
-                description:
-                  " Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly.",
-              },
-              {
-                icon: "/svgs/routine_.svg",
-                title: "Deep and Routine Cleaning",
-                description:
-                  "We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy.",
-              },
-              {
-                icon: "/svgs/repair.svg",
-                title: "Repair and Installation",
-                description:
-                  "We install and repair essential equipment for efficient and safe pool operation.",
-              },
-              {
-                icon: "/svgs/pool_sistem.svg",
-                title: "Pool System Automation",
-                description:
-                  "Control your pool from your phone with smart technology that makes daily management easy.",
-              },
-              {
-                icon: "/svgs/diagnosis.svg",
-                title: "Diagnosis and Troubleshooting",
-                description:
-                  "We quickly identify any pool issue and provide precise, effective solutions.",
-              },
-              {
-                icon: "/svgs/custom_pool.svg",
-                title: "Custom Pool Design & Construction",
-                description:
-                  "Coming soon: custom pool construction using quality materials and exceptional finishes.",
-              },
-            ].map((card, index) => (
+            {cards.map((card, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 snap-center px-3 w-full sm:w-[280px]"
+                className="flex-shrink-0 snap-center w-[90%] max-w-[380px] px-6"
               >
-                <div className="bg-[#CFF2FC] text-[#0F172A] rounded-2xl px-4 py-6 shadow-md min-h-[300px] flex flex-col justify-start items-center text-center space-y-4">
+                <div className="bg-[#CFF2FC] text-[#0F172A] rounded-2xl px-4 py-6 shadow-md h-full flex flex-col justify-start items-center text-center space-y-4">
                   <MobileCard
                     icon={card.icon}
                     title={card.title}
@@ -177,10 +182,10 @@ const MobileBody = () => {
             ))}
           </div>
 
-          {/* Paginación personalizada */}
+          {/* Paginación */}
           <div className="mt-6 flex justify-center">
             <div className="bg-[#485AFF] px-4 py-2 rounded-full flex items-center gap-2">
-              {[...Array(6)].map((_, index) => (
+              {cards.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => scrollToIndex(index)}
@@ -374,55 +379,8 @@ const MobileBody = () => {
 
 
     <section className="w-full bg-slate-900 px-4 py-10">
-      <div className="w-full max-w-screen-sm mx-auto flex flex-col gap-8 rounded-2xl">
-
-        <header className="text-white text-3xl font-bold leading-10">
-          POOL QUALITY SOLUTION INC
-        </header>
-
-        <div className="flex flex-col gap-2.5 w-full">
-          <div className="flex flex-col gap-2 w-full items-center">
-            {/* Email */}
-            <div className="flex gap-2 items-center">
-              <svg className="w-5 h-6" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                <path d="M4 4h16v16H4z" />
-                <path d="M4 4l8 8 8-8" />
-              </svg>
-              <span className="text-xs leading-7 text-white">correo@hosting.com</span>
-            </div>
-
-            {/* Phone */}
-            <div className="flex gap-2 items-center">
-              <svg className="w-5 h-5" fill="white" viewBox="0 0 24 24">
-                <path d="M22 16.92V21a1 1 0 0 1-1.09 1 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2 3.09 1 1 0 0 1 3 2h4.09a1 1 0 0 1 1 .75 12.05 12.05 0 0 0 .56 1.59 1 1 0 0 1-.23 1.09L7.21 7.21a16 16 0 0 0 6.58 6.58l1.78-1.78a1 1 0 0 1 1.09-.23 12.05 12.05 0 0 0 1.59.56 1 1 0 0 1 .75 1V21z" />
-              </svg>
-              <span className="text-xs leading-7 text-white">+1 (239) 380-0766</span>
-            </div>
-          </div>
-
-          {/* Social Icons */}
-          <div className="flex justify-center gap-12 py-5">
-            <Music2 className="text-white w-6 h-6" aria-label="TikTok" />
-            <Facebook className="text-white w-6 h-6" aria-label="Facebook" />
-            <Instagram className="text-white w-6 h-6" aria-label="Instagram" />
-        </div>
-
-          <hr className="w-full h-px bg-zinc-600" />
-
-          <nav className="flex flex-wrap gap-6 justify-center">
-            <span className="text-xs font-medium leading-6 text-white">Home</span>
-            <span className="text-xs font-medium leading-6 text-white">Services</span>
-            <span className="text-xs font-medium leading-6 text-white">About Us</span>
-            <span className="text-xs font-medium leading-6 text-white">Contact</span>
-          </nav>
-
-          <div className="mt-5 text-sm leading-6 text-white">
-            © Copyright 2025, All Rights Reserved
-          </div>
-        </div>
-      </div>
-    </section>
-
+        <MobileFooter />
+      </section>
   </main>
   );
 };

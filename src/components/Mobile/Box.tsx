@@ -3,7 +3,7 @@ import React from "react";
 export const Box = () => {
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Contenedor centrado del video (SE MANTIENE IGUAL) */}
+      {/* Contenedor centrado del video */}
       <div className="relative w-full max-w-screen-sm mx-auto px-8 sm:px-16 z-10">
         <div className="relative w-full aspect-[280/191] rounded-t-[24px] overflow-hidden">
           {/* Video de fondo */}
@@ -25,26 +25,24 @@ export const Box = () => {
 
           {/* Texto centrado */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
-            <span className="font-bold text-white text-[70px] sm:text-[50px] blur-[2px] leading-none tracking-wider">
+            <span className="text-white text-center font-inter font-semibold leading-[40px] tracking-wider text-[clamp(28px,13vw,90px)] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] blur-[2.0125px]">
               BEFORE
             </span>
           </div>
         </div>
       </div>
 
-      {/* Olas FUERA del contenedor limitado → ocupan 100vw */}
-      {/* Ola superior nítida */}
+      {/* Ola superior nítida (fuera del contenedor) */}
       <div className="absolute bottom-0 left-0 w-screen h-[80px] z-20 overflow-hidden">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="w-screen h-full object-cover"
           style={{
             transform: "scale(1.05)",
-            clipPath:
-              "path('M0,60 C150,0 180,100 256,60 C330,20 420,100 512,60 L512,100 L0,100 Z')",
+            clipPath: "path('M0,60 C150,0 180,100 256,60 C350,20 500,100 1500,60 L600,100 L0,100 Z')"
           }}
         >
           <source src="/videos/videovector1.mp4" type="video/mp4" />
@@ -55,8 +53,7 @@ export const Box = () => {
       <div
         className="absolute bottom-0 left-0 w-screen h-[100px] z-10 overflow-hidden blur-[2px]"
         style={{
-          WebkitMaskImage:
-            "linear-gradient(to top, black 100%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to top, black 100%, transparent 100%)",
           maskImage: "linear-gradient(to top, black 100%, transparent 100%)",
         }}
       >
@@ -65,11 +62,11 @@ export const Box = () => {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="w-screen h-full object-cover"
           style={{
             transform: "scale(1.05)",
             clipPath:
-              "path('M0,55 C80,30 220,90 256,60 C384,10 384,110 512,60 L512,100 L0,100 Z')",
+              "path('M0,55 C80,30 220,90 256,60 C384,10 384,110 1500,60 L512,100 L0,100 Z')",
           }}
         >
           <source src="/videos/videovector1.mp4" type="video/mp4" />

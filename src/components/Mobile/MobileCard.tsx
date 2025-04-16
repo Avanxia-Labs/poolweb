@@ -9,9 +9,9 @@ interface CardProps {
 
 export default function MobileCard({ icon, title, description }: CardProps) {
   return (
-    <div className="max-w-[330px] max-h-[217px] flex flex-col flex-shrink-0 items-center px-4">
+  <div className="max-w-[330px] flex flex-col flex-shrink-0 items-center px-4">
     <Image className="mb-[45px]" src={icon} alt={title} width={44} height={44} />
-  
+    
     <p className="mb-[22px] text-[#18181B] text-center font-plus_jakarta_sans text-[21px] font-bold leading-[28px] mx-auto max-w-[315px]">
       {title}
     </p>
