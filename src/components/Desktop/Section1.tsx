@@ -204,8 +204,34 @@
 import React from 'react'
 import FancyButton from './FancyButton'
 import BeforeAfterAnimation from './BeforeAfterAnimation'
+import { useRef, useState, useEffect } from 'react'
 
 function Section1() {
+
+
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [currentText, setCurrentText] = useState<'BEFORE' | 'AFTER'>('BEFORE');
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        const handleTimeUpdate = () => {
+            const currentTime = video.currentTime;
+            if (currentTime < 2.5) {
+                setCurrentText('BEFORE');
+            } else {
+                setCurrentText('AFTER');
+            }
+        };
+
+        video.addEventListener('timeupdate', handleTimeUpdate);
+
+        return () => {
+            video.removeEventListener('timeupdate', handleTimeUpdate);
+        };
+    }, []);
+
     return (
         <section className='flex w-full mx-auto h-[1200px] flex-col items-start shrink-0'>
 
@@ -241,12 +267,18 @@ function Section1() {
             {/* <div className='h-[300px] bg-sky-400 w-full'> Video</div> */}
 
             <div id='abajo' className='z-0 h-5/8 flex flex-col relative w-full overflow-hidden'>
-                
+
                 {/* //bg-white absolute top-[-10%] w-full */}
                 <div className='absolute top-[-5%] min-top-[-10%] w-full'>
-                    <BeforeAfterAnimation/>
+                    <BeforeAfterAnimation currentText={currentText}/>
                 </div>
-                
+
+                {/* <div className=''>
+                    {currentText }
+
+                </div> */}
+
+
 
                 {/* Layer 4: Background water effect - Responsive positioning
                 absolute bottom-0 z-10 w-full h-[30%] md:h-[35%] lg:h-[40%] mx-auto */}
@@ -326,6 +358,7 @@ function Section1() {
                 <div id='image' className='absolute bottom-0 inset-0 z-30 flex justify-center items-center'>
                     <div className='w-[354.463px] h-[437px] rounded-t-[30px] overflow-hidden'>
                         <video
+                            ref={videoRef}
                             autoPlay
                             loop
                             muted

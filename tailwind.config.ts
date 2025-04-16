@@ -20,6 +20,9 @@ export default {
       blur: {
         '7.95': '7.95px',
       },
+      screen:{
+        '3xl': '2000px' 
+      }
       
     },
   },

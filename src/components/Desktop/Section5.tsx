@@ -38,31 +38,31 @@ function Section5() {
         //     </div>
         // </section>
 
-
-        <section id='Frame8' className='relative w-full h-screen mx-auto overflow-hidden'>
+        //Dandole altura a la seccion para que mantenga toda la imagen (probar poner un punto...)
+        <section id='Frame8' className='relative w-full h-screen xl:h-[1280px] 2xl:h-[1440px] h-3xl h-4xl mx-auto overflow-hidden'>
             {/* Contenedor principal con fondo azul para evitar espacios blancos */}
             <div className='absolute inset-0 bg-[#485AFF]'>
-                {/* Imagen de fondo que prioriza mostrar toda la imagen */}
+                {/* Imagen de fondo que se muestra de lg(1024px) hacia abajo */}
                 <img
                     src='/images/yosbaniHomeBackground.png'
                     alt='Pool background'
-                    className='w-full h-full object-contain md:object-cover object-top-right md:object-[75%_15%] xl:object-cover xl:object-[80%_10%]'
+                    className=' w-full h-full object-contain md:object-cover object-top-right md:object-[75%_15%] xl:object-cover xl:object-[80%_10%]'
                     style={{ objectPosition: 'top right' }}
                 />
 
                 {/* Superposición de contenido alineada al cuarto superior izquierdo */}
                 <div className='absolute inset-0'>
-                    <div className='w-full max-w-[600px] px-4 pt-8 md:pt-16 lg:pt-24 md:px-6 lg:px-12'>
+                    <div className='w-full lg:max-w-[750px] xl:max-w-[850px] 2xl:max-w-[1150px] max-w-[600px] px-4 pt-8 md:pt-16 lg:pt-24 md:px-6 lg:px-12'>
                         <div className='flex flex-col items-start gap-4 md:gap-6 lg:gap-8'>
                             <h2 className='text-[#F5F9FF] font-inter text-3xl md:text-4xl lg:text-5xl xl:text-[64px] font-bold leading-tight tracking-tight'>
                                 Transform Your Pool Experience
                             </h2>
 
                             {/* Texto condensado para mejor ajuste */}
-                            <p className='text-[#FFF] font-inter text-sm md:text-base lg:text-xl font-normal leading-relaxed'>
-                                We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations. We combine expertise with dedication to deliver
-
-                                exceptional pool services that exceed expectations. We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
+                            <p className='text-[#FFF] font-inter text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl 2xl:leading-[40px] font-normal leading-relaxed'>
+                                Owning a pool should be relaxing, not a complex chemistry puzzle. Our founder's Chemical Engineering expertise ensures we apply scientific principles for perfectly balanced and safe water.
+                                <br /> <br />
+                                This science-backed approach results in consistent water clarity, enhanced safety for swimmers, and better protection for your valuable pool equipment. Experience the peace of mind that comes from truly expert care. Let us transform your pool experience - get started with your free estimate today.
                             </p>
 
                             <button className='flex p-3 md:p-4 justify-center items-center rounded-[8px] bg-[#F5F9FF]'>

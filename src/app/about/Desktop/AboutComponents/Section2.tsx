@@ -29,9 +29,12 @@ function Section2() {
                         </p>
                     </div>
 
-                    <p className="text-[#A1A1AA] text-[13px] md:text-[14.065px] italic font-extrabold leading-relaxed underline decoration-skip-ink-none font-plusjakartasans">
+                    <a 
+                    href='/docs/VerifiedCredentials.pdf'
+                    download={true}
+                    className="hover:text-[#485AFF] text-[#A1A1AA] text-[13px] md:text-[14.065px] italic font-extrabold leading-relaxed underline decoration-skip-ink-none font-plusjakartasans">
                         View Verified Credentials
-                    </p>
+                    </a>
                 </div>
 
                 {/* Col 2 */}
