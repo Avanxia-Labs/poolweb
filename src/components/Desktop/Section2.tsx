@@ -2,6 +2,7 @@ import React from 'react'
 import Card from './Card'
 import Image from 'next/image'
 import FancyButton from './FancyButton'
+import Link from 'next/link'
 
 function Section2() {
     return (
@@ -25,9 +26,12 @@ function Section2() {
                         Into our Services
                     </h2>
 
-                    <FancyButton
-                        text={'View All Services'} 
-                    />
+                    <Link href="/services">
+                        <FancyButton
+                            text={'View All Services'}
+                        />
+                    </Link>
+
 
                     <p className="mt-2 max-w-2xl text-[#212939] text-base sm:text-lg md:text-xl leading-relaxed">
                         We combine expertise with dedication to deliver exceptional pool services that exceed expectations.

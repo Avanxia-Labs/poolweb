@@ -37,9 +37,14 @@ function Section4() {
                                 <br /><br />
                                 Bachelor of Science, I understand that water chemistry is crucial. It's not just about having a pool that looks clean - it's about ensuring a safe, balanced, and healthy swimming environment for your family and friends. Our commitment is to apply this expertise accurately and consistently, delivering quality service you can trust.
                             </p>
-                            <p className='text-[#A1A1AA] font-plusjakartasans text-[0.73vw] italic font-extrabold underline self-stretch'>
+
+                            <a 
+                                href='/docs/VerifiedCredentials.pdf'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='hover:text-[#485AFF] text-[#A1A1AA] font-plusjakartasans text-[0.73vw] italic font-extrabold underline self-stretch'>
                                 View Verified Credentials
-                            </p>
+                            </a>
                         </div>
                     </div>
 

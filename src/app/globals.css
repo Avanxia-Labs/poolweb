@@ -31,6 +31,29 @@
       height: 1920px;
     }
   }
+
+  @media (min-width: 1700px) {
+    .text-for-1700px {
+      font-size: 32px;
+    }
+  }
+
+  @media (min-width: 2000px) {
+    .text-3xl-100px {
+      font-size: 100px;
+    }
+
+    .text-3xl-40px {
+      font-size: 40px;
+    }
+
+    .leading-3xl-60px {
+      line-height: 60px;
+    }
+  }
+
+  
+
 }
 
 body {
