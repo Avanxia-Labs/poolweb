@@ -4,6 +4,7 @@ import FooterSection from '@/components/Desktop/FooterSection'
 import Section1 from './Desktop/Section1'
 import Section2 from './Desktop/Section2'
 
+
 function DesktopFormPage() {
   return (
      <div className='w-full mx-auto'>

@@ -327,10 +327,16 @@ const MobileHeroContent = () => {
         } overflow-hidden bg-black`}
       >
         <video
+
           ref={(el: HTMLVideoElement | null) => {
             if (el) {
               videoRefs.current[index] = el;
             }
+
+          //ref={(el) => (videoRefs.current[index] = el)}
+          ref={(el) => {
+            videoRefs.current[index] = el;
+
           }}
           data-index={index}
           src={`/videos/${src}`}

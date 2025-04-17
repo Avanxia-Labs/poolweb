@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+
+  transpilePackages: ['react-phone-input-2'],
 };
 
 export default nextConfig;

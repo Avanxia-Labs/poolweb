@@ -4,9 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 const Section3 = () => {
     const [currentSlide, setCurrentSlide] = useState(1);
     const [isMuted, setIsMuted] = useState(true);
-    //const videoRefs = useRef([]);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-
 
     // Videos de ejemplo
     const videos = [
@@ -40,19 +38,8 @@ const Section3 = () => {
             video.muted = !isMuted;
           }
         });
-      };
+    };
       
-
-    // const toggleMute = (e) => {
-    //     e.stopPropagation();
-    //     setIsMuted(!isMuted);
-    //     videoRefs.current.forEach(video => {
-    //         if (video) {
-    //             video.muted = !isMuted;
-    //         }
-    //     });
-    // };
-
     const getVisibleVideos = () => {
         const prev = (currentSlide - 1 + videos.length) % videos.length;
         const current = currentSlide;
@@ -86,42 +73,55 @@ const Section3 = () => {
                         const isCurrent = index === 1;
                         const isSide = !isCurrent;
 
+                        // Calculate widths based on 9:16 aspect ratio
+                        // For current (center) video
+                        const currentWidth = "w-full sm:w-[278px] md:w-[337px] lg:w-[349px]";
+                        const currentHeight = "h-[494px] sm:h-[494px] md:h-[600px] lg:h-[621px]";
+                        
+                        // For side videos
+                        const sideWidth = "hidden sm:block w-[169px] md:w-[225px] lg:w-[262px]";
+                        const sideHeight = "sm:h-[300px] md:h-[400px] lg:h-[466px]";
+
                         return (
                             <div
                                 key={videoIndex}
                                 className={`
-                  relative overflow-hidden rounded-2xl transition-all duration-300 
-                  ${isCurrent ? 'w-full sm:w-[350px] md:w-[380px] lg:w-[414px] h-[350px] sm:h-[400px] md:h-[500px] lg:h-[621px]' : 'hidden sm:block w-[150px] sm:w-[200px] md:w-[260px] lg:w-[311px] h-[280px] sm:h-[350px] md:h-[400px] lg:h-[466px]'}
-                `}
+                                    relative overflow-hidden rounded-2xl transition-all duration-300 
+                                    ${isCurrent ? `${currentWidth} ${currentHeight}` : `${sideWidth} ${sideHeight}`}
+                                `}
                             >
-                                <video
-                                    //ref={el => videoRefs.current[videoIndex] = el}
-                                    ref={el => { videoRefs.current[videoIndex] = el; }}
-                                    className="w-full h-full object-cover"
-                                    src={videos[videoIndex]}
-                                    loop
-                                    muted={isMuted}
-                                    playsInline
-                                />
-                                <button
-                                    onClick={toggleMute}
-                                    className="absolute bottom-4 right-4 bg-black bg-opacity-60 rounded-full p-2 text-white"
-                                    aria-label={isMuted ? "Unmute video" : "Mute video"}
-                                >
-                                    {isMuted ? (
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                                            <line x1="23" y1="9" x2="17" y2="15"></line>
-                                            <line x1="17" y1="9" x2="23" y2="15"></line>
-                                        </svg>
-                                    ) : (
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-                                        </svg>
-                                    )}
-                                </button>
+                                <div className={`relative w-full h-full`}>
+                                    <video
+                                        ref={el => { videoRefs.current[videoIndex] = el; }}
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                        src={videos[videoIndex]}
+                                        loop
+                                        muted={isMuted}
+                                        playsInline
+                                    />
+                                </div>
+                                
+                                {isCurrent && (
+                                    <button
+                                        onClick={toggleMute}
+                                        className="absolute bottom-4 right-4 bg-black bg-opacity-60 rounded-full p-2 text-white"
+                                        aria-label={isMuted ? "Unmute video" : "Mute video"}
+                                    >
+                                        {isMuted ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+                                                <line x1="23" y1="9" x2="17" y2="15"></line>
+                                                <line x1="17" y1="9" x2="23" y2="15"></line>
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                                            </svg>
+                                        )}
+                                    </button>
+                                )}
                             </div>
                         );
                     })}
@@ -148,7 +148,6 @@ const Section3 = () => {
 };
 
 // Componente para los botones de redes sociales
-
 type SocialMediaButtonProps = {
   icon: string;
   name: string;

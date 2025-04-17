@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from './ContactForm/Form'
 
 function Section7() {
+
+    const [showExtraFields, setShowExtraFields] = useState(false);
+  
+    const handleClientFieldsChange = (showClientFields: boolean) => {
+        setShowExtraFields(showClientFields);
+    };
+
     return (
-        <section id='contact' className='flex flex-col sm:flex-row h-auto md:h-[1450px] mx-auto overflow-hidden w-full'>
+        
+        <section id='contact' className={`flex flex-col sm:flex-row h-auto mx-auto overflow-hidden w-full ${showExtraFields ? 'md:h-[1950px]' : 'md:h-[1400px]'}`}   >
             {/* Video background - full screen on mobile, half on desktop */}
             <div className='relative h-full sm:h-full w-full sm:w-4/7 overflow-hidden'>
                 <video
@@ -35,7 +43,7 @@ function Section7() {
 
                 {/* Form */}
                 <div className=''>
-                    <Form />
+                    <Form onClientFieldsChange={handleClientFieldsChange}/>
                 </div>
                 
             </div>

@@ -111,13 +111,13 @@ export const Section1: React.FC = () => {
         onTouchEnd={handleTouchEnd}
       >
         {/* Vector at top */}
-        <div className="z-10 w-full mt-0 h-auto">
+        <div className="z-10 w-full -mt-[5px] h-auto text-[#485AFF]">
           <Image
             src="/svgs/vectorHeroServices.svg"
             alt="decorative vector"
             width={1920}
             height={127}
-            className="w-full h-auto"
+            className="w-full h-auto text-[#485AFF]"
             priority
           />
         </div>
@@ -137,28 +137,7 @@ export const Section1: React.FC = () => {
           </p>
         </div>
 
-        {/* Navigation Arrows */}
-        <div className="flex justify-between absolute top-1/2 transform -translate-y-1/2 w-full px-4 z-20">
-          <button
-            onClick={previousSlide}
-            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 focus:outline-none"
-            aria-label="Previous slide"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button
-            onClick={nextSlide}
-            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 focus:outline-none"
-            aria-label="Next slide"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 6L15 12L9 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
-
+        
         {/* Pagination */}
         <div className="flex relative z-10 gap-5 justify-center items-center p-3.5 mt-auto bg-indigo-500 rounded-3xl">
           {heroContents.map((_, index) => (

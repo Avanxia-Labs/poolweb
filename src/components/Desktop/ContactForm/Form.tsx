@@ -1,118 +1,34 @@
-// "use client";
-// import * as React from "react";
-// import { InputField } from "./InputField";
-// import { PhoneInput } from "./PhoneInput";
-// import { TextArea } from "./TextArea";
-// import { CheckboxGroup } from "./CheckboxGroup";
-// import { Button } from "./Button";
-
-// const serviceOptions = [
-//   { id: "maintenance", label: "Regular Maintenance" },
-//   { id: "cleaning", label: "Deep and Routine Cleaning" },
-//   { id: "repair", label: "Repair and Installation" },
-//   { id: "content", label: "Content creation" },
-//   { id: "automation", label: "Pool System Automation" },
-//   { id: "other", label: "Other" },
-// ];
-
-// const Form: React.FC = () => {
-//   const [formData, setFormData] = React.useState({
-//     name: "",
-//     email: "",
-//     phone: "",
-//     message: "",
-//     selectedServices: [] as string[],
-//   });
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     // Handle form submission
-//     console.log(formData);
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="max-w-lg">
-//       <div className="w-full text-[#344054] text-sm font-large leading-[20px] font-inter">
-//         <InputField
-//           label="Name"
-//           placeholder="Your name"
-//           value={formData.name}
-//           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-//         />
-
-//         <div className="mt-2 text-[#344054] text-sm font-large leading-[20px] font-inter">
-//           <InputField
-//             label="Do you have previous experience in pool 
-//             maintenance?"
-//             placeholder="Type"
-//             value={formData.name}
-//             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-//           />
-//         </div>
-
-//         <div className="mt-2 text-[#344054] text-sm font-large leading-[20px] font-inter">
-//           <InputField
-//             label="Email"
-//             type="email"
-//             placeholder="you@company.com"
-//             value={formData.email}
-//             onChange={(e) =>
-//               setFormData({ ...formData, email: e.target.value })
-//             }
-//           />
-//         </div>
-
-//         <div className="mt-2 text-[#344054] text-sm font-large leading-[20px] font-inter">
-//           <PhoneInput
-//             label="Phone number"
-//             value={formData.phone}
-//             onChange={(value) => setFormData({ ...formData, phone: value })}
-//           />
-//         </div>
-
-//         <div className="mt-2">
-//           <TextArea
-//             label="How can we help?"
-//             placeholder="Tell us a little about the project..."
-//             value={formData.message}
-//             onChange={(e) =>
-//               setFormData({ ...formData, message: e.target.value })
-//             }
-//           />
-//         </div>
-
-//         <div className="mt-2">
-//           <CheckboxGroup
-//             label="Services"
-//             options={serviceOptions}
-//             selectedOptions={formData.selectedServices}
-//             onChange={(selected) =>
-//               setFormData({ ...formData, selectedServices: selected })
-//             }
-//           />
-//         </div>
-//       </div>
-
-//       <div className="mt-2">
-//         <Button type="submit" fullWidth>
-//           Get started
-//         </Button>
-//       </div>
-//     </form>
-//   );
-// };
-
-// export default Form;
-
-
-
-
-// import { useState } from 'react';
+// import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 // import { ChevronDown } from 'lucide-react';
-// import FancyButton from '../FancyButton';
+// import PhoneInput from 'react-phone-input-2';
+// import 'react-phone-input-2/lib/style.css';
 
-// export default function PoolServiceForm() {
-//   const [formData, setFormData] = useState({
+// // Define types
+// type ServiceType = string;
+
+// interface FormDataType {
+//   name: string;
+//   role: string;
+//   company: string;
+//   poolSize: string;
+//   email: string;
+//   phone: string;
+//   projectDetails: string;
+//   services: ServiceType[];
+//   // Nuevos campos para información del cliente
+//   clientFullName: string;
+//   clientPhone: string;
+//   clientEmail: string;
+//   clientAddress: string;
+//   clientCompany: string;
+// }
+
+// interface PoolServiceFormProps {
+//   onClientFieldsChange?: (showClientFields: boolean) => void;
+// }
+
+// export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFormProps) {
+//   const [formData, setFormData] = useState<FormDataType>({
 //     name: '',
 //     role: '',
 //     company: '',
@@ -120,20 +36,36 @@
 //     email: '',
 //     phone: '',
 //     projectDetails: '',
-//     services: []
+//     services: [],
+//     // Inicializar nuevos campos
+//     clientFullName: '',
+//     clientPhone: '',
+//     clientEmail: '',
+//     clientAddress: '',
+//     clientCompany: ''
 //   });
 
 //   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
   
-//   const roleOptions = ['Pool Owner', 'Property Manager', 'Contractor', 'Designer'];
+//   const roleOptions = ['Pool Owner', 'Pool Service Technician', 'Pool Repair Technician'];
   
-//   const handleChange = (e) => {
+//   // Determinar si mostrar los campos adicionales del cliente
+//   const showClientFields = formData.role !== '' && formData.role !== 'Pool Owner';
+  
+//   // Notificar al componente padre cuando cambia showClientFields
+//   useEffect(() => {
+//     if (onClientFieldsChange) {
+//       onClientFieldsChange(showClientFields);
+//     }
+//   }, [showClientFields, onClientFieldsChange]);
+  
+//   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 //     const { name, value } = e.target;
-//     setFormData(prev => ({ ...prev, [name]: value }));
+//     setFormData((prev: FormDataType) => ({ ...prev, [name]: value }));
 //   };
   
-//   const handleServiceChange = (service) => {
-//     setFormData(prev => {
+//   const handleServiceChange = (service: ServiceType) => {
+//     setFormData((prev: FormDataType) => {
 //       const updatedServices = prev.services.includes(service)
 //         ? prev.services.filter(s => s !== service)
 //         : [...prev.services, service];
@@ -141,23 +73,31 @@
 //     });
 //   };
   
-//   const selectRole = (role) => {
-//     setFormData(prev => ({ ...prev, role }));
+//   const selectRole = (role: string) => {
+//     setFormData((prev: FormDataType) => ({ ...prev, role }));
 //     setIsRoleDropdownOpen(false);
 //   };
   
-//   const handleSubmit = (e) => {
+//   const handleSubmit = (e: FormEvent) => {
 //     e.preventDefault();
 //     console.log('Form submitted:', formData);
 //     // Process form submission
 //     alert('Form submitted successfully!');
 //   };
 
+//   const handlePhoneChange = (value: string) => {
+//     setFormData(prev => ({ ...prev, phone: value }));
+//   };
+
+//   const handleClientPhoneChange = (value: string) => {
+//     setFormData(prev => ({ ...prev, clientPhone: value }));
+//   };
+
 //   return (
-//     <div className="flex justify-center w-full h-full items-center min-h-screen bg-black p-4">
-//       <div className="w-full h-full max-w-4xl bg-indigo-100 rounded-xl shadow-md p-4 sm:p-8">
-//         <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4">
-//           <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+//     <div className="flex justify-center w-full h-full items-start min-h-screen sm:pb-5 p-4 overflow-auto">
+      
+//       <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4 w-full max-w-3xl">
+//           <div className="grid grid-cols-1 gap-6 2xl:grid-cols-2">
 //             {/* Name Field */}
 //             <div className="space-y-2">
 //               <label className="block text-sm font-medium text-gray-700">Name</label>
@@ -241,26 +181,106 @@
 //               />
 //             </div>
             
-//             {/* Phone Field */}
+//             {/* Phone Field - usando PhoneInput */}
 //             <div className="space-y-2">
 //               <label className="block text-sm font-medium text-gray-700">Phone number</label>
-//               <div className="flex">
-//                 <div className="flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md">
-//                   <span className="text-gray-500">US</span>
-//                   <ChevronDown size={16} className="ml-1 text-gray-500" />
-//                 </div>
-//                 <input
-//                   type="tel"
-//                   name="phone"
-//                   value={formData.phone}
-//                   onChange={handleChange}
-//                   placeholder="+1 (555) 000-0000"
-//                   className="w-full px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-//                   required
-//                 />
-//               </div>
+//               <PhoneInput
+//                 placeholder='555 000-0000'
+//                 country={'us'}
+//                 value={formData.phone}
+//                 onChange={handlePhoneChange}
+//                 inputClass="!w-full !py-2 !pl-12 !text-sm"
+//                 dropdownClass="!text-sm"
+//                 containerClass="!w-full"
+//                 enableSearch
+//                 inputProps={{
+//                   required: true,
+//                   name: 'phone'
+//                 }}
+//               />
 //             </div>
 //           </div>
+          
+//           {/* Campos adicionales del cliente - se muestran solo cuando no es Pool Owner */}
+//           {showClientFields && (
+//             <div className="mt-6 p-4 rounded-lg border border-gray-800">
+//               <h3 className="text-lg font-medium text-gray-900 mb-4">Client Information</h3>
+//               <div className="grid grid-cols-1 gap-6 2xl:grid-cols-2">
+//                 {/* Client Full Name Field */}
+//                 <div className="space-y-2">
+//                   <label className="block text-sm font-medium text-gray-700">Client Full Name</label>
+//                   <input
+//                     type="text"
+//                     name="clientFullName"
+//                     value={formData.clientFullName}
+//                     onChange={handleChange}
+//                     placeholder="Client's full name"
+//                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                     required
+//                   />
+//                 </div>
+                
+//                 {/* Client Phone Field - usando PhoneInput */}
+//                 <div className="space-y-2 ">
+//                   <label className="block text-sm font-medium text-gray-700">Client Phone Number</label>
+//                   <PhoneInput
+//                     country={'us'}
+//                     value={formData.clientPhone}
+//                     onChange={handleClientPhoneChange}
+//                     inputClass="!w-full !py-2 !pl-12 !text-sm"
+//                     dropdownClass="!text-sm"
+//                     containerClass="!w-full"
+//                     enableSearch
+//                     inputProps={{
+//                       required: true,
+//                       name: 'clientPhone'
+//                     }} 
+//                   />
+//                 </div>
+                
+//                 {/* Client Email Field */}
+//                 <div className="space-y-2">
+//                   <label className="block text-sm font-medium text-gray-700">Client Email</label>
+//                   <input
+//                     type="email"
+//                     name="clientEmail"
+//                     value={formData.clientEmail}
+//                     onChange={handleChange}
+//                     placeholder="client@example.com"
+//                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                     required
+//                   />
+//                 </div>
+                
+//                 {/* Client Company Field */}
+//                 <div className="space-y-2">
+//                   <label className="block text-sm font-medium text-gray-700">Client Company (optional)</label>
+//                   <input
+//                     type="text"
+//                     name="clientCompany"
+//                     value={formData.clientCompany}
+//                     onChange={handleChange}
+//                     placeholder="Client's company"
+//                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                   />
+//                 </div>
+                
+//                 {/* Client Address Field - full width */}
+//                 <div className="space-y-2 2xl:col-span-2">
+//                   <label className="block text-sm font-medium text-gray-700">Client Address</label>
+//                   <input
+//                     type="text"
+//                     name="clientAddress"
+//                     value={formData.clientAddress}
+//                     onChange={handleChange}
+//                     placeholder="Client's full address"
+//                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                     required
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+//           )}
           
 //           {/* Project Details Field */}
 //           <div className="space-y-2">
@@ -270,7 +290,7 @@
 //               value={formData.projectDetails}
 //               onChange={handleChange}
 //               placeholder="Tell us a little about the project..."
-//               rows="4"
+//               rows={4}
 //               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 //             ></textarea>
 //           </div>
@@ -278,7 +298,7 @@
 //           {/* Services Field */}
 //           <div className="space-y-3">
 //             <label className="block text-sm font-medium text-gray-700">Services</label>
-//             <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+//             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2">
 //               <div className="flex items-start">
 //                 <input
 //                   type="checkbox"
@@ -368,16 +388,16 @@
 //               Get started
 //             </button>
 //           </div>
-//         </form>
-//       </div>
+//       </form>
 //     </div>
 //   );
 // }
 
 
-
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 // Define types
 type ServiceType = string;
@@ -391,9 +411,19 @@ interface FormDataType {
   phone: string;
   projectDetails: string;
   services: ServiceType[];
+  // Nuevos campos para información del cliente
+  clientFullName: string;
+  clientPhone: string;
+  clientEmail: string;
+  clientAddress: string;
+  clientCompany: string;
 }
 
-export default function PoolServiceForm() {
+interface PoolServiceFormProps {
+  onClientFieldsChange?: (showClientFields: boolean) => void;
+}
+
+export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFormProps) {
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
     role: '',
@@ -402,16 +432,42 @@ export default function PoolServiceForm() {
     email: '',
     phone: '',
     projectDetails: '',
-    services: []
+    services: [],
+    // Inicializar nuevos campos
+    clientFullName: '',
+    clientPhone: '',
+    clientEmail: '',
+    clientAddress: '',
+    clientCompany: ''
   });
 
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   
-  const roleOptions = ['Pool Owner', 'Property Manager', 'Contractor', 'Designer'];
+  const roleOptions = ['Pool Owner', 'Pool Service Technician', 'Pool Repair Technician'];
+  
+  // Determinar si mostrar los campos adicionales del cliente
+  const showClientFields = formData.role !== '' && formData.role !== 'Pool Owner';
+  
+  // Notificar al componente padre cuando cambia showClientFields
+  useEffect(() => {
+    if (onClientFieldsChange) {
+      onClientFieldsChange(showClientFields);
+    }
+  }, [showClientFields, onClientFieldsChange]);
   
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev: FormDataType) => ({ ...prev, [name]: value }));
+    
+    // Limpiar el error para este campo si existe
+    if (formErrors[name]) {
+      setFormErrors(prev => {
+        const updated = { ...prev };
+        delete updated[name];
+        return updated;
+      });
+    }
   };
   
   const handleServiceChange = (service: ServiceType) => {
@@ -421,46 +477,123 @@ export default function PoolServiceForm() {
         : [...prev.services, service];
       return { ...prev, services: updatedServices };
     });
+    
+    // Limpiar el error de servicios si se selecciona alguno
+    if (formErrors['services'] && !formData.services.includes(service)) {
+      setFormErrors(prev => {
+        const updated = { ...prev };
+        delete updated['services'];
+        return updated;
+      });
+    }
   };
   
   const selectRole = (role: string) => {
     setFormData((prev: FormDataType) => ({ ...prev, role }));
     setIsRoleDropdownOpen(false);
+    
+    // Limpiar el error de role si existe
+    if (formErrors['role']) {
+      setFormErrors(prev => {
+        const updated = { ...prev };
+        delete updated['role'];
+        return updated;
+      });
+    }
   };
   
+  const handlePhoneChange = (value: string) => {
+    setFormData(prev => ({ ...prev, phone: value }));
+    
+    // Limpiar el error de phone si existe
+    if (formErrors['phone']) {
+      setFormErrors(prev => {
+        const updated = { ...prev };
+        delete updated['phone'];
+        return updated;
+      });
+    }
+  };
+
+  const handleClientPhoneChange = (value: string) => {
+    setFormData(prev => ({ ...prev, clientPhone: value }));
+    
+    // Limpiar el error de clientPhone si existe
+    if (formErrors['clientPhone']) {
+      setFormErrors(prev => {
+        const updated = { ...prev };
+        delete updated['clientPhone'];
+        return updated;
+      });
+    }
+  };
+  
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+    
+    // Validar campos obligatorios
+    if (!formData.name.trim()) errors.name = 'Name is required';
+    if (!formData.role) errors.role = 'Role selection is required';
+    if (!formData.email.trim()) errors.email = 'Email is required';
+    if (!formData.phone.trim()) errors.phone = 'Phone number is required';
+    if (formData.services.length === 0) errors.services = 'Please select at least one service';
+    
+    // Validar campos del cliente cuando corresponda
+    if (showClientFields) {
+      if (!formData.clientFullName.trim()) errors.clientFullName = 'Client name is required';
+      if (!formData.clientPhone.trim()) errors.clientPhone = 'Client phone is required';
+      if (!formData.clientEmail.trim()) errors.clientEmail = 'Client email is required';
+      if (!formData.clientAddress.trim()) errors.clientAddress = 'Client address is required';
+    }
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Process form submission
-    alert('Form submitted successfully!');
+    
+    if (validateForm()) {
+      console.log('Form submitted:', formData);
+      // Process form submission
+      alert('Form submitted successfully!');
+    } else {
+      console.log('Form validation failed');
+      alert('Please fill in all required fields');
+    }
   };
 
   return (
     <div className="flex justify-center w-full h-full items-start min-h-screen sm:pb-5 p-4 overflow-auto">
       
-      <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4 w-full max-w-3xl">
           <div className="grid grid-cols-1 gap-6 2xl:grid-cols-2">
             {/* Name Field */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Name <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Your name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full px-3 py-2 border ${formErrors.name ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 required
               />
+              {formErrors.name && <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>}
             </div>
             
             {/* I am a Field */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">I am a</label>
+              <label className="block text-sm font-medium text-gray-700">
+                I am a <span className="text-red-500">*</span>
+              </label>
               <div className="relative">
                 <button
                   type="button"
-                  className="w-full px-3 py-2 text-left border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+                  className={`w-full px-3 py-2 text-left border ${formErrors.role ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center`}
                   onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
                 >
                   <span>{formData.role || 'Please select:'}</span>
@@ -481,11 +614,14 @@ export default function PoolServiceForm() {
                   </div>
                 )}
               </div>
+              {formErrors.role && <p className="text-red-500 text-xs mt-1">{formErrors.role}</p>}
             </div>
             
-            {/* Company Field */}
+            {/* Company Field (opcional) */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Company</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Company <span className="text-gray-400">(optional)</span>
+              </label>
               <input
                 type="text"
                 name="company"
@@ -496,9 +632,11 @@ export default function PoolServiceForm() {
               />
             </div>
             
-            {/* Pool Size Field */}
+            {/* Pool Size Field (opcional) */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">How many gallons is your pool?</label>
+              <label className="block text-sm font-medium text-gray-700">
+                How many gallons is your pool? <span className="text-gray-400">(optional)</span>
+              </label>
               <input
                 type="text"
                 name="poolSize"
@@ -511,42 +649,144 @@ export default function PoolServiceForm() {
             
             {/* Email Field */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Email <span className="text-red-500">*</span>
+              </label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="you@company.com"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full px-3 py-2 border ${formErrors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                 required
               />
+              {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
             </div>
             
-            {/* Phone Field */}
+            {/* Phone Field - usando PhoneInput */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Phone number</label>
-              <div className="flex">
-                <div className="flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md">
-                  <span className="text-gray-500">US</span>
-                  <ChevronDown size={16} className="ml-1 text-gray-500" />
-                </div>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="+1 (555) 000-0000"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
+              <label className="block text-sm font-medium text-gray-700">
+                Phone number <span className="text-red-500">*</span>
+              </label>
+              <PhoneInput
+                placeholder='555 000-0000'
+                country={'us'}
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                inputClass={`!w-full !py-2 !pl-12 !text-sm ${formErrors.phone ? '!border-red-500' : ''}`}
+                dropdownClass="!text-sm"
+                containerClass="!w-full"
+                enableSearch
+                inputProps={{
+                  required: true,
+                  name: 'phone'
+                }}
+              />
+              {formErrors.phone && <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>}
             </div>
           </div>
           
-          {/* Project Details Field */}
+          {/* Campos adicionales del cliente - se muestran solo cuando no es Pool Owner */}
+          {showClientFields && (
+            <div className="mt-6 p-4 rounded-lg border border-gray-800">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Client Information</h3>
+              <div className="grid grid-cols-1 gap-6 2xl:grid-cols-2">
+                {/* Client Full Name Field */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Client Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="clientFullName"
+                    value={formData.clientFullName}
+                    onChange={handleChange}
+                    placeholder="Client's full name"
+                    className={`w-full px-3 py-2 border ${formErrors.clientFullName ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    required
+                  />
+                  {formErrors.clientFullName && <p className="text-red-500 text-xs mt-1">{formErrors.clientFullName}</p>}
+                </div>
+                
+                {/* Client Phone Field - usando PhoneInput */}
+                <div className="space-y-2 ">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Client Phone Number <span className="text-red-500">*</span>
+                  </label>
+                  <PhoneInput
+                    country={'us'}
+                    value={formData.clientPhone}
+                    onChange={handleClientPhoneChange}
+                    inputClass={`!w-full !py-2 !pl-12 !text-sm ${formErrors.clientPhone ? '!border-red-500' : ''}`}
+                    dropdownClass="!text-sm"
+                    containerClass="!w-full"
+                    enableSearch
+                    inputProps={{
+                      required: true,
+                      name: 'clientPhone'
+                    }} 
+                  />
+                  {formErrors.clientPhone && <p className="text-red-500 text-xs mt-1">{formErrors.clientPhone}</p>}
+                </div>
+                
+                {/* Client Email Field */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Client Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="clientEmail"
+                    value={formData.clientEmail}
+                    onChange={handleChange}
+                    placeholder="client@example.com"
+                    className={`w-full px-3 py-2 border ${formErrors.clientEmail ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    required
+                  />
+                  {formErrors.clientEmail && <p className="text-red-500 text-xs mt-1">{formErrors.clientEmail}</p>}
+                </div>
+                
+                {/* Client Company Field (opcional) */}
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Client Company <span className="text-gray-400">(optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="clientCompany"
+                    value={formData.clientCompany}
+                    onChange={handleChange}
+                    placeholder="Client's company"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                
+                {/* Client Address Field - full width */}
+                <div className="space-y-2 2xl:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Client Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="clientAddress"
+                    value={formData.clientAddress}
+                    onChange={handleChange}
+                    placeholder="Client's full address"
+                    className={`w-full px-3 py-2 border ${formErrors.clientAddress ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                    required
+                  />
+                  {formErrors.clientAddress && <p className="text-red-500 text-xs mt-1">{formErrors.clientAddress}</p>}
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* Project Details Field (opcional) */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">How can we help?</label>
+            <label className="block text-sm font-medium text-gray-700">
+              How can we help? <span className="text-gray-400">(optional)</span>
+            </label>
             <textarea
               name="projectDetails"
               value={formData.projectDetails}
@@ -559,7 +799,9 @@ export default function PoolServiceForm() {
           
           {/* Services Field */}
           <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">Services</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Services <span className="text-red-500">*</span>
+            </label>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2">
               <div className="flex items-start">
                 <input
@@ -639,6 +881,7 @@ export default function PoolServiceForm() {
                 </label>
               </div>
             </div>
+            {formErrors.services && <p className="text-red-500 text-xs mt-1">{formErrors.services}</p>}
           </div>
           
           {/* Submit Button */}
@@ -651,10 +894,6 @@ export default function PoolServiceForm() {
             </button>
           </div>
       </form>
-      
-      {/* <div className="bg-indigo-300 w-full h-[80vh] max-w-4xl rounded-xl shadow-md p-4 sm:p-8 max-h-screen overflow-y-auto">
-        
-      </div> */}
     </div>
   );
 }

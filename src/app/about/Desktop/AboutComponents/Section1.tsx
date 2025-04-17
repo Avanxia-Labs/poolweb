@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 function Section1() {
   return (
@@ -6,11 +7,11 @@ function Section1() {
       <div className="flex flex-col lg:flex-row">
         {/* Imagen principal - Tocando borde izquierdo e inferior */}
         <div className="w-full lg:w-1/2">
-          <img 
+          <img
             // className="w-full h-auto object-contain" 
             className='w-full h-full object-cover lg:object-contain'
-            src="/svgs/AboutHome.svg" 
-            alt="Pool Quality Solutions Inc" 
+            src="/svgs/AboutHome.svg"
+            alt="Pool Quality Solutions Inc"
           />
         </div>
 
@@ -32,11 +33,14 @@ function Section1() {
             </div>
 
             {/* Botón CTA */}
-            <button className="py-4 px-6 flex justify-center items-center rounded-lg bg-[#485AFF] hover:bg-[#3A4AD9] transition-colors">
-              <p className="text-white text-center font-inter text-base sm:text-lg font-semibold leading-tight">
-                GET YOUR FREE ESTIMATE
-              </p>
-            </button>
+
+            <Link href='/form'>
+              <button className="py-4 px-6 flex justify-center items-center rounded-lg bg-[#485AFF] hover:bg-[#3A4AD9] transition-colors">
+                <p className="text-white text-center font-inter text-base sm:text-lg font-semibold leading-tight">
+                  GET YOUR FREE ESTIMATE
+                </p>
+              </button>
+            </Link>
           </div>
 
           {/* Estadísticas */}
@@ -44,7 +48,7 @@ function Section1() {
             {/* Primera estadística */}
             <div className="flex flex-col items-start">
               <p className="text-[#0082F8] font-montserrat text-3xl md:text-[36px] font-semibold leading-tight">
-                30<br />+
+                10<br />+
               </p>
               <p className="text-[#0E0E0E] font-montserrat text-base md:text-lg font-medium leading-normal opacity-70 max-w-[212px]">
                 Years Providing Quality Pool Services
@@ -52,14 +56,14 @@ function Section1() {
             </div>
 
             {/* Segunda estadística */}
-            <div className="flex flex-col items-start">
+            {/* <div className="flex flex-col items-start">
               <p className="text-[#0082F8] font-montserrat text-3xl md:text-[36px] font-semibold leading-tight">
                 750<br />+
               </p>
               <p className="text-[#0E0E0E] font-montserrat text-base md:text-lg font-medium leading-normal opacity-70 max-w-[212px]">
                 High-Quality Pools Constructed
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

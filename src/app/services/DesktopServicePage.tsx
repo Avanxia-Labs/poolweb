@@ -3,7 +3,7 @@ import NavBar from "@/components/Desktop/NavBar";
 import FooterSection from '@/components/Desktop/FooterSection';
 import Section1 from './Desktop/Section1';
 import Section2 from './Desktop/Section2';
-import Section3 from './Desktop/Section3';
+//import Section3 from './Desktop/Section3';
 
 function DesktopServicePage() {
 
@@ -12,7 +12,9 @@ function DesktopServicePage() {
       <NavBar />
       <Section1 />
       <Section2 />
-      <Section3/>
+
+      {/* FUTURA SECCION DE REDES SOCIALES Y VIDEOS */}
+      {/* <Section3/> */}
       <FooterSection />
     </div>
   )

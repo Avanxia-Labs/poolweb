@@ -1,7 +1,7 @@
 import React from 'react'
 import InputDesign from './Frame66Card'
 import Image from 'next/image'
-import SubscriptionCalculatorCard from './SubscriptionCalculatorCard'
+import SubscriptionCalculatorCard from '../Mobile/SubscriptionCalculatorCard'
 
 function Section3() {
     return (
@@ -47,6 +47,7 @@ function Section3() {
                         id="Frame66"
                         className="z-5 w-full lg:mr-[4.75rem] max-w-md h-auto rounded-[2.5rem] bg-[#F6FEFF] shadow-lg hover:shadow-xl transition-all"
                     >
+                        {/* <SubscriptionCalculatorCard/> */}
                         <InputDesign />
                     </div>
 

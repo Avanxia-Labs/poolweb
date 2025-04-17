@@ -31,7 +31,7 @@ function Section3() {
                         </div>
 
                         <div className='px-6 pt-2 pb-4 rounded-[15px] bg-[#485AFF] w-full'>
-                            <p className='text-white font-montserrat text-2xl sm:text-3xl md:text-[36px] font-extrabold leading-normal'>30+</p>
+                            <p className='text-white font-montserrat text-2xl sm:text-3xl md:text-[36px] font-extrabold leading-normal'>10+</p>
                             <p className='text-white font-montserrat text-lg sm:text-xl md:text-[24px] font-semibold leading-normal'>Years of experience</p>
                         </div>
                     </div>
