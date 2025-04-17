@@ -1,5 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation'; // Si usas App Router
+
 
 const SubscriptionCalculatorCard: React.FC = () => {
   const [gallons, setGallons] = useState<string>('15.000');
@@ -9,11 +11,20 @@ const SubscriptionCalculatorCard: React.FC = () => {
   });
 
   const calculatePrice = (): number => {
-    let basePrice = 200;
-    if (additionalServices.vacuuming) basePrice += 5;
-    if (additionalServices.filterWash) basePrice += 5;
-    return basePrice;
+    const parsedGallons = parseFloat(gallons.replace(',', '').replace('.', ''));
+    const validGallons = isNaN(parsedGallons) ? 0 : parsedGallons;
+  
+    let basePrice = validGallons * 0.013;
+    let extras = 0;
+  
+    if (additionalServices.vacuuming) extras += 5;
+    if (additionalServices.filterWash) extras += 5;
+  
+    const total = basePrice + extras;
+  
+    return Math.round(total * 100) / 100; // ✅ Redondeo a 2 decimales
   };
+  
 
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -37,11 +48,28 @@ const SubscriptionCalculatorCard: React.FC = () => {
     };
   }, []);
 
+  const router = useRouter();
+
+  const handleRedirect = () => {
+    const data = {
+      gallons,
+      vacuuming: additionalServices.vacuuming,
+      filterWash: additionalServices.filterWash,
+      total: calculatePrice()
+    };
+  
+    const queryString = new URLSearchParams(data as any).toString();
+    router.push(`/form?${queryString}`);
+  };
+
   return (
-    <div
-    ref={cardRef}
-    className="mt-6 bg-white p-6 rounded-3xl shadow-lg relative overflow-hidden z-10 w-full max-w-[290px] mx-auto"
+<section className="w-full flex justify-center pt-10 pb-16 px-6">
+  <div
+  ref={cardRef}
+  className="mt-6 bg-white p-6 rounded-3xl shadow-lg relative overflow-hidden z-10 w-full max-w-[clamp(320px,95vw,768px)] mx-auto"
   >
+
+
     {/* Blob superior izquierdo */}
     <div
       className={`absolute w-[300px] h-[300px] left-[-170px] top-[-170px] rounded-full blur-[20px] transition-all duration-700 ease-out z-0 ${
@@ -51,7 +79,6 @@ const SubscriptionCalculatorCard: React.FC = () => {
         background: 'linear-gradient(205deg, rgba(255, 227, 174, 1) 7.53%, rgba(175, 239, 239, 1) 84.19%)',
       }}
     />
-  
     {/* Blob inferior derecho */}
     <div
       className={`absolute w-[300px] h-[300px] right-[-120px] bottom-[-120px] rounded-full blur-[20px] transition-all duration-700 ease-out z-0 ${
@@ -64,23 +91,21 @@ const SubscriptionCalculatorCard: React.FC = () => {
   
     {/* Contenido principal */}
     <div className="relative z-20 flex flex-col gap-4 w-full">
-      {/* Título */}
-      <h2 className="text-[20px] leading-[25.416px] font-bold text-left text-[#052F52] font-['Plus_Jakarta_Sans']">
+      <h2 className="text-[clamp(18px,5vw,22px)] leading-[25.4px] font-bold text-left text-[#052F52] font-['Plus_Jakarta_Sans']">
         Calculate Your <br /> Subscription Price
       </h2>
   
-      {/* Campo de entrada */}
       <div className="text-left">
         <div className="flex items-center justify-between">
           <label
             htmlFor="gallons"
-            className="text-[10px] font-bold leading-[25.416px] text-[#051535] font-inter"
+            className="text-[clamp(10px,2.5vw,12px)] font-bold leading-[25.4px] text-[#051535] font-inter"
           >
             How many gallons is your pool?
           </label>
           <button
             type="button"
-            className="text-[10px] font-bold leading-[25.416px] text-[#485AFF] font-inter"
+            className="text-[clamp(10px,2.5vw,12px)] font-bold text-[#485AFF] font-inter"
           >
             Don't know?
           </button>
@@ -91,11 +116,10 @@ const SubscriptionCalculatorCard: React.FC = () => {
           type="text"
           value={gallons}
           onChange={(e) => setGallons(e.target.value)}
-          className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md bg-white text-[13.555px] leading-[16.097px] font-normal text-black font-inter"
+          className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md bg-white text-[clamp(13px,3vw,15px)] font-normal text-black font-inter"
         />
       </div>
   
-      {/* Servicios adicionales */}
       <div className="space-y-3">
         <div className="flex justify-between items-center">
           <label className="flex items-center text-xs font-bold text-slate-900 cursor-pointer">
@@ -134,29 +158,31 @@ const SubscriptionCalculatorCard: React.FC = () => {
         </div>
       </div>
   
-      {/* Separador visual */}
       <img
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/28b5e33c3932e21a2282a031f0ecda738dcd6f28?placeholderIfAbsent=true&apiKey=06e3f92e1e524befb11420293ad988ac"
         alt="Divider"
         className="my-4 w-full"
       />
   
-      {/* Precio estimado */}
       <div className="text-left">
         <h3 className="text-xs font-medium text-slate-500">ESTIMATED PRICE:</h3>
-        <p className="text-[21.113px] leading-[52.783px] font-black text-[#052F52] font-inter mt-1">
+        <p className="text-[clamp(20px,6vw,24px)] leading-[36px] font-black text-[#052F52] font-inter mt-1">
           ${calculatePrice()} / MONTH
         </p>
       </div>
   
-      {/* Botón de acción */}
       <button
+        onClick={handleRedirect}
         className="mt-4 flex flex-col justify-center items-center gap-[4.236px] px-[8.472px] py-[6.778px] text-[12px] font-extrabold text-white bg-[#485AFF] rounded-[3.389px] text-left w-fit"
       >
         Request Subscription
       </button>
+
     </div>
   </div>
+
+</section>
+  
   
   );
 };

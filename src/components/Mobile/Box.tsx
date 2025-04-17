@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const Box = () => {
-  return (
+  const [label, setLabel] = useState("BEFORE");
+
+  useEffect(() => {
+    const video = document.getElementById("beforeAfterVideo") as HTMLVideoElement | null;
+    if (!video) return;
+  
+    const switchLabels = () => {
+      const time = video.currentTime;
+  
+      // Ajusta estos valores según la duración del video 9 video letra y 2letr avideo
+      if (time >= 0 && time < 2.41) {
+        setLabel("BEFORE");
+      } else if (time >= 2.41 && time < 8) {
+        setLabel("AFTER");
+      }
+    };
+  
+    video.addEventListener("timeupdate", switchLabels);
+  
+    return () => {
+      video.removeEventListener("timeupdate", switchLabels);
+    };
+  }, []);
+    return (
     <section className="relative w-full overflow-hidden">
       {/* Contenedor centrado del video */}
       <div className="relative w-full max-w-screen-sm mx-auto px-8 sm:px-16 z-10">
@@ -9,6 +32,7 @@ export const Box = () => {
           {/* Video de fondo */}
           <div className="absolute inset-0 w-full h-full overflow-hidden rounded-t-[24px]">
             <video
+              id="beforeAfterVideo"
               autoPlay
               loop
               muted
@@ -26,7 +50,7 @@ export const Box = () => {
           {/* Texto centrado */}
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <span className="text-white text-center font-inter font-semibold leading-[40px] tracking-wider text-[clamp(28px,13vw,90px)] drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)] blur-[2.0125px]">
-              BEFORE
+              {label}
             </span>
           </div>
         </div>

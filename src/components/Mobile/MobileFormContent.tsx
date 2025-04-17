@@ -1,23 +1,63 @@
+'use client';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import React from "react";
-import Image from "next/image";
 import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
 import MobileFooter from '@/components/Mobile/MobileFooter';
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
 
 
 const MobileFormContent = () => {
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const gallons = searchParams.get('gallons');
+    const vacuuming = searchParams.get('vacuuming');
+    const filterWash = searchParams.get('filterWash');
+    const total = searchParams.get('total');
+
+    console.log('Datos desde calculadora:', { gallons, vacuuming, filterWash, total });
+  }, [searchParams]);
+
+
+  useEffect(() => {
+    const fromCalc = searchParams.get('gallons');
+    if (fromCalc) {
+      const target = document.getElementById('subscription-form');
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300); // Pequeña pausa para asegurar que todo cargue
+      }
+    }
+  }, [searchParams]);
+
+  
+
   return (
   <main>
-<section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-[470px] text-center text-[#0F172A] overflow-hidden">
+<section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-[460px] text-center text-[#0F172A] overflow-hidden">
   {/* Título principal */}
-  <h2 className="text-2xl font-bold mb-2 z-10 relative">Let's work together!</h2>
+  <h2 className="text-[clamp(22px,6vw,28px)] font-bold mb-2 z-10 relative leading-tight">
+    Let's work together!
+  </h2>
 
   {/* Subtítulo */}
-  <p className="text-sm leading-6 max-w-xs mx-auto mb-3 z-10 relative">
-    We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the <br />next 24 hours.
+  <p className="text-[clamp(12px,3.5vw,16px)] leading-[1.6] max-w-[clamp(280px,90vw,420px)] mx-auto mb-[clamp(30px,6vw,50px)] z-10 relative font-inter">
+    We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the <br /> next <strong>24 hours</strong>.
   </p>
 
-  {/* Fondo curvo azul encima de la imagen */}
+  {/* Imagen del personaje centrada y más abajo */}
+  <div className="absolute bottom-[130px] left-1/2 transform -translate-x-1/2 z-10">
+    <img
+      src="/images/contact_image.png"
+      alt="Person Contact"
+      className="w-[clamp(220px,60vw,280px)] h-auto object-contain"
+    />
+  </div>
+
+  {/* Fondo azul curvo */}
   <div className="absolute bottom-0 left-0 w-full z-20">
     <img
       src="/images/contact_blue.png"
@@ -25,28 +65,21 @@ const MobileFormContent = () => {
       className="w-full h-[160px] object-cover"
     />
   </div>
-
-  {/* Imagen centrada y más grande */}
-  <div className="absolute bottom-[145px] left-1/2 transform -translate-x-1/2 z-10">
-    <img
-      src="/images/contact_image.png"
-      alt="Person Contact"
-      className="max-w-[250px] h-auto object-contain"
-    />
-  </div>
 </section>
 
 
-
-
-
 {/* Sección Contact us */}
-<section className="w-full px-4 ">
+<section id="subscription-form" className="w-full px-4">
   <div className="w-full max-w-[480px] mx-auto">
-    <div className="bg-white rounded-2xl shadow-md px-6 py-8 w-full">
+    <div className="bg-white rounded-2xl shadow-md px-6 py-[clamp(24px,6vw,40px)] w-full">
+      
       <div className="w-full text-center mb-6">
-        <h2 className="text-2xl font-bold text-slate-900 mb-2">Contact us</h2>
-        <p className="text-sm text-gray-500">Enter Your Pool Details Below</p>
+        <h2 className="text-[clamp(22px,6vw,28px)] font-bold text-slate-900 mb-2 leading-tight">
+          Contact us
+        </h2>
+        <p className="text-[clamp(12px,3.5vw,16px)] text-gray-500 leading-snug">
+          Enter Your Pool Details Below
+        </p>
       </div>
 
       <ContactFormSection />
@@ -54,7 +87,7 @@ const MobileFormContent = () => {
   </div>
 </section>
 
-<section className="w-full px-4 py-12 bg-[#F7FAFE]">
+<section className="w-full px-4 py-[clamp(40px,8vw,60px)] bg-[#F7FAFE]">
   <div className="w-full max-w-xs mx-auto space-y-6">
     {/* Card Template */}
     {[
@@ -62,7 +95,7 @@ const MobileFormContent = () => {
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 text-[#667085]"
+            className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -81,7 +114,7 @@ const MobileFormContent = () => {
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 text-[#667085]"
+            className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -105,7 +138,7 @@ const MobileFormContent = () => {
         icon: (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 text-[#667085]"
+            className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -120,14 +153,17 @@ const MobileFormContent = () => {
     ].map(({ icon, label }, idx) => (
       <div
         key={idx}
-        className="flex flex-col justify-center items-center text-center bg-white rounded-xl shadow-lg py-6 h-[150px]"
+        className="flex flex-col justify-center items-center text-center bg-white rounded-xl shadow-lg py-6 h-[clamp(140px,20vw,180px)]"
       >
         {icon}
-        <span className="mt-2 text-sm font-medium text-[#344054]">{label}</span>
+        <span className="mt-2 text-[clamp(13px,3.5vw,16px)] font-medium text-[#344054]">
+          {label}
+        </span>
       </div>
     ))}
   </div>
 </section>
+
 
 <section className="relative w-full h-[300px] overflow-hidden text-center flex items-center justify-center">
   {/* Video de fondo */}

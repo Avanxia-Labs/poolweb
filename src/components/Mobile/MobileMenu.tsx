@@ -115,9 +115,9 @@ const getLinkClass = (href: string) =>
 
         {/* Redes */}
         <div className="flex justify-around items-center gap-4 text-white">
-        <Music2 className="text-white w-6 h-6" aria-label="TikTok" />
+        {/* <Music2 className="text-white w-6 h-6" aria-label="TikTok" />
         <a href="#" aria-label="Facebook"><Facebook className="h-5 w-5" /></a>
-          <a href="#" aria-label="Instagram"><Instagram className="h-5 w-5" /></a>
+          <a href="#" aria-label="Instagram"><Instagram className="h-5 w-5" /></a> */}
         </div>
       </div>
     </div>

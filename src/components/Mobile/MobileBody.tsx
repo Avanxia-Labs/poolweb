@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, { useRef, useState, useEffect } from "react";
 import { Frame } from "@/components/Mobile/Frame";
 import { Box } from "./Box";
@@ -148,10 +147,11 @@ const MobileBody = () => {
         className="w-full max-w-[280px] mb-3"
         />
 
-        {/* Botón */}
-        <button className="bg-[#485AFF] text-white text-[12px] leading-[28px] font-semibold text-center rounded-[8px] px-[10px] py-[8px] mb-2">
-          View All Services
-        </button>
+        <a href="/services">
+          <button className="bg-[#485AFF] text-white text-[12px] leading-[28px] font-semibold text-center rounded-[8px] px-[10px] py-[8px] mb-2">
+            View All Services
+          </button>
+        </a>
 
 
         {/* Texto descriptivo */}
@@ -227,10 +227,11 @@ const MobileBody = () => {
     <section className="relative w-full px-0 overflow-hidden min-h-screen">
       {/* Imagen de fondo Fija */}
       <img
-    src="/images/man_mobile.png"
-    alt="Yosbani Martinez background"
-    className="absolute top-0 left-0 w-full h-full object-cover object-[left_top] z-0"
-  />
+      src="/svgs/man_mobile_svg.svg"
+      alt="Yosbani Martinez background"
+      className="absolute top-0 left-0 w-full h-full object-cover object-[left_top] z-0"
+    />
+
 
   {/* Contenido debajo de la imagen */}
   <div className="relative z-10 px-4 pt-[95vh] pb-8 text-white max-w-[380px] mx-auto">
@@ -248,12 +249,14 @@ const MobileBody = () => {
       </p>
     </article>
 
-    <button
-      onClick={handleScroll}
+    <a
+      href="/docs/mobile/VerifiedCredentials.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
       className="text-[#F5F9FF] text-[12px] leading-[24.614px] font-extrabold italic underline decoration-solid [text-decoration-skip-ink:none] font-['Plus_Jakarta_Sans'] mt-4 hover:text-indigo-300 transition-colors"
     >
       View Verified Credentials
-    </button>
+    </a>
   </div>
     </section>
 
@@ -294,71 +297,72 @@ const MobileBody = () => {
 
 
     <section
-    ref={sectionRef}
-    className="w-full bg-[#161F7B] pt-10 pb-28"
-  >
-    <div className="w-full max-w-screen-sm mx-auto flex flex-col items-center gap-8 rounded-2xl">
-      <header className="text-left text-white w-full px-4 max-w-[360px] mx-auto">
-        <h1 className="text-[32px] leading-[36px] font-bold text-[#F5F9FF] font-inter mb-4">
-          Customers say<br />About Us
-        </h1>
+  ref={sectionRef}
+  className="w-full bg-[#161F7B] pt-10 pb-28"
+>
+  <div className="w-full flex flex-col items-center gap-8 rounded-2xl">
+    <header className="text-left text-white w-full px-4  mx-auto">
+      <h1 className="text-[24px] sm:text-[28px] md:text-[32px] leading-[30px] sm:leading-[34px] md:leading-[36px] font-bold text-[#F5F9FF] font-inter mb-4">
+        Customers say<br />About Us
+      </h1>
 
-        <p className="text-[12px] leading-[20px] font-normal text-[#F5F9FF] font-inter mb-10">
-          Trust is built through results. Here you can read what our clients say about their experience with our service. Their words reflect our commitment to quality and excellence.
-        </p>
-      </header>
+      <p className="text-[12px] sm:text-[14px] md:text-[16px] leading-[20px] font-normal text-[#F5F9FF] font-inter mb-10">
+        Trust is built through results. Here you can read what our clients say about their experience with our service.
+        Their words reflect our commitment to quality and excellence.
+      </p>
+    </header>
 
-      <div className="relative w-full h-[500px] flex justify-center items-start overflow-hidden">
-        
-           {/* Primer artículo: rota más a la izquierda */}
-          <article
-            className="p-6 bg-white rounded-xl shadow-md w-[260px] absolute z-10 transition-transform duration-500"
-            style={{
-              top: "20px",
-              left: "calc(50% - 180px)",
-              transform: inView ? "rotate(-15deg)" : "rotate(0deg)",
-            }}
-          >
-          <header className="flex gap-3 items-center mb-4">
-            <div className="flex items-center justify-center w-10 h-10 font-bold bg-green-500 rounded-full text-white">
-              O
-            </div>
-            <div className="flex flex-col">
-              <h2 className="text-base font-bold text-zinc-800">Marvin McKinney</h2>
-              <p className="text-sm text-stone-500">Project Manager</p>
-            </div>
-          </header>
-          <blockquote className="text-sm leading-relaxed text-zinc-800">
-            "Great service! My pool looks fantastic, and I trust the water is safe thanks to their expertise. Highly recommend!"
-          </blockquote>
-        </article>
-         {/* Segundo artículo: rota más a la derecha */}
-          <article
-            className="p-6 bg-white rounded-xl shadow-md w-[300px] absolute z-0 transition-transform duration-500"
-            style={{
-              top: "200px",
-              left: "calc(100% - 300px)",
-              transform: inView ? "rotate(15deg)" : "rotate(0deg)",
-            }}
-          >
-          <header className="flex gap-3 items-center mb-4">
-            <img
-              src="images/perfil_1.png"
-              className="object-cover w-10 h-10 rounded-full"
-              alt="Profile"
-            />
-            <div className="flex flex-col">
-              <h2 className="text-base font-bold text-zinc-800">Mostafa Hussein</h2>
-              <p className="text-sm text-stone-500">Client</p>
-            </div>
-          </header>
-          <blockquote className="text-sm leading-relaxed text-zinc-800">
-            Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they're coming with me! Highly recommend!
-          </blockquote>
-        </article>
-      </div>
+    <div className="relative w-full h-[500px] flex justify-center items-start overflow-hidden px-4">
+      {/* Testimonio 1 */}
+      <article
+        className="p-6 bg-white rounded-xl shadow-md w-[260px] sm:w-[280px] absolute z-10 transition-transform duration-500"
+        style={{
+          top: "50px",
+          left: "calc(50% - 160px)",
+          transform: inView ? "rotate(-15deg)" : "rotate(0deg)",
+        }}
+      >
+        <header className="flex gap-3 items-center mb-4">
+          <div className="flex items-center justify-center w-10 h-10 font-bold bg-green-500 rounded-full text-white">
+            O
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-zinc-800">Marvin McKinney</h2>
+            <p className="text-sm text-stone-500">Project Manager</p>
+          </div>
+        </header>
+        <blockquote className="text-sm leading-relaxed text-zinc-800">
+          "Great service! My pool looks fantastic, and I trust the water is safe thanks to their expertise. Highly recommend!"
+        </blockquote>
+      </article>
+
+      {/* Testimonio 2 */}
+      <article
+        className="p-6 bg-white rounded-xl shadow-md w-[260px] sm:w-[280px] absolute z-0 transition-transform duration-500"
+        style={{
+          top: "228px",
+          left: "calc(50% - 100px)",
+          transform: inView ? "rotate(15deg)" : "rotate(0deg)",
+        }}
+      >
+        <header className="flex gap-3 items-center mb-4">
+          <img
+            src="/images/perfil_1.png"
+            className="object-cover w-10 h-10 rounded-full"
+            alt="Profile"
+          />
+          <div>
+            <h2 className="text-base font-bold text-zinc-800">Mostafa Hussein</h2>
+            <p className="text-sm text-stone-500">Client</p>
+          </div>
+        </header>
+        <blockquote className="text-sm leading-relaxed text-zinc-800">
+          Geo and his team are awesome. They handle everything in a timely manner and are always a great price! No matter where I move in Naples, they're coming with me! Highly recommend!
+        </blockquote>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
 
     <section className="w-full bg-white px-4 py-16">
