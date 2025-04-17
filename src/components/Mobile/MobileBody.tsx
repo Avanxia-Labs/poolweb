@@ -7,8 +7,10 @@ import { Facebook, Instagram, Music2 } from "lucide-react";
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
 import SubscriptionCalculatorCard from "./SubscriptionCalculatorCard";
 import MobileFooter from "./MobileFooter";
+import { useRouter } from 'next/navigation';
 
 const MobileBody = () => {
+  const router = useRouter();
   // Ref y estado para scroll horizontal (slider)
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -285,11 +287,11 @@ const MobileBody = () => {
               expectations.
             </p>
             <button
-              onClick={() => console.log("CTA clicked")}
-              className="mt-4 flex justify-center items-center px-[10px] py-[8px] text-[12px] leading-[28px] font-semibold text-[#485AFF] text-center font-inter bg-[#F5F9FF] rounded-[8px] w-fit"
-            >
-              GET YOUR FREE ESTIMATE
-            </button>
+      onClick={() => router.push('/form')}
+      className="mt-4 flex justify-center items-center px-[10px] py-[8px] text-[12px] leading-[28px] font-semibold text-[#485AFF] text-center font-inter bg-[#F5F9FF] rounded-[8px] w-fit"
+    >
+      GET YOUR FREE ESTIMATE
+    </button>
           </article>
         </div>
       </div>

@@ -1,8 +1,11 @@
+'use client'; // si estás en /app
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from 'next/navigation';
 import { Card, CardContent } from "@/components/ui/card";
 
 export const Frame = () => {
+  const router = useRouter();
     return (
       <div className="w-full max-w-screen-sm mx-auto px-4 py-4">
         <div className="flex flex-col items-center gap-5 text-center">
@@ -16,9 +19,13 @@ export const Frame = () => {
             We combine expertise with dedication to deliver <br /> exceptional pool
             services that exceed <br />expectations.
           </p>
-          <Button className="bg-[#485AFF] hover:bg-[#485AFF]/90 text-white text-xs font-semibold rounded-lg px-4 py-2">
-            GET YOUR FREE ESTIMATE
-          </Button>
+          <Button
+      onClick={() => router.push('/form')}
+      className="flex flex-col justify-center items-center gap-[10px] px-0 py-[8px] bg-[#485AFF] hover:bg-[#485AFF]/90 text-white text-[14px] leading-[32px] font-semibold text-center font-inter rounded-[8px]"
+    >
+      GET YOUR FREE ESTIMATE
+    </Button>
+
         </div>
       </div>
     );

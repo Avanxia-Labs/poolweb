@@ -8,40 +8,40 @@ const services = [
   { title: 'Diagnostics & Troubleshooting', 
     description: 'Persistent pool problems? Our expert diagnostics pinpoint the root cause of water quality issues, leaks, or equipment malfunctions for targeted, effective solutions.',
     longText: ' Discover ultimate convenience with Pool Quality automation services. We integrate smart systems that allow you to control all aspects of your pool with just a button press. From water temperature to lighting, filtration scheduling, and special features, automation completely transforms how you interact with your pool.Our automation specialists assess your current setup and identify the best options to modernize your system. We install cutting-edge controllers compatible with smartphones and voice assistants, allowing you to manage your pool from anywhere. Smart programming optimizes filtration cycles and chemical treatments, improving energy efficiency and reducing operating costs.  Automation not only adds convenience but also value to your property. Our solutions include remote monitoring, maintenance alerts, and automatic adjustments based on weather conditions. We provide comprehensive training on your new system and ongoing technical support to ensure you get the most out of your automated pool. Let us elevate your aquatic experience with technology that makes pool maintenance simple, efficient, and truly enjoyable.',
-    image1: '/svgs/diagnostic_comparative_svg.svg',
-    image2: '/svgs/diagnostic_comparative2_svg.svg'
+    image1: '/images/diagnostic_comparative@2x.png',
+    image2: '/images/diagnostic_comparative2@2x.png'
   },
     
   { title: 'Pool Maintenance',
     description: 'Proactive weekly care ensuring balanced chemistry, pristine cleanliness, and optimal equipment function. Enjoy a worry-free, swim-ready pool year-round.',
     longText: 'Choosing Pool Quality Maintenance changes everything. Our professional maintenance service ensures your investment is protected and your pool is always ready to enjoy. Following our maintenance schedule, we make sure all systems function correctly, extending the lifespan of your equipment and keeping the water crystal clear.Our certified technicians perform comprehensive inspections of the filtration system, pumps, heaters, and automation systems. We check and adjust chemical levels to prevent problems like algae, cloudy water, or skin irritation. Regular maintenance eliminates debris buildup, reduces the chances of costly repairs, and allows you to enjoy your pool without worries.Whether you need weekly, bi-weekly, or monthly service, our customized plans adapt to your specific needs. Equipped with the necessary tools and expertise, we perform preventive maintenance that saves time and money in the long run. Our knowledge of water chemistry and filtration systems ensures superior results. Let us handle the technical aspects while you simply enjoy your crystal-clear water and perfectly maintained pool environment.',
-    image1: '/svgs/matience_comparative_svg.svg',
-    image2: '/svgs/matience_comparative2_svg.svg'
+    image1: '/images/matience_comparative@2x.png',
+    image2: '/images/matience_comparative2@2x.png'
  },
   { title: 'Pool Cleaning', 
     description: "Restore your pool's sparkle. We provide thorough one-time or regular cleaning, including brushing, vacuuming, and stain/algae treatment.",
     longText: 'Keeping your pool visually appealing is just the start. Our professional Pool Cleaning service ensures your water is not only sparkling clear but also healthy and safe for swimming, reflecting our commitment to meticulous care backed by scientific understanding. We go beyond a simple surface skim. Our comprehensive cleaning includes thoroughly brushing pool walls, steps, and waterlines to dislodge algae and buildup, meticulous vacuuming of the pool floor to remove settled debris, emptying skimmer and pump baskets to maintain proper flow, and ensuring overall cleanliness.Whether you need a one-time deep clean after a party or storm, require seasonal opening or closing services, or are dealing with the challenge of recovering a green pool, Pool Quality Solutions has the specialized tools and expertise required. Even during routine cleaning, our knowledge of water chemistry – driven by our founders Chemical Engineering background – ensures we help maintain the delicate water balance, protecting both swimmers and your valuable pool equipment from potential issues caused by neglect. Let us handle the hard work with precision and care, so you can simply relax and enjoy your pristine, healthy pool environment.',
-    image1: '/svgs/services_comparative_svg.svg',
-    image2: '/svgs/services_comparative2_svg.svg'
+    image1: '/images/services_comparative@2x.png',
+    image2: '/images/services_comparative2@2x.png'
  },
   { title: 'Equipment Repair & Installation', 
     description: 'Fast, expert repairs for pumps, filters, heaters, and more. We also install high-quality, energy-efficient new equipment for lasting performance.',
     longText: 'Trust Pool Quality for all your pool equipment needs. Our certified technicians have experience with all major brands and equipment models, ensuring your system operates at maximum efficiency. When something fails in your pool, we respond quickly to diagnose and fix the problem, minimizing downtime.Our comprehensive repair service includes pumps, filters, heaters, chlorination systems, automatic controllers, and cleaning systems. We use quality replacement parts and offer warranty on our repairs. For new installations, we ensure each component is properly sized and configured for optimal performance, energy savings, and ease of maintenance.We stay updated with the latest technologies in pool equipment, offering you options that can reduce your operating costs and enhance your pool experience. Whether its a simple repair or a complete system renovation, our team provides expert advice, professional installation, and ongoing support. Count on us to keep your equipment running smoothly season after season.',
-    image1: '/svgs/equipament_comparative_svg.svg',
-    image2: '/svgs/equipament_comparative2_svg.svg'
+    image1: '/images/equipament_comparative@2x.png',
+    image2: '/images/equipament_comparative2@2x.png'
  },
   { title: 'Pool Automation', 
     description: 'Simplify pool ownership with smart automation. Control pumps, heating, lights, and cleaning easily from anywhere via your smartphone or tablet.',
     longText: ' Discover ultimate convenience with Pool Quality automation services. We integrate smart systems that allow you to control all aspects of your pool with just a button press. From water temperature to lighting, filtration scheduling, and special features, automation completely transforms how you interact with your pool.Our automation specialists assess your current setup and identify the best options to modernize your system. We install cutting-edge controllers compatible with smartphones and voice assistants, allowing you to manage your pool from anywhere. Smart programming optimizes filtration cycles and chemical treatments, improving energy efficiency and reducing operating costs.Automation not only adds convenience but also value to your property. Our solutions include remote monitoring, maintenance alerts, and automatic adjustments based on weather conditions. We provide comprehensive training on your new system and ongoing technical support to ensure you get the most out of your automated pool. Let us elevate your aquatic experience with technology that makes pool maintenance simple, efficient, and truly enjoyable.',
-    image1: '/svgs/automation_comparative_svg.svg',
-    image2: '/svgs/automation_comparative2_svg.svg'
+    image1: '/images/automation_comparative@2x.png',
+    image2: '/images/automation_comparative2@2x.png'
  },
   { title: 'Custom Pool Design & Construction', 
     description: 'Transform your outdoor space with a custom-designed pool tailored to your style, needs, and landscape. Our team handles every detail—from concept to construction—for a seamless, high-quality result.' ,
     longText: 'At Pool Quality, we transform visions into stunning aquatic realities. Our custom design and construction process begins with a detailed consultation to fully understand your desires, needs, and the environment where your new pool will be located. Our expert designers create concepts that maximize your space, complement existing architecture, and reflect your personal style.From infinity pools with panoramic views to intimate tropical oases or elegant minimalist designs, our construction team has the expertise to execute projects of any scale and complexity. We use the highest quality materials and advanced construction techniques that ensure durability, energy efficiency, and ease of maintenance. Every detail, from finish selection to the integration of special water features, is meticulously planned.Throughout the construction process, we maintain transparent communication and constant supervision to ensure that every aspect meets our rigorous standards. Our commitment to excellence extends beyond project completion, offering comprehensive guidance on the maintenance and operation of your new pool. Let us create a custom aquatic space that not only beautifies your property but also enriches your lifestyle for many years to come.',
-    image1: '/svgs/custom_comparative_svg.svg',
-    image2: '/svgs/custom_comparative2_svg.svg'
-},
+    image1: '/images/custom_comparative@2x.png',
+    image2: '/images/custom_comparative2@2x.png',
+    },
 ];
 
 const videoSources = ['REEL1.mp4', 'REEL2.mp4', 'REEL3.mp4'];
@@ -231,26 +231,32 @@ const MobileHeroContent = () => {
 </section>
 
 
-
 {services[activeServiceIndex] && (
-  <section className="w-full px-4 pt-10 pb-8 bg-[#F7FAFE] text-[#212939] text-[12px] leading-[20px]">
+  <section
+    key={activeServiceIndex}
+    className="w-full px-4 pt-10 pb-8 bg-[#F7FAFE] text-[#212939] text-[12px] leading-[20px]"
+  >
     <h2 className="text-[22px] font-bold text-[#3E57DA] text-center capitalize font-inter">
       The {services[activeServiceIndex].title} Difference
     </h2>
 
-    {/* Imagen superior dinámica */}
+    {/* Imagen superior dinámica con <img> */}
     <div className="w-full mt-4">
-      <Image
+      <img
         src={services[activeServiceIndex].image1 || ''}
         alt="Before"
-        width={320}
-        height={180}
+        width="320"
+        height="180"
         className="w-full rounded-md"
       />
     </div>
 
     {/* Texto largo dividido por párrafos */}
-    <p className={`text-justify pt-16 mb-4 text-[14px] text-[#0B0858] leading-[30px] font-[400] font-inter capitalize overflow-hidden text-ellipsis ${showFullText ? '' : 'line-clamp-[12]'}`}>
+    <p
+      className={`text-justify pt-16 mb-4 text-[14px] text-[#0B0858] leading-[30px] font-[400] font-inter capitalize overflow-hidden text-ellipsis ${
+        showFullText ? '' : 'line-clamp-[12]'
+      }`}
+    >
       {services[activeServiceIndex].longText?.split('\n\n').map((paragraph, index) => (
         <span key={index}>
           {paragraph}
@@ -270,13 +276,13 @@ const MobileHeroContent = () => {
       </button>
     </div>
 
-    {/* Imagen inferior dinámica */}
+    {/* Imagen inferior dinámica con <img> */}
     <div className="w-full mt-4">
-      <Image
+      <img
         src={services[activeServiceIndex].image2 || ''}
         alt="Additional comparison"
-        width={320}
-        height={180}
+        width="320"
+        height="180"
         className="w-full rounded-md"
       />
     </div>
