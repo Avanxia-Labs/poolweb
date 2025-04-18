@@ -85,7 +85,7 @@ export const Section1: React.FC = () => {
       role="region"
       aria-label="Pool services showcase"
       style={{
-        maxWidth: "1920px",
+        maxWidth: "100vw",
       }}
     >
       {/* Video Background */}

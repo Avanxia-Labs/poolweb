@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 function Section1() {
   return (
-    <section className="w-full max-w-[1920px] mx-auto">
+    <section className="w-full mx-auto">
       <div className="flex flex-col lg:flex-row">
         {/* Imagen principal - Tocando borde izquierdo e inferior */}
         <div className="w-full lg:w-1/2">

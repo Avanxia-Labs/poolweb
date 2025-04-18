@@ -103,7 +103,7 @@ const Section2 = () => {
   const currentService = servicesData.find(service => service.id === selectedService) || servicesData[0];
 
   return (
-    <div className="flex flex-col lg:flex-row bg-[#F5F9FF] w-full py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-16 xl:px-32 gap-8 lg:gap-12 xl:gap-[118px]">
+    <div className="flex flex-col justify-center xl:flex-row items-center bg-[#F5F9FF] w-full py-8 md:py-12 xl:py-16 px-4 md:px-8 xl:px-16 xl:px-32 gap-8 xl:gap-12 2xl:gap-[118px]">
 
       {/* Before/After Section - Responsive layout */}
       <div className="w-full lg:w-3/5">
@@ -117,16 +117,16 @@ const Section2 = () => {
         </div>
 
         <div id='serviceDescription' className="w-full mb-6 md:mb-8 lg:mb-[58px]">
-          <h2 className="text-2xl md:text-3xl font-bold text-blue-600 mb-3 md:mb-4">{currentService.title}</h2>
+          <h2 className="md:px-4 text-2xl md:text-3xl font-bold text-blue-600 mb-3 md:mb-4">{currentService.title}</h2>
           {currentService.description.map((paragraph, index) => (
-            <p key={index} className="text-gray-700 mb-3 md:mb-4 text-sm md:text-base whitespace-pre-line">
+            <p key={index} className="md:px-4 text-gray-700 mb-3 md:mb-4 text-sm md:text-base whitespace-pre-line">
               {paragraph}
             </p>
           ))}
         </div>
 
         {/* Before/After Pool Images - Responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div id='beforeImage' className="border border-blue-200 rounded-lg overflow-hidden">
             <img
               src={currentService.beforeImage}
@@ -168,7 +168,7 @@ const Section2 = () => {
         </div>
 
         {/* Subscription Calculator or ExplorePoolServices */}
-        <div className="w-full max-w-[485px] mx-auto lg:mx-0">
+        <div className="flex flex-col items-center w-full max-w-[685px] mx-auto lg:mx-0">
           {['pool-cleaning', 'pool-maintenance', 'equipment-repair'].includes(selectedService)
             ? <InputDesign />
             : <ExplorePoolServices />}

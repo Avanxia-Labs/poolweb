@@ -8,7 +8,7 @@ import Section4 from './Desktop/AboutComponents/Section4'
 
 function DesktopAboutPage() {
   return (
-      <div className='w-full max-w-[1920px] mx-auto bg-[#F5F9FF]'>
+      <div className='w-full mx-auto bg-[#F5F9FF]'>
           <NavBar/>
           <Section1/>
           <Section2/>

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 function Section3() {
     return (
-        <section className='w-full max-w-[1920px] mx-auto flex flex-col xl:flex-row justify-center items-center gap-10 py-16'>
+        <section className='w-full mx-auto flex flex-col xl:flex-row justify-center items-center gap-10 py-16'>
             {/* Left side with images */}
             <div className='w-full max-w-[635px] flex justify-center xl:justify-end'>
                 <div className='flex flex-row gap-4 sm:gap-[33px] w-full max-w-[635px] px-4'>

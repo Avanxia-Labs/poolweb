@@ -85,7 +85,7 @@ function Section4() {
 
     return (
         <section className='bg-[#0F172A] w-full'>
-            <div className='max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[212px] py-12 md:py-[102px] flex flex-col xl:flex-row justify-center items-center gap-10 xl:gap-[35px]'>
+            <div className='w-full mx-auto px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[212px] py-12 md:py-[102px] flex flex-col xl:flex-row justify-center items-center gap-10 xl:gap-[35px]'>
                 {/* Left column with three cards */}
                 <div id='col1' className='flex flex-col gap-5 sm:gap-[20px] w-full xl:w-[612px]'>
                     

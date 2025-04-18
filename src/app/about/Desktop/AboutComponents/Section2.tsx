@@ -3,11 +3,11 @@ import Image from 'next/image';
 
 function Section2() {
     return (
-        <section className="w-full bg-[#0F172A] px-4 sm:px-10 md:px-20 lg:px-[120px] xl:px-[220px] py-[60px] md:py-[100px] xl:py-[140px] max-w-[1920px] mx-auto">
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
+        <section className="w-full bg-[#0F172A] px-4 sm:px-10 md:px-20 lg:px-[120px] xl:px-[220px] py-[60px] md:py-[100px] xl:py-[140px] mx-auto">
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-12">
 
                 {/* Col 1 */}
-                <div className="flex flex-col gap-6 w-full lg:w-1/2 max-w-[600px]">
+                <div className=" flex flex-col gap-6 w-full lg:w-1/2 max-w-[600px] 2xl:max-w-[900px]">
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-4">
                             <h1 className="text-white text-[36px] md:text-[48px] xl:text-[64px] font-semibold leading-tight font-inter">
@@ -39,7 +39,7 @@ function Section2() {
                 </div>
 
                 {/* Col 2 */}
-                <div className="w-full lg:w-1/2 flex flex-col items-center justify-start gap-10">
+                <div className=" w-full lg:w-1/2 flex flex-col items-center justify-start gap-10">
 
                     <div className="w-full max-w-[498px]">
                         <Image
