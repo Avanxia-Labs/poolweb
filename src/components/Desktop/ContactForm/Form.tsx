@@ -222,7 +222,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   };
 
   return (
-    <div className="flex justify-center w-full h-full items-start min-h-screen sm:pb-5 p-4 overflow-auto">
+    <div className=" flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
 
       <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4 w-full max-w-3xl">
         <div className="grid grid-cols-1 gap-6 2xl:grid-cols-2">

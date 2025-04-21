@@ -16,7 +16,7 @@ function Section1() {
         </div>
 
         {/* Contenido derecho con espacio adecuado */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-between items-start gap-8 sm:gap-12 lg:gap-[85px] p-6 lg:p-0 lg:pl-28 lg:py-16">
+        <div className="w-full lg:w-1/2 flex flex-col justify-between 2xl:justify-start items-start gap-8 sm:gap-12 lg:gap-[85px] p-6 lg:p-0 lg:pl-28 lg:py-16">
           {/* Texto principal y botón */}
           <div className="flex flex-col items-start gap-6 sm:gap-8 w-full xl:max-w-[25rem] 2xl:max-w-[40rem]">
             <div className="flex flex-col items-start gap-4 sm:gap-6 md:gap-[27px] w-full">
@@ -44,14 +44,14 @@ function Section1() {
           </div>
 
           {/* Estadísticas */}
-          <div className="w-full flex flex-row sm:flex-row items-start gap-8 sm:gap-[145px]">
+          <div className=" w-full flex flex-row sm:flex-row items-start gap-8 sm:gap-[145px]">
             {/* Primera estadística */}
-            <div className="flex flex-col items-start">
-              <p className="text-[#0082F8] font-montserrat text-3xl md:text-[36px] font-semibold leading-tight">
+            <div className=" flex flex-col items-start">
+              <p className="text-[#0082F8] font-montserrat 2xl:text-[60px] md:text-[36px] font-semibold leading-tight">
                 10<br />+
               </p>
-              <p className="text-[#0E0E0E] font-montserrat text-base md:text-lg font-medium leading-normal opacity-70 max-w-[212px]">
-                Years Providing Quality Pool Services
+              <p className="text-3xl-40px text-[#0E0E0E] font-montserrat text-base md:text-lg xl:text-xl 2xl:text-2xl font-medium leading-normal opacity-70 max-w-[512px]">
+                Years Providing Quality <br/> Pool Services
               </p>
             </div>
 

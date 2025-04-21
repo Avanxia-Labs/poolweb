@@ -52,6 +52,28 @@
     }
   }
 
+  @media (min-width: 2300px) {
+    .title-2300 {
+      font-size: 100px;
+    }
+
+    .text-2300 {
+      font-size: 40px;
+    }
+
+  }
+
+  @media (min-width: 2100px) {
+    .title-2100 {
+      font-size: 80px;
+    }
+
+    .text-2100 {
+      font-size: 30px;
+    }
+
+  }
+
   
 
 }

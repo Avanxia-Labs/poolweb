@@ -54,7 +54,7 @@ export const ExplorePoolServices: React.FC = () => {
     return (
         <article
             ref={cardRef}
-            className="flex overflow-hidden flex-col items-start px-6 py-12 font-bold leading-10 bg-slate-50 max-w-[482px] rounded-[39px] shadow-[0px_3px_8px_rgba(0,0,0,0.25)] text-slate-900 max-md:px-5 relative"
+            className="flex overflow-hidden flex-col items-start px-6 py-12 font-bold leading-10 bg-slate-50 w-[30rem] rounded-[39px] shadow-[0px_3px_8px_rgba(0,0,0,0.25)] text-slate-900 max-md:px-5 relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >

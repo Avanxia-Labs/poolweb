@@ -55,8 +55,8 @@ export async function POST(request: Request) {
         port: 587,
         secure: false,
         auth: {
-          user: 'fq4yc7bbouisvmxb@ethereal.email',
-          pass: 'b1t1c1fQW5sbXDaHDV',
+          user: 'pyvtekn7ouxy2gpa@ethereal.email',
+          pass: 'T2tpnSAsXzWqfPBEgV',
         }
       };
     }

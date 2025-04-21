@@ -111,7 +111,7 @@ export const Section1: React.FC = () => {
         onTouchEnd={handleTouchEnd}
       >
         {/* Vector at top */}
-        <div className="z-10 w-full -mt-[5px] h-auto text-[#485AFF]">
+        <div className="z-10 w-full -mt-[10px] h-auto text-[#485AFF]">
           <Image
             src="/svgs/vectorHeroServices.svg"
             alt="decorative vector"
