@@ -37,35 +37,37 @@ const MobileFormContent = () => {
 
   return (
   <main>
-<section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-[460px] text-center text-[#0F172A] overflow-hidden">
+<section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-20 text-center text-[#0F172A] overflow-hidden">
   {/* Título principal */}
-  <h2 className="text-[clamp(22px,6vw,28px)] font-bold mb-2 z-10 relative leading-tight">
+  <h2 className="text-[clamp(22px,6vw,28px)] font-bold mb-2 leading-tight">
     Let's work together!
   </h2>
 
   {/* Subtítulo */}
-  <p className="text-[clamp(12px,3.5vw,16px)] leading-[1.6] max-w-[clamp(280px,90vw,420px)] mx-auto mb-[clamp(30px,6vw,50px)] z-10 relative font-inter">
+  <p className="text-[clamp(12px,3.5vw,16px)] leading-[1.6] max-w-[clamp(280px,90vw,420px)] mx-auto mb-[clamp(30px,6vw,50px)] font-inter">
     We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the <br /> next <strong>24 hours</strong>.
   </p>
 
-  {/* Imagen del personaje centrada y más abajo */}
-  <div className="absolute bottom-[130px] left-1/2 transform -translate-x-1/2 z-10">
-    <img
-      src="/images/contact_image.png"
-      alt="Person Contact"
-      className="w-[clamp(220px,60vw,280px)] h-auto object-contain"
-    />
-  </div>
+  {/* Imagen del personaje (ya no absolute) */}
+<div className="flex justify-center bottom-[40px] z-0 relative">
+  <img
+    src="/images/contact_image.png"
+    alt="Person Contact"
+    className="w-[clamp(260px,70vw,340px)] h-auto object-contain"
+  />
+</div>
 
-  {/* Fondo azul curvo */}
-  <div className="absolute bottom-0 left-0 w-full z-20">
-    <img
-      src="/images/contact_blue.png"
-      alt="Blue Background Curve"
-      className="w-full h-[160px] object-cover"
-    />
-  </div>
+{/* Fondo azul curvo */}
+<div className="absolute bottom-0 left-0 w-full z-10">
+  <img
+    src="/images/contact_blue.png"
+    alt="Blue Background Curve"
+    className="w-full h-[160px] object-cover"
+  />
+</div>
+
 </section>
+
 
 
 {/* Sección Contact us */}
