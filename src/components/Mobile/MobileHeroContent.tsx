@@ -3,6 +3,8 @@ import Image from "next/image";
 import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
 import MobileFooter from '@/components/Mobile/MobileFooter';
 import { RefCallback } from 'react';
+import TarjetaMobile from "./TarjetMobile";
+
 
 const services = [
   { title: 'Diagnostics & Troubleshooting', 
@@ -47,6 +49,12 @@ const services = [
 const videoSources = ['REEL1.mp4', 'REEL2.mp4', 'REEL3.mp4'];
 
 const MobileHeroContent = () => {
+  
+const [currentServiceTitle, setCurrentServiceTitle] = useState('Pool Maintenance');
+
+const selectedService = services.find(s => s.title === currentServiceTitle);
+const subscriptionTitles = ['Pool Maintenance', 'Pool Cleaning'];
+const showSubscriptionCard = subscriptionTitles.includes(selectedService?.title ?? '');
   const [showFullText, setShowFullText] = useState(false);
   const [activeServiceIndex, setActiveServiceIndex] = useState(2);
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
@@ -134,6 +142,14 @@ const MobileHeroContent = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [index]);
+
+  useEffect(() => {
+    const foundIndex = services.findIndex(s => s.title === currentServiceTitle);
+    if (foundIndex !== -1) {
+      setIndex(foundIndex);
+      setActiveServiceIndex(foundIndex);
+    }
+  }, [currentServiceTitle]);
   
   
   return (
@@ -153,7 +169,7 @@ const MobileHeroContent = () => {
   </div>
 
   {/* Vector decorativo */}
-  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10 w-full h-[65px] overflow-hidden -mt-[1px]">
+  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 z-10 w-full h-[65px] overflow-hidden -mt-[5px]">
     <img
       src="/svgs/vectorHeroServices.svg"
       alt="Decorative vector"
@@ -216,7 +232,11 @@ const MobileHeroContent = () => {
         <button
           key={index}
           ref={setTabRef(index)}
-          onClick={() => setActiveServiceIndex(index)}
+          onClick={() =>{ 
+            setActiveServiceIndex(index);
+            setCurrentServiceTitle(services[index].title);
+          }}
+          
           className={`flex items-center h-[46px] px-[20px] py-[14px] gap-[17px] font-inter text-[15px] font-normal transition-colors whitespace-nowrap ${
             activeServiceIndex === index
               ? 'bg-[#485AFF] text-white rounded-md'
@@ -289,10 +309,10 @@ const MobileHeroContent = () => {
   </section>
 )}
 
-
 <section className="relative w-full flex justify-center pt-10 pb-16 overflow-hidden bg-[#f7fafe]">
-  <SubscriptionCalculatorCard />
+  {showSubscriptionCard ? <SubscriptionCalculatorCard /> : <TarjetaMobile />}
 </section>
+
 
   {/* 
       <section className="relative w-full min-h-[820px] overflow-hidden">

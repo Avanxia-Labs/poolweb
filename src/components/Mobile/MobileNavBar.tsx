@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu } from 'lucide-react'; // ícono hamburguesa
 import { useState } from 'react';
+import Link from 'next/link';
 import MobileMenu from '@/components/Mobile/MobileMenu';
 
 
@@ -11,8 +12,13 @@ const MobileNavBar = () => {
     return (
       <>
       <header className="flex items-center justify-between w-full px-4 py-2 bg-[#f7fafe] shadow-sm">
-        <img src="/images/logo.png" alt="Pool Quality Logo" className="h-[45px] w-auto" />
-
+      <Link href="/">
+        <img
+          src="/images/logo.png"
+          alt="Pool Quality Logo"
+          className="h-[45px] w-auto cursor-pointer"
+        />
+      </Link>
         <button
           onClick={() => setMenuOpen(true)}
           className="p-2 rounded-md hover:bg-gray-100"

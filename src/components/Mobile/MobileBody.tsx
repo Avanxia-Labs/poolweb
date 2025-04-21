@@ -202,30 +202,24 @@ const MobileBody = () => {
       </div>
     </section>
 
-    <section className="relative w-full flex justify-center pt-10 pb-16 overflow-hidden">
-      {/* Imagen de fondo */}
-      <img
-        src="/images/cotiza.png"
-        alt="Cotiza Background"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
+    <section>
+  <div className="w-full relative flex flex-col items-center px-[clamp(1rem,4vw,2rem)] py-10 z-10">
+    <div className="w-full max-w-[clamp(320px, 90vw, 768px)] mx-auto">
+      <header className="text-center px-2">
+        <h1 className="text-[clamp(20px,5vw,24px)] leading-[clamp(30px,6vw,40px)] font-bold text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] w-full">
+          Get Your Instant Pool <br /> Service Estimate
+        </h1>
+        <p className="mt-3 text-[12px] leading-[28px] font-extrabold text-[#485AFF] text-center font-inter">
+          Enter Your Pool Details Below
+        </p>
+      </header>
 
-    <div className="w-full max-w-screen-sm relative flex flex-col items-center px-6 sm:px-4 py-10 z-10">
-      <div className="w-full max-w-sm mx-auto">
-        <header className="text-center px-2">
-          <h1 className="text-[24px] leading-[40px] font-bold text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] w-full">
-            Get Your Instant Pool <br /> Service Estimate
-          </h1>
-          <p className="mt-3 text-[12px] leading-[28px] font-extrabold text-[#485AFF] text-center font-inter">
-            Enter Your Pool Details Below
-          </p>
-        </header>
+      {/* Tarjeta reutilizable */}
+      <SubscriptionCalculatorCard />
+    </div>
+  </div>
+</section>
 
-        {/* Tarjeta reutilizable */}
-        <SubscriptionCalculatorCard />
-        </div>
-      </div>
-    </section>
     <section className="relative w-full px-0 overflow-hidden min-h-screen">
       {/* Imagen de fondo Fija */}
       <img
@@ -255,10 +249,11 @@ const MobileBody = () => {
       href="/docs/mobile/VerifiedCredentials.pdf"
       target="_blank"
       rel="noopener noreferrer"
-      className="text-[#F5F9FF] text-[12px] leading-[24.614px] font-extrabold italic underline decoration-solid [text-decoration-skip-ink:none] font-['Plus_Jakarta_Sans'] mt-4 hover:text-indigo-300 transition-colors"
+      className="text-[#F5F9FF] text-[12px] leading-[24.614px] font-extrabold italic underline decoration-solid [text-decoration-skip-ink:none] font-['Plus_Jakarta_Sans'] mt-4 hover:text-indigo-300 active:text-[#485AFF] transition-colors"
     >
       View Verified Credentials
     </a>
+
   </div>
     </section>
 

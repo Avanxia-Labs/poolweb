@@ -45,7 +45,13 @@ const getLinkClass = (href: string) =>
   
       {/* Logo */}
       <div className="flex justify-center mb-3">
-        <img src="/images/logo.png" alt="Logo" className="h-[45px]" />
+        <Link href="/">
+          <img
+            src="/images/logo.png"
+            alt="Logo"
+            className="h-[45px] cursor-pointer"
+          />
+        </Link>      
       </div>
 
       <div className="w-full flex justify-center mb-4">

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 import Image from "next/image";
 import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
 import MobileFooter from '@/components/Mobile/MobileFooter';
@@ -31,10 +32,12 @@ const MobileFormContent = () => {
 </p>
 
  {/* Botón */} 
-<div className="flex justify-center mt-6">
-  <button className="inline-flex flex-col justify-center items-center gap-2 px-5 py-4 bg-[#485AFF] text-white text-xs font-bold rounded-lg">
-    HOME PAGE
-  </button>
+ <div className="flex justify-center mt-6">
+  <Link href="/">
+    <button className="inline-flex flex-col justify-center items-center gap-2 px-5 py-4 bg-[#485AFF] text-white text-xs font-bold rounded-lg">
+      HOME PAGE
+    </button>
+  </Link>
 </div>
 
 </section>

@@ -2,8 +2,10 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import MobileFooter from '@/components/Mobile/MobileFooter';
+import { useRouter } from 'next/navigation';
 
 const MobileAboutContent = () => {
+  const router = useRouter();
 
   const cardRefs = [useRef(null), useRef(null), useRef(null)];
 
@@ -97,13 +99,13 @@ const MobileAboutContent = () => {
 
     {/* Métricas responsivas */}
     <div className="flex flex-col sm:flex-row sm:justify-between text-left gap-6 mb-8">
-      <div>
+      {/* <div>
         <p className="text-[clamp(22px,6vw,28px)] font-bold text-[#1D7DED]">750+</p>
         <p className="text-[clamp(12px,3.5vw,15px)] text-[#344054] leading-snug font-medium">
           High-Quality <br />
           Pools <br /> Constructed
         </p>
-      </div>
+      </div> */}
       <div>
         <p className="text-[clamp(22px,6vw,28px)] font-bold text-[#1D7DED]">10+</p>
         <p className="text-[clamp(12px,3.5vw,15px)] text-[#344054] leading-snug font-medium">
@@ -115,7 +117,10 @@ const MobileAboutContent = () => {
 
     {/* Botón */}
     <div className="w-full flex justify-start">
-      <button className="bg-[#485AFF] text-white font-bold text-[clamp(11px,2.5vw,13px)] rounded-[8px] px-[20px] py-[12px] border border-[#7F56D9] shadow-sm">
+      <button
+        onClick={() => router.push('/form')}
+        className="bg-[#485AFF] text-white font-bold text-[clamp(11px,2.5vw,13px)] rounded-[8px] px-[20px] py-[12px] border border-[#7F56D9] shadow-sm"
+      >
         GET YOUR FREE ESTIMATE
       </button>
     </div>
