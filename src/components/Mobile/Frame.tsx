@@ -20,12 +20,11 @@ export const Frame = () => {
             services that exceed <br />expectations.
           </p>
           <Button
-      onClick={() => router.push('/form')}
-      className="flex flex-col justify-center items-center gap-[10px] px-0 py-[8px] bg-[#485AFF] hover:bg-[#485AFF]/90 text-white text-[14px] leading-[32px] font-semibold text-center font-inter rounded-[8px]"
-    >
-      GET YOUR FREE ESTIMATE
-    </Button>
-
+            onClick={() => router.push('/form')}
+            className="flex flex-col justify-center items-center gap-[10px] px-0 py-[8px] bg-[#485AFF] hover:bg-[#485AFF]/90 text-white text-[14px] leading-[32px] font-semibold text-center font-inter rounded-[8px]"
+          >
+            GET YOUR FREE ESTIMATE
+          </Button>
         </div>
       </div>
     );
