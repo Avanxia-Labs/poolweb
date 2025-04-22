@@ -154,19 +154,6 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     return Object.keys(errors).length === 0;
   };
 
-  // const handleSubmit = (e: FormEvent) => {
-  //   e.preventDefault();
-
-  //   if (validateForm()) {
-  //     console.log('Form submitted:', formData);
-  //     // Process form submission
-  //     alert('Form submitted successfully!');
-  //   } else {
-  //     console.log('Form validation failed');
-  //     alert('Please fill in all required fields');
-  //   }
-  // };
-
 
   
   const handleSubmit = async (e: FormEvent) => {
@@ -225,7 +212,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     <div className=" flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
 
       <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4 w-full max-w-3xl">
-        <div className="grid grid-cols-1 gap-6 2xl:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
           {/* Name Field */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
