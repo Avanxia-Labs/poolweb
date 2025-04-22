@@ -238,7 +238,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
             <div className="relative">
               <button
                 type="button"
-                className={`w-full px-3 py-2 text-left border ${formErrors.role ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center`}
+                className={`text-[#6c757d] w-full px-3 py-2 text-left border ${formErrors.role ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center`}
                 onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
               >
                 <span>{formData.role || 'Please select:'}</span>
@@ -250,7 +250,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
                   {roleOptions.map((option) => (
                     <div
                       key={option}
-                      className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+                      className="text-black px-3 py-2 cursor-pointer hover:bg-gray-100"
                       onClick={() => selectRole(option)}
                     >
                       {option}
