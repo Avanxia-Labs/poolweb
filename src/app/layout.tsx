@@ -34,12 +34,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light" data-theme="light">
+    <html
+      lang="en"
+      className="light"
+      data-theme="light"
+      data-color-mode="light"
+      style={{ colorScheme: 'light' }}>
       <head>
-        <meta name="color-scheme" content="light"/>
+        <meta name="color-scheme" content="light only" />
       </head>
       <body
-        
+
         className={`
             ${inter.variable} 
             ${poppins.variable} 

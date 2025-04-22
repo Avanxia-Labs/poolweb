@@ -6,6 +6,35 @@
   color-scheme: light;
 }
 
+::placeholder{
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Para Firefox */
+::-moz-placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Para Edge */
+::-ms-input-placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Para Safari and Chrome */
+::-webkit-input-placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Forzar colores de entrada */
+input, textarea, select {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ced4da !important;
+}
 
 @media (prefers-color-scheme: dark) {
   html.light {
