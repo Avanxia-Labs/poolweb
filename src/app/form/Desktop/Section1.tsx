@@ -24,8 +24,8 @@ const Section1 = () => {
             <div className="hidden lg:block absolute inset-0">
               {/* Image container set to 85% height and positioned at the bottom */}
               <div className="relative h-full w-full">
-                <div className="absolute bottom-0 left-0 w-full h-[92%] overflow-hidden">
-                  <img
+                <div className="absolute bottom-0 left-0 w-full h-[92%] 2xl:h-[100%] overflow-hidden">
+                  <img 
                     src='/images/yosbaniContact.png'
                     alt="Yosbani"
                     className="w-full h-full object-cover object-left-bottom"
