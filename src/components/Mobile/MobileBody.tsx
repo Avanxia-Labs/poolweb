@@ -369,7 +369,12 @@ const MobileBody = () => {
           Let’s level up your brand,<br />together
         </h2>
         <p className="mt-4 text-[18px] leading-[28px] font-normal text-[#667085] font-inter">
-          You can reach us anytime via <span className="font-medium text-[#6941C6]">hi@untitledui.com</span>
+          You can reach us anytime via <br />
+          <a href="mailto:poolqualitysolutions@hotmail.com">
+            <span className="font-medium text-[#6941C6] underline hover:text-[#7F56D9] transition-colors">
+              poolqualitysolutions@hotmail.com
+            </span>
+          </a>        
         </p>
         </div>
 

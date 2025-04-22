@@ -13,24 +13,40 @@ const MobileFooter = () => {
     <div className="flex flex-col gap-4 w-full items-center">
       {/* Email y Phone */}
       <div className="flex flex-col gap-2 items-center">
-        {/* Email */}
-        <div className="flex gap-2 items-center">
-          <svg className="w-5 h-6" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-            <path d="M4 4h16v16H4z" />
-            <path d="M4 4l8 8 8-8" />
-          </svg>
-          <span className="text-xs leading-7 text-white">poolqualitysolutions@hotmail.com</span>
-        </div>
+          {/* Email */}
+            <a
+              href="mailto:poolqualitysolutions@hotmail.com"
+              className="flex gap-2 items-center hover:underline"
+            >
+              <svg className="w-5 h-6" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <path d="M4 4h16v16H4z" />
+                <path d="M4 4l8 8 8-8" />
+              </svg>
+              <span className="text-xs leading-7 text-white">poolqualitysolutions@hotmail.com</span>
+            </a>
 
-        {/* Phone */}
-        <div className="flex gap-2 items-center">
-          <svg className="w-5 h-5" fill="white" viewBox="0 0 24 24">
-            <path d="M22 16.92V21a1 1 0 0 1-1.09 1 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2 3.09 1 1 0 0 1 3 2h4.09a1 1 0 0 1 1 .75 12.05 12.05 0 0 0 .56 1.59 1 1 0 0 1-.23 1.09L7.21 7.21a16 16 0 0 0 6.58 6.58l1.78-1.78a1 1 0 0 1 1.09-.23 12.05 12.05 0 0 0 1.59.56 1 1 0 0 1 .75 1V21z" />
-          </svg>
-          <span className="text-xs leading-7 text-white">+1 (239) 380-0766</span>
+            {/* Phone */}
+            <a
+              href="tel:+12393800766"
+              className="flex gap-2 items-center hover:underline"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+              <span className="text-xs leading-7 text-white">+1 (239) 380-0766</span>
+            </a>
         </div>
-      </div>
-
       {/* Social Icons */}
       <div className="flex justify-center gap-12 py-5">
         {/* <Music2 className="text-white w-6 h-6" aria-label="TikTok" />
