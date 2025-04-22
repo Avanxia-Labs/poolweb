@@ -34,7 +34,7 @@ function Section7() {
                             "Let's elevate your <br/> pool care, together."
                         </p>
                         <p className='text-[#667085] font-inter text-sm sm:text-base md:text-lg lg:text-[20px] font-normal leading-relaxed sm:leading-[1.6] lg:leading-[30px]'>
-                            You can reach us anytime via email@hosting.com
+                            You can reach us anytime via:  <a href="mailto:poolqualitysolutions@hotmail.com" className="text-md hover:underline">poolqualitysolutions@hotmail.com</a>
                         </p>
                     </div>
 
