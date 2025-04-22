@@ -24,7 +24,7 @@ const Section1 = () => {
             <div className="hidden lg:block absolute inset-0">
               {/* Image container set to 85% height and positioned at the bottom */}
               <div className="relative h-full w-full">
-                <div className="absolute bottom-0 left-0 w-full h-[92%] 2xl:h-[100%] overflow-hidden">
+                <div className="absolute bottom-0 left-0 w-full h-[94%] 2xl:h-[100%] overflow-hidden">
                   <img 
                     src='/images/yosbaniContact.png'
                     alt="Yosbani"
@@ -36,10 +36,10 @@ const Section1 = () => {
 
               {/* Desktop text overlay */}
               <div className="absolute top-10 right-0 flex flex-col items-start justify-start max-w-md px-8 z-20">
-                <h1 className="title-2300 title-2100 text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+                <h1 className="title-1920 title-1800 text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
                   Let's<br />work<br />together!
                 </h1>
-                <p className="text-2300 text-2100 text-lg text-gray-600">
+                <p className="text-1920 text-1800 text-lg text-gray-600">
                   We're here to help you enjoy your pool again. Complete the form and we'll be in touch within the next 24 hours.
                 </p>
               </div>

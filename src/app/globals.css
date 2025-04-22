@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  html.light {
+    color-scheme: light;
+  }
 }
 
 @theme inline {
@@ -11,6 +19,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -52,23 +61,23 @@
     }
   }
 
-  @media (min-width: 2300px) {
-    .title-2300 {
+  @media (min-width: 1920px) {
+    .title-1920 {
       font-size: 100px;
     }
 
-    .text-2300 {
+    .text-1920 {
       font-size: 40px;
     }
 
   }
 
-  @media (min-width: 2100px) {
-    .title-2100 {
+  @media (min-width: 1800px) {
+    .title-1800 {
       font-size: 80px;
     }
 
-    .text-2100 {
+    .text-1800 {
       font-size: 30px;
     }
 
