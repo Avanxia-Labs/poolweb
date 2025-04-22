@@ -36,6 +36,28 @@ input, textarea, select {
   border-color: #ced4da !important;
 }
 
+.react-phone-input-2 {
+  color: #6c757d !important;
+  background-color: #ffffff !important;
+}
+
+/* Estilo global para menús desplegables */
+select,
+option,
+[role="option"],
+.dropdown-item,
+.dropdown-content * {
+  color: #6c757d; /* Color de texto azul */
+  background-color: #ffffff; /* Fondo blanco */
+  text-shadow: none; /* Eliminar sombra de texto */
+}
+
+/* Asegúrate de que los placeholders también se muestren correctamente */
+select::placeholder,
+textarea::placeholder {
+  color: #6c757d !important; /* Fuerza que el placeholder sea azul */
+}
+
 @media (prefers-color-scheme: dark) {
   html.light {
     color-scheme: light;
