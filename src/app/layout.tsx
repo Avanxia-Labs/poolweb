@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter, Poppins, Kanit, Plus_Jakarta_Sans, Montserrat } from "next/font/google"
-import TransitionLayout from "@/components/Desktop/TransitionLayout";
+//import TransitionLayout from "@/components/Desktop/TransitionLayout";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -53,9 +53,9 @@ export default function RootLayout({
             ${plus_jakarta_sans.variable}
             ${montserrat.variable} 
             antialiased`}>
-        <TransitionLayout>
+        {/* <TransitionLayout> */}
             {children}
-        </TransitionLayout>
+        {/* </TransitionLayout> */}
       </body>
     </html>
   );

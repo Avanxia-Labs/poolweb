@@ -23,14 +23,25 @@ const Section1 = () => {
             {/* Desktop image container with absolute positioning (>1024px) */}
             <div className="hidden lg:block absolute inset-0">
               {/* Image container set to 85% height and positioned at the bottom */}
-              <div className="relative h-full w-full">
-                <div className="absolute bottom-0 left-0 w-full h-[94%] 2xl:h-[100%] overflow-hidden">
+              <div className="relative h-[100%] w-full">
+                {/* <div className="absolute bottom-0 left-0 w-full h-[100%] 2xl:h-[100%] overflow-hidden">
                   <img 
                     src='/images/yosbaniContact.png'
                     alt="Yosbani"
                     className="w-full h-full object-cover object-left-bottom"
                     style={{ objectPosition: 'left bottom' }}
                   />
+                </div> */}
+
+                <div className='absolute bottom-0 left-0 w-full h-[98%]'>
+                  <div className="absolute bottom-0 top-0 left-0 w-full h-[100%] 2xl:h-[100%] overflow-hidden">
+                    <img
+                      src='/images/yosbaniContact.png'
+                      alt="Yosbani"
+                      className="w-full h-full object-cover object-left-top"
+                      style={{ objectPosition: 'left top' }}
+                    />
+                  </div>
                 </div>
               </div>
 
