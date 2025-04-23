@@ -5,11 +5,11 @@ import Section2 from './Desktop/AboutComponents/Section2'
 import Section3 from './Desktop/AboutComponents/Section3'
 import FooterSection from '@/components/Desktop/FooterSection'
 import Section4 from './Desktop/AboutComponents/Section4'
-import PageTransition from '@/components/Desktop/PageTransition'
+//import PageTransition from '@/components/Desktop/PageTransition'
 
 function DesktopAboutPage() {
   return (
-    <PageTransition>
+    
       <div className='w-full mx-auto bg-[#F5F9FF]'>
           <NavBar/>
           <Section1/>
@@ -18,7 +18,7 @@ function DesktopAboutPage() {
           <Section4/> 
           <FooterSection/>
       </div>
-    </PageTransition>
+    
     )
 }
 

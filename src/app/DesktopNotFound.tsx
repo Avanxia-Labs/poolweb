@@ -3,11 +3,11 @@ import NavBar from '@/components/Desktop/NavBar'
 import FooterSection from '@/components/Desktop/FooterSection'
 import Image from 'next/image'
 import Link from 'next/link'
-import PageTransition from '@/components/Desktop/PageTransition'
+//import PageTransition from '@/components/Desktop/PageTransition'
 
 function DesktopNotFound() {
   return (
-    <PageTransition>
+    
       <div className="flex flex-col min-h-screen">
         <NavBar />
         <div
@@ -38,7 +38,7 @@ function DesktopNotFound() {
         </div>
         <FooterSection />
       </div>
-    </PageTransition>
+    
   );
 }
 

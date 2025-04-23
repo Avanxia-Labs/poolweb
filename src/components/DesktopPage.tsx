@@ -8,12 +8,12 @@ import Section5 from './Desktop/Section5';
 import Section6 from './Desktop/Section6';
 import Section7 from './Desktop/Section7';
 import FooterSection from './Desktop/FooterSection';
-import PageTransition from './Desktop/PageTransition';
+//import PageTransition from './Desktop/PageTransition';
 
 
 function DesktopPage() {
   return (
-    <PageTransition>
+    
       <div className="w-full mx-auto bg-[#F5F9FF]">
         <NavBar />
         <Section1 />
@@ -25,7 +25,7 @@ function DesktopPage() {
         <Section7 />
         <FooterSection />
       </div>
-    </PageTransition>
+    
   )
 }
 
