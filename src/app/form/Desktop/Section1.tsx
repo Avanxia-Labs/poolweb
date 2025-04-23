@@ -46,11 +46,11 @@ const Section1 = () => {
               </div>
 
               {/* Desktop text overlay */}
-              <div className="absolute top-10 right-0 flex flex-col items-start justify-start max-w-md px-8 z-20">
-                <h1 className="title-1920 title-1800 text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+              <div className="wide-1920 absolute top-10 right-0 flex flex-col items-start justify-start max-w-md xl:max-w-[430px] 2xl:max-w-lg lg:max-w-sm lg:items-start px-8 z-20">
+                <h1 className="title-1920 title-1800 text-4xl md:text-5xl lg:text-3xl xl:text-6xl font-bold text-gray-800 mb-4">
                   Let's<br />work<br />together!
                 </h1>
-                <p className="text-1920 text-1800 text-lg text-gray-600">
+                <p className=" text-1920 text-1800 text-lg text-gray-600 lg:text-start lg:text-2xl lg:max-w-[190px] xl:max-w-full xl:text-3xl 2xl:text-4xl">
                   We're here to help you enjoy your pool again. Complete the form and we'll be in touch within the next 24 hours.
                 </p>
               </div>
