@@ -8,21 +8,24 @@ import Section5 from './Desktop/Section5';
 import Section6 from './Desktop/Section6';
 import Section7 from './Desktop/Section7';
 import FooterSection from './Desktop/FooterSection';
+import PageTransition from './Desktop/PageTransition';
 
 
 function DesktopPage() {
   return (
-    <div className="w-full mx-auto bg-[#F5F9FF]">
-      <NavBar/>
-      <Section1/>
-      <Section2/>
-      <Section3/>
-      <Section4/>
-      <Section5/>
-      <Section6/>
-      <Section7/>
-      <FooterSection/>
-    </div>
+    <PageTransition>
+      <div className="w-full mx-auto bg-[#F5F9FF]">
+        <NavBar />
+        <Section1 />
+        <Section2 />
+        <Section3 />
+        <Section4 />
+        <Section5 />
+        <Section6 />
+        <Section7 />
+        <FooterSection />
+      </div>
+    </PageTransition>
   )
 }
 

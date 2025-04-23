@@ -34,14 +34,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
+    <html 
       lang="en"
       className="light"
       data-theme="light"
       data-color-mode="light"
       style={{ colorScheme: 'light' }}>
       <head>
-        <meta name="color-scheme" content="light only" />
+      <meta name="color-scheme" content="light only"/>
       </head>
       <body
 
