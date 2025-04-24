@@ -24,16 +24,9 @@ const Section1 = () => {
             <div className="hidden lg:block absolute inset-0">
               {/* Image container set to 85% height and positioned at the bottom */}
               <div className="relative h-[100%] w-full">
-                {/* <div className="absolute bottom-0 left-0 w-full h-[100%] 2xl:h-[100%] overflow-hidden">
-                  <img 
-                    src='/images/yosbaniContact.png'
-                    alt="Yosbani"
-                    className="w-full h-full object-cover object-left-bottom"
-                    style={{ objectPosition: 'left bottom' }}
-                  />
-                </div> */}
 
-                <div className='absolute bottom-0 left-0 w-full h-[98%]'>
+                {/* Contenedor que controla altura de la imagen */}
+                <div className='absolute bottom-0 left-0 w-full h-[85%]'>
                   <div className="absolute bottom-0 top-0 left-0 w-full h-[100%] 2xl:h-[100%] overflow-hidden">
                     <img
                       src='/images/yosbaniContact.png'
@@ -43,16 +36,6 @@ const Section1 = () => {
                     />
                   </div>
                 </div>
-              </div>
-
-              {/* Desktop text overlay */}
-              <div className="wide-1920 absolute top-10 right-0 flex flex-col items-start justify-start max-w-md xl:max-w-[430px] 2xl:max-w-lg lg:max-w-sm lg:items-start px-8 z-20">
-                <h1 className="title-1920 title-1800 text-4xl md:text-5xl lg:text-3xl xl:text-6xl font-bold text-gray-800 mb-4">
-                  Let's<br />work<br />together!
-                </h1>
-                <p className=" text-1920 text-1800 text-lg text-gray-600 lg:text-start lg:text-2xl lg:max-w-[190px] xl:max-w-full xl:text-3xl 2xl:text-4xl">
-                  We're here to help you enjoy your pool again. Complete the form and we'll be in touch within the next 24 hours.
-                </p>
               </div>
             </div>
 
@@ -72,9 +55,20 @@ const Section1 = () => {
           </div>
 
           {/* Right side with contact info and form */}
-          <div className="flex flex-col 2xl:justify-center w-full lg:w-4/9 2xl:w-1/2 lg:pl-5 2xl:pl-10 px-4 lg:px-0 lg:pr-10">
+          <div className="flex flex-col gap-[1.25rem] 2xl:justify-center w-full lg:w-4/9 2xl:w-1/2 lg:pl-5 2xl:pl-10 px-4 lg:px-0 lg:pr-10">
+
+            {/* Desktop text overlay */}
+            <div className=' flex flex-col items-start gap-[2.5rem]'>
+
+              <h1 className='text-[#0F172A] font-inter text-[4rem] font-bold leading-[4.3125rem] not-italic self-stretch'>Let's work together!</h1>
+
+              <p className='text-[#212939] font-inter text-2xl not-italic font-normal leading-[2.375rem]'>We're here to help you enjoy your pool again. Complete the form and we'll be in touch within the next 24 hours.</p>
+
+            </div>
+
+
             {/* Contact cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 mt-6 lg:mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Teléfono */}
               <a
                 href="tel:+12363800768"
