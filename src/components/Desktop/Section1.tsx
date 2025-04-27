@@ -31,7 +31,7 @@ function Section1() {
     }, []);
 
     return (
-        <section className='flex w-full mx-auto h-[1200px] flex-col items-start shrink-0'>
+        <section className='flex w-full mx-auto h-[1200px] flex-col items-start shrink-0 overflow-visible'>
 
             <div id='Frame5' className='relative flex h-3/8 flex-col items-center gap-4 md:gap-5 lg:gap-[23px] w-full max-w-[650px] mx-auto justify-center'>
                 {/* Main heading - Responsive text scaling */}
@@ -65,7 +65,7 @@ function Section1() {
 
             {/* <div className='h-[300px] bg-sky-400 w-full'> Video</div> */}
 
-            <div id='abajo' className='z-0 h-5/8 flex flex-col relative w-full overflow-hidden'>
+            <div id='abajo' className='z-0 h-5/8 flex flex-col relative w-full overflow-visible'>
 
                 {/* //bg-white absolute top-[-10%] w-full */}
                 <div className='absolute top-[-5%] min-top-[-10%] w-full'>
@@ -131,7 +131,7 @@ function Section1() {
                 </div>
 
                 {/* Tercera capa: agua más brillante */}
-                <div id='vector2' className='absolute bottom-0 z-20 w-full h-[225.499px] mx-auto'>
+                <div id='vector2' className='absolute bottom-0 z-20 w-full h-[225.499px] mx-auto mb-[-1px]'>
                     <svg width="0" height="0">
                         <defs>
                             <clipPath id="video-clip" clipPathUnits="userSpaceOnUse">
