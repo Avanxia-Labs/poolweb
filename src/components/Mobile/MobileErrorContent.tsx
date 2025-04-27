@@ -1,11 +1,8 @@
 import React from "react";
 import Link from 'next/link';
 import Image from "next/image";
-// Reemplazar la importación del componente que causa el error
-import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 import MobileFooter from '@/components/Mobile/MobileFooter';
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
-
 
 const MobileFormContent = () => {
   return (
