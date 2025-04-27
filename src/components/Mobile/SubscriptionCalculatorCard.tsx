@@ -59,7 +59,7 @@ const SubscriptionCalculatorCard: React.FC = () => {
     };
   
     const queryString = new URLSearchParams(data as any).toString();
-    router.push(`/form?${queryString}`);
+    router.push(`/contact?${queryString}`);
   };
 
   return (

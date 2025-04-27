@@ -48,7 +48,7 @@ function Section1() {
                 <button id='button' className='flex flex-col justify-center items-center gap-[10px] p-3 md:p-4 px-4 md:px-5 rounded-[8px]'>
                     <div id='Frame1' className='flex justify-center items-center gap-[9px]'>
 
-                        <Link href="/form">
+                        <Link href="/contact">
                             <FancyButton text={"GET YOUR FREE ESTIMATE"} width="17.18rem" height="3.75rem" textSize="1.125rem" />
                         </Link>
 

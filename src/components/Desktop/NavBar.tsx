@@ -57,11 +57,11 @@ function NavBar() {
                     </div>
 
                     {/* Contact button */}
-                    <Link href="/form">
+                    <Link href="/contact">
                         <div className={`flex h-12 px-6 py-3 items-center gap-2 rounded-lg border-2 
-                            ${isActive('/form') ? 'border-[#485AFF]' : 'border-[#0F172A]'}`}>
+                            ${isActive('/contact') ? 'border-[#485AFF]' : 'border-[#0F172A]'}`}>
                             <p className={`font-inter text-base font-semibold leading-6 
-                                ${isActive('/form') ? 'text-[#485AFF]' : 'text-[#0F172A]'}`}>
+                                ${isActive('/contact') ? 'text-[#485AFF]' : 'text-[#0F172A]'}`}>
                                 Contact
                             </p>
                             {/* Placeholder icon */}

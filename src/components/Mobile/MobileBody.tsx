@@ -282,7 +282,7 @@ const MobileBody = () => {
               expectations.
             </p>
             <button
-      onClick={() => router.push('/form')}
+      onClick={() => router.push('/contact')}
       className="mt-4 flex justify-center items-center px-[10px] py-[8px] text-[12px] leading-[28px] font-semibold text-[#485AFF] text-center font-inter bg-[#F5F9FF] rounded-[8px] w-fit"
     >
       GET YOUR FREE ESTIMATE

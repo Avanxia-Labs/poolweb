@@ -96,10 +96,10 @@ const getLinkClass = (href: string) =>
           </div>
         </Link>
         {/* Contact Button */}
-        <Link href="/form" onClick={onClose} className="mt-[30px] w-full flex justify-center">
+        <Link href="/contact" onClick={onClose} className="mt-[30px] w-full flex justify-center">
           <button
             className={`w-[212px] px-[20px] py-[10px] flex items-start justify-center gap-[21px] rounded-none text-[14px] leading-[22px] font-medium tracking-[0.28px] font-inter transition-colors duration-300 ${
-              pathname === '/form' ? 'bg-[#3A48CC]' : 'bg-[#485AFF]'
+              pathname === '/contact' ? 'bg-[#3A48CC]' : 'bg-[#485AFF]'
             } text-white`}
           >
             <ContactIcon className="w-6 h-6" />

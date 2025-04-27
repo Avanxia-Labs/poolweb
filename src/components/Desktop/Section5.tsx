@@ -33,7 +33,7 @@ function Section5() {
                                 This science-backed approach results in consistent water clarity, enhanced safety for swimmers, and better protection for your valuable pool equipment. Experience the peace of mind that comes from truly expert care. Let us transform your pool experience - get started with your free estimate today.
                             </p>
 
-                            <Link href="/form">
+                            <Link href="/contact">
                                 <button className='flex p-3 md:p-4 justify-center items-center rounded-[8px] bg-[#F5F9FF]'>
                                     <p className='text-[#485AFF] text-center text-for-1700px font-inter text-base md:text-lg font-bold'>
                                         Start with a Free Estimate

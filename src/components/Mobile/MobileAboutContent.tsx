@@ -118,7 +118,7 @@ const MobileAboutContent = () => {
     {/* Botón */}
     <div className="w-full flex justify-start">
       <button
-        onClick={() => router.push('/form')}
+        onClick={() => router.push('/contact')}
         className="bg-[#485AFF] text-white font-bold text-[clamp(11px,2.5vw,13px)] rounded-[8px] px-[20px] py-[12px] border border-[#7F56D9] shadow-sm"
       >
         GET YOUR FREE ESTIMATE

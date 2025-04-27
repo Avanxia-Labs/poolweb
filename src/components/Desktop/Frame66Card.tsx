@@ -160,7 +160,7 @@ function InputDesign({ onSubscribe }: InputDesignProps) {
           </div>
 
           <div className="mt-4">
-          <Link href="/form">
+          <Link href="/contact">
             <FancyButton text={"Request Subscription"} onClick={handleSubmit} />
           </Link>
           </div>

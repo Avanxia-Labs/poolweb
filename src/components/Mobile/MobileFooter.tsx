@@ -61,7 +61,7 @@ const MobileFooter = () => {
         <Link href="/"><span className="text-xs font-medium leading-6 text-white">Home</span></Link>
         <Link href="/services"><span className="text-xs font-medium leading-6 text-white">Services</span></Link>
         <Link href="/about"><span className="text-xs font-medium leading-6 text-white">About Us</span></Link>
-        <Link href="/form"><span className="text-xs font-medium leading-6 text-white">Contact</span></Link>
+        <Link href="/contact"><span className="text-xs font-medium leading-6 text-white">Contact</span></Link>
       </nav>
 
       {/* Copyright */}

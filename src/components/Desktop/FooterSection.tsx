@@ -54,7 +54,7 @@ const FooterSection = () => {
           <Link href="/about" className="hover:underline">
             About Us
           </Link>
-          <Link href="/form" className="hover:underline">
+          <Link href="/contact" className="hover:underline">
             Contact
           </Link>
         </nav>

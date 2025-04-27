@@ -68,7 +68,7 @@ const TarjetaMobile: React.FC = () => {
 
           <button
             className="flex w-[170px] h-[44px] px-[20px] py-[16px] justify-center items-center gap-[10px] text-white text-[14px] font-semibold bg-[#485AFF] rounded-[8px]"
-            onClick={() => router.push('/form')}
+            onClick={() => router.push('/contact')}
           >
             Request Quote
           </button>
