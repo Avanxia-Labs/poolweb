@@ -1,8 +1,9 @@
-"use client";
-import * as React from "react";
-import { useState, useRef, useEffect } from "react";
-import FancyButton from "./FancyButton";
-import Link from "next/link";
+'use client';
+import * as React from 'react';
+import { useState, useRef } from 'react';
+import Link from 'next/link';
+import FancyButton from '@/components/Desktop/FancyButton';
+import { useRouter } from 'next/navigation';
 
 interface Service {
   id: string;
@@ -12,8 +13,6 @@ interface Service {
 }
 
 const DEFAULT_GALLONS = 10000;
-const BASE_PRICE = 50;
-
 const DEFAULT_SERVICES: Service[] = [
   {
     id: "vacuuming",
@@ -29,15 +28,12 @@ const DEFAULT_SERVICES: Service[] = [
   },
 ];
 
-interface InputDesignProps {
-  onSubscribe?: (data: {
-    gallons: number;
-    services: Service[];
-    total: number;
-  }) => void;
+interface SubscriptionCalculatorProps {
+  isMobile?: boolean;
 }
 
-function InputDesign({ onSubscribe }: InputDesignProps) {
+export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalculatorProps) {
+  const router = useRouter();
   const [poolGallons, setPoolGallons] = useState(DEFAULT_GALLONS);
   const [services, setServices] = useState(DEFAULT_SERVICES);
   const [isHovered, setIsHovered] = useState(false);
@@ -53,33 +49,62 @@ function InputDesign({ onSubscribe }: InputDesignProps) {
     const additionalCost = services
       .filter((service) => service.checked)
       .reduce((sum, service) => sum + service.price, 0);
-    return poolGallons * 0.013 + additionalCost;
+    const total = poolGallons * 0.013 + additionalCost;
+    return Number(total.toFixed(2));
   };
 
-  const handleSubmit = () => {
-    onSubscribe?.({
-      gallons: poolGallons,
-      services: services,
-      total: calculateTotal(),
-    });
+  const handleGallonsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '') {
+      setPoolGallons(0);
+      return;
+    }
+    const number = Number(value);
+    if (!isNaN(number)) {
+      setPoolGallons(number);
+    }
   };
+
+  const handleRedirect = () => {
+    const queryParams = new URLSearchParams({
+      gallons: String(poolGallons),
+      vacuuming: String(services[0].checked),
+      filterWash: String(services[1].checked),
+      total: String(calculateTotal())
+    }).toString();
+    
+    router.push(`/contact?${queryParams}`);
+  };
+
+  // Clases condicionales basadas en mobile/desktop
+  const containerClass = isMobile
+    ? "w-full flex justify-center pt-10 pb-16 px-6"
+    : "";
+  
+  const cardClass = isMobile
+    ? "mt-6 bg-white p-6 rounded-3xl shadow-lg relative overflow-hidden z-10 w-full max-w-[clamp(320px,95vw,768px)] mx-auto"
+    : "box-border px-12 py-12 rounded-3xl shadow-lg max-md:p-8 max-md:max-w-full max-sm:p-6 max-sm:rounded-3xl relative overflow-hidden z-10 bg-white w-full max-w-xl mx-auto";
+
+  const titleClass = isMobile
+    ? "text-[clamp(18px,5vw,22px)] leading-[25.4px] font-bold text-left text-[#052F52] font-['Plus_Jakarta_Sans']"
+    : "text-2xl font-bold leading-8 text-[#052F52] font-['Plus_Jakarta_Sans'] mb-6 md:text-4xl";
+
+  const inputClass = isMobile
+    ? "w-full px-4 py-2 mt-2 border border-gray-300 rounded-md bg-white text-[clamp(13px,3vw,15px)] font-normal text-black font-inter"
+    : "w-full px-4 py-3 mt-2 border border-gray-300 rounded-md bg-white text-black font-inter md:text-xl md:py-4";
+
+  const priceClass = isMobile
+    ? "text-[clamp(20px,6vw,24px)] leading-[36px] font-black text-[#052F52] font-inter mt-1"
+    : "text-2xl font-black text-[#052F52] font-inter mt-1 md:text-4xl";
 
   return (
-    <div>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&family=Inter:wght@400;500;700;800;900&display=swap"
-        rel="stylesheet"
-      />
-      <main
+    <section className={containerClass}>
+      <div
         ref={cardRef}
-        className="box-border px-12 py-12 rounded-3xl shadow-lg max-md:p-8 max-md:max-w-full max-sm:p-6 max-sm:rounded-3xl relative overflow-hidden z-10 bg-white w-full max-w-xl mx-auto"
-        style={{
-          width: "30rem",
-          height: "auto",
-          transition: "background 700ms ease-out",
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className={cardClass}
+        style={!isMobile ? { width: "30rem", transition: "background 700ms ease-out" } : undefined}
+        onMouseEnter={() => !isMobile && setIsHovered(true)}
+        onMouseLeave={() => !isMobile && setIsHovered(false)}
       >
         {/* Blob superior izquierdo */}
         <div
@@ -103,7 +128,7 @@ function InputDesign({ onSubscribe }: InputDesignProps) {
 
         {/* Contenido principal */}
         <div className="relative z-20 flex flex-col gap-4 w-full">
-          <h1 className="text-2xl font-bold leading-8 text-[#052F52] font-['Plus_Jakarta_Sans'] mb-6 md:text-4xl">
+          <h1 className={titleClass}>
             Calculate Your <br className="md:hidden" /> Subscription Price
           </h1>
 
@@ -126,9 +151,9 @@ function InputDesign({ onSubscribe }: InputDesignProps) {
             <input
               id="gallons"
               type="number"
-              value={poolGallons}
-              onChange={(e) => setPoolGallons(Number(e.target.value))}
-              className="w-full px-4 py-3 mt-2 border border-gray-300 rounded-md bg-white text-black font-inter md:text-xl md:py-4"
+              value={poolGallons || ''}
+              onChange={handleGallonsChange}
+              className={inputClass}
               min="0"
             />
           </div>
@@ -154,20 +179,27 @@ function InputDesign({ onSubscribe }: InputDesignProps) {
 
           <div className="text-left">
             <h3 className="text-sm font-medium text-slate-500 md:text-lg">ESTIMATED PRICE:</h3>
-            <p className="text-2xl font-black text-[#052F52] font-inter mt-1 md:text-4xl">
+            <p className={priceClass}>
               ${calculateTotal()} / MONTH
             </p>
           </div>
 
           <div className="mt-4">
-          <Link href="/contact">
-            <FancyButton text={"Request Subscription"} onClick={handleSubmit} />
-          </Link>
+            {isMobile ? (
+              <button
+                onClick={handleRedirect}
+                className="mt-4 flex flex-col justify-center items-center gap-[4.236px] px-[8.472px] py-[6.778px] text-[12px] font-extrabold text-white bg-[#485AFF] rounded-[3.389px] text-left w-fit"
+              >
+                Request Subscription
+              </button>
+            ) : (
+              <Link href="/contact">
+                <FancyButton text="Request Subscription" onClick={handleRedirect} />
+              </Link>
+            )}
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
-
-export default InputDesign;

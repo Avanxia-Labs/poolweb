@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import React from "react";
-import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
+import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 import MobileFooter from '@/components/Mobile/MobileFooter';
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
 

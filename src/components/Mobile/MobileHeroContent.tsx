@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import SubscriptionCalculatorCard from '@/components/Mobile/SubscriptionCalculatorCard';
 import MobileFooter from '@/components/Mobile/MobileFooter';
 import { RefCallback } from 'react';
 import TarjetaMobile from "./TarjetMobile";
-
+import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 
 const services = [
   { title: 'Diagnostics & Troubleshooting', 
@@ -310,7 +309,7 @@ const showSubscriptionCard = subscriptionTitles.includes(selectedService?.title 
 )}
 
 <section className="relative w-full flex justify-center pt-10 pb-16 overflow-hidden bg-[#f7fafe]">
-  {showSubscriptionCard ? <SubscriptionCalculatorCard /> : <TarjetaMobile />}
+  {showSubscriptionCard ? <SubscriptionCalculator isMobile={true} /> : <TarjetaMobile />}
 </section>
 
 

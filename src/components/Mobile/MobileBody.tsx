@@ -5,9 +5,9 @@ import { Box } from "./Box";
 import MobileCard from "./MobileCard";
 import { Facebook, Instagram, Music2 } from "lucide-react";
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
-import SubscriptionCalculatorCard from "./SubscriptionCalculatorCard";
 import MobileFooter from "./MobileFooter";
 import { useRouter } from 'next/navigation';
+import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 
 const MobileBody = () => {
   const router = useRouter();
@@ -205,7 +205,7 @@ const MobileBody = () => {
     <section>
   <div className="w-full relative flex flex-col items-center px-[clamp(1rem,4vw,2rem)] py-10 z-10">
     <div className="w-full max-w-[clamp(320px, 90vw, 768px)] mx-auto">
-      <header className="text-center px-2">
+      <header className="text-center mb-8">
         <h1 className="text-[clamp(20px,5vw,24px)] leading-[clamp(30px,6vw,40px)] font-bold text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] w-full">
           Get Your Instant Pool <br /> Service Estimate
         </h1>
@@ -215,7 +215,7 @@ const MobileBody = () => {
       </header>
 
       {/* Tarjeta reutilizable */}
-      <SubscriptionCalculatorCard />
+      <SubscriptionCalculator isMobile={true} />
     </div>
   </div>
 </section>

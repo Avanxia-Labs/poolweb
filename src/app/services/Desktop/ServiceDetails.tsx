@@ -1,5 +1,5 @@
 import React from 'react';
-import InputDesign from '@/components/Desktop/Frame66Card';
+import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 
 const PoolQualityComponent = () => {
     return (
@@ -76,7 +76,7 @@ const PoolQualityComponent = () => {
 
                     {/* Subscription Calculator */}
                     <div className="w-full lg:w-1/2">
-                        <InputDesign />
+                        <SubscriptionCalculator isMobile={false} />
                     </div>
 
                     {/* Social Media Section */}

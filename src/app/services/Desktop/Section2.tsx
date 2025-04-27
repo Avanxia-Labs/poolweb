@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import InputDesign from '@/components/Desktop/Frame66Card';
 import ExplorePoolServices from './ExplorePoolServices';
+import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 
 // Definimos un tipo para los datos de servicios
 type ServiceData = {
@@ -174,7 +174,7 @@ const Section2 = () => {
           {/* Subscription Calculator or ExplorePoolServices */}
           <div className="flex flex-col md:items-center lg:items-center w-full">
             {['pool-cleaning', 'pool-maintenance'].includes(selectedService)
-              ? <InputDesign />
+              ? <SubscriptionCalculator isMobile={false} />
               : <ExplorePoolServices />}
           </div>
 
