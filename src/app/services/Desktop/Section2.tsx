@@ -72,9 +72,11 @@ const Section2 = () => {
       name: 'Diagnostics & Troubleshooting',
       title: 'Advanced Pool Diagnostics Services',
       description: [`
-      Discover ultimate convenience with Pool Quality automation services. We integrate smart systems that allow you to control all aspects of your pool with just a button press. From water temperature to lighting, filtration scheduling, and special features, automation completely transforms how you interact with your pool.\n
-      Our automation specialists assess your current setup and identify the best options to modernize your system. We install cutting-edge controllers compatible with smartphones and voice assistants, allowing you to manage your pool from anywhere. Smart programming optimizes filtration cycles and chemical treatments, improving energy efficiency and reducing operating costs.\n
-      Automation not only adds convenience but also value to your property. Our solutions include remote monitoring, maintenance alerts, and automatic adjustments based on weather conditions. We provide comprehensive training on your new system and ongoing technical support to ensure you get the most out of your automated pool. Let us elevate your aquatic experience with technology that makes pool maintenance simple, efficient, and truly enjoyable.
+      Keep your pool in peak condition with Pool Quality's expert diagnostics and troubleshooting. We specialize in identifying and resolving any issues affecting your pool's functionality. From equipment malfunctions to water chemistry imbalances, our skilled technicians employ advanced techniques to pinpoint the root cause of problems.
+
+      Our comprehensive diagnostic process includes thorough inspections, precise testing, and detailed analysis. We address issues such as leaks, pump failures, filtration inefficiencies, and heating system faults. By providing accurate assessments and effective solutions, we minimize downtime and prevent further damage.
+
+      Trust Pool Quality to restore your pool to its optimal state. We offer clear explanations of our findings, transparent recommendations for repair or maintenance, and reliable service to get you back to enjoying your pool as quickly as possible.
       `],
       beforeAfterImage: '/images/diagnostics-testing.png',
       beforeImage: '/images/problem-pool.png',
