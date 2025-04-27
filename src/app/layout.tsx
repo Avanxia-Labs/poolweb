@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Inter, Poppins, Kanit, Plus_Jakarta_Sans, Montserrat } from "next/font/google"
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,7 +37,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        
         className={`
             ${inter.variable} 
             ${poppins.variable} 
@@ -45,6 +45,7 @@ export default function RootLayout({
             ${montserrat.variable} 
             antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
