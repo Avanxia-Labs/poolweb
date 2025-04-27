@@ -57,12 +57,17 @@ const MobileFormContent = () => {
   />
 </div>
 
-{/* Fondo azul curvo */}
-<div className="absolute bottom-0 left-0 w-full z-10">
+{/* Fondo azul curvo - Ajustado para mantener su forma en todos los breakpoints */}
+<div className="absolute bottom-0 left-0 w-full z-10 overflow-hidden">
   <img
     src="/images/contact_blue.png"
     alt="Blue Background Curve"
-    className="w-full h-[160px] object-cover"
+    className="w-full h-auto min-h-[120px] max-h-[180px] object-cover object-top"
+    style={{ 
+      borderTopLeftRadius: '100% 80%', 
+      borderTopRightRadius: '100% 80%',
+      transform: 'scaleX(1.2)'
+    }}
   />
 </div>
 
