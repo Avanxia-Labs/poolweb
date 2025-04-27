@@ -3,6 +3,65 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
+}
+
+::placeholder{
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Para Firefox */
+::-moz-placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Para Edge */
+::-ms-input-placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Para Safari and Chrome */
+::-webkit-input-placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+/* Forzar colores de entrada */
+input, textarea, select {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ced4da !important;
+}
+
+.react-phone-input-2 {
+  color: #6c757d !important;
+  background-color: #ffffff !important;
+}
+
+/* Estilo global para menús desplegables */
+select,
+option,
+[role="option"],
+.dropdown-item,
+.dropdown-content * {
+  color: #6c757d; /* Color de texto azul */
+  background-color: #ffffff; /* Fondo blanco */
+  text-shadow: none; /* Eliminar sombra de texto */
+}
+
+/* Asegúrate de que los placeholders también se muestren correctamente */
+select::placeholder,
+textarea::placeholder {
+  color: #6c757d !important; /* Fuerza que el placeholder sea azul */
+}
+
+@media (prefers-color-scheme: dark) {
+  html.light {
+    color-scheme: light;
+  }
 }
 
 @theme inline {
@@ -11,6 +70,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -52,24 +112,28 @@
     }
   }
 
-  @media (min-width: 2300px) {
-    .title-2300 {
+  @media (min-width: 1920px) {
+    .title-1920 {
       font-size: 100px;
     }
 
-    .text-2300 {
+    .text-1920 {
       font-size: 40px;
+    }
+
+    .wide-1920 {
+      max-width: 700px;
     }
 
   }
 
-  @media (min-width: 2100px) {
-    .title-2100 {
+  @media (min-width: 1800px) {
+    .title-1800 {
       font-size: 80px;
     }
 
-    .text-2100 {
-      font-size: 30px;
+    .text-1800 {
+      font-size: 35px;
     }
 
   }
