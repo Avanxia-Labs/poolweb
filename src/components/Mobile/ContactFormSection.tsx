@@ -108,6 +108,11 @@ const ContactFormSection = () => {
     }
   };
 
+  const removeGalleryImage = (index: number) => {
+    setGalleryImages((prev) => prev.filter((_, i) => i !== index));
+  };
+  
+
   return (
     <form onSubmit={handleSubmit} className="mt-10 w-full space-y-6">
       <div>
@@ -244,12 +249,20 @@ const ContactFormSection = () => {
               className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
             />
           ))}
-          {galleryImages.map((file, idx) => (
-            <img
-              key={`gallery-${idx}`}
-              src={URL.createObjectURL(file)}
-              className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
-            />
+         {galleryImages.map((file, idx) => (
+            <div key={`gallery-${idx}`} className="relative pt-3 pr-3">
+              <img
+                src={URL.createObjectURL(file)}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+              />
+              <button
+                type="button"
+                onClick={() => removeGalleryImage(idx)}
+                className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 rounded-full shadow-md hover:bg-red-700 transition"
+              >
+                ✕
+              </button>
+            </div>
           ))}
         </div>
       </div>
