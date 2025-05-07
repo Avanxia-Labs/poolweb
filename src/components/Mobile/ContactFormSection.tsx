@@ -1,8 +1,9 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import Webcam from 'react-webcam';
 
 const ContactFormSection = () => {
   const searchParams = useSearchParams();
@@ -20,6 +21,10 @@ const ContactFormSection = () => {
   const [experience, setExperience] = useState("Pool owner");
   const [phone, setPhone] = useState('');
   const [showClientForm, setShowClientForm] = useState(false);
+
+  const webcamRef = useRef<Webcam>(null);
+  const [capturedImages, setCapturedImages] = useState<string[]>([]);
+  const [galleryImages, setGalleryImages] = useState<File[]>([]);
 
   const [clientFullName, setClientFullName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
@@ -44,74 +49,68 @@ const ContactFormSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-      // Validaciones personalizadas
-  if (!phone.trim()) {
-    alert("Por favor ingresa un número de teléfono 📱");
-    return;
-  }
-
-  if (selectedServices.length === 0) {
-    alert("Por favor selecciona al menos un servicio 🛠️");
-    return;
-  }
-
-   // 🧾 Validación del formulario de cliente si se activa
-   if (showClientForm) {
-    if (!clientPhone.trim()) {
-      alert("Por favor ingresa el teléfono del cliente 📞");
+    if (!phone.trim()) {
+      alert("Por favor ingresa un número de teléfono 📱");
       return;
     }
-    if (!clientFullName.trim()) {
-      alert("Por favor ingresa el nombre completo del cliente 🧍‍♂️");
-      return;
-    }
-    if (!clientEmail.trim()) {
-      alert("Por favor ingresa el correo del cliente 📧");
-      return;
-    }
-    if (!clientAddress.trim()) {
-      alert("Por favor ingresa la dirección del cliente 📍");
-      return;
-    }
-  }
 
-    const clientExtraData = showClientForm ? {
-      fullName: clientFullName,
-      phone: clientPhone,
-      email: clientEmail,
-      company: clientCompany,
-      address: clientAddress
-    } : {};
+    if (selectedServices.length === 0) {
+      alert("Por favor selecciona al menos un servicio 🛠️");
+      return;
+    }
 
-    const data = {
+    if (showClientForm) {
+      if (!clientPhone.trim() || !clientFullName.trim() || !clientEmail.trim() || !clientAddress.trim()) {
+        alert("Por favor completa todos los campos del cliente 🧾");
+        return;
+      }
+    }
+
+    const formData = new FormData();
+
+    formData.append('data', JSON.stringify({
       name,
-      experience,
+      role: experience,
       phone,
       email,
       company,
-      gallonsFromForm,
-      message,
+      poolSize: gallonsFromForm,
+      projectDetails: message,
       services: selectedServices,
-      clientExtraData,
-      fromCalculator: {
-        gallons: gallonsFromCalc,
-        vacuuming,
-        filterWash,
-        total,
-      },
-    };
+      clientFullName: clientFullName || '',
+      clientPhone: clientPhone || '',
+      clientEmail: clientEmail || '',
+      clientCompany: clientCompany || '',
+      clientAddress: clientAddress || '',
+      fromCalculator: { gallons: gallonsFromCalc, vacuuming, filterWash, total },
+    }));
+    
 
-    const res = await fetch("/api/form", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    capturedImages.forEach((img) => formData.append("capturedImages", img));
+    galleryImages.forEach((img) => formData.append('galleryImages', img));
 
+    
+
+    const res = await fetch("/api/form", { method: "POST", body: formData });
     const result = await res.json();
-    if (result.success) {
-      alert("Enviado correctamente ✅");
-    } else {
-      alert("Error al enviar ❌");
+
+    alert(result.success ? "Enviado correctamente ✅" : "Error al enviar ❌");
+  };
+
+  const capture = () => {
+    const imageSrc = webcamRef.current?.getScreenshot();
+    if (imageSrc && capturedImages.length < 10) setCapturedImages([...capturedImages, imageSrc]);
+    else alert("Máximo 10 imágenes.");
+  };
+
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      if (filesArray.length + capturedImages.length > 10) {
+        alert("Máximo 10 imágenes en total.");
+        return;
+      }
+      setGalleryImages([...galleryImages, ...filesArray]);
     }
   };
 
@@ -225,6 +224,38 @@ const ContactFormSection = () => {
               />
               {service}
             </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <label className="block text-[12px] font-bold text-[#344054] mb-1">
+            Seleccionar desde Galería 📷 (opcional)
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleGalleryChange}
+            className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
+          />
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-4 justify-center">
+          {capturedImages.map((src, idx) => (
+            <img
+              key={`captured-${idx}`}
+              src={src}
+              className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+            />
+          ))}
+          {galleryImages.map((file, idx) => (
+            <img
+              key={`gallery-${idx}`}
+              src={URL.createObjectURL(file)}
+              className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+            />
           ))}
         </div>
       </div>
