@@ -100,39 +100,40 @@ const ContactFormSection = () => {
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-
+  
       const totalSize = [...galleryImages, ...filesArray].reduce((acc, file) => acc + file.size, 0);
       const totalSizeMB = totalSize / (1024 * 1024);
-
+  
       if (totalSizeMB > 10) {
-        alert("El tamaño total de las imágenes no debe exceder los 10MB.");
+        alert("The total size of the images must not exceed 10MB.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-
+  
       const totalImages = galleryImages.length + capturedImages.length;
       const spaceAvailable = 10 - totalImages;
-
+  
       if (spaceAvailable <= 0) {
-        alert("Ya has alcanzado el límite de 10 imágenes.");
+        alert("You have reached the limit of 10 images.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-
+  
       const filesToAdd = filesArray.slice(0, spaceAvailable);
       const remainingFiles = filesArray.length - filesToAdd.length;
-
+  
       if (remainingFiles > 0) {
-        alert("Solo se agregaron algunas imágenes para no exceder el límite de 10.");
+        alert("Only some images were added to avoid exceeding the 10 image limit.");
       }
-
+  
       setGalleryImages(prev => [...prev, ...filesToAdd]);
-
+  
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
   };
+  
   
   const removeGalleryImage = (index: number) => {
     setGalleryImages((prev) => prev.filter((_, i) => i !== index));
@@ -257,11 +258,11 @@ const ContactFormSection = () => {
       </div>
 
       <div className="space-y-4">
-      <div>
-        <label className="block text-[12px] font-bold text-[#344054] mb-1">
-          Seleccionar desde Galería 📷 (opcional)
-        </label>
-        <input
+        <div>
+          <label className="block text-[12px] font-bold text-[#344054] mb-1">
+            Select from Gallery 📷 (optional)
+          </label>
+          <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
@@ -269,8 +270,8 @@ const ContactFormSection = () => {
             onChange={handleGalleryChange}
             className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white"
           />
-            <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB en total de 10 imagenes</small>
-      </div>
+          <small className="text-xs text-gray-500 mt-1 block">*Maximum 10MB total from 10 images</small>
+        </div>
 
         <div className="flex flex-wrap gap-2 mt-4 justify-center">
           {capturedImages.map((src, idx) => (
@@ -280,7 +281,7 @@ const ContactFormSection = () => {
               className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
             />
           ))}
-         {galleryImages.map((file, idx) => (
+          {galleryImages.map((file, idx) => (
             <div key={`gallery-${idx}`} className="relative pt-3 pr-3">
               <img
                 src={URL.createObjectURL(file)}
@@ -297,10 +298,10 @@ const ContactFormSection = () => {
           ))}
         </div>
         <small className="text-xs text-gray-500 mt-1 block">
-  *Máximo 10MB por imagen – {galleryImages.length + capturedImages.length} / 10 imágenes añadidas
-</small>
-
+          *Maximum 10MB per image – {galleryImages.length + capturedImages.length} / 10 images added
+        </small>
       </div>
+
 
       <div className="w-full flex justify-center">
         <button type="submit" className="inline-flex items-center justify-center gap-2 px-[20px] py-[12px] bg-[#485AFF] border border-[#7F56D9] text-white text-[12px] font-bold rounded-[8px] shadow-sm">
