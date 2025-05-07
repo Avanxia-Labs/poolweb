@@ -48,6 +48,9 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
+  const [capturedImages, setCapturedImages] = useState<string[]>([]);
+  const [galleryImages, setGalleryImages] = useState<File[]>([]);
+
   const roleOptions = ['Pool Owner', 'Pool Service Technician', 'Pool Repair Technician'];
 
   // Determinar si mostrar los campos adicionales del cliente
@@ -158,26 +161,37 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+  
     if (validateForm()) {
       try {
-        // Mostrar indicador de carga (opcional)
         console.log('Enviando datos del formulario...');
-
-        // Enviar los datos del formulario a nuestra API route (ruta actualizada)
+  
+        const fullFormData = {
+          ...formData,
+        };
+  
+        const formPayload = new FormData();
+  
+        // 1. Agrega los datos del formulario en un único campo "data"
+        formPayload.append("data", JSON.stringify(fullFormData));
+  
+        // 2. Agrega las imágenes seleccionadas desde galería
+        galleryImages.forEach((file) => {
+          formPayload.append("galleryImages", file);
+        });
+  
+        // 3. Agrega imágenes capturadas (si las usas en desktop)
+        capturedImages.forEach((base64, index) => {
+          formPayload.append("capturedImages", base64);
+        });
+  
         const response = await fetch('/api/form', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+          body: formPayload,
         });
-
+  
         if (response.ok) {
-          console.log('Formulario enviado correctamente');
           alert('¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.');
-
-          // Opcional: Limpiar el formulario después de enviar
           setFormData({
             name: '',
             role: '',
@@ -193,6 +207,8 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
             clientAddress: '',
             clientCompany: ''
           });
+          setGalleryImages([]);
+          setCapturedImages([]);
         } else {
           const errorData = await response.json();
           console.error('Error al enviar el correo:', errorData);
@@ -205,6 +221,19 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     } else {
       console.log('Validación del formulario fallida');
       alert('Por favor, completa todos los campos requeridos');
+    }
+  };
+  
+  
+
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      if (filesArray.length + capturedImages.length > 10) {
+        alert("Máximo 10 imágenes en total.");
+        return;
+      }
+      setGalleryImages([...galleryImages, ...filesArray]);
     }
   };
 
@@ -528,7 +557,38 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
           </div>
           {formErrors.services && <p className="text-red-500 text-xs mt-1">{formErrors.services}</p>}
         </div>
+        {/* Imagen desde Galería (opcional) */}
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Seleccionar desde Galería 📷 (opcional)
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleGalleryChange}
+              className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
+            />
+          </div>
 
+          <div className="flex flex-wrap gap-2 mt-4 justify-center">
+            {capturedImages.map((src, idx) => (
+              <img
+                key={`captured-${idx}`}
+                src={src}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+              />
+            ))}
+            {galleryImages.map((file, idx) => (
+              <img
+                key={`gallery-${idx}`}
+                src={URL.createObjectURL(file)}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+              />
+            ))}
+          </div>
+        </div>
         {/* Submit Button */}
         <div className="pt-2">
           <button
