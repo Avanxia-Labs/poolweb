@@ -245,19 +245,19 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   
       const totalExistingSize = galleryImages.reduce((acc, file) => acc + file.size, 0);
       const newFilesSize = filesArray.reduce((acc, file) => acc + file.size, 0);
-      const capturedSize = 0; // Asumimos que las capturadas no están en formato File (si lo están, súmalas)
+      const capturedSize = 0; // Assuming captured images are not File objects (include them if needed)
   
       const totalSizeMB = (totalExistingSize + newFilesSize + capturedSize) / (1024 * 1024);
   
       if (totalSizeMB > 10) {
-        alert("El tamaño total de las imágenes no debe exceder los 10MB.");
+        alert("The total size of all images must not exceed 10MB.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
   
       const totalImages = galleryImages.length + capturedImages.length;
       if (totalImages >= 10) {
-        alert("Ya has alcanzado el límite de 10 imágenes.");
+        alert("You have reached the 10 image limit.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
@@ -272,7 +272,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   
       const allowedFiles = newFiles.slice(0, 10 - totalImages);
       if (allowedFiles.length < newFiles.length) {
-        alert("Solo se agregaron algunas imágenes para no exceder el límite de 10.");
+        alert("Only some images were added to avoid exceeding the 10 image limit.");
       }
   
       setGalleryImages(prev => [...prev, ...allowedFiles]);
@@ -280,6 +280,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
+  
   
     
   
@@ -604,11 +605,11 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
           </div>
           {formErrors.services && <p className="text-red-500 text-xs mt-1">{formErrors.services}</p>}
         </div>
-        {/* Imagen desde Galería (opcional) */}
+        {/* Image from Gallery (optional) */}
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Seleccionar desde Galería 📷 (opcional)
+              Select from Gallery 📷 (optional)
             </label>
             <input
               ref={fileInputRef}
@@ -618,7 +619,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               onChange={handleGalleryChange}
               className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
             />
-            <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB en total de 10 imagenes</small>
+            <small className="text-xs text-gray-500 mt-1 block">*Maximum 10MB total from 10 images</small>
           </div>
 
           <div className="flex flex-wrap gap-2 mt-4 justify-center">
@@ -629,25 +630,25 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
                 className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
               />
             ))}
-          {galleryImages.map((file, idx) => (
-            <div key={`gallery-${idx}`} className="relative pt-3 pr-3">
-              <img
-                src={URL.createObjectURL(file)}
-                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
-              />
-              <button
-                type="button"
-                onClick={() => removeGalleryImage(idx)}
-                className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 rounded-full shadow-md hover:bg-red-700 transition"
-              >
-                ✕
-              </button>
-              <p className="text-xs text-center mt-1 w-20 truncate block font-medium text-gray-700">{file.name}</p>
-            </div>
-          ))}
+            {galleryImages.map((file, idx) => (
+              <div key={`gallery-${idx}`} className="relative pt-3 pr-3">
+                <img
+                  src={URL.createObjectURL(file)}
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeGalleryImage(idx)}
+                  className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 rounded-full shadow-md hover:bg-red-700 transition"
+                >
+                  ✕
+                </button>
+                <p className="text-xs text-center mt-1 w-20 truncate block font-medium text-gray-700">{file.name}</p>
+              </div>
+            ))}
           </div>
           <small className="text-xs text-gray-500 mt-1 block">
-            {galleryImages.length + capturedImages.length} / 10 imágenes añadidas
+            {galleryImages.length + capturedImages.length} / 10 images added
           </small>
         </div>
         {/* Submit Button */}
