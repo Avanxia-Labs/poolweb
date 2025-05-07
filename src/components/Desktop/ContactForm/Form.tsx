@@ -157,6 +157,14 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     return Object.keys(errors).length === 0;
   };
 
+  const removeGalleryImage = (index: number) => {
+    setGalleryImages((prev) => prev.filter((_, i) => i !== index));
+  };
+  
+  const removeCapturedImage = (index: number) => {
+    setCapturedImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
 
   
   const handleSubmit = async (e: FormEvent) => {
@@ -580,12 +588,20 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
                 className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
               />
             ))}
-            {galleryImages.map((file, idx) => (
+           {galleryImages.map((file, idx) => (
+            <div key={`gallery-${idx}`} className="relative pt-3 pr-3">
               <img
-                key={`gallery-${idx}`}
-                src={URL.createObjectURL(file)}
-                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+                  src={URL.createObjectURL(file)}
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
               />
+                <button
+                  type="button"
+                  onClick={() => removeGalleryImage(idx)}
+                  className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 rounded-full shadow-md hover:bg-red-700 transition"
+                >
+                  ✕
+                </button>
+            </div>
             ))}
           </div>
         </div>
