@@ -100,20 +100,36 @@ const ContactFormSection = () => {
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-      if (filesArray.length + capturedImages.length > 10) {
-        alert("Máximo 10 imágenes en total.");
+  
+      const tooLarge = filesArray.find(file => file.size > 10 * 1024 * 1024);
+      if (tooLarge) {
+        alert(`El archivo "${tooLarge.name}" excede los 10MB. Por favor selecciona imágenes menores.`);
         return;
       }
-      setGalleryImages(prev => [...prev, ...filesArray]);
   
-      // Limpiar el input
+      const totalImages = galleryImages.length + capturedImages.length;
+      const spaceAvailable = 10 - totalImages;
+  
+      if (spaceAvailable <= 0) {
+        alert("Ya has alcanzado el límite de 10 imágenes.");
+        return;
+      }
+  
+      const filesToAdd = filesArray.slice(0, spaceAvailable);
+      const remainingFiles = filesArray.length - filesToAdd.length;
+  
+      setGalleryImages(prev => [...prev, ...filesToAdd]);
+  
+      if (remainingFiles > 0) {
+        alert("Solo se agregaron algunas imágenes para no exceder el límite de 10.");
+      }
+  
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
   };
   
-
   const removeGalleryImage = (index: number) => {
     setGalleryImages((prev) => prev.filter((_, i) => i !== index));
   };
@@ -249,6 +265,8 @@ const ContactFormSection = () => {
             onChange={handleGalleryChange}
             className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white"
           />
+          <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB por imagen</small>
+
       </div>
 
         <div className="flex flex-wrap gap-2 mt-4 justify-center">
@@ -275,6 +293,10 @@ const ContactFormSection = () => {
             </div>
           ))}
         </div>
+        <small className="text-xs text-gray-500 mt-1 block">
+  *Máximo 10MB por imagen – {galleryImages.length + capturedImages.length} / 10 imágenes añadidas
+</small>
+
       </div>
 
       <div className="w-full flex justify-center">
