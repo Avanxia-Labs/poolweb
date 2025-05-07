@@ -100,30 +100,34 @@ const ContactFormSection = () => {
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-  
-      const tooLarge = filesArray.find(file => file.size > 10 * 1024 * 1024);
-      if (tooLarge) {
-        alert(`El archivo "${tooLarge.name}" excede los 10MB. Por favor selecciona imágenes menores.`);
+
+      const totalSize = [...galleryImages, ...filesArray].reduce((acc, file) => acc + file.size, 0);
+      const totalSizeMB = totalSize / (1024 * 1024);
+
+      if (totalSizeMB > 10) {
+        alert("El tamaño total de las imágenes no debe exceder los 10MB.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-  
+
       const totalImages = galleryImages.length + capturedImages.length;
       const spaceAvailable = 10 - totalImages;
-  
+
       if (spaceAvailable <= 0) {
         alert("Ya has alcanzado el límite de 10 imágenes.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-  
+
       const filesToAdd = filesArray.slice(0, spaceAvailable);
       const remainingFiles = filesArray.length - filesToAdd.length;
-  
-      setGalleryImages(prev => [...prev, ...filesToAdd]);
-  
+
       if (remainingFiles > 0) {
         alert("Solo se agregaron algunas imágenes para no exceder el límite de 10.");
       }
-  
+
+      setGalleryImages(prev => [...prev, ...filesToAdd]);
+
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -265,8 +269,7 @@ const ContactFormSection = () => {
             onChange={handleGalleryChange}
             className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white"
           />
-          <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB por imagen</small>
-
+            <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB en total de 10 imagenes</small>
       </div>
 
         <div className="flex flex-wrap gap-2 mt-4 justify-center">

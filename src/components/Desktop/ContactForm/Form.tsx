@@ -243,7 +243,18 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
   
-      // Limitar a 10 en total sumando las ya existentes
+      const totalExistingSize = galleryImages.reduce((acc, file) => acc + file.size, 0);
+      const newFilesSize = filesArray.reduce((acc, file) => acc + file.size, 0);
+      const capturedSize = 0; // Asumimos que las capturadas no están en formato File (si lo están, súmalas)
+  
+      const totalSizeMB = (totalExistingSize + newFilesSize + capturedSize) / (1024 * 1024);
+  
+      if (totalSizeMB > 10) {
+        alert("El tamaño total de las imágenes no debe exceder los 10MB.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+  
       const totalImages = galleryImages.length + capturedImages.length;
       if (totalImages >= 10) {
         alert("Ya has alcanzado el límite de 10 imágenes.");
@@ -251,15 +262,6 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
         return;
       }
   
-      // Validar imágenes muy grandes (>10MB)
-      const tooLarge = filesArray.find(file => file.size > 10 * 1024 * 1024);
-      if (tooLarge) {
-        alert(`El archivo "${tooLarge.name}" excede los 10MB. Por favor selecciona imágenes menores.`);
-        if (fileInputRef.current) fileInputRef.current.value = '';
-        return;
-      }
-  
-      // Filtrar duplicadas y recortar si excede el máximo
       const newFiles = filesArray.filter(
         (newFile) =>
           !galleryImages.some(
@@ -278,6 +280,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
+  
     
   
 
@@ -615,7 +618,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               onChange={handleGalleryChange}
               className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
             />
-            <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB por imagen</small>
+            <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB en total de 10 imagenes</small>
           </div>
 
           <div className="flex flex-wrap gap-2 mt-4 justify-center">
