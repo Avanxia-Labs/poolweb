@@ -243,25 +243,42 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
   
-      if (filesArray.length + capturedImages.length > 10) {
-        alert("Máximo 10 imágenes en total.");
+      // Limitar a 10 en total sumando las ya existentes
+      const totalImages = galleryImages.length + capturedImages.length;
+      if (totalImages >= 10) {
+        alert("Ya has alcanzado el límite de 10 imágenes.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
   
-      const newFiles = filesArray.filter((newFile) =>
-        !galleryImages.some(
-          (existing) =>
-            existing.name === newFile.name && existing.size === newFile.size
-        )
+      // Validar imágenes muy grandes (>10MB)
+      const tooLarge = filesArray.find(file => file.size > 10 * 1024 * 1024);
+      if (tooLarge) {
+        alert(`El archivo "${tooLarge.name}" excede los 10MB. Por favor selecciona imágenes menores.`);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+  
+      // Filtrar duplicadas y recortar si excede el máximo
+      const newFiles = filesArray.filter(
+        (newFile) =>
+          !galleryImages.some(
+            (existing) =>
+              existing.name === newFile.name && existing.size === newFile.size
+          )
       );
   
-      setGalleryImages((prev) => [...prev, ...newFiles]);
-  
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+      const allowedFiles = newFiles.slice(0, 10 - totalImages);
+      if (allowedFiles.length < newFiles.length) {
+        alert("Solo se agregaron algunas imágenes para no exceder el límite de 10.");
       }
+  
+      setGalleryImages(prev => [...prev, ...allowedFiles]);
+  
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
+    
   
 
   return (
@@ -598,6 +615,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               onChange={handleGalleryChange}
               className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
             />
+            <small className="text-xs text-gray-500 mt-1 block">*Máximo 10MB por imagen</small>
           </div>
 
           <div className="flex flex-wrap gap-2 mt-4 justify-center">
@@ -625,6 +643,9 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
             </div>
           ))}
           </div>
+          <small className="text-xs text-gray-500 mt-1 block">
+            {galleryImages.length + capturedImages.length} / 10 imágenes añadidas
+          </small>
         </div>
         {/* Submit Button */}
         <div className="pt-2">
