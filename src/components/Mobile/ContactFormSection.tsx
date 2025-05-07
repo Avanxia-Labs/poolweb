@@ -3,7 +3,6 @@ import { useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import Webcam from 'react-webcam';
 
 const ContactFormSection = () => {
   const searchParams = useSearchParams();
@@ -22,7 +21,6 @@ const ContactFormSection = () => {
   const [phone, setPhone] = useState('');
   const [showClientForm, setShowClientForm] = useState(false);
 
-  const webcamRef = useRef<Webcam>(null);
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [galleryImages, setGalleryImages] = useState<File[]>([]);
 
@@ -97,11 +95,7 @@ const ContactFormSection = () => {
     alert(result.success ? "Enviado correctamente ✅" : "Error al enviar ❌");
   };
 
-  const capture = () => {
-    const imageSrc = webcamRef.current?.getScreenshot();
-    if (imageSrc && capturedImages.length < 10) setCapturedImages([...capturedImages, imageSrc]);
-    else alert("Máximo 10 imágenes.");
-  };
+
 
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
