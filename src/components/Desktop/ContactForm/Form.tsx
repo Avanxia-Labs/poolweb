@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -165,6 +165,11 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     setCapturedImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+
+
+
 
   
   const handleSubmit = async (e: FormEvent) => {
@@ -237,13 +242,27 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
+  
       if (filesArray.length + capturedImages.length > 10) {
         alert("Máximo 10 imágenes en total.");
         return;
       }
-      setGalleryImages([...galleryImages, ...filesArray]);
+  
+      const newFiles = filesArray.filter((newFile) =>
+        !galleryImages.some(
+          (existing) =>
+            existing.name === newFile.name && existing.size === newFile.size
+        )
+      );
+  
+      setGalleryImages((prev) => [...prev, ...newFiles]);
+  
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
+  
 
   return (
     <div className=" flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
@@ -572,6 +591,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               Seleccionar desde Galería 📷 (opcional)
             </label>
             <input
+              ref={fileInputRef}
               type="file"
               accept="image/*"
               multiple
@@ -588,21 +608,22 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
                 className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
               />
             ))}
-           {galleryImages.map((file, idx) => (
+          {galleryImages.map((file, idx) => (
             <div key={`gallery-${idx}`} className="relative pt-3 pr-3">
               <img
-                  src={URL.createObjectURL(file)}
-                  className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
+                src={URL.createObjectURL(file)}
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border"
               />
-                <button
-                  type="button"
-                  onClick={() => removeGalleryImage(idx)}
-                  className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 rounded-full shadow-md hover:bg-red-700 transition"
-                >
-                  ✕
-                </button>
+              <button
+                type="button"
+                onClick={() => removeGalleryImage(idx)}
+                className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 rounded-full shadow-md hover:bg-red-700 transition"
+              >
+                ✕
+              </button>
+              <p className="text-xs text-center mt-1 w-20 truncate block font-medium text-gray-700">{file.name}</p>
             </div>
-            ))}
+          ))}
           </div>
         </div>
         {/* Submit Button */}

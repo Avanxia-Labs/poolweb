@@ -104,13 +104,22 @@ const ContactFormSection = () => {
         alert("Máximo 10 imágenes en total.");
         return;
       }
-      setGalleryImages([...galleryImages, ...filesArray]);
+      setGalleryImages(prev => [...prev, ...filesArray]);
+  
+      // Limpiar el input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
+  
 
   const removeGalleryImage = (index: number) => {
     setGalleryImages((prev) => prev.filter((_, i) => i !== index));
   };
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   
 
   return (
@@ -228,18 +237,19 @@ const ContactFormSection = () => {
       </div>
 
       <div className="space-y-4">
-        <div>
-          <label className="block text-[12px] font-bold text-[#344054] mb-1">
-            Seleccionar desde Galería 📷 (opcional)
-          </label>
-          <input
+      <div>
+        <label className="block text-[12px] font-bold text-[#344054] mb-1">
+          Seleccionar desde Galería 📷 (opcional)
+        </label>
+        <input
+            ref={fileInputRef}
             type="file"
             accept="image/*"
             multiple
             onChange={handleGalleryChange}
-            className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
+            className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white"
           />
-        </div>
+      </div>
 
         <div className="flex flex-wrap gap-2 mt-4 justify-center">
           {capturedImages.map((src, idx) => (
