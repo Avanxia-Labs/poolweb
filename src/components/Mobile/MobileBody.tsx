@@ -204,6 +204,12 @@ const MobileBody = () => {
 
     <section>
   <div className="w-full relative flex flex-col items-center px-[clamp(1rem,4vw,2rem)] py-10 z-10">
+      {/* Imagen de fondo */}
+  <img
+    src="/images/cotiza.png"
+    alt="Cotiza Background"
+    className="absolute inset-0 w-full h-full object-cover z-0"
+  />
     <div className="w-full max-w-[clamp(320px, 90vw, 768px)] mx-auto">
       <header className="text-center mb-8">
         <h1 className="text-[clamp(20px,5vw,24px)] leading-[clamp(30px,6vw,40px)] font-bold text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] w-full">
