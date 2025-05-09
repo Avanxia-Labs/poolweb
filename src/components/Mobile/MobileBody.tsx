@@ -229,7 +229,7 @@ const MobileBody = () => {
     <section className="relative w-full px-0 overflow-hidden min-h-screen">
       {/* Imagen de fondo Fija */}
       <img
-      src="/svgs/man_mobile_svg.svg"
+      src="/svgs/man_mobile_svg1.svg"
       alt="Yosbani Martinez background"
       className="absolute top-0 left-0 w-full h-full object-cover object-[left_top] z-0"
     />
