@@ -1,6 +1,16 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
+export const runtime = 'nodejs';
+
+// Aumentar el límite de body parser
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // ajusta según lo necesites
+    },
+  },
+};
 
 interface FormData {
   name: string;
@@ -19,6 +29,7 @@ interface FormData {
 }
 
 export async function POST(request: Request) {
+  
   try {
     const form = await request.formData();
 
