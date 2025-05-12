@@ -26,14 +26,13 @@ export async function POST(request: Request) {
     if (!rawData || typeof rawData !== 'string') {
       throw new Error('Datos de formulario inválidos o ausentes.');
     }
+
     const formData: FormData = JSON.parse(rawData);
 
-    const galleryFiles = form.getAll('galleryImages') as File[];
-    const capturedImages = form.getAll('capturedImages').filter(i => typeof i === 'string') as string[];
-
+    // Archivos adjuntos
     const attachments = [];
 
-    // Archivos desde galería
+    const galleryFiles = form.getAll('galleryImages') as File[];
     for (const file of galleryFiles) {
       const buffer = Buffer.from(await file.arrayBuffer());
       attachments.push({
@@ -42,7 +41,7 @@ export async function POST(request: Request) {
       });
     }
 
-    // Imágenes base64 (captura directa)
+    const capturedImages = form.getAll('capturedImages').filter(i => typeof i === 'string') as string[];
     capturedImages.forEach((base64, i) => {
       const base64Data = base64.split(',')[1];
       attachments.push({
@@ -52,21 +51,31 @@ export async function POST(request: Request) {
       });
     });
 
-    const transportOptions: SMTPTransport.Options = {
-      host: process.env.EMAIL_HOST,
-      port: parseInt(process.env.EMAIL_PORT || '587'),
-      secure: process.env.EMAIL_SECURE === 'true',
-      auth: {
-        user: process.env.EMAIL_USER || '',
-        pass: process.env.EMAIL_APP_PASSWORD || '',
-      },
-    };
+    // Configuración del transporte
+    const transportOptions: SMTPTransport.Options =
+      process.env.EMAIL_HOST
+        ? {
+            host: process.env.EMAIL_HOST,
+            port: parseInt(process.env.EMAIL_PORT || '587'),
+            secure: process.env.EMAIL_SECURE === 'true',
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_APP_PASSWORD,
+            },
+          }
+        : {
+            service: 'gmail',
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_APP_PASSWORD,
+            },
+          };
 
     const transporter = nodemailer.createTransport(transportOptions);
 
     const mailOptions = {
       from: `"Formulario de Contacto" <${process.env.EMAIL_USER}>`,
-      to: process.env.OWNER_EMAIL,
+      to: process.env.OWNER_EMAIL || 'destinatario@example.com',
       replyTo: formData.email,
       subject: `Nueva solicitud de servicio de piscina de ${formData.name}`,
       html: generateEmailHTML(formData),
@@ -74,7 +83,7 @@ export async function POST(request: Request) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Correo enviado:', info.messageId);
+    console.log('Correo enviado: %s', info.messageId);
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
@@ -83,7 +92,6 @@ export async function POST(request: Request) {
   }
 }
 
-// HTML del correo (puedes dejarlo igual al anterior)
 function generateEmailHTML(formData: FormData): string {
   const {
     name, role, company, poolSize,
