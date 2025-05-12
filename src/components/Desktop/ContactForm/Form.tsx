@@ -2,7 +2,6 @@ import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import imageCompression from 'browser-image-compression';
 
 // Define types
 type ServiceType = string;
@@ -166,6 +165,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     setCapturedImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
 
 
@@ -237,40 +237,54 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     }
   };
   
-    const fileInputRef = useRef<HTMLInputElement>(null);
-
   
 
- const handleGalleryChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const filesArray = Array.from(e.target.files);
-
-    // 1) Comprime cada imagen
-    const compressed = await Promise.all(
-      filesArray.map(file => imageCompression(file, { maxSizeMB: 1, maxWidthOrHeight: 1024 }))
-    );
-    // 2) Tamaño total
-    const totalMB = [...galleryImages, ...compressed].reduce((sum, f) => sum + f.size, 0) / (1024*1024);
-    if (totalMB > 10) {
-      alert('Total size must not exceed 10MB');
-      fileInputRef.current!.value = '';
-      return;
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+  
+      const totalExistingSize = galleryImages.reduce((acc, file) => acc + file.size, 0);
+      const newFilesSize = filesArray.reduce((acc, file) => acc + file.size, 0);
+      const capturedSize = 0; // Assuming captured images are not File objects (include them if needed)
+  
+      const totalSizeMB = (totalExistingSize + newFilesSize + capturedSize) / (1024 * 1024);
+  
+      if (totalSizeMB > 4.5) {
+        alert("The total size of all images must not exceed 4.5MB.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+  
+      const totalImages = galleryImages.length + capturedImages.length;
+      if (totalImages >= 10) {
+        alert("You have reached the 10 image limit.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+  
+      const newFiles = filesArray.filter(
+        (newFile) =>
+          !galleryImages.some(
+            (existing) =>
+              existing.name === newFile.name && existing.size === newFile.size
+          )
+      );
+  
+      const allowedFiles = newFiles.slice(0, 10 - totalImages);
+      if (allowedFiles.length < newFiles.length) {
+        alert("Only some images were added to avoid exceeding the 10 image limit.");
+      }
+  
+      setGalleryImages(prev => [...prev, ...allowedFiles]);
+  
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
-    // 3) Límite count
-    const space = 10 - (galleryImages.length + capturedImages.length);
-    if (space <= 0) {
-      alert('Max 10 images allowed');
-      fileInputRef.current!.value = '';
-      return;
-    }
-    const toAdd = compressed.slice(0, space);
-    if (toAdd.length < compressed.length) {
-      alert('Only some images were added to respect limit');
-    }
-    setGalleryImages(prev => [...prev, ...toAdd]);
-    fileInputRef.current!.value = '';
   };
   
+  
+    
+  
+
   return (
     <div className=" flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
 
@@ -605,7 +619,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               onChange={handleGalleryChange}
               className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm"
             />
-            <small className="text-xs text-gray-500 mt-1 block">*Maximum 10MB total from 10 images</small>
+            <small className="text-xs text-gray-500 mt-1 block">*Maximum 4.5MB total</small>
           </div>
 
           <div className="flex flex-wrap gap-2 mt-4 justify-center">

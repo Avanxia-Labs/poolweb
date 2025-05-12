@@ -3,8 +3,6 @@ import { useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import imageCompression from 'browser-image-compression';
-
 
 const ContactFormSection = () => {
   const searchParams = useSearchParams();
@@ -97,51 +95,51 @@ const ContactFormSection = () => {
     alert(result.success ? "Enviado correctamente ✅" : "Error al enviar ❌");
   };
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
 
-  const handleGalleryChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const filesArray = Array.from(e.target.files);
-
-    // 1) Comprime cada imagen a <1MB y max 1024px
-    const compressedFiles = await Promise.all(
-      filesArray.map(file =>
-        imageCompression(file, { maxSizeMB: 1, maxWidthOrHeight: 1024 })
-      )
-    );
-
-    // 2) Calcula tamaño total en MB
-    const totalSizeMB = [...galleryImages, ...compressedFiles]
-      .reduce((acc, f) => acc + f.size, 0) / (1024 * 1024);
-    if (totalSizeMB > 10) {
-      alert("The total size of the images must not exceed 10MB.");
-      fileInputRef.current && (fileInputRef.current.value = '');
-      return;
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+  
+      const totalSize = [...galleryImages, ...filesArray].reduce((acc, file) => acc + file.size, 0);
+      const totalSizeMB = totalSize / (1024 * 1024);
+  
+      if (totalSizeMB > 4.5) {
+        alert("The total size of the images must not exceed 4.5MB.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+  
+      const totalImages = galleryImages.length + capturedImages.length;
+      const spaceAvailable = 10 - totalImages;
+  
+      if (spaceAvailable <= 0) {
+        alert("You have reached the limit of 10 images.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+  
+      const filesToAdd = filesArray.slice(0, spaceAvailable);
+      const remainingFiles = filesArray.length - filesToAdd.length;
+  
+      if (remainingFiles > 0) {
+        alert("Only some images were added to avoid exceeding the 10 image limit.");
+      }
+  
+      setGalleryImages(prev => [...prev, ...filesToAdd]);
+  
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
-
-    // 3) Comprueba límite de 10 imágenes
-    const totalImages = galleryImages.length + capturedImages.length;
-    const spaceAvailable = 10 - totalImages;
-    if (spaceAvailable <= 0) {
-      alert("You have reached the limit of 10 images.");
-      fileInputRef.current && (fileInputRef.current.value = '');
-      return;
-    }
-
-    // 4) Añade sólo las que quepan
-    const toAdd = compressedFiles.slice(0, spaceAvailable);
-    if (toAdd.length < compressedFiles.length) {
-      alert("Only some images were added to avoid exceeding the 10 image limit.");
-    }
-    setGalleryImages(prev => [...prev, ...toAdd]);
-    fileInputRef.current && (fileInputRef.current.value = '');
   };
+  
   
   const removeGalleryImage = (index: number) => {
     setGalleryImages((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   
 
@@ -272,7 +270,7 @@ const ContactFormSection = () => {
             onChange={handleGalleryChange}
             className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white"
           />
-          <small className="text-xs text-gray-500 mt-1 block">*Maximum 10MB total from 10 images</small>
+          <small className="text-xs text-gray-500 mt-1 block">*Maximum 4.5MB total</small>
         </div>
 
         <div className="flex flex-wrap gap-2 mt-4 justify-center">
@@ -300,7 +298,7 @@ const ContactFormSection = () => {
           ))}
         </div>
         <small className="text-xs text-gray-500 mt-1 block">
-          *Maximum 10MB per image – {galleryImages.length + capturedImages.length} / 10 images added
+          {galleryImages.length + capturedImages.length} / 10 images added
         </small>
       </div>
 
