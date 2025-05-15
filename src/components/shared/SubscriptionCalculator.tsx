@@ -128,9 +128,15 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
 
         {/* Contenido principal */}
         <div className="relative z-20 flex flex-col gap-4 w-full">
-          <h1 className={titleClass}>
-            Calculate Your <br className="md:hidden" /> Subscription Price
-          </h1>
+        <h1
+          className={titleClass}
+          style={{ wordSpacing: '0.75rem' }}
+        >
+          Calculate your<br className="md:hidden" />
+          <span className="block mt-3">
+            subscription price
+          </span>
+        </h1>
 
           <div className="text-left">
             <div className="flex items-center justify-between">
@@ -140,13 +146,13 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
               >
                 How many gallons is your pool?
               </label>
-              <button
-                type="button"
-                className="text-sm font-bold text-[#485AFF] font-inter md:text-lg"
+              <a
+                href="#contact"
+                className="text-sm font-bold text-[#485AFF] font-inter md:text-lg hover:underline"
               >
                 Don't know?
-              </button>
-            </div>
+              </a>         
+          </div>
 
             <input
               id="gallons"

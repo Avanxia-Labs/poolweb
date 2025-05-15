@@ -15,7 +15,7 @@ const services = [
     
   { title: 'Pool Maintenance',
     description: 'Proactive weekly care ensuring balanced chemistry, pristine cleanliness, and optimal equipment function. Enjoy a worry-free, swim-ready pool year-round.',
-    longText: 'Choosing Pool Quality Maintenance changes everything. Our professional maintenance service ensures your investment is protected and your pool is always ready to enjoy. Following our maintenance schedule, we make sure all systems function correctly, extending the lifespan of your equipment and keeping the water crystal clear.Our certified technicians perform comprehensive inspections of the filtration system, pumps, heaters, and automation systems. We check and adjust chemical levels to prevent problems like algae, cloudy water, or skin irritation. Regular maintenance eliminates debris buildup, reduces the chances of costly repairs, and allows you to enjoy your pool without worries.Whether you need weekly, bi-weekly, or monthly service, our customized plans adapt to your specific needs. Equipped with the necessary tools and expertise, we perform preventive maintenance that saves time and money in the long run. Our knowledge of water chemistry and filtration systems ensures superior results. Let us handle the technical aspects while you simply enjoy your crystal-clear water and perfectly maintained pool environment.',
+    longText: ' Choosing Pool Quality Maintenance changes everything. Our professional maintenance service ensures your investment is protected and your pool is always ready to enjoy. Following our maintenance schedule, we make sure all systems function correctly, extending the lifespan of your equipment and keeping the water crystal clear. Our certified technicians perform comprehensive inspections of the filtration system, pumps, heaters, and automation systems. We check and adjust chemical levels to prevent problems like algae, cloudy water, or skin irritation. Regular maintenance eliminates debris buildup, reduces the chances of costly repairs, and allows you to enjoy your pool without worries. Whether you need weekly, bi-weekly, or monthly service, our customized plans adapt to your specific needs. Equipped with the necessary tools and expertise, we perform preventive maintenance that saves time and money in the long run. Our knowledge of water chemistry and filtration systems ensures superior results. Let us handle the technical aspects while you simply enjoy your crystal-clear water and perfectly maintained pool environment.',
     image1: '/images/matience_comparative@2x.png',
     image2: '/images/matience_comparative2@2x.png'
  },
@@ -135,7 +135,7 @@ const showSubscriptionCard = subscriptionTitles.includes(selectedService?.title 
   useEffect(() => {
     timeoutRef.current = setTimeout(() => {
       setIndex((prev) => (prev + 1) % services.length);
-    }, 3000);
+    }, 6000);
   
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -184,7 +184,13 @@ const showSubscriptionCard = subscriptionTitles.includes(selectedService?.title 
     <h1 className="text-[32px] text-black text-center font-inter font-bold leading-[38px] tracking-[-1.127px]">
       {services[index].title}
     </h1>
-    <p className="text-[12px] font-semibold text-[#212939] text-center leading-[16.901px] font-inter">
+    <p
+      className="text-[17px] font-semibold text-white text-center leading-[16.901px] font-inter"
+      style={{
+        textShadow: '1px 1px 2px rgba(0,0,0,0.6)',
+        wordSpacing: '0.5rem'
+      }}
+    >
       {services[index].description}
     </p>
   </div>
@@ -192,7 +198,7 @@ const showSubscriptionCard = subscriptionTitles.includes(selectedService?.title 
 
 
 {/* Controles FIJOS (no cambian ni se mueven) */}
-<div className="relative z-20 flex items-center justify-center gap-4 mt-20">
+<div className="relative z-20 flex items-center justify-center gap-4 mt-30">
   {/* Flecha izquierda */}
   <button
     onClick={prev}
@@ -272,7 +278,7 @@ const showSubscriptionCard = subscriptionTitles.includes(selectedService?.title 
 
     {/* Texto largo dividido por párrafos */}
     <p
-      className={`text-justify pt-16 mb-4 text-[14px] text-[#0B0858] leading-[30px] font-[400] font-inter capitalize overflow-hidden text-ellipsis ${
+      className={`text-justify pt-16 mb-4 text-[14px] text-[#0B0858] leading-[30px] font-[400] font-inter normal-case overflow-hidden text-ellipsis ${
         showFullText ? '' : 'line-clamp-[12]'
       }`}
     >

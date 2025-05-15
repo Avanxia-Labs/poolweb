@@ -31,7 +31,7 @@ function Section7() {
                     {/* Heading */}
                     <div id='heading' className=' w-max-[32rem] flex flex-col items-start gap-3 sm:gap-4 lg:gap-[24px] self-stretch'>
                         <p className='self-stretch text-[#101828] font-inter text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-semibold leading-tight sm:leading-[1.2] lg:leading-[60px] tracking-[-0.5px] sm:tracking-[-0.96px]'>
-                            "Let's elevate your <br/> pool care, together."
+                            Let's elevate your <br/> pool care, together.
                         </p>
                         <p className='text-[#667085] font-inter text-sm sm:text-base md:text-lg lg:text-[20px] font-normal leading-relaxed sm:leading-[1.6] lg:leading-[30px]'>
                             You can reach us anytime via:  <a href="mailto:poolqualitysolutions@hotmail.com" className="text-md hover:underline">poolqualitysolutions@hotmail.com</a>

@@ -218,7 +218,7 @@ const MobileFormContent = () => {
   {/* Texto superpuesto */}
 <div className="relative z-10 px-4">
   <h2 className="text-[#0F172A] text-[24px] leading-[22px] font-bold tracking-[6px] text-center font-inter">
-    Transform YourPool <br /> Experience
+    Transform Your Pool <br /> Experience
   </h2>
 </div>
 

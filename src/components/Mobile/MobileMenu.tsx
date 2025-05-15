@@ -112,7 +112,7 @@ const getLinkClass = (href: string) =>
       <div className="bg-[#0F172A] text-white px-6 py-4 text-sm font-inter">
         <div className="mb-2 flex items-center gap-2">
           <Mail className="h-4 w-4" />
-          <span>correo@hosting.com</span>
+          <span>poolqualitysolutions@hotmail.com</span>
         </div>
         <div className="mb-4 flex items-center gap-2">
           <Phone className="h-4 w-4" />
