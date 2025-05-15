@@ -67,10 +67,9 @@
             property="og:description"
             content="Professional pool care: maintenance, diagnostics, automation, and more."
           />
-          <meta
-            property="og:image"
-            content="https://poolqualitysolutions.com/images/logoHD.png"
-          />
+           <meta property="og:image" content="https://poolqualitysolutions.com/images/logoHD.png" />
+           <meta property="og:image:width"  content="1200" />
+           <meta property="og:image:height" content="630" />
 
           {/* Twitter Card */}
           <meta name="twitter:card" content="summary_large_image" />
