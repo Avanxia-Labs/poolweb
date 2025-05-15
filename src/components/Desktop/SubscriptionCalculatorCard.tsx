@@ -65,7 +65,7 @@ const SubscriptionCalculatorCard: React.FC = () => {
       {/* Contenido principal */}
       <div className="relative z-20">
         <h2 className="text-lg font-bold text-center text-slate-900 mb-4">
-          Calculate Your <br /> Subscription Price
+          Calculate your <br /> subscription price
         </h2>
 
         {/* Campo de entrada */}

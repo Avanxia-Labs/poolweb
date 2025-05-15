@@ -372,7 +372,7 @@ const MobileBody = () => {
       <div className="w-full max-w-[480px] mx-auto">
         <div className="w-full">
         <h2 className="text-[36px] font-semibold leading-[44px] tracking-[-0.72px] text-[#101828] font-inter">
-          Let’s level up your brand,<br />together
+          Let's elevate your pool <br/> care, together.
         </h2>
         <p className="mt-4 text-[18px] leading-[28px] font-normal text-[#667085] font-inter">
           You can reach us anytime via <br />

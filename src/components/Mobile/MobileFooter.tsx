@@ -7,7 +7,7 @@ const MobileFooter = () => {
 <section className="w-full bg-slate-900 px-4 py-10">
   <div className="w-full max-w-screen-sm mx-auto flex flex-col items-center text-center gap-8 rounded-2xl">
     <header className="text-white text-3xl font-bold leading-10">
-      POOL QUALITY SOLUTION INC
+      POOL QUALITY SOLUTIONS INC
     </header>
 
     <div className="flex flex-col gap-4 w-full items-center">

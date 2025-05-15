@@ -4,7 +4,7 @@ const FooterSection = () => {
   return (
     <footer className="w-full h-full bg-[#0F172A] text-white py-16">
       <div className="max-w-7xl mx-auto px-4 flex flex-col items-center">
-        <h2 className="text-3xl font-bold mb-8">POOL QUALITY SOLUTION INC</h2>
+        <h2 className="text-3xl font-bold mb-8">POOL QUALITY SOLUTIONS INC</h2>
 
         <div className="flex items-center mb-4">
           <div className="flex items-center mb-2">
