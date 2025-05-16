@@ -8,6 +8,7 @@ import ServicesIcon from '@/components/Mobile/icons/ServicesIcon';
 import AboutIcon from '@/components/Mobile/icons/AboutIcon';
 import ContactIcon from '@/components/Mobile/icons/ContactIcon';
 import ActiveMarker from './icons/ActiveMarker';
+import BlogIcon from './icons/BlogIcon';
 
 
 
@@ -93,6 +94,17 @@ const getLinkClass = (href: string) =>
           <div className="flex items-center gap-2">
             <AboutIcon className="w-6 h-6" stroke={getStrokeColor('/about')} />
             <span className={getLinkClass('/about')}>About Us</span>
+          </div>
+        </Link>
+        <Link href="/blog" onClick={onClose} className="relative w-full pl-[16px]">
+          {pathname === '/blog' && (
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[24px]">
+              <ActiveMarker className="w-[12px] h-[31px]" />
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <BlogIcon className="w-6 h-6" stroke={getStrokeColor('/blog')} />
+            <span className={getLinkClass('/blog')}>Blog</span>
           </div>
         </Link>
         {/* Contact Button */}

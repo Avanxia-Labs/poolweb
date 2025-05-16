@@ -6,6 +6,7 @@ import { FiRefreshCw } from 'react-icons/fi'
 import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator'
 import { featured, posts, PostEntry } from '@/data/post'
 import { PostCardSkeleton } from '@/components/shared/PostCardSkeleton'
+import MobileMenu from '@/components/Mobile/MobileMenu'
 
 type BlogProps = {
   initialSearch?: string
@@ -16,6 +17,7 @@ const services = ['Pool Maintenance', 'Pool Cleaning', 'Diagnostics & Troublesho
 
 export default function Blog({ initialSearch = '' }: BlogProps) {
   const [searchTerm, setSearchTerm] = useState(initialSearch)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const allPosts: PostEntry[] = [featured, ...posts]
   const matched = allPosts.filter(p => p.title.toLowerCase().includes(searchTerm.toLowerCase()))
   const displayPosts = matched.length > 0 ? matched : allPosts
