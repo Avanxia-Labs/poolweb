@@ -7,10 +7,11 @@ export const metadata: Metadata = {
   description: 'Descubre nuestros artículos sobre mantenimiento y diseño de piscinas',
 }
 
+// Ahora es async y await sobre searchParams:
 export default async function Page({
   searchParams,
 }: {
-  // Next te pasa searchParams como una promesa
+  // Next te pasa searchParams como Promise<{ search?: string }>
   searchParams: Promise<{ search?: string }>
 }) {
   const { search } = await searchParams
