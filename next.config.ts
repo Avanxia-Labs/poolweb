@@ -1,22 +1,10 @@
-import type { NextConfig } from "next";
+// next.config.ts
+import { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  webpack(config, { isServer }) {
-    // Esto asegura que el SVG se maneje correctamente en el cliente
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
-    });
+  reactStrictMode: true,
+  // aquí puedes añadir otras opciones de Next.js que necesites,
+  // pero sin ningún `require('next-optimized-images')`.
+}
 
-    return config;
-  },
-
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
-  transpilePackages: ['react-phone-input-2'],
-};
-
-export default nextConfig;
+export default nextConfig

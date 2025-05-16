@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prebuild": "node optimize-svgs.js"
+    "prebuild": "node optimize-svgs.js",
+    "optimize-images": "imagemin \"public/**/*.{jpg,jpeg,png,svg}\" --out-dir=public --plugin=mozjpeg --plugin=pngquant --plugin=svgo"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
@@ -18,6 +19,7 @@
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.487.0",
     "next": "^15.3.2",
+    "next-optimized-images": "^2.6.2",    
     "nodemailer": "^6.10.1",
     "raw-loader": "^4.0.2",
     "react": "^19.0.0",
@@ -36,6 +38,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-svgo": "^11.0.1",
     "svgo": "^3.3.2",
     "tailwindcss": "^4",
     "typescript": "^5"

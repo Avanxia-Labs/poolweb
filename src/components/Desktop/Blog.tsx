@@ -1,5 +1,6 @@
 // src/components/Desktop/Blog.tsx
 'use client'
+
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { FiRefreshCw } from 'react-icons/fi'
@@ -13,21 +14,31 @@ type BlogProps = {
 }
 
 const pageTitle = 'THE POOL BLOG'
-const services = ['Pool Maintenance', 'Pool Cleaning', 'Diagnostics & Troubleshooting', 'Custom Pool Design & Construction']
+const services = [
+  'Pool Maintenance',
+  'Pool Cleaning',
+  'Diagnostics & Troubleshooting',
+  'Custom Pool Design & Construction',
+]
 
 export default function Blog({ initialSearch = '' }: BlogProps) {
   const [searchTerm, setSearchTerm] = useState(initialSearch)
   const [mobileOpen, setMobileOpen] = useState(false)
+
   const allPosts: PostEntry[] = [featured, ...posts]
-  const matched = allPosts.filter(p => p.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  const matched = allPosts.filter(p =>
+    p.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
   const displayPosts = matched.length > 0 ? matched : allPosts
   const featuredPost = displayPosts[0]
   const leftPosts = displayPosts.slice(1, 5)
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white overflow-x-hidden">
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+
       <section className="px-4 py-12 max-w-7xl mx-auto">
-        {/* HERO DE VÍDEO */}
+        {/* HERO VIDEO */}
         <div className="relative py-16 flex justify-center items-center rounded-xl overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
@@ -37,10 +48,12 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
             muted
             playsInline
           />
-          <h2 className="relative z-10 text-white text-5xl font-bold tracking-tight">{pageTitle}</h2>
+          <h2 className="relative z-10 text-white text-5xl font-bold tracking-tight">
+            {pageTitle}
+          </h2>
         </div>
 
-        {/* BUSCADOR */}
+        {/* SEARCH BAR */}
         <div className="-mt-8 relative w-full max-w-3xl mx-auto px-4 z-20 flex items-center gap-2">
           <input
             type="text"
@@ -58,7 +71,7 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
           </button>
         </div>
 
-        {/* POST DESTACADO */}
+        {/* FEATURED POST */}
         <div className="mt-12 flex flex-col lg:flex-row gap-8">
           <img
             src={featuredPost.heroImage}
@@ -66,7 +79,9 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
             className="w-full lg:w-1/3 h-64 object-cover rounded-lg"
           />
           <div className="flex-1 flex flex-col">
-            <h3 className="text-2xl font-bold mb-2 text-black">{featuredPost.title}</h3>
+            <h3 className="text-2xl font-bold mb-2 text-black">
+              {featuredPost.title}
+            </h3>
             <p className="text-gray-600 mb-4">{featuredPost.excerpt}</p>
             <Link
               href={`/blog/${featuredPost.slug}`}
@@ -77,9 +92,10 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
           </div>
         </div>
 
-        {/* GRILLA O “PRÓXIMAMENTE” + ESQUELETOS */}
+        {/* POSTS GRID + SIDEBAR */}
         <div className="mt-12 flex flex-col lg:flex-row gap-8">
-          <div className="flex-1 bg-white p-6 rounded-xl shadow">
+          {/* Posts Grid */}
+          <div className="flex-1 bg-white p-6 rounded-xl shadow min-w-0">
             {leftPosts.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {leftPosts.map(post => (
@@ -88,10 +104,18 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
                     className="flex flex-col border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
                   >
                     <Link href={`/blog/${post.slug}`} className="block flex-1">
-                      <img src={post.heroImage} alt={post.title} className="w-full h-40 object-cover" />
+                      <img
+                        src={post.heroImage}
+                        alt={post.title}
+                        className="w-full h-40 object-cover"
+                      />
                       <div className="p-4 flex-1 flex flex-col">
-                        <h4 className="font-semibold mb-2 text-black">{post.title}</h4>
-                        <p className="text-gray-600 text-sm flex-1">{post.excerpt}</p>
+                        <h4 className="font-semibold mb-2 text-black">
+                          {post.title}
+                        </h4>
+                        <p className="text-gray-600 text-sm flex-1">
+                          {post.excerpt}
+                        </p>
                       </div>
                     </Link>
                     <div className="p-4 pt-0">
@@ -113,16 +137,21 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
                   ))}
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/50 pointer-events-none">
-                  <h3 className="text-2xl font-semibold text-gray-700">Próximamente más artículos</h3>
-                  <p className="mt-2 text-gray-500">Estamos preparando contenido nuevo para ti.</p>
+                  <h3 className="text-2xl font-semibold text-gray-700">
+                    Próximamente más artículos
+                  </h3>
+                  <p className="mt-2 text-gray-500">
+                    Estamos preparando contenido nuevo para ti.
+                  </p>
                 </div>
               </div>
             )}
           </div>
 
-          {/* SIDEBAR */}
-          <aside className="w-full lg:w-1/3 space-y-6">
-            <div className="p-6 text-black rounded-2xl shadow">
+          {/* Sidebar */}
+          <aside className="w-full md:w-1/2 lg:w-1/3 space-y-6 min-w-0 flex-shrink-0">
+            {/* Categories */}
+            <div className="p-6 text-black rounded-2xl shadow max-w-full">
               <h3 className="text-xl font-bold mb-4">Categories</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 {services.map(svc => (
@@ -136,8 +165,14 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
                 ))}
               </ul>
             </div>
-            <SubscriptionCalculator />
-          </aside>
+
+            <div className="w-full flex justify-center lg:justify-start px-4">
+              {/* quitamos el 2xl:max-w para dejar que el componente interno haga su clamp */}
+              <div className="w-full p-2 bg-white rounded-2xl shadow">
+                <SubscriptionCalculator isMobile={true} />
+              </div>
+            </div>
+            </aside>
         </div>
       </section>
     </div>
