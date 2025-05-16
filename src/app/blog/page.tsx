@@ -1,26 +1,20 @@
-"use client"
+'use client'
 import React from 'react'
-import { useIsMobile } from '@/hooks/useIsMobile';
-import DesktopBlogPage from './DesktopBlogPage';
-import MobileBlogPage from './MobileBlogPage'; 
+import { useIsMobile } from '@/hooks/useIsMobile'
+import DesktopBlogPage from './DesktopBlogPage'
+import MobileBlogPage from './MobileBlogPage'
+import { useSearchParams } from 'next/navigation'
 
-/**
- * Renders either the mobile or desktop version of the page Service
- * depending on the viewport width. Rendering is deferred until
- * hydration to avoid visual flickering during initial load.
- */
-function Page() {
+export default function Page() {
+  const [isMobile, hydrated] = useIsMobile()
+  const searchParams = useSearchParams()
+  const initialSearch = searchParams.get('search') ?? ''
 
-  const [isMobile, hydrated] = useIsMobile();
-
-  // Avoids rendering until hydration is complete and screen size is determined
   if (!hydrated || isMobile === null) {
-    return null;
+    return null
   }
 
-  // Conditionally renders based on the screen size
-  return isMobile ? <MobileBlogPage /> : <DesktopBlogPage />;
-
+  return isMobile
+    ? <MobileBlogPage initialSearch={initialSearch} />
+    : <DesktopBlogPage initialSearch={initialSearch} />
 }
-
-export default Page

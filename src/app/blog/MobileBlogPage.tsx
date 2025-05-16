@@ -1,13 +1,21 @@
+'use client'
 import React from 'react'
-import MobileHeroContent from '@/components/Mobile/MobileHeroContent'
-import MobileNavBar from '@/components/Mobile/MobileNavBar'
+import NavBar from '@/components/Desktop/NavBar'
+import FooterSection from '@/components/Desktop/FooterSection'
+import Blog from '@/components/Desktop/Blog'
 
-function MobileBlogPage() {
-  return (
-    <div className="min-h-screen bg-[#f7fafe]">
-    <MobileNavBar/>
-    <MobileHeroContent />    
-</div>  )
+type MobileBlogPageProps = {
+  initialSearch?: string
 }
 
-export default MobileBlogPage
+export default function MobileBlogPage({
+  initialSearch = '',
+}: MobileBlogPageProps) {
+  return (
+    <>
+      <NavBar />
+      <Blog initialSearch={initialSearch} />
+      <FooterSection />
+    </>
+  )
+}

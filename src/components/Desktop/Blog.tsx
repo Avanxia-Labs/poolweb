@@ -1,120 +1,183 @@
-// components/Blog.tsx
+// components/Desktop/Blog.tsx
+'use client'
+
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { FiRefreshCw } from 'react-icons/fi'
+import { SubscriptionCalculator } from '../shared/SubscriptionCalculator'
+import { featured, posts, PostEntry } from '@/data/post'
+import { PostCardSkeleton } from './PostCardSkeleton'
 
-type Post = {
-  image: string
-  title: string
-  excerpt: string
-  link: string
+type BlogProps = {
+  initialSearch?: string
 }
 
-const blogContent = {
-  title: 'THE POOL BLOG',
-  searchPlaceholder: 'Search',
-  featured: {
-    image: '/images/problem-pool.png',
-    title: 'An Has Bren Released By Great Scientists',
-    excerpt:
-      'This geometric swimming pool has an attached hot tub with a spill over feature. The pool features a small waterfall into the pool. Ledger stone and tile accent the modern swimming pool design. The pool is guarded by a clear glass fence to overlook the beautiful valley below.',
-    buttonText: 'VIEW NOTICE',
-    link: '/blog/an-has-bren-released',
-  },
-  posts: [
-    { image: '/images/custom_comparative.png', title: 'Swimming Pool Filter 101', excerpt: 'Keeping your swimming pool clean is the most essential part of pool ownership. The circulation of water allows the pool chemicals to keep the water sanitized and crystal clear.', link: '/blog/swimming-pool-filter-101' },
-    { image: '/images/custom_comparative.png', title: 'How to Balance pH Levels', excerpt: 'To keep your pool healthy, monitoring and adjusting pH is crucial. Learn step-by-step how to test and balance the pH for crystal-clear water.', link: '/blog/balance-ph-levels' },
-    { image: '/images/automation-showcase.png', title: 'Top Pool Automation Systems', excerpt: 'Discover the latest in pool automation. From smart timers to remote controls, these systems will simplify your pool maintenance.', link: '/blog/pool-automation-systems' },
-    { image: '/images/custom_comparative.png', title: 'Winterizing Your Pool', excerpt: 'Don’t let cold weather damage your pool. Follow our complete guide to winterize your pool and protect your equipment all season long.', link: '/blog/winterize-your-pool' },
-    { image: '/images/custom_comparative.png', title: 'Choosing the Right Pool Vacuum', excerpt: 'A good vacuum makes all the difference. We review the best manual and robotic pool vacuums on the market.', link: '/blog/pool-vacuum-guide' },
-    { image: '/images/automation-showcase.png', title: 'DIY vs Professional Maintenance', excerpt: 'Should you tackle pool care yourself? We compare costs, time, and results between DIY and hiring a pro.', link: '/blog/diy-vs-professional' },
-  ] as Post[],
-}
+const pageTitle = 'THE POOL BLOG'
+const searchPlaceholder = 'Search'
+const services = [
+  'Pool Maintenance',
+  'Pool Cleaning',
+  'Diagnostics & Troubleshooting',
+  'Custom Pool Design & Construction',
+]
 
-const Blog: React.FC = () => {
-  const { title, searchPlaceholder, featured, posts } = blogContent
-  const [searchTerm, setSearchTerm] = useState('')
+export const Blog: React.FC<BlogProps> = ({ initialSearch = '' }) => {
+  const [searchTerm, setSearchTerm] = useState(initialSearch)
 
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const allPosts: PostEntry[] = [featured, ...posts]
+  const matched = allPosts.filter((p) =>
+    p.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
+  const displayPosts = matched.length > 0 ? matched : allPosts
+
+  const dynamicFeatured = displayPosts[0]
+  const leftPosts = displayPosts.slice(1, 5)
+
+  const handleReset = () => setSearchTerm('')
 
   return (
-    <section className="px-4 py-12 max-w-7xl mx-auto">
-      {/* HERO */}
-      <div
-        className="relative py-16 flex justify-center items-center rounded-xl overflow-hidden"
-        style={{
-          backgroundImage: 'url(/images/pool_blog.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <h2 className="text-white text-5xl font-bold tracking-tight z-10">
-          {title}
-        </h2>
-      </div>
+    <div className="w-full bg-white">
+      <section className="px-4 py-12 max-w-7xl mx-auto">
+        {/* HERO de vídeo */}
+        <div className="relative py-16 flex justify-center items-center rounded-xl overflow-hidden">
+          <video
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            src="/videos/videoHD.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <h2 className="relative z-10 text-white text-5xl font-bold tracking-tight">
+            {pageTitle}
+          </h2>
+        </div>
 
-      {/* BUSCADOR flotando con negative margin */}
-      <div className="-mt-8 relative w-full max-w-3xl mx-auto px-4 z-20">
-        <input
-          type="text"
-          placeholder={searchPlaceholder}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-3 bg-white rounded-full shadow-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-      </div>
+        {/* BUSCADOR + BOTÓN RESET */}
+        <div className="-mt-8 relative w-full max-w-3xl mx-auto px-4 z-20 flex items-center gap-2">
+          <input
+            type="text"
+            placeholder={searchPlaceholder}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="
+              flex-1 p-3 bg-white rounded-full shadow-lg border border-gray-200
+              focus:outline-none focus:ring-2 focus:ring-blue-400
+            "
+          />
+          <button
+            onClick={handleReset}
+            aria-label="Reset filters"
+            className="
+              p-3 bg-white rounded-full shadow-lg border border-gray-200
+              hover:bg-gray-100 transition
+            "
+          >
+            <FiRefreshCw className="text-gray-600 w-5 h-5" />
+          </button>
+        </div>
 
-      {/* Featured Post */}
-      <div className="mt-12 flex flex-col lg:flex-row gap-8">
-        <img
-          src={featured.image}
-          alt={featured.title}
-          className="w-full lg:w-1/3 h-64 object-cover rounded-lg"
-        />
-        <div className="flex-1 flex flex-col justify-between">
-          <div>
+        {/* 1) POST DESTACADO */}
+        <div className="mt-12 flex flex-col lg:flex-row gap-8">
+          <img
+            src={dynamicFeatured.heroImage}
+            alt={dynamicFeatured.title}
+            className="w-full lg:w-1/3 h-64 object-cover rounded-lg"
+          />
+          <div className="flex-1 flex flex-col">
             <h3 className="text-2xl font-bold mb-2 text-black">
-              {featured.title}
+              {dynamicFeatured.title}
             </h3>
-            <p className="text-gray-600 mb-4">{featured.excerpt}</p>
-          </div>
-          {/* Botón reducido */}
-          <div>
+            <p className="text-gray-600 mb-4">{dynamicFeatured.excerpt}</p>
             <Link
-              href={featured.link}
-              className="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700"
+              href={`/blog/${dynamicFeatured.slug}`}
+              className="self-start inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700"
             >
-              {featured.buttonText}
+              {dynamicFeatured.buttonText ?? 'READ ME'}
             </Link>
           </div>
-
         </div>
-      </div>
 
-      {/* Grid de Posts */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredPosts.map((post, idx) => (
-          <Link
-            key={idx}
-            href={post.link}
-            className="block border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-          >
-            <img
-              src={post.image}
-              alt={post.title}
-              className="w-full h-40 object-cover"
-            />
-            <div className="p-4">
-              <h4 className="font-semibold mb-2 text-black">
-                {post.title}
-              </h4>
-              <p className="text-gray-600 text-sm">{post.excerpt}</p>
+        {/* 2) GRID DE 4 POSTS + “Próximamente” o ESQUELETOS */}
+        <div className="mt-12 flex flex-col lg:flex-row gap-8">
+          {/* Grid o Próximamente */}
+          <div className="flex-1 bg-white p-6 rounded-xl shadow">
+            {leftPosts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {leftPosts.map((post) => (
+                  <div
+                    key={post.slug}
+                    className="flex flex-col border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                  >
+                    <Link href={`/blog/${post.slug}`} className="block flex-1">
+                      <img
+                        src={post.heroImage}
+                        alt={post.title}
+                        className="w-full h-40 object-cover"
+                      />
+                      <div className="p-4 flex-1 flex flex-col">
+                        <h4 className="font-semibold mb-2 text-black">
+                          {post.title}
+                        </h4>
+                        <p className="text-gray-600 text-sm flex-1">
+                          {post.excerpt}
+                        </p>
+                      </div>
+                    </Link>
+                    <div className="p-4 pt-0">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="w-full block text-center bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded hover:bg-blue-700"
+                      >
+                        READ ME
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+  <div className="relative">
+             {/* Esqueletos de carga */}
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+               {Array.from({ length: 4 }).map((_, i) => (
+                 <PostCardSkeleton key={i} />
+               ))}
+             </div>
+
+             {/* Overlay “Próximamente” */}
+             <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/50 pointer-events-none">
+               <h3 className="text-2xl font-semibold text-gray-700">
+                 Próximamente más artículos
+               </h3>
+               <p className="mt-2 text-gray-500">
+                 Estamos preparando contenido nuevo para ti.
+               </p>
+             </div>
+           </div>
+            )}
+          </div>
+
+          {/* Sidebar */}
+          <aside className="w-full lg:w-1/3 space-y-6">
+            <div className="p-6 text-black rounded-2xl shadow">
+              <h3 className="text-xl font-bold mb-4">Categories</h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                {services.map((svc) => (
+                  <li
+                    key={svc}
+                    onClick={() => setSearchTerm(svc)}
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    {svc}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Link>
-        ))}
-      </div>
-    </section>
+            <SubscriptionCalculator />
+          </aside>
+        </div>
+      </section>
+    </div>
   )
 }
 

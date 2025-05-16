@@ -53,6 +53,12 @@ function NavBar() {
                                 </div>
                             </Link>
 
+                            <Link href="/blog">
+                                <div className={`${isActive('/blog') ? 'text-[#485AFF] underline' : 'text-zinc-900'} font-semibold text-base leading-6 font-inter`}>
+                                    Blog
+                                </div>
+                            </Link>
+
                         </div>
                     </div>
 
