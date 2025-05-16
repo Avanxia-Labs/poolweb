@@ -5,10 +5,18 @@ import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculat
 import Link from 'next/link'
 import { Metadata } from 'next'
 
-// Genera metadata dinámico
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+type Params = { slug: string }
+
+// Para generar metadata también hay que await params
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>
+}): Promise<Metadata> {
+  const { slug } = await params
   const all: PostEntry[] = [featured, ...allPosts]
-  const entry = all.find((p) => p.slug === params.slug) ?? featured
+  const entry = all.find(p => p.slug === slug) ?? featured
+
   return {
     title: entry.title,
     description: entry.excerpt,
@@ -21,14 +29,20 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
 }
 
-// Prerenderiza todas las rutas /blog/<slug>
-export function generateStaticParams(): Array<{ slug: string }> {
-  return [featured, ...allPosts].map((p) => ({ slug: p.slug }))
+// Las rutas estáticas siguen igual
+export function generateStaticParams(): Params[] {
+  return [featured, ...allPosts].map(p => ({ slug: p.slug }))
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
+// La página ahora es async y await params
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<Params>
+}) {
+  const { slug } = await params
   const all: PostEntry[] = [featured, ...allPosts]
-  const entry = all.find((p) => p.slug === params.slug) ?? featured
+  const entry = all.find(p => p.slug === slug) ?? featured
 
   const blogProps: BlogPostData = {
     title: entry.title,
@@ -47,11 +61,11 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           <div className="p-6 bg-white rounded-2xl shadow">
             <h3 className="text-xl font-bold mb-4 text-black">Categories</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
-              {entry.tags?.map((svc) => (
+              {entry.tags?.map(svc => (
                 <li key={svc}>
                   <Link
                     href={`/blog?search=${encodeURIComponent(svc)}`}
-                    className="cursor-pointer hover:text-blue-600"
+                    className="hover:text-blue-600"
                   >
                     {svc}
                   </Link>

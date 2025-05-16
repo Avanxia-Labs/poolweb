@@ -1,20 +1,81 @@
-'use client'
-import React from 'react'
-import { useIsMobile } from '@/hooks/useIsMobile'
-import DesktopBlogPage from './DesktopBlogPage'
-import MobileBlogPage from './MobileBlogPage'
-import { useSearchParams } from 'next/navigation'
+// src/app/blog/[slug]/page.tsx
+import BlogPost, { BlogPostData } from '@/components/Desktop/BlogPost'
+import { featured, posts as allPosts, PostEntry } from '@/data/post'
+import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator'
+import Link from 'next/link'
+import { Metadata } from 'next'
 
-export default function Page() {
-  const [isMobile, hydrated] = useIsMobile()
-  const searchParams = useSearchParams()
-  const initialSearch = searchParams.get('search') ?? ''
+type Params = { slug: string }
 
-  if (!hydrated || isMobile === null) {
-    return null
+// metadata dinámico: params es Promise<Params>
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const all: PostEntry[] = [featured, ...allPosts]
+  const entry = all.find(p => p.slug === slug) ?? featured
+
+  return {
+    title: entry.title,
+    description: entry.excerpt,
+    openGraph: {
+      title: entry.title,
+      description: entry.excerpt,
+      images: [entry.heroImage, entry.sectionImage],
+      type: 'article',
+    },
+  }
+}
+
+// prerenderiza rutas
+export function generateStaticParams(): Params[] {
+  return [featured, ...allPosts].map(p => ({ slug: p.slug }))
+}
+
+// page como async y await params
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<Params>
+}) {
+  const { slug } = await params
+  const all: PostEntry[] = [featured, ...allPosts]
+  const entry = all.find(p => p.slug === slug) ?? featured
+
+  const propsData: BlogPostData = {
+    title: entry.title,
+    excerpt: entry.excerpt,
+    heroImage: entry.heroImage,
+    sectionImage: entry.sectionImage,
+    sectionTitles: entry.sectionTitles,
+    content: entry.content,
   }
 
-  return isMobile
-    ? <MobileBlogPage initialSearch={initialSearch} />
-    : <DesktopBlogPage initialSearch={initialSearch} />
+  return (
+    <BlogPost
+      {...propsData}
+      sidebar={
+        <>
+          <div className="p-6 bg-white rounded-2xl shadow">
+            <h3 className="text-xl font-bold mb-4 text-black">Categories</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              {entry.tags?.map((svc) => (
+                <li key={svc}>
+                  <Link
+                    href={`/blog?search=${encodeURIComponent(svc)}`}
+                    className="hover:text-blue-600"
+                  >
+                    {svc}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <SubscriptionCalculator />
+        </>
+      }
+    />
+  )
 }
