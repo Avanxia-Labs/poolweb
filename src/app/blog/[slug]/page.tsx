@@ -5,10 +5,8 @@ import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculat
 import Link from 'next/link'
 import { Metadata } from 'next'
 
-type Params = { slug: string }
-
 // Genera metadata dinámico
-export function generateMetadata({ params }: { params: Params }): Metadata {
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const all: PostEntry[] = [featured, ...allPosts]
   const entry = all.find((p) => p.slug === params.slug) ?? featured
   return {
@@ -24,18 +22,15 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
 }
 
 // Prerenderiza todas las rutas /blog/<slug>
-export function generateStaticParams() {
+export function generateStaticParams(): Array<{ slug: string }> {
   return [featured, ...allPosts].map((p) => ({ slug: p.slug }))
 }
-
-interface Props { params: Params }
 
 export default function PostPage({ params }: { params: { slug: string } }) {
   const all: PostEntry[] = [featured, ...allPosts]
   const entry = all.find((p) => p.slug === params.slug) ?? featured
 
-  // Ahora usamos heroImage y sectionImage
-  const props: BlogPostData = {
+  const blogProps: BlogPostData = {
     title: entry.title,
     excerpt: entry.excerpt,
     heroImage: entry.heroImage,
@@ -46,7 +41,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
   return (
     <BlogPost
-      {...props}
+      {...blogProps}
       sidebar={
         <>
           <div className="p-6 bg-white rounded-2xl shadow">
