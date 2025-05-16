@@ -6,17 +6,15 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 type Params = { slug: string }
+type PageProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-// Para generar metadata también hay que await params
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>
-}): Promise<Metadata> {
-  const { slug } = await params
-  const all: PostEntry[] = [featured, ...allPosts]
-  const entry = all.find(p => p.slug === slug) ?? featured
-
+// Genera metadata dinámico
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const all: PostEntry[] = [featured, ...allPosts];
+  const entry = all.find((p) => p.slug === params.slug) ?? featured;
   return {
     title: entry.title,
     description: entry.excerpt,
@@ -26,23 +24,17 @@ export async function generateMetadata({
       images: [entry.heroImage, entry.sectionImage],
       type: 'article',
     },
-  }
+  };
 }
 
-// Las rutas estáticas siguen igual
-export function generateStaticParams(): Params[] {
-  return [featured, ...allPosts].map(p => ({ slug: p.slug }))
+// Prerenderiza todas las rutas /blog/<slug>
+export function generateStaticParams(): Array<{ slug: string }> {
+  return [featured, ...allPosts].map((p) => ({ slug: p.slug }));
 }
 
-// La página ahora es async y await params
-export default async function PostPage({
-  params,
-}: {
-  params: Promise<Params>
-}) {
-  const { slug } = await params
-  const all: PostEntry[] = [featured, ...allPosts]
-  const entry = all.find(p => p.slug === slug) ?? featured
+export default function PostPage({ params }: PageProps) {
+  const all: PostEntry[] = [featured, ...allPosts];
+  const entry = all.find((p) => p.slug === params.slug) ?? featured;
 
   const blogProps: BlogPostData = {
     title: entry.title,
@@ -51,7 +43,7 @@ export default async function PostPage({
     sectionImage: entry.sectionImage,
     sectionTitles: entry.sectionTitles,
     content: entry.content,
-  }
+  };
 
   return (
     <BlogPost
@@ -61,11 +53,11 @@ export default async function PostPage({
           <div className="p-6 bg-white rounded-2xl shadow">
             <h3 className="text-xl font-bold mb-4 text-black">Categories</h3>
             <ul className="list-disc list-inside space-y-2 text-gray-700">
-              {entry.tags?.map(svc => (
+              {entry.tags?.map((svc) => (
                 <li key={svc}>
                   <Link
                     href={`/blog?search=${encodeURIComponent(svc)}`}
-                    className="hover:text-blue-600"
+                    className="cursor-pointer hover:text-blue-600"
                   >
                     {svc}
                   </Link>
@@ -77,5 +69,5 @@ export default async function PostPage({
         </>
       }
     />
-  )
+  );
 }
