@@ -30,7 +30,7 @@ export function generateStaticParams() {
 
 interface Props { params: Params }
 
-export default function PostPage({ params }: Props) {
+export default function PostPage({ params }: { params: { slug: string } }) {
   const all: PostEntry[] = [featured, ...allPosts]
   const entry = all.find((p) => p.slug === params.slug) ?? featured
 
