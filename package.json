@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run optimize-assets && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prebuild": "node optimize-svgs.js",
-    "optimize-assets": "node scripts/optimize-assets.js"
+    "prebuild": "node optimize-svgs.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
