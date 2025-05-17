@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run optimize-assets && next build",
     "start": "next start",
     "lint": "next lint",
     "prebuild": "node optimize-svgs.js",
-    "optimize-images": "imagemin \"public/**/*.{jpg,jpeg,png,svg}\" --out-dir=public --plugin=mozjpeg --plugin=pngquant --plugin=svgo"
+    "optimize-assets": "node scripts/optimize-assets.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
@@ -19,7 +19,7 @@
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.487.0",
     "next": "^15.3.2",
-    "next-optimized-images": "^2.6.2",    
+    "next-optimized-images": "^2.6.2",
     "nodemailer": "^6.10.1",
     "raw-loader": "^4.0.2",
     "react": "^19.0.0",
@@ -38,6 +38,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",
     "imagemin-svgo": "^11.0.1",
