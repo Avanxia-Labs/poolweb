@@ -1,18 +1,22 @@
-// import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-// export function middleware(request: NextRequest) {
-//   const userAgent = request.headers.get('user-agent') || ''
-//   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(userAgent)
+export function middleware(request: NextRequest) {
+  console.log('Middleware triggered. Pathname:', request.nextUrl.pathname);
+  const { pathname } = request.nextUrl
 
-//   const response = NextResponse.next()
-//   response.cookies.set('isMobile', String(isMobile), {
-//     path: '/',
-//     httpOnly: false,
-//   })
+  // Permitir el acceso a la página de mantenimiento y a sus assets
+  if (pathname === '/maintenance' || 
+      pathname.startsWith('/_next/') || 
+      pathname.startsWith('/favicon.ico')) {
+    return NextResponse.next()
+  }
 
-//   return response
-// }
+  // Redirigir todas las demás rutas a la página de mantenimiento
+  const maintenanceUrl = new URL('/maintenance', request.url)
+  return NextResponse.redirect(maintenanceUrl)
+}
 
-// export const config = {
-//   matcher: ['/', '/about', '/contact'],
-// }
+export const config = {
+  // Aplicar el middleware a TODAS las rutas
+  matcher: ['/(.*)', '/'],
+}

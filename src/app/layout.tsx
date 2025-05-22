@@ -4,6 +4,7 @@
   import { Inter, Poppins, Kanit, Plus_Jakarta_Sans, Montserrat } from "next/font/google"
   import { Analytics } from "@vercel/analytics/react"
   import Script from "next/script"
+  import MaintenanceRedirect from "./MaintenanceRedirect"
   // import TransitionLayout from "@/components/Desktop/TransitionLayout"
 
   const inter = Inter({
@@ -101,6 +102,9 @@
             antialiased
           `}
         >
+          {/* Componente de redirección al modo mantenimiento */}
+          <MaintenanceRedirect />
+          
           {/* If you need page transitions, uncomment below */}
           {/* <TransitionLayout> */}
             {children}
