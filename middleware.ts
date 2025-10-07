@@ -1,22 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  console.log('Middleware triggered. Pathname:', request.nextUrl.pathname);
-  const { pathname } = request.nextUrl
+  const maintenanceEnabled = process.env.MAINTENANCE_MODE === 'true'
 
-  // Permitir el acceso a la página de mantenimiento y a sus assets
-  if (pathname === '/maintenance' || 
-      pathname.startsWith('/_next/') || 
-      pathname.startsWith('/favicon.ico')) {
+  if (!maintenanceEnabled) {
     return NextResponse.next()
   }
 
-  // Redirigir todas las demás rutas a la página de mantenimiento
+  const { pathname } = request.nextUrl
+
+  if (
+    pathname === '/maintenance' ||
+    pathname.startsWith('/_next/') ||
+    pathname === '/favicon.ico'
+  ) {
+    return NextResponse.next()
+  }
+
   const maintenanceUrl = new URL('/maintenance', request.url)
   return NextResponse.redirect(maintenanceUrl)
 }
 
 export const config = {
-  // Aplicar el middleware a TODAS las rutas
   matcher: ['/(.*)', '/'],
 }

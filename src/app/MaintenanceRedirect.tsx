@@ -3,21 +3,24 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
+const maintenanceEnabled = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+const allowedPaths = ['/maintenance'];
+
 const MaintenanceRedirect = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // List of allowed paths in maintenance mode
-  const allowedPaths = ['/maintenance'];
-  
   useEffect(() => {
-    // If we're not on an allowed path, redirect to the maintenance page
-    if (!allowedPaths.includes(pathname) && !pathname.startsWith('/_next/')) {
-      router.push('/maintenance');
+    if (!maintenanceEnabled) {
+      return;
     }
-  }, [pathname, router]);
 
-  return null; // This component doesn't render anything
+    if (!allowedPaths.includes(pathname) && !pathname.startsWith('/_next/')) {
+      router.replace('/maintenance');
+    }
+  }, [maintenanceEnabled, pathname, router]);
+
+  return null;
 };
 
-export default MaintenanceRedirect; 
+export default MaintenanceRedirect;

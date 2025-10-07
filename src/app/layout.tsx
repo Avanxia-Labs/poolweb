@@ -34,6 +34,8 @@
     subsets: ["latin"],
   })
 
+  const maintenanceEnabled = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true"
+
   export default function RootLayout({
     children,
   }: Readonly<{
@@ -102,8 +104,8 @@
             antialiased
           `}
         >
-          {/* Componente de redirección al modo mantenimiento */}
-          <MaintenanceRedirect />
+          {/* Componente de redireccion al modo mantenimiento */}
+          {maintenanceEnabled && <MaintenanceRedirect />}
           
           {/* If you need page transitions, uncomment below */}
           {/* <TransitionLayout> */}
@@ -132,3 +134,4 @@
       </html>
     )
   }
+
