@@ -68,34 +68,9 @@ const ConstructionServiceEnhanced: React.FC = () => {
         </Link>
       </div>
 
-      {/* Category Description */}
-      <div className="mt-6 p-4 bg-white rounded-lg border border-gray-100">
-        <div className="flex items-center gap-2 mb-2">
-          <div
-            className="w-3 h-3 rounded-full"
-            style={{ backgroundColor: categoryConfig[activeCategory].color }}
-          />
-          <span className="text-sm font-medium text-gray-700">
-            {categoryConfig[activeCategory].label}
-          </span>
-        </div>
-        <p className="text-gray-500 text-sm">
-          {categoryConfig[activeCategory].description}
-        </p>
-      </div>
-
-      {/* Service Features Grid */}
-      <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Service Features Grid - Adjusted to 3 cols */}
+      <div className="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-4">
         {[
-          {
-            icon: (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            ),
-            title: 'Licensed & Insured',
-            desc: 'Full coverage for your peace of mind'
-          },
           {
             icon: (
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
