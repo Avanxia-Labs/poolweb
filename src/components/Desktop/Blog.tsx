@@ -170,7 +170,7 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
                 <SubscriptionCalculator isMobile={true} />
               </div>
             </div>
-            </aside>
+          </aside>
         </div>
       </section>
     </div>

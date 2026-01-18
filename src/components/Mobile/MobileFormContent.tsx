@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import React from "react";
 import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
-import MobileFooter from '@/components/Mobile/MobileFooter';
+import Footer from '@/components/shared/Footer';
 import ContactFormSection from '@/components/Mobile/ContactFormSection';
 
 
@@ -35,206 +35,208 @@ const MobileFormContent = () => {
     }
   }, [searchParams]);
 
-  
+
 
   return (
-  <main>
-<section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-20 text-center text-[#0F172A] overflow-hidden">
-  {/* Título principal */}
-  <h2 className="text-[clamp(22px,6vw,28px)] font-bold mb-2 leading-tight">
-    Let's work together!
-  </h2>
-
-  {/* Subtítulo */}
-  <p className="text-[clamp(12px,3.5vw,16px)] leading-[1.6] max-w-[clamp(280px,90vw,420px)] mx-auto mb-[clamp(30px,6vw,50px)] font-inter">
-    We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the <br /> next <strong>24 hours</strong>.
-  </p>
-
-  {/* Imagen del personaje (ya no absolute) */}
-<div className="flex justify-center bottom-[40px] z-0 relative">
-  <img
-    src="/images/contact_image.png"
-    alt="Person Contact"
-    className="w-[clamp(260px,70vw,340px)] h-auto object-contain"
-  />
-</div>
-
-{/* Fondo azul curvo - Ajustado para mantener su forma en todos los breakpoints */}
-<div className="absolute bottom-0 left-0 w-full z-10 overflow-hidden">
-  <img
-    src="/images/contact_blue.png"
-    alt="Blue Background Curve"
-    className="w-full h-auto min-h-[120px] max-h-[180px] object-cover object-top"
-    style={{ 
-      borderTopLeftRadius: '100% 80%', 
-      borderTopRightRadius: '100% 80%',
-      transform: 'scaleX(1.2)'
-    }}
-  />
-</div>
-
-</section>
-
-
-
-{/* Sección Contact us */}
-<section id="subscription-form" className="w-full px-4">
-  <div className="w-full max-w-[480px] mx-auto">
-    <div className="bg-white rounded-2xl shadow-md px-6 py-[clamp(24px,6vw,40px)] w-full">
-      
-      <div className="w-full text-center mb-6">
-        <h2 className="text-[clamp(22px,6vw,28px)] font-bold text-slate-900 mb-2 leading-tight">
-          Contact us
+    <main>
+      <section className="relative w-full bg-[#F7FAFE] px-4 pt-6 pb-20 text-center text-[#0F172A] overflow-hidden">
+        {/* Título principal */}
+        <h2 className="text-[clamp(22px,6vw,28px)] font-bold mb-2 leading-tight">
+          Let's work together!
         </h2>
-        <p className="text-[clamp(12px,3.5vw,16px)] text-gray-500 leading-snug">
-          Enter Your Pool Details Below
+
+        {/* Subtítulo */}
+        <p className="text-[clamp(12px,3.5vw,16px)] leading-[1.6] max-w-[clamp(280px,90vw,420px)] mx-auto mb-[clamp(30px,6vw,50px)] font-inter">
+          We're here to help you enjoy your pool again. Complete the form and we’ll be in touch within the <br /> next <strong>24 hours</strong>.
         </p>
-      </div>
 
-      <ContactFormSection />
-    </div>
-  </div>
-</section>
+        {/* Imagen del personaje (ya no absolute) */}
+        <div className="flex justify-center bottom-[40px] z-0 relative">
+          <img
+            src="/images/contact_image.png"
+            alt="Person Contact"
+            className="w-[clamp(260px,70vw,340px)] h-auto object-contain"
+          />
+        </div>
 
-<section className="w-full px-4 py-[clamp(40px,8vw,60px)] bg-[#F7FAFE]">
-  <div className="w-full max-w-xs mx-auto space-y-6">
-    {/* Card Template */}
-    {[
-     {
-      icon: (
-        <a href="tel:+12393800766">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085] cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
-            />
-          </svg>
-        </a>
-      ),
-      label: (
-        <a
-          href="tel:+12393800766"
-          className="text-[clamp(12px,4vw,14px)] font-semibold text-[#667085] underline hover:text-[#485AFF] transition-colors"
-        >
-          +1 (239) 380-0766
-        </a>
-      )
-    },    
-    {
-      icon: (
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=1743+Jung+Blvd+E+Naples,+FL+34120"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085] cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
-            />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-        </a>
-      ),
-      label: (
-        <a
-          href="https://www.google.com/maps/search/?api=1&query=1743+Jung+Blvd+E+Naples,+FL+34120"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[clamp(12px,4vw,14px)] font-semibold text-[#667085] underline hover:text-[#485AFF] transition-colors"
-        >
-          1743 Jung Blvd E Naples, Fl 34120
-        </a>
-      )
-    },    
-    {
-      icon: (
-        <a
-          href="mailto:poolqualitysolutions@hotmail.com"
-          className="cursor-pointer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <rect width="20" height="16" x="2" y="4" rx="2" />
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-          </svg>
-        </a>
-      ),
-      label: (
-        <a
-          href="mailto:poolqualitysolutions@hotmail.com"
-          className="text-[clamp(12px,4vw,14px)] font-semibold text-[#667085] underline hover:text-[#485AFF] transition-colors"
-        >
-          poolqualitysolutions@hotmail.com
-        </a>
-      )
-    },    
-    ].map(({ icon, label }, idx) => (
-      <div
-        key={idx}
-        className="flex flex-col justify-center items-center text-center bg-white rounded-xl shadow-lg py-6 h-[clamp(140px,20vw,180px)]"
-      >
-        {icon}
-        <span className="mt-2 text-[clamp(13px,3.5vw,16px)] font-medium text-[#344054]">
-          {label}
-        </span>
-      </div>
-    ))}
-  </div>
-</section>
+        {/* Fondo azul curvo - Ajustado para mantener su forma en todos los breakpoints */}
+        <div className="absolute bottom-0 left-0 w-full z-10 overflow-hidden">
+          <img
+            src="/images/contact_blue.png"
+            alt="Blue Background Curve"
+            className="w-full h-auto min-h-[120px] max-h-[180px] object-cover object-top"
+            style={{
+              borderTopLeftRadius: '100% 80%',
+              borderTopRightRadius: '100% 80%',
+              transform: 'scaleX(1.2)'
+            }}
+          />
+        </div>
 
-
-<section className="relative w-full h-[300px] overflow-hidden text-center flex items-center justify-center">
-  {/* Video de fondo */}
-  <video
-    className="absolute top-0 left-0 w-full h-full object-cover z-0"
-    src="/videos/videoHD.mp4"
-    autoPlay
-    loop
-    muted
-    playsInline
-  />
-
-  {/* Texto superpuesto */}
-<div className="relative z-10 px-4">
-  <h2 className="text-[#0F172A] text-[24px] leading-[22px] font-bold tracking-[6px] text-center font-inter">
-    Transform Your Pool <br /> Experience
-  </h2>
-</div>
-
-</section>
+      </section>
 
 
 
+      {/* Sección Contact us */}
+      <section id="subscription-form" className="w-full px-4">
+        <div className="w-full max-w-[480px] mx-auto">
+          <div className="bg-white rounded-2xl shadow-md px-6 py-[clamp(24px,6vw,40px)] w-full">
 
-    <section className="w-full bg-slate-900 px-4 py-10">
-        <MobileFooter />
-        </section>
+            <div className="w-full text-center mb-6">
+              <h2 className="text-[clamp(22px,6vw,28px)] font-bold text-slate-900 mb-2 leading-tight">
+                Contact us
+              </h2>
+              <p className="text-[clamp(12px,3.5vw,16px)] text-gray-500 leading-snug">
+                Enter Your Pool Details Below
+              </p>
+            </div>
+
+            <ContactFormSection />
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full px-4 py-[clamp(40px,8vw,60px)] bg-[#F7FAFE]">
+        <div className="w-full max-w-xs mx-auto space-y-6">
+          {/* Card Template */}
+          {[
+            {
+              icon: (
+                <a href="tel:+12393800766">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085] cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    />
+                  </svg>
+                </a>
+              ),
+              label: (
+                <a
+                  href="tel:+12393800766"
+                  className="text-[clamp(12px,4vw,14px)] font-semibold text-[#667085] underline hover:text-[#485AFF] transition-colors"
+                >
+                  +1 (239) 380-0766
+                </a>
+              )
+            },
+            {
+              icon: (
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1743+Jung+Blvd+E+Naples,+FL+34120"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085] cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                    />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </a>
+              ),
+              label: (
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1743+Jung+Blvd+E+Naples,+FL+34120"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[clamp(12px,4vw,14px)] font-semibold text-[#667085] underline hover:text-[#485AFF] transition-colors"
+                >
+                  1743 Jung Blvd E Naples, Fl 34120
+                </a>
+              )
+            },
+            {
+              icon: (
+                <a
+                  href="mailto:poolqualitysolutions@hotmail.com"
+                  className="cursor-pointer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-[clamp(22px,6vw,28px)] h-[clamp(22px,6vw,28px)] text-[#667085]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </a>
+              ),
+              label: (
+                <a
+                  href="mailto:poolqualitysolutions@hotmail.com"
+                  className="text-[clamp(12px,4vw,14px)] font-semibold text-[#667085] underline hover:text-[#485AFF] transition-colors"
+                >
+                  poolqualitysolutions@hotmail.com
+                </a>
+              )
+            },
+          ].map(({ icon, label }, idx) => (
+            <div
+              key={idx}
+              className="flex flex-col justify-center items-center text-center bg-white rounded-xl shadow-lg py-6 h-[clamp(140px,20vw,180px)]"
+            >
+              {icon}
+              <span className="mt-2 text-[clamp(13px,3.5vw,16px)] font-medium text-[#344054]">
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
 
 
-  </main>
+      <section className="relative w-full h-[400px] overflow-hidden flex items-center justify-center group">
+        {/* Video de fondo */}
+        <video
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-105"
+          src="/videos/videoHD.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+
+        {/* Overlay Premium */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-10" />
+
+        {/* Contenido */}
+        <div className="relative z-20 px-6 text-center max-w-[340px] flex flex-col items-center">
+          <h2 className="text-white text-[32px] leading-[1.2] font-bold font-['Plus_Jakarta_Sans'] tracking-tight drop-shadow-2xl mb-6">
+            Transform Your Pool <br /> Experience
+          </h2>
+
+          <div className="w-12 h-1 bg-[#485AFF] rounded-full shadow-[0_0_10px_rgba(72,90,255,0.5)]" />
+        </div>
+      </section>
+
+
+
+
+      <Footer />
+
+
+    </main>
 
   );
 };

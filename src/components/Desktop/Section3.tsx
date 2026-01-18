@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
 
 function Section3() {
+    const [activeTab, setActiveTab] = useState<'maintenance' | 'construction'>('maintenance');
+
     return (
         <>
             <section className="relative w-full min-h-screen py-20 flex items-center justify-center">
@@ -12,17 +14,24 @@ function Section3() {
                         id="Frame66"
                         className="z-5 w-full lg:mr-[4.75rem] max-w-md h-auto rounded-[2.5rem] bg-[#F6FEFF] shadow-lg hover:shadow-xl transition-all"
                     >
-                        <SubscriptionCalculator isMobile={false} />
+                        <SubscriptionCalculator isMobile={false} onTabChange={setActiveTab} />
                     </div>
 
                     {/* Imagen de la piscina */}
                     <div id="Image" className="w-full max-w-md h-[400px] sm:h-[500px] lg:h-[643px] rounded-[2.5rem] overflow-hidden bg-[#F6FEFF] relative">
-                        <Image
-                            src="/images/pool.png"
-                            alt="pool"
-                            fill
-                            className="object-cover scale-110"
-                        />
+                        {/* Placeholder para Construction o Imagen Normal */}
+                        {activeTab === 'construction' ? (
+                            <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold text-xl">
+                                Construction Placeholder
+                            </div>
+                        ) : (
+                            <Image
+                                src="/images/pool.png"
+                                alt="pool"
+                                fill
+                                className="object-cover scale-110"
+                            />
+                        )}
                     </div>
                 </div>
             </section>

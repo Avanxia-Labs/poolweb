@@ -30,15 +30,21 @@ const DEFAULT_SERVICES: Service[] = [
 
 interface SubscriptionCalculatorProps {
   isMobile?: boolean;
+  onTabChange?: (tab: 'maintenance' | 'construction') => void;
 }
 
-export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalculatorProps) {
+export function SubscriptionCalculator({ isMobile = false, onTabChange }: SubscriptionCalculatorProps) {
   const router = useRouter();
   const [poolGallons, setPoolGallons] = useState(DEFAULT_GALLONS);
   const [services, setServices] = useState(DEFAULT_SERVICES);
   const [isHovered, setIsHovered] = useState(false);
   const [activeTab, setActiveTab] = useState<'maintenance' | 'construction'>('maintenance');
   const cardRef = useRef<HTMLDivElement | null>(null);
+
+  const handleTabChange = (tab: 'maintenance' | 'construction') => {
+    setActiveTab(tab);
+    if (onTabChange) onTabChange(tab);
+  };
 
   const toggleService = (index: number) => {
     const newServices = [...services];
@@ -131,7 +137,7 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
           {/* Service Type Toggles */}
           <div className="flex bg-slate-100 p-1 rounded-xl mb-2">
             <button
-              onClick={() => setActiveTab('maintenance')}
+              onClick={() => handleTabChange('maintenance')}
               className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'maintenance'
                 ? 'bg-white text-[#485AFF] shadow-sm'
                 : 'text-slate-500 hover:text-slate-700'
@@ -140,7 +146,7 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
               Subscription
             </button>
             <button
-              onClick={() => setActiveTab('construction')}
+              onClick={() => handleTabChange('construction')}
               className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'construction'
                 ? 'bg-white text-[#485AFF] shadow-sm'
                 : 'text-slate-500 hover:text-slate-700'

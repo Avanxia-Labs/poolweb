@@ -391,20 +391,16 @@ const MobileBody = () => {
         />
 
         {/* Contenedor del texto alineado */}
-        <div className="relative z-10 max-w-screen-sm mx-auto px-4 flex flex-col justify-end min-h-[500px] pb-10">
-          <div className="w-full max-w-[260px]"> {/* ← Aquí el ajuste importante */}
+        {/* Contenedor del texto alineado */}
+        <div className="relative z-10 max-w-screen-sm mx-auto px-4 flex flex-col justify-start pt-24 min-h-[500px]">
+          <div className="w-full max-w-[260px]">
             <article className="flex flex-col text-white">
               <h1 className="text-3xl font-bold tracking-tight leading-tight text-white mb-4 font-['Plus_Jakarta_Sans']">
                 Transform Your Pool Experience
               </h1>
               <p className="text-sm leading-relaxed text-white/90 mb-6 font-inter">
                 We combine expertise with dedication to deliver exceptional pool services
-                that exceed expectations. We combine expertise with dedication to deliver
-                exceptional pool services that exceed expectations.
-                <br /><br />
-                Exceptional pool services that exceed expectations. We combine expertise
-                with dedication to deliver exceptional pool services that exceed
-                expectations.
+                that exceed expectations.
               </p>
               <button
                 onClick={() => router.push('/contact')}
@@ -509,9 +505,7 @@ const MobileBody = () => {
       </section>
 
 
-      <section className="w-full bg-slate-900 px-0 pt-0">
-        <Footer />
-      </section>
+      <Footer />
     </main>
   );
 };

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import NavBar from '@/components/Desktop/NavBar'
-import FooterSection from '@/components/Desktop/FooterSection'
+import Footer from '@/components/shared/Footer'
 import MobileNavBar from '@/components/Mobile/MobileNavBar'
 
 export default function BlogLayout({
@@ -22,7 +22,7 @@ export default function BlogLayout({
       </div>
 
       <main>{children}</main>
-      <FooterSection />
+      <Footer />
     </>
   )
 }
