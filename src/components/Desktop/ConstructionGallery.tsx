@@ -12,7 +12,7 @@ const galleryItems = [
         category: "Blueprint Phase",
         color: "from-blue-500 to-indigo-600",
         icon: <Ruler className="w-6 h-6 text-white/80" />,
-        image: "/images/design-custom-pool.png"
+        image: "/images/projects/new-construction-1/new-construction-1-1.jpeg"
     },
     {
         id: 2,
@@ -20,7 +20,7 @@ const galleryItems = [
         category: "Construction",
         color: "from-slate-600 to-slate-800",
         icon: <BrickWall className="w-6 h-6 text-white/80" />,
-        image: "/images/custom-pool-two.png"
+        image: "/images/projects/commercial-renovation/commercial-renovation-1.jpeg"
     },
     {
         id: 3,
@@ -28,7 +28,7 @@ const galleryItems = [
         category: "Final Touch",
         color: "from-emerald-500 to-teal-600",
         icon: <Sparkles className="w-6 h-6 text-white/80" />,
-        image: "/images/custom-pool-one.png"
+        image: "/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg"
     }
 ];
 

@@ -49,133 +49,109 @@ export const categoryConfig: Record<ConstructionCategory, {
   }
 };
 
-// Placeholder projects - client will send real photos via email
+// Real projects imported from filesystem assets
 export const constructionProjects: ConstructionProject[] = [
-  // NEW BUILD projects
+  // NEW BUILD - Custom Project 1 (New Construction)
   {
-    id: 'new-1',
+    id: 'new-cust-1',
     category: 'NEW_BUILD',
-    title: 'Modern Geometric Pool',
-    description: 'Contemporary rectangular pool design with clean lines and minimalist aesthetic.',
-    dimensions: "32' x 16'",
-    features: ['LED lighting', 'automatic cover', 'salt water system'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
+    title: 'Custom Pool Build',
+    description: 'A stunning new custom pool construction showcasing our precision engineering and design capabilities.',
+    images: [
+      '/images/projects/new-construction-1/new-construction-1-1.jpeg',
+      '/images/projects/new-construction-1/new-construction-1-2.jpeg',
+      '/images/projects/new-construction-1/new-construction-1-3.jpeg',
+      '/images/projects/new-construction-1/new-construction-1-4.jpeg',
+      '/images/projects/new-construction-1/new-construction-1-5.jpeg'
+    ]
   },
+  // NEW BUILD - New Pool 24x12
   {
-    id: 'new-2',
+    id: 'new-pool-sun',
     category: 'NEW_BUILD',
-    title: 'Family Resort Pool',
-    description: 'Spacious freeform pool perfect for family gatherings and entertainment.',
-    dimensions: "28' x 18'",
-    features: ['sun shelf', 'waterfall', 'beach entry'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
-  },
-  {
-    id: 'new-3',
-    category: 'NEW_BUILD',
-    title: 'Lap Pool Elite',
-    description: 'Professional-grade lap pool for fitness enthusiasts.',
-    dimensions: "50' x 12'",
-    features: ['swim jets', 'lane markers', 'heating system'],
-    images: ['/images/pool.png', '/images/pool.png']
-  },
-
-  // COMMERCIAL RENOVATION projects
-  {
-    id: 'comm-1',
-    category: 'COMMERCIAL_RENOVATION',
-    title: 'Hotel Pool Modernization',
-    description: 'Complete renovation of hotel pool with modern amenities and safety features.',
-    dimensions: "60' x 30'",
-    features: ['ADA compliant', 'commercial filtration', 'safety lighting'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
-  },
-  {
-    id: 'comm-2',
-    category: 'COMMERCIAL_RENOVATION',
-    title: 'Country Club Refresh',
-    description: 'Elegant upgrade to country club pool facilities.',
-    dimensions: "45' x 25'",
-    features: ['new tile work', 'modern equipment', 'enhanced lighting'],
-    images: ['/images/pool.png', '/images/pool.png']
-  },
-
-  // RESIDENTIAL RENOVATION projects
-  {
-    id: 'res-1',
-    category: 'RESIDENTIAL_RENOVATION',
-    title: 'Backyard Transformation',
-    description: 'Complete makeover of an aging pool into a modern oasis.',
+    title: 'Pool with Sun Shelf & Waterfall',
+    description: '24x12 pool featuring a relaxing sun shelf and elegant waterfall with custom stonework.',
     dimensions: "24' x 12'",
-    features: ['new plaster', 'updated tile', 'energy-efficient pump'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
+    images: [
+      '/images/projects/new-pool-waterfall/new-pool-waterfall-1.jpeg',
+      '/images/projects/new-pool-waterfall/new-pool-waterfall-2.jpeg',
+      '/images/projects/new-pool-waterfall/new-pool-waterfall-3.jpeg'
+    ]
   },
+  // NEW BUILD - New Construction 24x12
   {
-    id: 'res-2',
-    category: 'RESIDENTIAL_RENOVATION',
-    title: 'Vintage Pool Revival',
-    description: 'Restoring charm while adding modern functionality.',
-    dimensions: "30' x 15'",
-    features: ['replastering', 'new coping', 'LED conversion'],
-    images: ['/images/pool.png', '/images/pool.png']
+    id: 'new-basic-24x12',
+    category: 'NEW_BUILD',
+    title: 'New Construction 24x12',
+    description: 'Efficient and beautiful 24x12 custom pool build.',
+    dimensions: "24' x 12'",
+    images: ['/images/projects/new-construction-24x12/new-construction-24x12-1.jpeg']
   },
+  // NEW BUILD - Custom 2
   {
-    id: 'res-3',
-    category: 'RESIDENTIAL_RENOVATION',
-    title: 'Pool Deck Renovation',
-    description: 'New deck and surface work for improved aesthetics and safety.',
-    dimensions: "26' x 14'",
-    features: ['travertine deck', 'new waterline tile', 'safety rails'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
+    id: 'new-cust-2',
+    category: 'NEW_BUILD',
+    title: 'Custom Pool Project II',
+    description: 'Another example of our bespoke pool construction expertise.',
+    images: ['/images/projects/new-construction-2/new-construction-2-1.jpeg']
   },
-
-  // PEBBLE FINISH projects
+  // NEW BUILD - Custom 3
   {
-    id: 'peb-1',
-    category: 'PEBBLE_FINISH',
-    title: 'Caribbean Blue Pebble',
-    description: 'Stunning Caribbean blue pebble finish for a tropical feel.',
-    dimensions: "22' x 11'",
-    features: ['PebbleTec finish', 'color-matched trim', 'UV resistant'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
-  },
-  {
-    id: 'peb-2',
-    category: 'PEBBLE_FINISH',
-    title: 'Natural Stone Pebble',
-    description: 'Earth-tone pebble finish blending with natural landscaping.',
-    dimensions: "28' x 16'",
-    features: ['natural stone blend', 'non-slip texture', 'long durability'],
-    images: ['/images/pool.png', '/images/pool.png']
+    id: 'new-cust-3',
+    category: 'NEW_BUILD',
+    title: 'Custom Pool Project III',
+    description: 'Tailored design meeting specific client requirements.',
+    images: ['/images/projects/new-construction-3/new-construction-3-1.jpeg']
   },
 
-  // POOL SPA INFINITY projects
+  // COMMERCIAL RENOVATION
   {
-    id: 'inf-1',
-    category: 'POOL_SPA_INFINITY',
-    title: 'Hillside Infinity Edge',
-    description: 'Breathtaking infinity edge pool with panoramic views.',
-    dimensions: "36' x 18'",
-    features: ['infinity edge', 'attached spa', 'fire features'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
+    id: 'comm-reno-1',
+    category: 'COMMERCIAL_RENOVATION',
+    title: 'Commercial Pool Renovation',
+    description: 'Complete renovation of commercial aquatic facilities to meet modern standards.',
+    images: [
+      '/images/projects/commercial-renovation/commercial-renovation-1.jpeg',
+      '/images/projects/commercial-renovation/commercial-renovation-2.jpeg',
+      '/images/projects/commercial-renovation/commercial-renovation-3.jpeg',
+      '/images/projects/commercial-renovation/commercial-renovation-4.jpeg',
+      '/images/projects/commercial-renovation/commercial-renovation-5.jpeg'
+    ]
   },
+
+  // RESIDENTIAL RENOVATION
   {
-    id: 'inf-2',
-    category: 'POOL_SPA_INFINITY',
-    title: 'Luxury Spa Combo',
-    description: 'Elegant pool and spa combination with spillover feature.',
-    dimensions: "32' x 16' + 8' spa",
-    features: ['spillover spa', 'infinity edge', 'smart controls'],
-    images: ['/images/pool.png', '/images/pool.png', '/images/pool.png']
+    id: 'res-reno-1',
+    category: 'RESIDENTIAL_RENOVATION',
+    title: 'Residential Renovation',
+    description: 'Transforming an existing residential pool into a modern backyard centerpiece.',
+    images: [
+      '/images/projects/residential-renovation/residential-renovation-1.jpeg',
+      '/images/projects/residential-renovation/residential-renovation-2.jpeg',
+      '/images/projects/residential-renovation/residential-renovation-3.jpeg'
+    ]
   },
+
+  // PEBBLE FINISH
   {
-    id: 'inf-3',
+    id: 'pebble-1',
+    category: 'PEBBLE_FINISH',
+    title: 'Pebble Finish Installation',
+    description: 'High-quality pebble finish application for superior durability and aesthetics.',
+    images: ['/images/projects/pebble-installation/pebble-installation-1.jpeg']
+  },
+
+  // POOL SPA INFINITY
+  {
+    id: 'infinity-1',
     category: 'POOL_SPA_INFINITY',
-    title: 'Resort-Style Infinity',
-    description: 'Resort-inspired design with multiple water features.',
-    dimensions: "40' x 20'",
-    features: ['double infinity', 'integrated spa', 'swim-up bar'],
-    images: ['/images/pool.png', '/images/pool.png']
+    title: 'Pool & Spa Infinity Edge',
+    description: 'Luxury pool and spa combination featuring a stunning infinity edge design.',
+    images: [
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg',
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg',
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-3.jpeg'
+    ]
   }
 ];
 
