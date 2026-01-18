@@ -289,11 +289,13 @@ const MobileAboutContent = () => {
       />
     </div>
 
- {/* Destacado exacto según Figma con 10+ arriba y texto debajo alineados a la izquierda */}
+ {/* Badge 10+ Years - Diseño mejorado */}
 <div className="flex flex-col items-center w-full">
-  <div className="flex flex-col justify-center w-[167px] h-[48px] px-[18px] bg-[#485AFF] rounded-[10px] text-white">
-    <span className="text-[20px] font-extrabold leading-none">10+</span>
-    <span className="text-[12px] font-semibold leading-none -mt-[2px]">Years of experience</span>
+  <div className="flex flex-col justify-center w-[180px] h-[60px] px-5 py-2
+                  bg-gradient-to-r from-[#485AFF] to-[#6366F1]
+                  rounded-xl text-white shadow-lg">
+    <span className="text-[24px] font-extrabold leading-tight">10+</span>
+    <span className="text-[13px] font-semibold leading-tight">Years of experience</span>
   </div>
 </div>
 

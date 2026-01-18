@@ -232,4 +232,219 @@ body {
 }
 
 
+/* Project Card Animations */
+.project-card {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Project Carousel Styles */
+.projects-carousel {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.projects-carousel-item {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* Tag Badge Glow Effect */
+.tag-badge {
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+}
+
+/* Pagination Dot Animation */
+.pagination-dot {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pagination-dot.active {
+  transform: scale(1.3);
+}
+
+/* Arrow Animation for CTA */
+@keyframes arrow-bounce {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-arrow-bounce:hover .arrow-icon {
+  animation: arrow-bounce 0.6s ease-in-out infinite;
+}
+
+/* =====================================================
+   CONSTRUCTION SERVICE HIGHLIGHT STYLES
+   ===================================================== */
+
+/* Glow effect for Construction Service header - Desktop */
+.construction-service-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.construction-service-highlight::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #10B981, #4CF7FB, #485AFF, #8B5CF6);
+  border-radius: inherit;
+  z-index: -1;
+  animation: gradient-rotate 3s linear infinite;
+  opacity: 0.7;
+}
+
+.construction-service-highlight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* Glow effect for Construction Service header - Mobile */
+.construction-service-highlight-mobile {
+  position: relative;
+  overflow: hidden;
+}
+
+.construction-service-highlight-mobile::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, #10B981, #06B6D4, #485AFF, #8B5CF6);
+  border-radius: inherit;
+  z-index: -1;
+  animation: gradient-rotate 4s linear infinite;
+  opacity: 0.6;
+}
+
+/* Gradient rotation animation */
+@keyframes gradient-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Category Tab Active State with Glow */
+.category-tab-active {
+  transform: scale(1.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gallery Image Transitions */
+.gallery-image {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-image.current {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 10;
+}
+
+.gallery-image.side {
+  transform: scale(0.85);
+  opacity: 0.6;
+  z-index: 5;
+}
+
+/* Scrollbar hiding for horizontal scroll areas */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Featured Badge Pulse Animation */
+@keyframes featured-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+}
+
+.featured-badge-pulse {
+  animation: featured-pulse 2s ease-in-out infinite;
+}
+
+/* Image fade-in animation */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.4s ease-out;
+}
+
+/* Shimmer loading effect for images */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* =====================================================
+   TABS SCROLL INDICATORS
+   ===================================================== */
+
+/* Fade gradient overlay on left edge of tabs */
+.tabs-scroll-indicator-left {
+  background: linear-gradient(to right, white 0%, transparent 100%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 10;
+}
+
+/* Fade gradient overlay on right edge of tabs */
+.tabs-scroll-indicator-right {
+  background: linear-gradient(to left, white 0%, transparent 100%);
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 10;
+}
 

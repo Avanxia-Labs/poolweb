@@ -1,54 +1,93 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import CarouselPagination from "@/components/shared/CarouselPagination";
 
 // Definimos la estructura de datos para el contenido del Hero
 type HeroContent = {
   id: number;
+  serviceId: string;
   title: string;
   description: string;
 };
 
 export const Section1: React.FC = () => {
-  // Datos para el carrusel de contenido
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Datos para el carrusel de contenido - Custom Pool Design in position 2 (middle)
   const heroContents: HeroContent[] = [
     {
       id: 0,
+      serviceId: "pool-maintenance",
       title: "Pool Maintenance",
       description: "Proactive weekly care ensuring balanced chemistry, pristine cleanliness, and optimal equipment function. Enjoy a worry-free, swim-ready pool year-round."
     },
     {
       id: 1,
+      serviceId: "pool-cleaning",
       title: "Pool Cleaning",
       description: "Restore your pool's sparkle. We provide thorough one-time or regular cleaning, including brushing, vacuuming, and stain/algae treatment."
     },
     {
       id: 2,
+      serviceId: "design-and-construction",
+      title: "Custom Pool Design & Construction",
+      description: "Transform your backyard into a stunning oasis. From infinity pools to tropical retreats, we design and build custom pools tailored to your vision."
+    },
+    {
+      id: 3,
+      serviceId: "equipment-repair",
       title: "Equipment Repair & Installation",
       description: "Fast, expert repairs for pumps, filters, heaters, and more. We also install high-quality, energy-efficient new equipment for lasting performance."
     },
     {
-      id: 3,
+      id: 4,
+      serviceId: "pool-automation",
       title: "Pool Automation",
       description: "Simplify pool ownership with smart automation. Control pumps, heating, lights, and cleaning easily from anywhere via your smartphone or tablet."
     },
     {
-      id: 4,
+      id: 5,
+      serviceId: "diagnostics",
       title: "Diagnostics & Troubleshooting",
       description: "Persistent pool problems? Our expert diagnostics pinpoint the root cause of water quality issues, leaks, or equipment malfunctions for targeted, effective solutions."
-    },
-    {
-      id: 5,
-      title: "Green Pool Recovery",
-      description: "Transform your green, algae-filled pool back to crystal clear water with our specialized treatment program and expert techniques."
     }
   ];
 
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // Get initial slide from URL query parameter
+  const getInitialSlide = () => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam) {
+      const index = heroContents.findIndex(h => h.serviceId === serviceParam);
+      if (index !== -1) return index;
+    }
+    return 2; // Default to Custom Pool Design & Construction
+  };
+
+  const [currentSlide, setCurrentSlide] = useState(getInitialSlide());
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+
+  // Update URL when slide changes
+  const updateUrlWithService = (index: number) => {
+    const serviceId = heroContents[index].serviceId;
+    router.push(`/services?service=${serviceId}`, { scroll: false });
+  };
+
+  // Sync with URL changes
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam) {
+      const index = heroContents.findIndex(h => h.serviceId === serviceParam);
+      if (index !== -1 && index !== currentSlide) {
+        setCurrentSlide(index);
+      }
+    }
+  }, [searchParams]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX);
@@ -77,6 +116,7 @@ export const Section1: React.FC = () => {
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
+    updateUrlWithService(index);
   };
 
   return (
@@ -137,22 +177,15 @@ export const Section1: React.FC = () => {
           </p>
         </div>
 
-        
+
         {/* Pagination */}
-        <div className="flex relative z-10 gap-5 justify-center items-center p-3.5 mt-auto bg-indigo-500 rounded-3xl">
-          {heroContents.map((_, index) => (
-            <button
-              className="flex shrink-0 self-stretch my-auto rounded-lg cursor-pointer duration-300 ease-in-out h-3 w-3"
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              aria-current={currentSlide === index ? "true" : "false"}
-              style={{
-                backgroundColor:
-                  currentSlide === index ? "#FFF" : "rgba(80, 0, 243, 1)",
-              }}
-            />
-          ))}
+        <div className="relative z-10 mt-auto mb-8">
+          <CarouselPagination
+            totalItems={heroContents.length}
+            activeIndex={currentSlide}
+            onIndexChange={goToSlide}
+            variant="white"
+          />
         </div>
       </div>
     </section>

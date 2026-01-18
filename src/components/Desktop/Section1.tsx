@@ -33,14 +33,14 @@ function Section1() {
     return (
         <section className='flex w-full mx-auto h-[1200px] flex-col items-start shrink-0 overflow-visible'>
 
-            <div id='Frame5' className='relative flex h-3/8 flex-col items-center gap-4 md:gap-5 lg:gap-[23px] w-full max-w-[650px] mx-auto justify-center'>
+            <div id='Frame5' className='relative flex h-3/8 flex-col items-center gap-4 md:gap-5 lg:gap-8 w-full max-w-[800px] mx-auto justify-center'>
                 {/* Main heading - Responsive text scaling */}
-                <p className='text-[#0F172A] text-center font-inter text-4xl md:text-5xl lg:text-[80px] font-bold leading-tight md:leading-tight lg:leading-[86px] tracking-tight md:tracking-tighter lg:tracking-[-4px] self-stretch'>
+                <p className="text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight self-stretch">
                     Transform Your Pool Experience
                 </p>
 
                 {/* Subheading - Responsive width and text size */}
-                <p className='text-[#212939] text-center font-inter text-lg md:text-xl lg:text-[24px] font-normal leading-relaxed md:leading-relaxed lg:leading-[40px] w-full max-w-[594px] px-4 md:px-6 lg:px-0'>
+                <p className="text-[#212939] text-center font-inter text-lg md:text-xl lg:text-2xl font-normal leading-relaxed w-full max-w-[700px] px-4 md:px-6 lg:px-0">
                     We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
                 </p>
 

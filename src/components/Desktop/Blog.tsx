@@ -130,20 +130,18 @@ export default function Blog({ initialSearch = '' }: BlogProps) {
                 ))}
               </div>
             ) : (
-              <div className="relative">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <PostCardSkeleton key={i} />
-                  ))}
+              <div className="flex flex-col items-center justify-center py-12 px-6 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="w-12 h-12 mb-4 rounded-full bg-[#485AFF]/10 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-[#485AFF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
                 </div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/50 pointer-events-none">
-                  <h3 className="text-2xl font-semibold text-gray-700">
-                    More Articles Coming Soon
-                  </h3>
-                  <p className="mt-2 text-gray-500">
-                    We’re preparing new content for you.
-                  </p>
-                </div>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  Coming Soon
+                </h3>
+                <p className="mt-1 text-sm text-gray-500 text-center">
+                  More articles are on the way.
+                </p>
               </div>
             )}
           </div>

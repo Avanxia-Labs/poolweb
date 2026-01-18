@@ -37,6 +37,7 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
   const [poolGallons, setPoolGallons] = useState(DEFAULT_GALLONS);
   const [services, setServices] = useState(DEFAULT_SERVICES);
   const [isHovered, setIsHovered] = useState(false);
+  const [activeTab, setActiveTab] = useState<'maintenance' | 'construction'>('maintenance');
   const cardRef = useRef<HTMLDivElement | null>(null);
 
   const toggleService = (index: number) => {
@@ -72,7 +73,7 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
       filterWash: String(services[1].checked),
       total: String(calculateTotal())
     }).toString();
-    
+
     router.push(`/contact?${queryParams}`);
   };
 
@@ -80,7 +81,7 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
   const containerClass = isMobile
     ? "w-full flex justify-center pt-10 pb-16 px-6"
     : "";
-  
+
   const cardClass = isMobile
     ? "mt-6 bg-white p-6 rounded-3xl shadow-lg relative overflow-hidden z-10 w-full max-w-[clamp(320px,95vw,768px)] mx-auto"
     : "box-border px-12 py-12 rounded-3xl shadow-lg max-md:p-8 max-md:max-w-full max-sm:p-6 max-sm:rounded-3xl relative overflow-hidden z-10 bg-white w-full max-w-xl mx-auto";
@@ -108,19 +109,17 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
       >
         {/* Blob superior izquierdo */}
         <div
-          className={`absolute w-80 h-80 left-[-170px] top-[-170px] rounded-full blur-lg transition-all duration-700 ease-out z-0 ${
-            isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-          }`}
+          className={`absolute w-80 h-80 left-[-170px] top-[-170px] rounded-full blur-lg transition-all duration-700 ease-out z-0 ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+            }`}
           style={{
             background: 'linear-gradient(205deg, rgba(255, 227, 174, 1) 7.53%, rgba(175, 239, 239, 1) 84.19%)',
           }}
         />
-        
+
         {/* Blob inferior derecho */}
         <div
-          className={`absolute w-80 h-80 right-[-120px] bottom-[-120px] rounded-full blur-lg transition-all duration-700 ease-out z-0 ${
-            isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-          }`}
+          className={`absolute w-80 h-80 right-[-120px] bottom-[-120px] rounded-full blur-lg transition-all duration-700 ease-out z-0 ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+            }`}
           style={{
             background: 'linear-gradient(205deg, rgba(255, 227, 174, 1) 7.53%, rgba(175, 239, 239, 1) 84.19%)',
           }}
@@ -128,82 +127,155 @@ export function SubscriptionCalculator({ isMobile = false }: SubscriptionCalcula
 
         {/* Contenido principal */}
         <div className="relative z-20 flex flex-col gap-4 w-full">
-        <h1
-          className={titleClass}
-          style={{ wordSpacing: '0.75rem' }}
-        >
-          Calculate your<br className="md:hidden" />
-          <span className="block mt-3">
-            subscription price
-          </span>
-        </h1>
 
-          <div className="text-left">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="gallons"
-                className="text-sm font-bold text-[#051535] font-inter md:text-lg"
-              >
-                How many gallons is your pool?
-              </label>
-              <a
-                href="#contact"
-                className="text-sm font-bold text-[#485AFF] font-inter md:text-lg hover:underline"
-              >
-                Don't know?
-              </a>         
+          {/* Service Type Toggles */}
+          <div className="flex bg-slate-100 p-1 rounded-xl mb-2">
+            <button
+              onClick={() => setActiveTab('maintenance')}
+              className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'maintenance'
+                ? 'bg-white text-[#485AFF] shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
+                }`}
+            >
+              Subscription
+            </button>
+            <button
+              onClick={() => setActiveTab('construction')}
+              className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'construction'
+                ? 'bg-white text-[#485AFF] shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
+                }`}
+            >
+              Construction
+            </button>
           </div>
 
-            <input
-              id="gallons"
-              type="number"
-              value={poolGallons || ''}
-              onChange={handleGallonsChange}
-              className={inputClass}
-              min="0"
-            />
-          </div>
+          {activeTab === 'maintenance' ? (
+            <div className="animate-in fade-in slide-in-from-right-4 duration-300">
+              <h1
+                className={titleClass}
+                style={{ wordSpacing: '0.75rem' }}
+              >
+                Calculate your<br className="md:hidden" />
+                <span className="block mt-3">
+                  subscription price
+                </span>
+              </h1>
 
-          <div className="space-y-3 mt-2">
-            {services.map((service, index) => (
-              <div key={service.id} className="flex justify-between items-center">
-                <label className="flex items-center text-sm font-bold text-slate-900 cursor-pointer md:text-lg">
-                  <input
-                    type="checkbox"
-                    checked={service.checked}
-                    onChange={() => toggleService(index)}
-                    className="mr-2 w-5 h-5 accent-blue-600"
-                  />
-                  {service.name}
-                </label>
-                <span className="text-sm font-bold text-slate-900 md:text-lg">+{service.price}</span>
+              <div className="text-left">
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="gallons"
+                    className="text-sm font-bold text-[#051535] font-inter md:text-lg"
+                  >
+                    How many gallons is your pool?
+                  </label>
+                  <a
+                    href="#contact"
+                    className="text-sm font-bold text-[#485AFF] font-inter md:text-lg hover:underline"
+                  >
+                    Don't know?
+                  </a>
+                </div>
+
+                <input
+                  id="gallons"
+                  type="number"
+                  value={poolGallons || ''}
+                  onChange={handleGallonsChange}
+                  className={inputClass}
+                  min="0"
+                />
               </div>
-            ))}
-          </div>
 
-          <hr className="my-5 h-px bg-slate-300" />
+              <div className="space-y-3 mt-2">
+                {services.map((service, index) => (
+                  <div key={service.id} className="flex justify-between items-center">
+                    <label className="flex items-center text-sm font-bold text-slate-900 cursor-pointer md:text-lg">
+                      <input
+                        type="checkbox"
+                        checked={service.checked}
+                        onChange={() => toggleService(index)}
+                        className="mr-2 w-5 h-5 accent-blue-600"
+                      />
+                      {service.name}
+                    </label>
+                    <span className="text-sm font-bold text-slate-900 md:text-lg">+{service.price}</span>
+                  </div>
+                ))}
+              </div>
 
-          <div className="text-left">
-            <h3 className="text-sm font-medium text-slate-500 md:text-lg">ESTIMATED PRICE:</h3>
-            <p className={priceClass}>
-              ${calculateTotal()} / MONTH
-            </p>
-          </div>
+              <hr className="my-5 h-px bg-slate-300" />
 
-          <div className="mt-4">
-            {isMobile ? (
-              <button
-                onClick={handleRedirect}
-                className="mt-4 flex flex-col justify-center items-center gap-[4.236px] px-[8.472px] py-[6.778px] text-[12px] font-extrabold text-white bg-[#485AFF] rounded-[3.389px] text-left w-fit"
-              >
-                Request Subscription
-              </button>
-            ) : (
-              <Link href="/contact">
-                <FancyButton text="Request Subscription" onClick={handleRedirect} />
-              </Link>
-            )}
-          </div>
+              <div className="text-left">
+                <h3 className="text-sm font-medium text-slate-500 md:text-lg">ESTIMATED PRICE:</h3>
+                <p className={priceClass}>
+                  ${calculateTotal()} / MONTH
+                </p>
+              </div>
+
+              <div className="mt-4">
+                {isMobile ? (
+                  <button
+                    onClick={handleRedirect}
+                    className="mt-4 flex flex-col justify-center items-center gap-[4.236px] px-[8.472px] py-3 text-[14px] font-extrabold text-white bg-[#485AFF] rounded-[8px] text-left w-full shadow-md active:scale-[0.98] transition-all"
+                  >
+                    Request Subscription
+                  </button>
+                ) : (
+                  <Link href="/contact">
+                    <FancyButton text="Request Subscription" onClick={handleRedirect} />
+                  </Link>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src="/images/custom_comparative2@2x.png"
+                  alt="Custom Pool Construction"
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-3 left-3">
+                  <span className="px-2 py-1 text-[10px] font-bold bg-white/90 text-[#485AFF] rounded-full uppercase tracking-wider">
+                    Premium Design
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <h3 className={isMobile
+                  ? "text-[22px] font-bold text-[#052F52] font-['Plus_Jakarta_Sans'] mb-2"
+                  : "text-3xl font-bold text-[#052F52] font-['Plus_Jakarta_Sans'] mb-4"
+                }>
+                  Build Your Dream Pool
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed font-inter px-2">
+                  Ready to transform your backyard? Our custom design team will guide you through every step, from concept to construction.
+                </p>
+              </div>
+
+              <div className="mt-2 text-center">
+                <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">
+                  Free Consultation & Quote
+                </p>
+                {isMobile ? (
+                  <Link
+                    href="/contact?service=design-and-construction"
+                    className="flex items-center justify-center w-full py-4 text-[14px] font-extrabold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-[8px] shadow-lg active:scale-[0.98] transition-all"
+                  >
+                    Get Construction Quote
+                  </Link>
+                ) : (
+                  <Link href="/contact?service=design-and-construction">
+                    <FancyButton text="Get Construction Quote" onClick={() => { }} />
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

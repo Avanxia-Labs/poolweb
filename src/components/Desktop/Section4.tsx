@@ -26,22 +26,22 @@ function Section4() {
           id='Group9'
           className='absolute inset-0 w-full max-w-[65.4vw] h-full flex-shrink-0 left-0 top-0'
         >
-        <div
-        id='Content'
-        className="
+          <div
+            id='Content'
+            className="
             absolute
             top-[-0%]           /* opcional: bajas un poco si sigue chocando abajo */
             left-[65%]          /* más espacio para el texto */
             w-full
             max-w-[55vw]        /* ancho ampliado para que quepa mejor */
         "
-        >
+          >
             <div id='Frame61' className='w-full mb-[1vw]'>
               {/* Nombre */}
               <p
                 className="
-                  text-[#0F172A] font-inter font-semibold leading-[1.4] mb-[0.3vw]
-                  text-[13px]        /* tamaño fijo 13px */
+                  text-[#0F172A] font-inter font-semibold leading-[1.2] mb-2
+                  text-3xl lg:text-4xl
                 "
               >
                 Yosbani Martinez
@@ -50,7 +50,7 @@ function Section4() {
               <p
                 className="
                   text-[#485AFF] font-inter font-medium leading-[1.4]
-                  text-[13px]        /* tamaño fijo 13px */
+                  text-xl lg:text-2xl
                 "
               >
                 Founder & Chemical Engineer
@@ -58,11 +58,11 @@ function Section4() {
             </div>
 
             {/* Descripción */}
-            <div id='Frame11' className='flex flex-col items-start gap-[0.96vw]'>
+            <div id='Frame11' className='flex flex-col items-start gap-6'>
               <p
                 className="
-                  text-[#18181B] font-inter leading-[1.5] max-w-[100%]
-                  text-[13px]        /* tamaño fijo 13px */
+                  text-[#18181B] font-inter leading-[1.6] max-w-[100%]
+                  text-base lg:text-lg text-pretty pr-10
                 "
               >
                 I founded Pool Quality Solutions to bring a higher level of scientific precision to pool care. As a Chemical Engineer, with a degree evaluated as equivalent to a U.S.
@@ -77,7 +77,7 @@ function Section4() {
                 rel='noopener noreferrer'
                 className="
                   hover:text-[#485AFF] text-[#A1A1AA] font-plusjakartasans font-extrabold italic underline
-                  text-[13px]        /* tamaño fijo 13px */
+                  text-sm lg:text-base
                   self-stretch
                 "
               >

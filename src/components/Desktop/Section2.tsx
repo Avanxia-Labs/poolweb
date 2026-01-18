@@ -4,6 +4,40 @@ import Image from 'next/image'
 import FancyButton from './FancyButton'
 import Link from 'next/link'
 
+const SERVICES = [
+    {
+        icon: "/svgs/Clock_Desktop2.svg",
+        title: "Regular Maintenance",
+        description: "Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly."
+    },
+    {
+        icon: "/svgs/bubble.svg",
+        title: "Deep and Routine Cleaning",
+        description: "We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy."
+    },
+    {
+        icon: "/svgs/helmet.svg",
+        title: "Custom Pool Design & Construction",
+        description: "Transform your backyard with custom pool design and construction using quality materials and exceptional finishes.",
+        featured: true
+    },
+    {
+        icon: "/svgs/tools.svg",
+        title: "Repair and Installation",
+        description: "We install and repair essential equipment for efficient and safe pool operation."
+    },
+    {
+        icon: "/svgs/balde.svg",
+        title: "Pool System Automation",
+        description: "Control your pool from your phone with smart technology that makes daily management easy."
+    },
+    {
+        icon: "/svgs/bulb.svg",
+        title: "Diagnosis and Troubleshooting",
+        description: "We quickly identify any pool issue and provide precise, effective solutions."
+    }
+];
+
 function Section2() {
     return (
 
@@ -22,7 +56,7 @@ function Section2() {
                         <Image src="/svgs/Deep.svg" alt="Deep" width={200} height={160} className="w-auto h-auto" />
                     </div>
 
-                    <h2 className="text-[#0F172A] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                    <h2 className="text-[#0F172A] text-4xl lg:text-5xl font-bold leading-tight tracking-tight font-['Plus_Jakarta_Sans']">
                         Into our Services
                     </h2>
 
@@ -33,7 +67,7 @@ function Section2() {
                     </Link>
 
 
-                    <p className="mt-2 max-w-2xl text-[#212939] text-base sm:text-lg md:text-xl leading-relaxed">
+                    <p className="mt-4 max-w-2xl text-[#485AFF] text-base lg:text-lg leading-relaxed font-inter font-medium">
                         We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
                     </p>
                 </div>
@@ -51,13 +85,39 @@ function Section2() {
                             <div className="hidden md:block absolute top-0 left-2/3 w-px h-full bg-[#E4E4E7]" />
 
                             {/* Grid responsive */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center">
-                                <Card icon="/svgs/Clock_Desktop2.svg" title="Regular Maintenance" description=" Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly." />
-                                <Card icon="/svgs/bubble.svg" title="Deep and Routine Cleaning" description="We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy." />
-                                <Card icon="/svgs/tools.svg" title="Repair and Installation" description="We install and repair essential equipment for efficient and safe pool operation." />
-                                <Card icon="/svgs/balde.svg" title="Pool System Automation" description="Control your pool from your phone with smart technology that makes daily management easy." />
-                                <Card icon="/svgs/bulb.svg" title="Diagnosis and Troubleshooting" description="We quickly identify any pool issue and provide precise, effective solutions." />
-                                <Card icon="/svgs/helmet.svg" title="Custom Pool Design &Construction" description="Coming soon: custom pool construction using quality materials and exceptional finishes." />
+                            {/* Grid responsive - Unified & Animated */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center relative z-10">
+                                {SERVICES.map((service, index) => (
+                                    <div
+                                        key={index}
+                                        className={`group relative w-full h-full flex justify-center items-center rounded-2xl p-4 md:p-6
+                                                    transition-all duration-500 ease-out
+                                                    hover:bg-white/40 hover:backdrop-blur-sm hover:shadow-lg
+                                                    hover:-translate-y-1 border border-transparent hover:border-white/30
+                                                    ${service.featured ? 'md:row-span-1' : ''}`}
+                                    >
+                                        {/* Featured Badge */}
+                                        {service.featured && (
+                                            <div className="absolute top-3 right-3 z-20 animate-fade-in">
+                                                <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold
+                                                               text-white bg-gradient-to-r from-emerald-500 to-cyan-500
+                                                               rounded-full shadow-sm">
+                                                    <span className="text-yellow-300 animate-pulse">&#9733;</span>
+                                                    Featured
+                                                </span>
+                                            </div>
+                                        )}
+
+                                        {/* Card Content */}
+                                        <div className="transform transition-transform duration-500">
+                                            <Card
+                                                icon={service.icon}
+                                                title={service.title}
+                                                description={service.description}
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
 
                         </div>

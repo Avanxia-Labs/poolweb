@@ -1,6 +1,10 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import ExplorePoolServices from './ExplorePoolServices';
 import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculator';
+import ConstructionServiceEnhanced from './ConstructionServiceEnhanced';
 
 // Definimos un tipo para los datos de servicios
 type ServiceData = {
@@ -14,8 +18,23 @@ type ServiceData = {
 };
 
 const Section2 = () => {
-  // Datos de los diferentes servicios
+  const searchParams = useSearchParams();
+
+  // Datos de los diferentes servicios - Custom Pool Design & Construction now in the middle
   const servicesData: ServiceData[] = [
+    {
+      id: 'pool-maintenance',
+      name: 'Pool Maintenance',
+      title: 'Professional Pool Maintenance Services',
+      description: [`
+        Choosing Pool Quality Maintenance changes everything. Our professional maintenance service ensures your investment is protected and your pool is always ready to enjoy. Following our maintenance schedule, we make sure all systems function correctly, extending the lifespan of your equipment and keeping the water crystal clear.\n
+        Our certified technicians perform comprehensive inspections of the filtration system, pumps, heaters, and automation systems. We check and adjust chemical levels to prevent problems like algae, cloudy water, or skin irritation. Regular maintenance eliminates debris buildup, reduces the chances of costly repairs, and allows you to enjoy your pool without worries.\n
+        Whether you need weekly, bi-weekly, or monthly service, our customized plans adapt to your specific needs. Equipped with the necessary tools and expertise, we perform preventive maintenance that saves time and money in the long run. Our knowledge of water chemistry and filtration systems ensures superior results. Let us handle the technical aspects while you simply enjoy your crystal-clear water and perfectly maintained pool environment.
+      `],
+      beforeAfterImage: '/images/maintenance-comparison.png',
+      beforeImage: '/images/maintenance-before.png',
+      afterImage: '/images/maintenance-after.png'
+    },
     {
       id: 'pool-cleaning',
       name: 'Pool Cleaning',
@@ -29,17 +48,17 @@ const Section2 = () => {
       afterImage: '/images/poolclean2.png'
     },
     {
-      id: 'pool-maintenance',
-      name: 'Pool Maintenance',
-      title: 'Professional Pool Maintenance Services',
+      id: 'design-and-construction',
+      name: 'Custom Pool Design & Construction',
+      title: 'Custom Pool Design & Construction',
       description: [`
-        Choosing Pool Quality Maintenance changes everything. Our professional maintenance service ensures your investment is protected and your pool is always ready to enjoy. Following our maintenance schedule, we make sure all systems function correctly, extending the lifespan of your equipment and keeping the water crystal clear.\n
-        Our certified technicians perform comprehensive inspections of the filtration system, pumps, heaters, and automation systems. We check and adjust chemical levels to prevent problems like algae, cloudy water, or skin irritation. Regular maintenance eliminates debris buildup, reduces the chances of costly repairs, and allows you to enjoy your pool without worries.\n
-        Whether you need weekly, bi-weekly, or monthly service, our customized plans adapt to your specific needs. Equipped with the necessary tools and expertise, we perform preventive maintenance that saves time and money in the long run. Our knowledge of water chemistry and filtration systems ensures superior results. Let us handle the technical aspects while you simply enjoy your crystal-clear water and perfectly maintained pool environment.
-      `],
-      beforeAfterImage: '/images/maintenance-comparison.png',
-      beforeImage: '/images/maintenance-before.png',
-      afterImage: '/images/maintenance-after.png'
+        At Pool Quality, we transform visions into stunning aquatic realities. Our custom design and construction process begins with a detailed consultation to fully understand your desires, needs, and the environment where your new pool will be located. Our expert designers create concepts that maximize your space, complement existing architecture, and reflect your personal style.\n
+        From infinity pools with panoramic views to intimate tropical oases or elegant minimalist designs, our construction team has the expertise to execute projects of any scale and complexity. We use the highest quality materials and advanced construction techniques that ensure durability, energy efficiency, and ease of maintenance. Every detail, from finish selection to the integration of special water features, is meticulously planned.\n
+        Throughout the construction process, we maintain transparent communication and constant supervision to ensure that every aspect meets our rigorous standards. Our commitment to excellence extends beyond project completion, offering comprehensive guidance on the maintenance and operation of your new pool. Let us create a custom aquatic space that not only beautifies your property but also enriches your lifestyle for many years to come.
+        `],
+      beforeAfterImage: '/images/design-custom-pool.png',
+      beforeImage: '/images/custom-pool-one.png',
+      afterImage: '/images/custom-pool-two.png'
     },
     {
       id: 'equipment-repair',
@@ -81,27 +100,31 @@ const Section2 = () => {
       beforeAfterImage: '/images/diagnostics-testing.png',
       beforeImage: '/images/problem-pool.png',
       afterImage: '/images/solution-implemented.png'
-    },
-    {
-      id: 'design-and-construction',
-      name: 'Custom Pool Design & Construction',
-      title: 'Custom Pool Design & Construction',
-      description: [`
-        At Pool Quality, we transform visions into stunning aquatic realities. Our custom design and construction process begins with a detailed consultation to fully understand your desires, needs, and the environment where your new pool will be located. Our expert designers create concepts that maximize your space, complement existing architecture, and reflect your personal style.\n
-        From infinity pools with panoramic views to intimate tropical oases or elegant minimalist designs, our construction team has the expertise to execute projects of any scale and complexity. We use the highest quality materials and advanced construction techniques that ensure durability, energy efficiency, and ease of maintenance. Every detail, from finish selection to the integration of special water features, is meticulously planned.\n
-        Throughout the construction process, we maintain transparent communication and constant supervision to ensure that every aspect meets our rigorous standards. Our commitment to excellence extends beyond project completion, offering comprehensive guidance on the maintenance and operation of your new pool. Let us create a custom aquatic space that not only beautifies your property but also enriches your lifestyle for many years to come.
-        `],
-      beforeAfterImage: '/images/design-custom-pool.png',
-      beforeImage: '/images/custom-pool-one.png',
-      afterImage: '/images/custom-pool-two.png'
     }
   ];
 
-  const [selectedService, setSelectedService] = useState<string>('pool-cleaning');
+  // Get initial service from URL query parameter, default to 'design-and-construction'
+  const getInitialService = () => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam && servicesData.some(s => s.id === serviceParam)) {
+      return serviceParam;
+    }
+    return 'design-and-construction';
+  };
+
+  const [selectedService, setSelectedService] = useState<string>(getInitialService());
   const [visible, setVisible] = useState(true);
   const [currentComponent, setCurrentComponent] = useState<'calculator' | 'explore'>(
-    ['pool-cleaning', 'pool-maintenance'].includes('pool-cleaning') ? 'calculator' : 'explore'
+    ['pool-cleaning', 'pool-maintenance'].includes(getInitialService()) ? 'calculator' : 'explore'
   );
+
+  // Update selected service when URL changes
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam && servicesData.some(s => s.id === serviceParam)) {
+      setSelectedService(serviceParam);
+    }
+  }, [searchParams]);
 
   const currentService = servicesData.find(service => service.id === selectedService) || servicesData[0];
 
@@ -128,40 +151,46 @@ const Section2 = () => {
 
         {/* Before/After Section - Lado izquierdo */}
         <div className="xl:col-span-7 w-full">
-          <div className="w-full mb-6 md:mb-8 lg:mb-[58px]">
-            <img
-              id='poolBeforeAndAfter'
-              src={currentService.beforeAfterImage}
-              alt="Pool service comparison"
-              className="rounded-lg w-full h-auto"
-            />
-          </div>
+          {selectedService === 'design-and-construction' ? (
+            <ConstructionServiceEnhanced />
+          ) : (
+            <>
+              <div className="w-full mb-6 md:mb-8 lg:mb-[58px]">
+                <img
+                  id='poolBeforeAndAfter'
+                  src={currentService.beforeAfterImage}
+                  alt="Pool service comparison"
+                  className="rounded-lg w-full h-auto"
+                />
+              </div>
 
-          <div id='serviceDescription' className="w-full mb-6 md:mb-8 lg:mb-[58px]">
-            <h2 className="md:px-4 text-2xl md:text-3xl font-bold text-blue-600 mb-3 md:mb-4">{currentService.title}</h2>
-            {currentService.description.map((paragraph, index) => (
-              <p key={index} className="md:px-4 text-gray-700 mb-3 md:mb-4 text-sm md:text-base whitespace-pre-line">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+              <div id='serviceDescription' className="w-full mb-6 md:mb-8 lg:mb-[58px]">
+                <h2 className="md:px-4 text-2xl md:text-3xl font-bold text-blue-600 mb-3 md:mb-4">{currentService.title}</h2>
+                {currentService.description.map((paragraph, index) => (
+                  <p key={index} className="md:px-4 text-gray-700 mb-3 md:mb-4 text-sm md:text-base whitespace-pre-line">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div id='beforeImage' className="border border-blue-200 rounded-lg overflow-hidden">
-              <img
-                src={currentService.beforeImage}
-                alt="Before service"
-                className="w-full h-auto"
-              />
-            </div>
-            <div id='afterImage' className="border border-blue-200 rounded-lg overflow-hidden">
-              <img
-                src={currentService.afterImage}
-                alt="After service"
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div id='beforeImage' className="border border-blue-200 rounded-lg overflow-hidden">
+                  <img
+                    src={currentService.beforeImage}
+                    alt="Before service"
+                    className="w-full h-auto"
+                  />
+                </div>
+                <div id='afterImage' className="border border-blue-200 rounded-lg overflow-hidden">
+                  <img
+                    src={currentService.afterImage}
+                    alt="After service"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Lado derecho - Usando flex column con gap fijo */}
@@ -175,14 +204,26 @@ const Section2 = () => {
                   {servicesData.map(service => (
                     <li
                       key={service.id}
-                      className={`cursor-pointer transition-colors duration-200 text-sm md:text-base ${
+                      className={`cursor-pointer transition-colors duration-200 text-sm md:text-base flex items-center gap-2 ${
+                        service.id === 'design-and-construction'
+                          ? 'font-semibold'
+                          : ''
+                      } ${
                         selectedService === service.id
                           ? "text-blue-600 font-medium"
                           : "text-gray-700 hover:text-blue-500"
                       }`}
                       onClick={() => setSelectedService(service.id)}
                     >
+                      {service.id === 'design-and-construction' && (
+                        <span className="text-yellow-500">&#9733;</span>
+                      )}
                       {service.name}
+                      {service.id === 'design-and-construction' && (
+                        <span className="ml-1 text-xs bg-gradient-to-r from-emerald-500 to-cyan-500 text-white px-2 py-0.5 rounded-full">
+                          Featured
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>

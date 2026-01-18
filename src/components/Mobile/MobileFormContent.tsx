@@ -23,12 +23,14 @@ const MobileFormContent = () => {
 
   useEffect(() => {
     const fromCalc = searchParams.get('gallons');
-    if (fromCalc) {
+    const serviceParam = searchParams.get('service');
+    // Auto-scroll to form when coming from calculator or "Request Quote" CTA
+    if (fromCalc || serviceParam) {
       const target = document.getElementById('subscription-form');
       if (target) {
         setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300); // Pequeña pausa para asegurar que todo cargue
+        }, 300);
       }
     }
   }, [searchParams]);
