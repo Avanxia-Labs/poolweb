@@ -65,18 +65,32 @@ export const constructionProjects: ConstructionProject[] = [
       '/images/projects/new-construction-1/new-construction-1-5.jpeg'
     ]
   },
-  // NEW BUILD - New Pool 24x12
+  // NEW BUILD - New Pool 24x12 (Split 1)
   {
-    id: 'new-pool-sun',
+    id: 'new-pool-sun-1',
     category: 'NEW_BUILD',
     title: 'Pool with Sun Shelf & Waterfall',
-    description: '24x12 pool featuring a relaxing sun shelf and elegant waterfall with custom stonework.',
+    description: 'Custom pool featuring a relaxing sun shelf and elegant waterfall feature.',
     dimensions: "24' x 12'",
-    images: [
-      '/images/projects/new-pool-waterfall/new-pool-waterfall-1.jpeg',
-      '/images/projects/new-pool-waterfall/new-pool-waterfall-2.jpeg',
-      '/images/projects/new-pool-waterfall/new-pool-waterfall-3.jpeg'
-    ]
+    images: ['/images/projects/new-pool-waterfall/new-pool-waterfall-2.jpeg']
+  },
+  // NEW BUILD - New Pool 24x12 (Split 2)
+  {
+    id: 'new-pool-sun-2',
+    category: 'NEW_BUILD',
+    title: 'Sun Shelf Pool Layout',
+    description: 'Spacious 24x12 pool design with integrated sun shelf and screen enclosure.',
+    dimensions: "24' x 12'",
+    images: ['/images/projects/new-pool-waterfall/new-pool-waterfall-1.jpeg']
+  },
+  // NEW BUILD - New Pool 24x12 (Split 3)
+  {
+    id: 'new-pool-sun-3',
+    category: 'NEW_BUILD',
+    title: 'Custom Sun Shelf Design',
+    description: 'Modern pool build with focused sun shelf area for ultimate relaxation.',
+    dimensions: "24' x 12'",
+    images: ['/images/projects/new-pool-waterfall/new-pool-waterfall-3.jpeg']
   },
   // NEW BUILD - New Construction 24x12
   {
@@ -149,8 +163,7 @@ export const constructionProjects: ConstructionProject[] = [
     description: 'Luxury pool and spa combination featuring a stunning infinity edge design.',
     images: [
       '/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg',
-      '/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg',
-      '/images/projects/pool-spa-infinity/pool-spa-infinity-3.jpeg'
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg'
     ]
   }
 ];
