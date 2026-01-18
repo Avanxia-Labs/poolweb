@@ -39,3 +39,33 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code
+.claude/
+tmpclaude*
+
+# Large media files (use CDN instead)
+# Uncomment these if you move videos to a CDN:
+# public/videos/*.mp4
+# public/videos/*.mov
+# public/videos/*.webm
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
