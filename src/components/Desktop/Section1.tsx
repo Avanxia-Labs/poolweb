@@ -31,57 +31,41 @@ function Section1() {
     }, []);
 
     return (
-        <section className='flex w-full mx-auto h-[1200px] flex-col items-start shrink-0 overflow-visible'>
+        <section className='flex w-full mx-auto min-h-[100vh] flex-col items-start shrink-0 overflow-visible pt-24 md:pt-32'>
 
-            <div id='Frame5' className='relative flex h-3/8 flex-col items-center gap-4 md:gap-5 lg:gap-8 w-full max-w-[800px] mx-auto justify-center'>
-                {/* Main heading - Responsive text scaling */}
-                <p className="text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight self-stretch">
+            <div id='Frame5' className='relative z-20 flex h-auto flex-col items-center gap-4 w-full max-w-[800px] mx-auto justify-center px-4 mb-12'>
+                {/* Main heading - Compacted size */}
+                <p className="text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight self-stretch">
                     Transform Your Pool Experience
                 </p>
 
-                {/* Subheading - Responsive width and text size */}
-                <p className="text-[#212939] text-center font-inter text-lg md:text-xl lg:text-2xl font-normal leading-relaxed w-full max-w-[700px] px-4 md:px-6 lg:px-0">
+                {/* Subheading - Compacted size */}
+                <p className="text-[#212939] text-center font-inter text-base md:text-lg lg:text-xl font-normal leading-relaxed w-full max-w-[700px] px-2">
                     We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
                 </p>
 
-                {/* CTA Button - Maintained proportions while being responsive */}
-                <button id='button' className='flex flex-col justify-center items-center gap-[10px] p-3 md:p-4 px-4 md:px-5 rounded-[8px]'>
+                {/* CTA Button - Compacted */}
+                <button id='button' className='flex flex-col justify-center items-center gap-[10px] p-2 mt-2'>
                     <div id='Frame1' className='flex justify-center items-center gap-[9px]'>
 
                         <Link href="/contact">
-                            <FancyButton text={"GET YOUR FREE ESTIMATE"} width="17.18rem" height="3.75rem" textSize="1.125rem" />
+                            <FancyButton text={"GET YOUR FREE ESTIMATE"} width="15rem" height="3.5rem" textSize="1rem" variant="luxury" />
                         </Link>
 
                         {/* Icon placeholder */}
                         <div id='icon'></div>
                     </div>
                 </button>
-
-                {/* Info dot/separator - Maintained for design consistency */}
-                <div id='info' className='w-[5px] h-[24px]'>
-                    <p className='text-[#9EA4B2] text-center font-poppins text-base lg:text-[16px] font-bold leading-none'>.</p>
-                </div>
             </div>
 
-            {/* <div className='h-[300px] bg-sky-400 w-full'> Video</div> */}
-
-            <div id='abajo' className='z-0 h-5/8 flex flex-col relative w-full overflow-visible'>
+            <div id='abajo' className='z-0 h-[750px] flex flex-col relative w-full overflow-visible'>
 
                 {/* //bg-white absolute top-[-10%] w-full */}
                 <div className='absolute top-[-5%] min-top-[-10%] w-full'>
                     <BeforeAfterAnimation currentText={currentText} />
                 </div>
 
-                {/* <div className=''>
-                    {currentText }
-
-                </div> */}
-
-
-
-                {/* Layer 4: Background water effect - Responsive positioning
-                absolute bottom-0 z-10 w-full h-[30%] md:h-[35%] lg:h-[40%] mx-auto */}
-
+                {/* Layer 4: Background water effect - Responsive positioning based on container height */}
                 <div id='vector1' className='absolute bottom-0 z-10 w-full h-[30%] md:h-[35%] lg:h-[40%] mx-auto'>
 
                     <svg width="0" height="0">

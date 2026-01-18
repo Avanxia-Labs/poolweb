@@ -6,35 +6,41 @@ import Link from 'next/link'
 
 const SERVICES = [
     {
+        icon: "/svgs/helmet.svg",
+        title: "Custom Pool Design & Construction",
+        description: "Transform your backyard with custom pool design and construction using quality materials and exceptional finishes.",
+        featured: true,
+        href: "/services?service=design-and-construction"
+    },
+    {
         icon: "/svgs/Clock_Desktop2.svg",
         title: "Regular Maintenance",
-        description: "Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly."
+        description: "Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly.",
+        href: "/services?service=pool-maintenance"
     },
     {
         icon: "/svgs/bubble.svg",
         title: "Deep and Routine Cleaning",
-        description: "We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy."
-    },
-    {
-        icon: "/svgs/helmet.svg",
-        title: "Custom Pool Design & Construction",
-        description: "Transform your backyard with custom pool design and construction using quality materials and exceptional finishes.",
-        featured: true
+        description: "We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy.",
+        href: "/services?service=pool-cleaning"
     },
     {
         icon: "/svgs/tools.svg",
         title: "Repair and Installation",
-        description: "We install and repair essential equipment for efficient and safe pool operation."
+        description: "We install and repair essential equipment for efficient and safe pool operation.",
+        href: "/services?service=equipment-repair"
     },
     {
         icon: "/svgs/balde.svg",
         title: "Pool System Automation",
-        description: "Control your pool from your phone with smart technology that makes daily management easy."
+        description: "Control your pool from your phone with smart technology that makes daily management easy.",
+        href: "/services?service=pool-automation"
     },
     {
         icon: "/svgs/bulb.svg",
         title: "Diagnosis and Troubleshooting",
-        description: "We quickly identify any pool issue and provide precise, effective solutions."
+        description: "We quickly identify any pool issue and provide precise, effective solutions.",
+        href: "/services?service=diagnostics"
     }
 ];
 
@@ -67,7 +73,7 @@ function Section2() {
                     </Link>
 
 
-                    <p className="mt-4 max-w-2xl text-[#485AFF] text-base lg:text-lg leading-relaxed font-inter font-medium">
+                    <p className="mt-4 max-w-2xl text-[#0F172A] text-base lg:text-lg leading-relaxed font-inter font-medium">
                         We combine expertise with dedication to deliver exceptional pool services that exceed expectations.
                     </p>
                 </div>
@@ -109,11 +115,12 @@ function Section2() {
                                         )}
 
                                         {/* Card Content */}
-                                        <div className="transform transition-transform duration-500">
+                                        <div className="transform transition-transform duration-500 h-full w-full">
                                             <Card
                                                 icon={service.icon}
                                                 title={service.title}
                                                 description={service.description}
+                                                href={service.href}
                                             />
                                         </div>
                                     </div>

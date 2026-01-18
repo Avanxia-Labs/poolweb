@@ -96,36 +96,42 @@ const MobileBody = () => {
       title: "Custom Pool Design & Construction",
       description:
         "Transform your backyard with custom pool design and construction using quality materials and exceptional finishes.",
+      href: "/services?service=design-and-construction"
     },
     {
       icon: "/svgs/Clock_mobile.svg",
       title: "Regular Maintenance",
       description:
         "Scheduled service to keep your pool in top condition, anticipating and correcting issues before they become costly.",
+      href: "/services?service=pool-maintenance"
     },
     {
       icon: "/svgs/routine_.svg",
       title: "Deep and Routine Cleaning",
       description:
         "We remove dirt, debris, and algae to ensure your pool stays clean, safe, and always ready to enjoy.",
+      href: "/services?service=pool-cleaning"
     },
     {
       icon: "/svgs/repair.svg",
       title: "Repair and Installation",
       description:
         "We install and repair essential equipment for efficient and safe pool operation.",
+      href: "/services?service=equipment-repair"
     },
     {
       icon: "/svgs/pool_sistem.svg",
       title: "Pool System Automation",
       description:
         "Control your pool from your phone with smart technology that makes daily management easy.",
+      href: "/services?service=pool-automation"
     },
     {
       icon: "/svgs/diagnosis.svg",
       title: "Diagnosis and Troubleshooting",
       description:
         "We quickly identify any pool issue and provide precise, effective solutions.",
+      href: "/services?service=diagnostics"
     },
   ];
 
@@ -198,6 +204,7 @@ const MobileBody = () => {
                             icon={card.icon}
                             title={card.title}
                             description={card.description}
+                            href={card.href}
                           />
                         </div>
                         {/* Glow effect on hover */}
@@ -215,6 +222,7 @@ const MobileBody = () => {
                           icon={card.icon}
                           title={card.title}
                           description={card.description}
+                          href={card.href}
                         />
                       </div>
                     )}

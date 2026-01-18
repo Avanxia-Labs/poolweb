@@ -1,89 +1,47 @@
-// // components/Card.tsx
-// import Image from 'next/image';
-
-// interface CardProps {
-//   icon: string;
-//   title: string;
-//   description: string;
-// }
-
-// export default function Card({ icon, title, description }: CardProps) {
-//   return (
-//     <div className='max-w-[330px] max-h-[217px] flex flex-col flex-shrink-0 gap-[1.19rem] items-center'>
-//       <Image className='pt-[1rem]' src={icon} alt={title} width={51} height={51} />
-//       <p className=' text-[#18181B] text-center font-plus_jakarta_sans text-[21px] font-bold leading-[28px] mx-auto max-w-[315px]'>
-//         {title}
-//       </p>
-
-//       <p className="touch-auto text-center text-gray-600 font-plus_jakarta_sans text-base font-normal leading-6 max-w-[90%] overflow-hidden text-ellipsis line-clamp-4 hover:overflow-y-auto hover:line-clamp-none max-h-[96px] transition-all duration-200 ease-in-out px-1">
-//         {description}
-//       </p>
-
-
-//     </div>
-//   );
-// }
-
-
 "use client"
 
 import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 interface CardProps {
   icon: string;
   title: string;
   description: string;
+  href: string;
 }
 
-export default function Card({ icon, title, description }: CardProps) {
-  const [isOverflowing, setIsOverflowing] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-
-  // Check if the text is overflowing
-  useEffect(() => {
-    const checkOverflow = () => {
-      if (descriptionRef.current) {
-        const element = descriptionRef.current;
-        setIsOverflowing(element.scrollHeight > element.clientHeight);
-      }
-    };
-
-    checkOverflow();
-    window.addEventListener('resize', checkOverflow);
-
-    return () => {
-      window.removeEventListener('resize', checkOverflow);
-    };
-  }, [description]);
-
+export default function Card({ icon, title, description, href }: CardProps) {
   return (
-    <div
-      className='max-w-[330px] max-h-[217px] flex flex-col flex-shrink-0 gap-[1.19rem] items-center relative'
-      onMouseEnter={() => isOverflowing && setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
-    >
-      <Image className='pt-[1rem]' src={icon} alt={title} width={51} height={51} />
-      <p className="text-[#18181B] text-center font-['Plus_Jakarta_Sans'] text-xl font-bold leading-tight mx-auto max-w-[315px]">
-        {title}
-      </p>
+    <div className='w-full flex flex-col flex-shrink-0 gap-[1.19rem] items-center py-4 h-full justify-between'>
+      <div className='flex flex-col items-center gap-[1.19rem]'>
+        <Image
+          className='pt-[0.5rem] mt-2'
+          src={icon}
+          alt={title}
+          width={51}
+          height={51}
+        />
 
-      <p
-        ref={descriptionRef}
-        className="touch-auto text-center text-gray-600 font-inter text-base font-normal leading-relaxed max-w-[90%] overflow-hidden text-ellipsis line-clamp-4 max-h-[96px] px-1"
-      >
-        {description}
-      </p>
+        <p className="text-[#18181B] text-center font-['Plus_Jakarta_Sans'] text-xl font-bold leading-tight mx-auto max-w-[315px] px-2">
+          {title}
+        </p>
 
-      {/* Tooltip */}
-      {showTooltip && isOverflowing && (
-        <div className="absolute z-10 p-3 bg-gray-800 text-white rounded-md shadow-lg max-w-xs bottom-full mb-2 text-sm">
+        <p className="text-center text-gray-600 font-inter text-base font-normal leading-relaxed max-w-[95%] px-1 pb-2">
           {description}
-          <div className="absolute w-3 h-3 bg-gray-800 transform rotate-45 -bottom-1 left-1/2 -translate-x-1/2"></div>
+        </p>
+      </div>
+
+      <Link
+        href={href}
+        className="mt-4 group"
+      >
+        <div className="px-5 py-2.5 rounded-full border border-[#485AFF] bg-transparent text-[#485AFF] font-semibold text-sm 
+                      hover:bg-[#485AFF] hover:text-white transition-all duration-300 flex items-center gap-2">
+          Learn more
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
-      )}
+      </Link>
     </div>
   );
 }
-
