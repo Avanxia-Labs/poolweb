@@ -1,3 +1,4 @@
+
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
@@ -21,6 +22,7 @@ interface FormDataType {
   clientEmail: string;
   clientAddress: string;
   clientCompany: string;
+  website?: string; // Honeypot field
 }
 
 interface PoolServiceFormProps {
@@ -42,7 +44,8 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
     clientPhone: '',
     clientEmail: '',
     clientAddress: '',
-    clientCompany: ''
+    clientCompany: '',
+    website: ''
   });
 
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
@@ -160,7 +163,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   const removeGalleryImage = (index: number) => {
     setGalleryImages((prev) => prev.filter((_, i) => i !== index));
   };
-  
+
   const removeCapturedImage = (index: number) => {
     setCapturedImages((prev) => prev.filter((_, i) => i !== index));
   };
@@ -171,38 +174,46 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
 
 
 
-  
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-  
+
+    // Honeypot check
+    if (formData.website) {
+      // Silent success for bots
+      console.log('Bot detected via honeypot');
+      alert('¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.'); // Fake success
+      return;
+    }
+
     if (validateForm()) {
       try {
         console.log('Enviando datos del formulario...');
-  
+
         const fullFormData = {
           ...formData,
         };
-  
+
         const formPayload = new FormData();
-  
+
         // 1. Agrega los datos del formulario en un único campo "data"
         formPayload.append("data", JSON.stringify(fullFormData));
-  
+
         // 2. Agrega las imágenes seleccionadas desde galería
         galleryImages.forEach((file) => {
           formPayload.append("galleryImages", file);
         });
-  
+
         // 3. Agrega imágenes capturadas (si las usas en desktop)
         capturedImages.forEach((base64, index) => {
           formPayload.append("capturedImages", base64);
         });
-  
+
         const response = await fetch('/api/form', {
           method: 'POST',
           body: formPayload,
         });
-  
+
         if (response.ok) {
           alert('¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.');
           setFormData({
@@ -218,7 +229,8 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
             clientPhone: '',
             clientEmail: '',
             clientAddress: '',
-            clientCompany: ''
+            clientCompany: '',
+            website: ''
           });
           setGalleryImages([]);
           setCapturedImages([]);
@@ -236,32 +248,32 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
       alert('Por favor, completa todos los campos requeridos');
     }
   };
-  
-  
+
+
 
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-  
+
       const totalExistingSize = galleryImages.reduce((acc, file) => acc + file.size, 0);
       const newFilesSize = filesArray.reduce((acc, file) => acc + file.size, 0);
       const capturedSize = 0; // Assuming captured images are not File objects (include them if needed)
-  
+
       const totalSizeMB = (totalExistingSize + newFilesSize + capturedSize) / (1024 * 1024);
-  
+
       if (totalSizeMB > 4.5) {
         alert("The total size of all images must not exceed 4.5MB.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-  
+
       const totalImages = galleryImages.length + capturedImages.length;
       if (totalImages >= 10) {
         alert("You have reached the 10 image limit.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-  
+
       const newFiles = filesArray.filter(
         (newFile) =>
           !galleryImages.some(
@@ -269,21 +281,21 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               existing.name === newFile.name && existing.size === newFile.size
           )
       );
-  
+
       const allowedFiles = newFiles.slice(0, 10 - totalImages);
       if (allowedFiles.length < newFiles.length) {
         alert("Only some images were added to avoid exceeding the 10 image limit.");
       }
-  
+
       setGalleryImages(prev => [...prev, ...allowedFiles]);
-  
+
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
-  
-  
-    
-  
+
+
+
+
 
   return (
     <div className=" flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
@@ -396,7 +408,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
               country={'us'}
               value={formData.phone}
               onChange={handlePhoneChange}
-              inputClass={`!w-full !py-2 !pl-12 !text-sm ${formErrors.phone ? '!border-red-500' : ''}`}
+              inputClass={`!w-full !py-2 !pl-12 !text-sm ${formErrors.phone ? '!border-red-500' : ''} `}
               dropdownClass="!text-sm"
               containerClass="!w-full"
               enableSearch
@@ -440,7 +452,7 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
                   country={'us'}
                   value={formData.clientPhone}
                   onChange={handleClientPhoneChange}
-                  inputClass={`!w-full !py-2 !pl-12 !text-sm ${formErrors.clientPhone ? '!border-red-500' : ''}`}
+                  inputClass={`!w-full !py-2 !pl-12 !text-sm ${formErrors.clientPhone ? '!border-red-500' : ''} `}
                   dropdownClass="!text-sm"
                   containerClass="!w-full"
                   enableSearch

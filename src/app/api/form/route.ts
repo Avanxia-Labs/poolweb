@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import SMTPTransport from 'nodemailer/lib/smtp-transport';
+import { Resend } from 'resend';
+import { SITE_CONFIG } from '@/config/constants';
+
 export const runtime = 'nodejs';
 
 // Aumentar el límite de body parser
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '10mb', // ajusta según lo necesites
+      sizeLimit: '10mb',
     },
   },
 };
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface FormData {
   name: string;
@@ -29,7 +32,6 @@ interface FormData {
 }
 
 export async function POST(request: Request) {
-  
   try {
     const form = await request.formData();
 
@@ -40,63 +42,48 @@ export async function POST(request: Request) {
 
     const formData: FormData = JSON.parse(rawData);
 
-    // Archivos adjuntos
+    // Archivos adjuntos para Resend
     const attachments = [];
 
     const galleryFiles = form.getAll('galleryImages') as File[];
     for (const file of galleryFiles) {
-      const buffer = Buffer.from(await file.arrayBuffer());
+      const arrayBuffer = await file.arrayBuffer();
       attachments.push({
         filename: file.name,
-        content: buffer,
+        content: Buffer.from(arrayBuffer),
       });
     }
 
     const capturedImages = form.getAll('capturedImages').filter(i => typeof i === 'string') as string[];
     capturedImages.forEach((base64, i) => {
+      // base64 viene formato "data:image/jpeg;base64,....."
       const base64Data = base64.split(',')[1];
-      attachments.push({
-        filename: `captured-${i + 1}.jpg`,
-        content: Buffer.from(base64Data, 'base64'),
-        encoding: 'base64',
-      });
+      if (base64Data) {
+        attachments.push({
+          filename: `captured-${i + 1}.jpg`,
+          content: Buffer.from(base64Data, 'base64'),
+        });
+      }
     });
 
-    // Configuración del transporte
-    const transportOptions: SMTPTransport.Options =
-      process.env.EMAIL_HOST
-        ? {
-            host: process.env.EMAIL_HOST,
-            port: parseInt(process.env.EMAIL_PORT || '587'),
-            secure: process.env.EMAIL_SECURE === 'true',
-            auth: {
-              user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_APP_PASSWORD,
-            },
-          }
-        : {
-            service: 'gmail',
-            auth: {
-              user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_APP_PASSWORD,
-            },
-          };
-
-    const transporter = nodemailer.createTransport(transportOptions);
-
-    const mailOptions = {
-      from: `"Formulario de Contacto" <${process.env.EMAIL_USER}>`,
-      to: process.env.OWNER_EMAIL || 'destinatario@example.com',
+    // Enviar correo con Resend
+    const { data, error } = await resend.emails.send({
+      from: 'Pool Quality Solutions <onboarding@resend.dev>', // Cambiar a tu dominio verificado cuando esté listo (ej: 'Noreply <info@poolquality.com>')
+      to: [process.env.OWNER_EMAIL || SITE_CONFIG.ownerEmail],
       replyTo: formData.email,
-      subject: `Nueva solicitud de servicio de piscina de ${formData.name}`,
+      subject: `Nueva solicitud de servicio: ${formData.name}`,
       html: generateEmailHTML(formData),
-      attachments,
-    };
+      attachments: attachments.length > 0 ? attachments : undefined,
+    });
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Correo enviado: %s', info.messageId);
+    if (error) {
+      console.error('Error Resend:', error);
+      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
 
-    return NextResponse.json({ success: true });
+    console.log('Correo enviado con éxito:', data?.id);
+    return NextResponse.json({ success: true, id: data?.id });
+
   } catch (error: any) {
     console.error('Error completo:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -111,12 +98,13 @@ function generateEmailHTML(formData: FormData): string {
   } = formData;
 
   const servicesHTML = services?.length
-    ? `<ul>${services.map(s => `<li>${s}</li>`).join('')}</ul>` : '<p>Sin servicios seleccionados.</p>';
+    ? `<ul>${services.map(s => `<li>${s}</li>`).join('')}</ul>`
+    : '<p>Sin servicios seleccionados.</p>';
 
   const clientHTML = (role !== 'Pool Owner' && clientFullName) ? `
-    <div>
-      <h2>Información del Cliente</h2>
-      <p><strong>Nombre:</strong> ${clientFullName}</p>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 15px;">
+      <h3 style="margin-top: 0; color: #444;">👷 Información del Cliente (Técnico/Contratista)</h3>
+      <p><strong>Nombre Cliente Final:</strong> ${clientFullName}</p>
       ${clientPhone ? `<p><strong>Teléfono:</strong> ${clientPhone}</p>` : ''}
       ${clientEmail ? `<p><strong>Email:</strong> ${clientEmail}</p>` : ''}
       ${clientAddress ? `<p><strong>Dirección:</strong> ${clientAddress}</p>` : ''}
@@ -125,18 +113,38 @@ function generateEmailHTML(formData: FormData): string {
   ` : '';
 
   return `
-    <div style="font-family: Arial; color: #333;">
-      <h1>Nueva Solicitud de Servicio de Piscina</h1>
-      <p><strong>Nombre:</strong> ${name}</p>
-      <p><strong>Rol:</strong> ${role}</p>
-      ${company ? `<p><strong>Empresa:</strong> ${company}</p>` : ''}
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Teléfono:</strong> ${phone}</p>
-      ${poolSize ? `<p><strong>Tamaño de piscina:</strong> ${poolSize} galones</p>` : ''}
+    <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+      <h1 style="color: #0284c7; border-bottom: 2px solid #0284c7; padding-bottom: 10px;">
+        Nueva Solicitud de Servicio
+      </h1>
+      
+      <div style="background-color: #f0f9ff; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+        <h2 style="margin-top: 0; color: #0369a1;">Contacto Principal</h2>
+        <p><strong>Nombre:</strong> ${name}</p>
+        <p><strong>Rol:</strong> ${role}</p>
+        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <p><strong>Teléfono:</strong> <a href="tel:${phone}">${phone}</a></p>
+        ${company ? `<p><strong>Empresa:</strong> ${company}</p>` : ''}
+        ${poolSize ? `<p><strong>Tamaño Piscina:</strong> ${poolSize} gls</p>` : ''}
+      </div>
+
       ${clientHTML}
-      <h2>Servicios Solicitados</h2>
-      ${servicesHTML}
-      ${projectDetails ? `<h2>Detalles del Proyecto</h2><p>${projectDetails}</p>` : ''}
+
+      <div style="margin-top: 20px;">
+        <h3 style="color: #444;">🛠 Servicios Solicitados</h3>
+        ${servicesHTML}
+      </div>
+
+      ${projectDetails ? `
+        <div style="margin-top: 20px;">
+          <h3 style="color: #444;">📝 Detalles del Proyecto</h3>
+          <p style="white-space: pre-wrap; background-color: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">${projectDetails}</p>
+        </div>
+      ` : ''}
+
+      <p style="font-size: 12px; color: #888; margin-top: 30px; text-align: center;">
+        Este correo fue enviado desde el formulario web de Pool Quality Solutions.
+      </p>
     </div>
   `;
 }

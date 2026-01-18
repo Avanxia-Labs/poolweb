@@ -20,6 +20,7 @@ const ContactFormSection = () => {
   const [experience, setExperience] = useState("Pool owner");
   const [phone, setPhone] = useState('');
   const [showClientForm, setShowClientForm] = useState(false);
+  const [website, setWebsite] = useState(''); // Honeypot state
 
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [galleryImages, setGalleryImages] = useState<File[]>([]);
@@ -82,12 +83,12 @@ const ContactFormSection = () => {
       clientAddress: clientAddress || '',
       fromCalculator: { gallons: gallonsFromCalc, vacuuming, filterWash, total },
     }));
-    
+
 
     capturedImages.forEach((img) => formData.append("capturedImages", img));
     galleryImages.forEach((img) => formData.append('galleryImages', img));
 
-    
+
 
     const res = await fetch("/api/form", { method: "POST", body: formData });
     const result = await res.json();
@@ -100,51 +101,55 @@ const ContactFormSection = () => {
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-  
+
       const totalSize = [...galleryImages, ...filesArray].reduce((acc, file) => acc + file.size, 0);
       const totalSizeMB = totalSize / (1024 * 1024);
-  
+
       if (totalSizeMB > 4.5) {
         alert("The total size of the images must not exceed 4.5MB.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-  
+
       const totalImages = galleryImages.length + capturedImages.length;
       const spaceAvailable = 10 - totalImages;
-  
+
       if (spaceAvailable <= 0) {
         alert("You have reached the limit of 10 images.");
         if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
-  
+
       const filesToAdd = filesArray.slice(0, spaceAvailable);
       const remainingFiles = filesArray.length - filesToAdd.length;
-  
+
       if (remainingFiles > 0) {
         alert("Only some images were added to avoid exceeding the 10 image limit.");
       }
-  
+
       setGalleryImages(prev => [...prev, ...filesToAdd]);
-  
+
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     }
   };
-  
-  
+
+
   const removeGalleryImage = (index: number) => {
     setGalleryImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  
+
 
   return (
     <form onSubmit={handleSubmit} className="mt-10 w-full space-y-6">
+      <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1 }} aria-hidden="true">
+        <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div>
         <label className="block text-[12px] font-bold text-[#344054] mb-1">
           Name <span className="text-red-500">*</span>
@@ -268,8 +273,7 @@ const ContactFormSection = () => {
             accept="image/*"
             multiple
             onChange={handleGalleryChange}
-            className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white"
-          />
+            className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white" />
           <small className="text-xs text-gray-500 mt-1 block">*Maximum 4.5MB total</small>
         </div>
 
