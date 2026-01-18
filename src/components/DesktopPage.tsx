@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from "@/components/Desktop/NavBar";
 import Section1 from "./Desktop/Section1"
 import Section2 from './Desktop/Section2';
@@ -14,12 +14,14 @@ import Footer from '@/components/shared/Footer';
 
 
 function DesktopPage() {
+  const [activeTab, setActiveTab] = useState<'maintenance' | 'construction'>('maintenance');
+
   return (
 
     <div className="w-full mx-auto bg-[#F5F9FF]">
       <NavBar />
-      <Section1 />
-      <Section2 />
+      <Section1 activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Section2 activeTab={activeTab} />
       <ProjectsSection />
       <Section3 />
       <Section4 />

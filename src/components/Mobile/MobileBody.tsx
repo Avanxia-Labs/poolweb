@@ -11,11 +11,14 @@ import { SubscriptionCalculator } from '@/components/shared/SubscriptionCalculat
 import MobileProjectsSection from './ProjectsSection';
 import CarouselPagination from '@/components/shared/CarouselPagination';
 
+import ConstructionGallery from '@/components/Desktop/ConstructionGallery';
+
 const MobileBody = () => {
   const router = useRouter();
   // Ref y estado para scroll horizontal (slider)
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState<'maintenance' | 'construction'>('maintenance');
 
   const handleScroll = () => {
     const container = containerRef.current;
@@ -136,11 +139,81 @@ const MobileBody = () => {
   ];
 
   return (
-    <main className="w-full bg-[#f7fafe]">
-      {/* Sección del título y estimación */}
-      <Frame />
-      <Box />
-      <section className="relative w-full pt-10 pb-16 overflow-hidden min-h-[750px]">
+    <main className="w-full bg-white">
+
+      <div className="flex flex-col items-center w-full">
+        {/* Tab Switcher */}
+        <div className="w-full flex justify-center py-8 z-50">
+          <div className="flex bg-white/80 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-sm animate-fade-in-down">
+            <button
+              onClick={() => setActiveTab('maintenance')}
+              className={`px-6 py-2 text-xs font-bold rounded-full transition-all duration-300 ${activeTab === 'maintenance'
+                ? 'bg-[#485AFF] text-white shadow-md transform scale-105'
+                : 'text-slate-500 hover:bg-slate-50'
+                }`}
+            >
+              Maintenance
+            </button>
+            <button
+              onClick={() => setActiveTab('construction')}
+              className={`px-6 py-2 text-xs font-bold rounded-full transition-all duration-300 ${activeTab === 'construction'
+                ? 'bg-[#485AFF] text-white shadow-md transform scale-105'
+                : 'text-slate-500 hover:bg-slate-50'
+                }`}
+            >
+              Construction
+            </button>
+          </div>
+        </div>
+
+        {/* Title Section */}
+        <Frame />
+
+        {/* Dynamic Visual Content */}
+        <div className="w-full relative mt-0 transition-all duration-500">
+          {activeTab === 'maintenance' ? (
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <Box />
+            </div>
+          ) : (
+            <section className="relative w-full max-w-screen-sm mx-auto overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+
+              {/* Gallery Container - Pushed down to interact with waves */}
+              <div className="relative z-10 w-full h-full px-4 flex flex-col justify-end pb-[80px]">
+                <div className="transform scale-90 origin-bottom">
+                  <ConstructionGallery />
+                </div>
+              </div>
+
+              {/* Waves Overlay - High Z-index to cover bottom of cards */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] h-[120px] z-30 pointer-events-none">
+                <video
+                  autoPlay loop muted playsInline
+                  className="w-full h-full object-cover"
+                  style={{ clipPath: "path('M0,60 C150,0 180,100 256,60 C350,20 500,100 1500,60 L600,100 L0,100 Z')" }}
+                >
+                  <source src="/videos/videovector1.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              {/* Blurred Wave for Depth */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] h-[140px] z-40 pointer-events-none blur-[2px]"
+                style={{ maskImage: "linear-gradient(to top, black 50%, transparent 100%)" }}
+              >
+                <video
+                  autoPlay loop muted playsInline
+                  className="w-full h-full object-cover"
+                  style={{ clipPath: "path('M0,55 C80,30 220,90 256,60 C384,10 384,110 1500,60 L512,100 L0,100 Z')" }}
+                >
+                  <source src="/videos/videovector1.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </section>
+          )}
+        </div>
+      </div>
+
+      <section className="relative w-full pt-0 pb-16 overflow-hidden min-h-[750px] -mt-16">
         {/* Imagen de fondo */}
         <img
           src="/images/deep.jpg"
@@ -149,7 +222,7 @@ const MobileBody = () => {
         />
 
         {/* Contenido sobre la imagen */}
-        <div className="relative z-20 w-full flex flex-col items-center text-center -mt-12">
+        <div className="relative z-20 w-full flex flex-col items-center text-center pt-20">
 
           <img
             src="/svgs/deep_text.svg"

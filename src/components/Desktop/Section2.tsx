@@ -44,13 +44,17 @@ const SERVICES = [
     }
 ];
 
-function Section2() {
+interface Section2Props {
+    activeTab: 'maintenance' | 'construction';
+}
+
+function Section2({ activeTab }: Section2Props) {
     return (
 
         <section id="Frame4" className="overflow-hidden flex flex-col items-center self-stretch bg-gradient-to-b from-[#4CF7FB] to-[#206680] px-4 sm:px-6 md:px-12 lg:px-20 xl:px-32 pb-6 lg:pb-10">
 
-            {/* Background blur */}
-            <div className="mb-10 w-3/4 max-w-md aspect-[2.5] blur-[14.5px] w-[22rem] h-[10rem] mb-[4.05rem]">
+            {/* Background blur - Hides in Construction mode to avoid visual clash, but keeps space (layout reflow prevented) */}
+            <div className={`mb-10 w-3/4 max-w-md aspect-[2.5] blur-[14.5px] w-[22rem] h-[10rem] mb-[4.05rem] transition-opacity duration-300 ${activeTab === 'construction' ? 'opacity-0' : 'opacity-100'}`}>
                 <div className="w-full h-full flex justify-center items-center rounded-[1.875rem 1.875rem 0rem 0rem] bg-[#0F172A]"></div>
             </div>
 

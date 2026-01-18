@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import FancyButton from './FancyButton'
-import BeforeAfterAnimation from './BeforeAfterAnimation'
-import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
+import ConstructionGallery from './ConstructionGallery'
+import BeforeAfterAnimation from './BeforeAfterAnimation'
 
-function Section1() {
+interface Section1Props {
+    activeTab: 'maintenance' | 'construction';
+    setActiveTab: (tab: 'maintenance' | 'construction') => void;
+}
 
-
-    const videoRef = useRef<HTMLVideoElement>(null);
+function Section1({ activeTab, setActiveTab }: Section1Props) {
     const [currentText, setCurrentText] = useState<'BEFORE' | 'AFTER'>('BEFORE');
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
         const video = videoRef.current;
@@ -24,16 +27,38 @@ function Section1() {
         };
 
         video.addEventListener('timeupdate', handleTimeUpdate);
-
         return () => {
             video.removeEventListener('timeupdate', handleTimeUpdate);
         };
-    }, []);
+    }, [activeTab]); // Re-run when tab changes to re-attach listener if video mounts
 
     return (
         <section className='flex w-full mx-auto min-h-[100vh] flex-col items-start shrink-0 overflow-visible pt-24 md:pt-32'>
 
-            <div id='Frame5' className='relative z-20 flex h-auto flex-col items-center gap-4 w-full max-w-[800px] mx-auto justify-center px-4 mb-12'>
+            <div id='Frame5' className='relative z-20 flex h-auto flex-col items-center gap-4 w-full max-w-[800px] mx-auto justify-center px-4 mb-4'>
+
+                {/* Tab Switcher */}
+                <div className="flex bg-slate-100/80 backdrop-blur-sm p-1.5 rounded-full mb-6 border border-slate-200 shadow-sm animate-fade-in">
+                    <button
+                        onClick={() => setActiveTab('maintenance')}
+                        className={`px-6 py-2 text-sm font-bold rounded-full transition-all duration-300 ${activeTab === 'maintenance'
+                            ? 'bg-white text-[#485AFF] shadow-md scale-105'
+                            : 'text-slate-500 hover:text-slate-700 hover:bg-white/50'
+                            }`}
+                    >
+                        Maintenance
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('construction')}
+                        className={`px-6 py-2 text-sm font-bold rounded-full transition-all duration-300 ${activeTab === 'construction'
+                            ? 'bg-white text-[#485AFF] shadow-md scale-105'
+                            : 'text-slate-500 hover:text-slate-700 hover:bg-white/50'
+                            }`}
+                    >
+                        Construction
+                    </button>
+                </div>
+
                 {/* Main heading - Compacted size */}
                 <p className="text-[#0F172A] text-center font-['Plus_Jakarta_Sans'] text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight self-stretch">
                     Transform Your Pool Experience
@@ -60,14 +85,89 @@ function Section1() {
 
             <div id='abajo' className='z-0 h-[750px] flex flex-col relative w-full overflow-visible'>
 
-                {/* //bg-white absolute top-[-10%] w-full */}
-                <div className='absolute top-[-5%] min-top-[-10%] w-full'>
-                    <BeforeAfterAnimation currentText={currentText} />
-                </div>
+                {/* --- MAINTENANCE MODE: Phone + Before/After --- */}
+                {activeTab === 'maintenance' && (
+                    <>
+                        {/* Background Text Animation */}
+                        <div className='absolute top-[-5%] min-top-[-10%] w-full animate-fade-in'>
+                            <BeforeAfterAnimation currentText={currentText} />
+                        </div>
 
-                {/* Layer 4: Background water effect - Responsive positioning based on container height */}
+                        {/* Phone Video Container */}
+                        <div id='image' className='absolute bottom-0 inset-0 z-30 flex justify-center items-center animate-slide-up-fade'>
+                            <div className='w-[354.463px] h-[437px] rounded-t-[30px] overflow-hidden shadow-2xl'>
+                                <video
+                                    ref={videoRef}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    className='w-full h-full object-cover scale-109 bg-[#0F172A]'>
+                                    <source src='videos/videopool.mp4' type='video/mp4' />
+                                </video>
+                            </div>
+                        </div>
+
+                        {/* Wave Overlay on Phone */}
+                        <div id='vector4' className='absolute h-[33px] z-40 flex justify-center w-full pointer-events-none' style={{
+                            bottom: 'calc(50% - (437px/2) - 7px )',
+                        }}>
+                            <div className="relative" style={{ width: '395px', height: '32px' }}>
+                                <svg width="0" height="0">
+                                    <defs>
+                                        <clipPath id="vector4-clip-1" clipPathUnits="userSpaceOnUse">
+                                            <path d="M322.566 7.36448C247.919 -6.13106 211.013 23.0371 162.814 27.9589H384.35C395.731 26.875 399.308 21.2386 322.566 7.36448Z" />
+                                        </clipPath>
+                                        <clipPath id="vector4-clip-2" clipPathUnits="userSpaceOnUse">
+                                            <path d="M117.706 24.7071C57.4402 9.96586 16.7213 18.5649 3.89502 24.7071L29.367 27.9589H136.231C130.319 27.3414 124.166 26.2873 117.706 24.7071Z" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <div className="absolute right-0 top-0" style={{ width: '222px', height: '28px' }}>
+                                    <video
+                                        src="/videos/videoHD.mp4"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                        style={{
+                                            clipPath: 'url(#vector4-clip-1)',
+                                            filter: 'blur(1.9px)'
+                                        }}
+                                    />
+                                </div>
+                                <div className="absolute left-0 top-0" style={{ width: '133px', height: '28px' }}>
+                                    <video
+                                        src="/videos/videoHD.mp4"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                        style={{
+                                            clipPath: 'url(#vector4-clip-2)',
+                                            filter: 'blur(2.5px)'
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {/* --- CONSTRUCTION MODE: Gallery --- */}
+                {activeTab === 'construction' && (
+                    <div className="absolute inset-0 z-30 flex items-end justify-center pb-48 pointer-events-none animate-fade-in">
+                        <div className="pointer-events-auto scale-90 md:scale-100 origin-bottom">
+                            <ConstructionGallery />
+                        </div>
+                    </div>
+                )}
+
+                {/* --- SHARED BACKGROUND --- */}
+
+                {/* Layer 4: Background water effect */}
                 <div id='vector1' className='absolute bottom-0 z-10 w-full h-[30%] md:h-[35%] lg:h-[40%] mx-auto'>
-
                     <svg width="0" height="0">
                         <defs>
                             <filter id="filter0_f_3_15" x="-902.2" y="0.250635" width="3404.4" height="315.025" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -75,11 +175,8 @@ function Section1() {
                                 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                                 <feGaussianBlur stdDeviation="7.95" result="effect1_foregroundBlur_3_15" />
                             </filter>
-
                             <clipPath id="vector1-clip" clipPathUnits="userSpaceOnUse">
-
                                 <path d="M-1009.2 204.085L-951.5 182.909C-893.8 161.734 -775.5 119.382 -660.3 87.6187C-545.1 55.8551 -426.7 34.6794 -311.5 24.0915C-193.1 13.5037 -77.9 13.5037 37.3 24.0915C155.7 34.6794 270.9 55.8551 386.1 82.3248C504.5 108.794 619.7 140.558 734.9 172.322C853.3 204.085 968.5 235.849 1086.9 209.379C1202.1 182.909 1317.3 98.2066 1435.7 55.8551C1550.9 13.5037 1666.1 13.5037 1784.5 34.6794C1899.7 55.8551 2014.9 98.2066 2133.3 119.382C2248.5 140.558 2366.9 140.558 2482.1 135.264C2597.3 129.97 2715.7 119.382 2773.4 114.088L2831.1 108.794V299.376H2773.4C2715.7 299.376 2597.3 299.376 2482.1 299.376C2366.9 299.376 2248.5 299.376 2133.3 299.376C2014.9 299.376 1899.7 299.376 1784.5 299.376C1666.1 299.376 1550.9 299.376 1435.7 299.376C1317.3 299.376 1202.1 299.376 1086.9 299.376C968.5 299.376 853.3 299.376 734.9 299.376C619.7 299.376 504.5 299.376 386.1 299.376C270.9 299.376 155.7 299.376 37.3 299.376C-77.9 299.376 -193.1 299.376 -311.5 299.376C-426.7 299.376 -545.1 299.376 -660.3 299.376C-775.5 299.376 -893.8 299.376 -951.5 299.376H-1009.2V204.085Z" />
-
                             </clipPath>
                         </defs>
                     </svg>
@@ -97,8 +194,6 @@ function Section1() {
                                 filter: 'blur(7.95px)'
                             }}
                         />
-
-                        {/* Unfiltered video layer for better blur control - Made responsive */}
                         <video
                             src="/videos/videoHD.mp4"
                             autoPlay
@@ -119,9 +214,7 @@ function Section1() {
                     <svg width="0" height="0">
                         <defs>
                             <clipPath id="video-clip" clipPathUnits="userSpaceOnUse">
-
                                 <path d="M-17.91 150.507L39.68 133.648C97.27 116.788 215.65 83.0684 330.88 57.7788C446.11 32.4893 564.5 15.6296 679.7 7.19971C798.09 -1.23014 913.29 -1.23014 1028.5 7.19971C1146.9 15.6296 1262.1 32.4893 1377.3 53.5639C1495.7 74.6385 1610.9 99.9281 1726.1 125.218C1844.5 150.507 1959.7 175.797 2078.1 154.722C2193.3 133.648 2308.5 66.2087 2426.9 32.4893C2542.1 -1.23014 2657.3 -1.23015 2775.7 15.6296C2890.9 32.4893 3006.1 66.2087 3124.5 83.0684C3239.7 99.9281 3358.1 99.9281 3473.3 95.7132C3588.5 91.4982 3706.9 83.0684 3764.5 78.8535L3822.1 74.6385V226.376H3137.1C3706.9 226.376 3588.5 226.376 3473.3 226.376C3358.1 226.376 3239.7 226.376 3124.5 226.376C3006.1 226.376 2890.9 226.376 2775.7 226.376C2657.3 226.376 2542.1 226.376 2426.9 226.376C2308.5 226.376 2193.3 226.376 2078.1 226.376C1959.7 226.376 1844.5 226.376 1726.1 226.376C1610.9 226.376 1495.7 226.376 1377.3 226.376C1262.1 226.376 1146.9 226.376 1028.5 226.376C913.29 226.376 798.09 226.376 679.7 226.376C564.5 226.376 446.11 226.376 330.88 226.376C215.65 226.376 97.27 226.376 39.68 226.376H-14.93L-17.91 150.507Z" />
-
                             </clipPath>
                         </defs>
                     </svg>
@@ -135,77 +228,6 @@ function Section1() {
                         className="w-full h-full object-cover"
                         style={{ clipPath: 'url(#video-clip)' }}
                     />
-                </div>
-
-                {/* Segunda capa: video en pantalla */}
-                <div id='image' className='absolute bottom-0 inset-0 z-30 flex justify-center items-center'>
-                    <div className='w-[354.463px] h-[437px] rounded-t-[30px] overflow-hidden'>
-                        <video
-                            ref={videoRef}
-                            autoPlay
-                            loop
-                            muted
-                            className='w-full h-full object-cover scale-109 bg-[#0F172A]'>
-                            <source src='videos/videopool.mp4' type='video/mp4' />
-                        </video>
-                    </div>
-                </div>
-
-                {/* Primer plano: ola encima del video - ahora posicionada para alinearse con la parte inferior del video */}
-
-                <div id='vector4' className='absolute h-[33px] z-40 flex justify-center w-full' style={{
-                    bottom: 'calc(50% - (437px/2) - 7px )',
-                }}>
-                    <div className="relative" style={{ width: '395px', height: '32px' }}>
-                        {/* Definiciones SVG para clipPath */}
-                        <svg width="0" height="0">
-                            <defs>
-                                <clipPath id="vector4-clip-1" clipPathUnits="userSpaceOnUse">
-                                    <path d="M322.566 7.36448C247.919 -6.13106 211.013 23.0371 162.814 27.9589H384.35C395.731 26.875 399.308 21.2386 322.566 7.36448Z" />
-                                </clipPath>
-                                <clipPath id="vector4-clip-2" clipPathUnits="userSpaceOnUse">
-                                    <path d="M117.706 24.7071C57.4402 9.96586 16.7213 18.5649 3.89502 24.7071L29.367 27.9589H136.231C130.319 27.3414 124.166 26.2873 117.706 24.7071Z" />
-                                </clipPath>
-                                <filter id="filter0_f_3_59" x="0.0950196" y="0.0312989" width="394.233" height="31.7276" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-                                    <feGaussianBlur stdDeviation="1.9" result="effect1_foregroundBlur_3_59" />
-                                </filter>
-                            </defs>
-                        </svg>
-
-                        {/* Primera forma con video */}
-                        <div className="absolute right-0 top-0" style={{ width: '222px', height: '28px' }}>
-                            <video
-                                src="/videos/videoHD.mp4"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-full object-cover"
-                                style={{
-                                    clipPath: 'url(#vector4-clip-1)',
-                                    filter: 'blur(1.9px)'
-                                }}
-                            />
-                        </div>
-
-                        {/* Segunda forma con video */}
-                        <div className="absolute left-0 top-0" style={{ width: '133px', height: '28px' }}>
-                            <video
-                                src="/videos/videoHD.mp4"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-full object-cover"
-                                style={{
-                                    clipPath: 'url(#vector4-clip-2)',
-                                    filter: 'blur(2.5px)'
-                                }}
-                            />
-                        </div>
-                    </div>
                 </div>
             </div>
 
