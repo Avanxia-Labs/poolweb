@@ -4,14 +4,7 @@ import { SITE_CONFIG } from '@/config/constants';
 
 export const runtime = 'nodejs';
 
-// Aumentar el límite de body parser
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-  },
-};
+
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
