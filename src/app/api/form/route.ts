@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 
     // Enviar correo con Resend
     const { data, error } = await resend.emails.send({
-      from: 'Pool Quality Solutions <onboarding@resend.dev>', // Cambiar a tu dominio verificado cuando esté listo (ej: 'Noreply <info@poolquality.com>')
+      from: 'Pool Quality Solutions <notifications@guimarais.com>',
       to: [process.env.OWNER_EMAIL || SITE_CONFIG.ownerEmail],
       replyTo: formData.email,
       subject: `Nueva solicitud de servicio: ${formData.name}`,
