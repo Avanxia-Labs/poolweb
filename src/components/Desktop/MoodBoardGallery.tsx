@@ -12,8 +12,8 @@ const galleryItems = [
         subtitle: "Blueprint & Layout",
         icon: <Ruler className="w-4 h-4 text-white" />,
         image: "/images/projects/new-construction-1/new-construction-1-2.jpeg",
-        color: "from-blue-600/80 to-indigo-900/80",
-        className: "md:col-span-1 md:row-span-1 h-[240px] md:h-[280px]"
+        color: "from-blue-600/40 to-indigo-900/40",
+        className: "md:col-span-1 md:row-span-1 h-[240px] md:h-[260px]"
     },
     {
         id: 2,
@@ -21,8 +21,8 @@ const galleryItems = [
         subtitle: "Structural Build",
         icon: <Hammer className="w-4 h-4 text-white" />,
         image: "/images/projects/commercial-renovation/commercial-renovation-2.jpeg",
-        color: "from-orange-600/80 to-amber-900/80",
-        className: "md:col-span-1 md:row-span-2 h-[240px] md:h-[580px]"
+        color: "from-orange-600/40 to-amber-900/40",
+        className: "md:col-span-1 md:row-span-2 h-[490px] md:h-[540px]"
     },
     {
         id: 3,
@@ -30,16 +30,16 @@ const galleryItems = [
         subtitle: "Premium Finish",
         icon: <Sparkles className="w-4 h-4 text-white" />,
         image: "/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg",
-        color: "from-emerald-600/80 to-teal-900/80",
-        className: "md:col-span-1 md:row-span-1 h-[240px] md:h-[280px]"
+        color: "from-emerald-600/40 to-teal-900/40",
+        className: "md:col-span-1 md:row-span-1 h-[240px] md:h-[260px]"
     },
     {
         id: 4,
         title: "Custom Features",
-        subtitle: "Every detail matters",
+        subtitle: "Precision & Detail",
         icon: <Star className="w-4 h-4 text-white" />,
-        image: "/images/projects/new-construction-3/new-construction-3-1.jpeg", // Using a relevant image
-        color: "from-purple-600/90 to-fuchsia-900/90", // Explicit purple for this card
+        image: "/images/projects/new-construction-3/new-construction-3-1.jpeg",
+        color: "from-purple-600/40 to-fuchsia-900/40",
         className: "md:col-span-2 md:row-span-1 h-[200px]"
     }
 ];
@@ -67,46 +67,49 @@ export default function MoodBoardGallery() {
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
 
-                        {/* Gradient Overlay */}
-                        <div className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-60 group-hover:opacity-80 transition-opacity duration-500`} />
+                        {/* Gradient Overlay - Significantly reduced opacity for clarity */}
+                        <div className={`absolute inset-0 bg-gradient-to-t ${item.color} opacity-60 group-hover:opacity-75 transition-opacity duration-500`} />
 
-                        {/* Purple Tint for Custom Features specific request */}
-                        {item.id === 4 && <div className="absolute inset-0 bg-purple-900/40 mix-blend-overlay" />}
+                        {/* Subtle tint for bottom text readability */}
+                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-80" />
 
                         {/* Content */}
                         <div className="absolute inset-0 p-6 flex flex-col justify-end">
                             <motion.div
-                                className="w-fit"
+                                className="w-full"
                                 initial={false}
                                 animate={{ y: hoveredId === item.id ? -5 : 0 }}
                                 transition={{ duration: 0.3 }}
                             >
                                 <div className="flex items-center gap-2 mb-2">
-                                    <div className="bg-white/20 backdrop-blur-md p-1.5 rounded-lg border border-white/10">
+                                    <div className="bg-white/20 backdrop-blur-md p-1.5 rounded-lg border border-white/10 shadow-sm">
                                         {item.icon}
                                     </div>
-                                    <span className="text-white/90 text-[10px] font-bold uppercase tracking-wider bg-black/20 backdrop-blur-sm px-2 py-1 rounded-md border border-white/10">
+                                    <span className="text-white/95 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md border border-white/10 bg-white/10 backdrop-blur-md shadow-sm">
                                         {item.subtitle}
                                     </span>
                                 </div>
 
-                                <h3 className="text-white font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-tight drop-shadow-sm">
-                                    {item.title}
-                                </h3>
-
-                                {item.id === 4 && (
-                                    <p className="text-white/80 text-sm mt-2 font-inter max-w-md">
-                                        From the initial blueprint to the crystal clear water, we ensure every element is perfect.
-                                    </p>
-                                )}
+                                <div className="flex justify-between items-end">
+                                    <div>
+                                        <h3 className="text-white font-['Plus_Jakarta_Sans'] font-bold text-2xl leading-tight drop-shadow-md">
+                                            {item.title}
+                                        </h3>
+                                        {item.id === 4 && (
+                                            <p className="text-white/80 text-xs mt-1 font-inter max-w-sm hidden sm:block">
+                                                Tailored features that make your pool uniquely yours.
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
                             </motion.div>
                         </div>
 
-                        {/* Badge for Custom Features if needed */}
+                        {/* Special interactive badge for Custom Features */}
                         {item.id === 4 && (
-                            <div className="absolute bottom-6 right-6">
-                                <span className="flex items-center gap-1 px-3 py-1 bg-blue-500 text-white text-[10px] font-bold rounded-full shadow-lg">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                            <div className="absolute top-4 right-4 animate-in fade-in zoom-in duration-500 delay-300">
+                                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 backdrop-blur-xl border border-white/30 text-white text-[10px] font-bold rounded-full shadow-lg">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse box-shadow-glow" />
                                     In Progress
                                 </span>
                             </div>

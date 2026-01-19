@@ -19,7 +19,7 @@ function Section3() {
                     </div>
 
                     {/* Imagen de la piscina */}
-                    <div id="Image" className="w-full max-w-md h-[400px] sm:h-[500px] lg:h-[643px] rounded-[2.5rem] overflow-hidden bg-[#F6FEFF] relative">
+                    <div id="Image" className="w-full max-w-md min-h-[400px] sm:min-h-[500px] lg:min-h-[643px] h-auto rounded-[2.5rem] overflow-hidden bg-[#F6FEFF] relative">
                         {/* Placeholder para Construction o Imagen Normal */}
                         {activeTab === 'construction' ? (
                             <MoodBoardGallery />
