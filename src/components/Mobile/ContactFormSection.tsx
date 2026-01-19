@@ -12,8 +12,33 @@ import { useEffect } from 'react';
 const ContactFormSection = () => {
   /* ... existing hooks ... */
   const searchParams = useSearchParams();
-  // ...
-  // ... (keep existing state declarations)
+  const gallonsFromCalc = searchParams.get("gallons");
+  const vacuuming = searchParams.get("vacuuming");
+  const filterWash = searchParams.get("filterWash");
+  const total = searchParams.get("total");
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [message, setMessage] = useState('');
+  const [gallonsFromForm, setGallonsFromForm] = useState('');
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [experience, setExperience] = useState("Pool owner");
+  const [phone, setPhone] = useState('');
+  const [showClientForm, setShowClientForm] = useState(false);
+  const [website, setWebsite] = useState(''); // Honeypot state
+
+  const [capturedImages, setCapturedImages] = useState<string[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [galleryImages, setGalleryImages] = useState<File[]>([]);
+
+  const [clientFullName, setClientFullName] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
+  const [clientCompany, setClientCompany] = useState('');
+  const [clientAddress, setClientAddress] = useState('');
+
+  // UI States
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -30,7 +55,142 @@ const ContactFormSection = () => {
   }, [status]);
   // END CHANGE
 
-  // ... (rest of the component until SUCCESS VIEW)
+  const handleExperienceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setExperience(value);
+    setShowClientForm(value === "Pool Servuce Technician" || value === "Pool Repair Technician");
+  };
+
+  const handleServiceChange = (service: string) => {
+    setSelectedServices((prev) =>
+      prev.includes(service)
+        ? prev.filter((s) => s !== service)
+        : [...prev, service]
+    );
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    if (!phone.trim()) {
+      setErrorMessage("Please enter a valid phone number 📱");
+      return;
+    }
+
+    if (selectedServices.length === 0) {
+      setErrorMessage("Please select at least one service 🛠️");
+      return;
+    }
+
+    if (showClientForm) {
+      if (!clientPhone.trim() || !clientFullName.trim() || !clientEmail.trim() || !clientAddress.trim()) {
+        setErrorMessage("Please complete all client required fields 🧾");
+        return;
+      }
+    }
+
+    setStatus('loading');
+
+    try {
+      const formData = new FormData();
+
+      formData.append('data', JSON.stringify({
+        name,
+        role: experience,
+        phone,
+        email,
+        company,
+        poolSize: gallonsFromForm,
+        projectDetails: message,
+        services: selectedServices,
+        clientFullName: clientFullName || '',
+        clientPhone: clientPhone || '',
+        clientEmail: clientEmail || '',
+        clientCompany: clientCompany || '',
+        clientAddress: clientAddress || '',
+        fromCalculator: { gallons: gallonsFromCalc, vacuuming, filterWash, total },
+      }));
+
+
+      capturedImages.forEach((img) => formData.append("capturedImages", img));
+      galleryImages.forEach((img) => formData.append('galleryImages', img));
+
+      const res = await fetch("/api/form", { method: "POST", body: formData });
+      const result = await res.json();
+
+      if (result.success) {
+        setStatus('success');
+        // Optional: Reset form here if needed, but we show a success view instead
+        // resetForm(); 
+      } else {
+        setStatus('error');
+        setErrorMessage(result.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+      setErrorMessage("Network error. Please try again later.");
+    }
+  };
+
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setPhone('');
+    setMessage('');
+    setCompany('');
+    setGallonsFromForm('');
+    setSelectedServices([]);
+    setGalleryImages([]);
+    setStatus('idle');
+    setErrorMessage('');
+  }
+
+
+  const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+
+      const totalSize = [...galleryImages, ...filesArray].reduce((acc, file) => acc + file.size, 0);
+      const totalSizeMB = totalSize / (1024 * 1024);
+
+      if (totalSizeMB > 4.5) {
+        alert("The total size of the images must not exceed 4.5MB.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      const totalImages = galleryImages.length + capturedImages.length;
+      const spaceAvailable = 10 - totalImages;
+
+      if (spaceAvailable <= 0) {
+        alert("You have reached the limit of 10 images.");
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      const filesToAdd = filesArray.slice(0, spaceAvailable);
+      const remainingFiles = filesArray.length - filesToAdd.length;
+
+      if (remainingFiles > 0) {
+        alert("Only some images were added to avoid exceeding the 10 image limit.");
+      }
+
+      setGalleryImages(prev => [...prev, ...filesToAdd]);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+
+  const removeGalleryImage = (index: number) => {
+    setGalleryImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // SUCCESS VIEW
   if (status === 'success') {

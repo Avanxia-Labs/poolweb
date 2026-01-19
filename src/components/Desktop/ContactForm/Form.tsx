@@ -1,8 +1,9 @@
 
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Loader2, CheckCircle2, AlertCircle, ArrowLeft } from 'lucide-react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Define types
 type ServiceType = string;
@@ -53,6 +54,21 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
 
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
   const [galleryImages, setGalleryImages] = useState<File[]>([]);
+
+  // UI States
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Ref for Success Scroll
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === 'success' && successRef.current) {
+      setTimeout(() => {
+        successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [status]);
 
   const roleOptions = ['Pool Owner', 'Pool Service Technician', 'Pool Repair Technician'];
 
@@ -170,23 +186,44 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-
-
-
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      role: '',
+      company: '',
+      poolSize: '',
+      email: '',
+      phone: '',
+      projectDetails: '',
+      services: [],
+      clientFullName: '',
+      clientPhone: '',
+      clientEmail: '',
+      clientAddress: '',
+      clientCompany: '',
+      website: ''
+    });
+    setGalleryImages([]);
+    setCapturedImages([]);
+    setStatus('idle');
+    setErrorMessage('');
+  }
 
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
 
     // Honeypot check
     if (formData.website) {
       // Silent success for bots
       console.log('Bot detected via honeypot');
-      alert('¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.'); // Fake success
+      setStatus('success'); // Fake success
       return;
     }
 
     if (validateForm()) {
+      setStatus('loading');
       try {
         console.log('Enviando datos del formulario...');
 
@@ -215,37 +252,21 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
         });
 
         if (response.ok) {
-          alert('¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.');
-          setFormData({
-            name: '',
-            role: '',
-            company: '',
-            poolSize: '',
-            email: '',
-            phone: '',
-            projectDetails: '',
-            services: [],
-            clientFullName: '',
-            clientPhone: '',
-            clientEmail: '',
-            clientAddress: '',
-            clientCompany: '',
-            website: ''
-          });
-          setGalleryImages([]);
-          setCapturedImages([]);
+          setStatus('success');
         } else {
           const errorData = await response.json();
           console.error('Error al enviar el correo:', errorData);
-          alert('Hubo un problema al enviar tu solicitud. Por favor, intenta nuevamente.');
+          setStatus('error');
+          setErrorMessage(errorData.error || 'Hubo un problema al enviar tu solicitud.');
         }
       } catch (error) {
         console.error('Error al enviar el formulario:', error);
-        alert('Error de conexión. Por favor, verifica tu conexión a internet e intenta nuevamente.');
+        setStatus('error');
+        setErrorMessage('Error de conexión. Por favor, verifica tu internet.');
       }
     } else {
-      console.log('Validación del formulario fallida');
-      alert('Por favor, completa todos los campos requeridos');
+      // If validation fails, stay on error state or just show validation errors (already handled by setFormErrors)
+      setErrorMessage('Please complete all required fields.');
     }
   };
 
@@ -294,13 +315,58 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
   };
 
 
-
+  if (status === 'success') {
+    return (
+      <div className="flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
+        <motion.div
+          ref={successRef}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="mt-10 w-full max-w-lg flex flex-col items-center justify-center text-center p-12 bg-green-50 rounded-2xl border border-green-100 shadow-sm"
+        >
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+            <CheckCircle2 className="w-10 h-10 text-green-600" />
+          </div>
+          <h3 className="text-3xl font-bold text-slate-800 mb-3 font-['Plus_Jakarta_Sans']">Message Sent!</h3>
+          <p className="text-slate-600 text-lg mb-10 max-w-sm">
+            Thank you for contacting us, <strong>{formData.name}</strong>. We have received your request and will get back to you within 24 hours.
+          </p>
+          <button
+            onClick={resetForm}
+            className="inline-flex items-center gap-2 text-blue-600 font-bold hover:underline text-lg"
+          >
+            <ArrowLeft className="w-5 h-5" /> Send another message
+          </button>
+        </motion.div>
+      </div>
+    );
+  }
 
 
   return (
-    <div className=" flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
+    <div className="flex justify-center w-full h-full items-start min-h-0 sm:pb-5 p-4 overflow-auto">
 
-      <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4 w-full max-w-3xl">
+      <form onSubmit={handleSubmit} className="space-y-6 xl:space-y-4 w-full max-w-3xl relative">
+
+        {/* Loading Overlay */}
+        {status === 'loading' && (
+          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm z-50 flex items-center justify-center rounded-2xl">
+            <div className="flex flex-col items-center bg-white p-8 rounded-xl shadow-2xl">
+              <Loader2 className="w-10 h-10 text-blue-600 animate-spin mb-4" />
+              <p className="text-lg font-bold text-slate-700">Sending your request...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Global Error Message */}
+        {errorMessage && (
+          <div className="flex items-center gap-3 p-4 bg-red-50 text-red-700 text-sm font-bold rounded-lg animate-pulse border border-red-100">
+            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+            <p>{errorMessage}</p>
+          </div>
+        )}
+
+
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
           {/* Name Field */}
           <div className="space-y-2">
@@ -667,9 +733,10 @@ export default function PoolServiceForm({ onClientFieldsChange }: PoolServiceFor
         <div className="pt-2">
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+            disabled={status === 'loading'}
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            Get started
+            {status === 'loading' ? 'Sending...' : 'Get started'}
           </button>
         </div>
       </form>
