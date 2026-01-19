@@ -4,7 +4,12 @@ import { useRef, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
+/* import icons */
+import { Loader2, CheckCircle2, AlertCircle, ArrowLeft } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
 const ContactFormSection = () => {
+  /* ... existing hooks ... */
   const searchParams = useSearchParams();
   const gallonsFromCalc = searchParams.get("gallons");
   const vacuuming = searchParams.get("vacuuming");
@@ -23,6 +28,7 @@ const ContactFormSection = () => {
   const [website, setWebsite] = useState(''); // Honeypot state
 
   const [capturedImages, setCapturedImages] = useState<string[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [galleryImages, setGalleryImages] = useState<File[]>([]);
 
   const [clientFullName, setClientFullName] = useState('');
@@ -30,6 +36,10 @@ const ContactFormSection = () => {
   const [clientEmail, setClientEmail] = useState('');
   const [clientCompany, setClientCompany] = useState('');
   const [clientAddress, setClientAddress] = useState('');
+
+  // UI States
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleExperienceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -47,55 +57,81 @@ const ContactFormSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
 
     if (!phone.trim()) {
-      alert("Por favor ingresa un número de teléfono 📱");
+      setErrorMessage("Please enter a valid phone number 📱");
       return;
     }
 
     if (selectedServices.length === 0) {
-      alert("Por favor selecciona al menos un servicio 🛠️");
+      setErrorMessage("Please select at least one service 🛠️");
       return;
     }
 
     if (showClientForm) {
       if (!clientPhone.trim() || !clientFullName.trim() || !clientEmail.trim() || !clientAddress.trim()) {
-        alert("Por favor completa todos los campos del cliente 🧾");
+        setErrorMessage("Please complete all client required fields 🧾");
         return;
       }
     }
 
-    const formData = new FormData();
+    setStatus('loading');
 
-    formData.append('data', JSON.stringify({
-      name,
-      role: experience,
-      phone,
-      email,
-      company,
-      poolSize: gallonsFromForm,
-      projectDetails: message,
-      services: selectedServices,
-      clientFullName: clientFullName || '',
-      clientPhone: clientPhone || '',
-      clientEmail: clientEmail || '',
-      clientCompany: clientCompany || '',
-      clientAddress: clientAddress || '',
-      fromCalculator: { gallons: gallonsFromCalc, vacuuming, filterWash, total },
-    }));
+    try {
+      const formData = new FormData();
 
-
-    capturedImages.forEach((img) => formData.append("capturedImages", img));
-    galleryImages.forEach((img) => formData.append('galleryImages', img));
-
+      formData.append('data', JSON.stringify({
+        name,
+        role: experience,
+        phone,
+        email,
+        company,
+        poolSize: gallonsFromForm,
+        projectDetails: message,
+        services: selectedServices,
+        clientFullName: clientFullName || '',
+        clientPhone: clientPhone || '',
+        clientEmail: clientEmail || '',
+        clientCompany: clientCompany || '',
+        clientAddress: clientAddress || '',
+        fromCalculator: { gallons: gallonsFromCalc, vacuuming, filterWash, total },
+      }));
 
 
-    const res = await fetch("/api/form", { method: "POST", body: formData });
-    const result = await res.json();
+      capturedImages.forEach((img) => formData.append("capturedImages", img));
+      galleryImages.forEach((img) => formData.append('galleryImages', img));
 
-    alert(result.success ? "Enviado correctamente ✅" : "Error al enviar ❌");
+      const res = await fetch("/api/form", { method: "POST", body: formData });
+      const result = await res.json();
+
+      if (result.success) {
+        setStatus('success');
+        // Optional: Reset form here if needed, but we show a success view instead
+        // resetForm(); 
+      } else {
+        setStatus('error');
+        setErrorMessage(result.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+      setErrorMessage("Network error. Please try again later.");
+    }
   };
 
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setPhone('');
+    setMessage('');
+    setCompany('');
+    setGallonsFromForm('');
+    setSelectedServices([]);
+    setGalleryImages([]);
+    setStatus('idle');
+    setErrorMessage('');
+  }
 
 
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,10 +178,44 @@ const ContactFormSection = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-
+  // SUCCESS VIEW
+  if (status === 'success') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="mt-10 w-full flex flex-col items-center justify-center text-center p-8 bg-green-50 rounded-2xl border border-green-100"
+      >
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+          <CheckCircle2 className="w-8 h-8 text-green-600" />
+        </div>
+        <h3 className="text-2xl font-bold text-slate-800 mb-2 font-['Plus_Jakarta_Sans']">Message Sent!</h3>
+        <p className="text-slate-600 mb-8 max-w-sm">
+          Thank you for contacting us, <strong>{name}</strong>. We have received your request and will get back to you within 24 hours.
+        </p>
+        <button
+          onClick={resetForm}
+          className="inline-flex items-center gap-2 text-[#485AFF] font-bold hover:underline"
+        >
+          <ArrowLeft className="w-4 h-4" /> Send another message
+        </button>
+      </motion.div>
+    );
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-10 w-full space-y-6">
+    <form onSubmit={handleSubmit} className="mt-10 w-full space-y-6 relative">
+
+      {/* Loading Overlay */}
+      {status === 'loading' && (
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-sm z-50 flex items-center justify-center rounded-2xl">
+          <div className="flex flex-col items-center bg-white p-6 rounded-xl shadow-xl">
+            <Loader2 className="w-8 h-8 text-[#485AFF] animate-spin mb-2" />
+            <p className="text-sm font-bold text-slate-700">Sending...</p>
+          </div>
+        </div>
+      )}
+
       <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1 }} aria-hidden="true">
         <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
       </div>
@@ -154,7 +224,7 @@ const ContactFormSection = () => {
         <label className="block text-[12px] font-bold text-[#344054] mb-1">
           Name <span className="text-red-500">*</span>
         </label>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" required className="w-full px-4 py-3 text-[12px] font-bold text-[#667085] border border-[#D0D5DD] rounded-lg shadow-sm outline-none" />
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" required className="w-full px-4 py-3 text-[12px] font-bold text-[#667085] border border-[#D0D5DD] rounded-lg shadow-sm outline-none focus:border-[#485AFF] focus:ring-1 focus:ring-[#485AFF] transition-all" />
       </div>
 
       <div className="space-y-6">
@@ -172,7 +242,7 @@ const ContactFormSection = () => {
         </div>
 
         {showClientForm && (
-          <div className="mt-4 border border-gray-400 rounded-lg p-4">
+          <div className="mt-4 border border-gray-400 rounded-lg p-4 bg-slate-50">
             <h2 className="text-base sm:text-lg font-semibold text-[#344054] mb-4">Client Information</h2>
             <div className="mt-4 flex flex-col gap-4">
               <div>
@@ -210,6 +280,10 @@ const ContactFormSection = () => {
         )}
       </div>
 
+      {/* ... Rest of fields ... */}
+
+      {/* Simplified for brevity in tool call, will use original content for fields I'm not changing drastically, just wrapping */}
+
       <div>
         <label className="block text-[12px] font-bold text-[#344054] mb-1">
           Company <span className="text-gray-400">(optional)</span>
@@ -245,16 +319,16 @@ const ContactFormSection = () => {
         <textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} required placeholder="Write your message..." className="w-full px-4 py-3 text-[12px] font-bold text-[#667085] border border-[#D0D5DD] rounded-lg shadow-sm outline-none resize-none" />
       </div>
 
-      <div className="px-4 py-4 rounded-xl">
+      <div className="px-4 py-4 rounded-xl border border-dashed border-slate-300">
         <h3 className="text-[12px] font-bold text-[#344054] mb-4">Services</h3>
         <div className="flex flex-col space-y-3">
           {["Regular Maintenance", "Deep and Routine Cleaning", "Repair and Installation", "Custom Pool Design & Construction", "Pool System Automation", "Other"].map((service) => (
-            <label key={service} className="flex items-center gap-3 text-[12px] font-bold text-[#667085]">
+            <label key={service} className="flex items-center gap-3 text-[12px] font-bold text-[#667085] cursor-pointer hover:text-[#485AFF] transition-colors">
               <input
                 type="checkbox"
                 checked={selectedServices.includes(service)}
                 onChange={() => handleServiceChange(service)}
-                className="w-[18px] h-[18px] rounded-[6px] border border-[#D0D5DD] bg-white"
+                className="w-[18px] h-[18px] rounded-[6px] border border-[#D0D5DD] bg-white accent-[#485AFF]"
               />
               {service}
             </label>
@@ -273,7 +347,7 @@ const ContactFormSection = () => {
             accept="image/*"
             multiple
             onChange={handleGalleryChange}
-            className="w-full max-w-sm mx-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-black bg-white" />
+            className="w-full max-w-sm mx-auto px-4 py-2 border border-blue-100 hover:border-blue-300 transition-colors rounded-lg shadow-sm text-black bg-blue-50/50 cursor-pointer" />
           <small className="text-xs text-gray-500 mt-1 block">*Maximum 4.5MB total</small>
         </div>
 
@@ -301,15 +375,26 @@ const ContactFormSection = () => {
             </div>
           ))}
         </div>
-        <small className="text-xs text-gray-500 mt-1 block">
+        <small className="text-xs text-center text-gray-500 mt-1 block">
           {galleryImages.length + capturedImages.length} / 10 images added
         </small>
       </div>
 
+      {/* Error Message Inline */}
+      {errorMessage && (
+        <div className="flex items-center gap-2 p-3 bg-red-50 text-red-600 text-xs font-bold rounded-lg animate-pulse">
+          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <p>{errorMessage}</p>
+        </div>
+      )}
 
       <div className="w-full flex justify-center">
-        <button type="submit" className="inline-flex items-center justify-center gap-2 px-[20px] py-[12px] bg-[#485AFF] border border-[#7F56D9] text-white text-[12px] font-bold rounded-[8px] shadow-sm">
-          Get started
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="inline-flex items-center justify-center gap-2 px-[20px] py-[12px] bg-[#485AFF] hover:bg-[#3E57DA] border border-[#7F56D9] text-white text-[12px] font-bold rounded-[8px] shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
+        >
+          {status === 'loading' ? 'Sending...' : 'Get started'}
         </button>
       </div>
     </form>
@@ -317,3 +402,5 @@ const ContactFormSection = () => {
 };
 
 export default ContactFormSection;
+
+

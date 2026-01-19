@@ -403,7 +403,7 @@ const MobileBody = () => {
                 that exceed expectations.
               </p>
               <button
-                onClick={() => router.push('/contact')}
+                onClick={() => router.push('/contact?scrollToForm=true')}
                 className="mt-2 flex justify-center items-center px-6 py-3 text-sm font-semibold text-[#485AFF] text-center font-inter bg-[#F5F9FF] rounded-xl w-fit shadow-lg active:scale-95 transition-transform"
               >
                 GET YOUR FREE ESTIMATE

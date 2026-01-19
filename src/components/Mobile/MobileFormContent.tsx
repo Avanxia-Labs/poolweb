@@ -24,8 +24,9 @@ const MobileFormContent = () => {
   useEffect(() => {
     const fromCalc = searchParams.get('gallons');
     const serviceParam = searchParams.get('service');
+    const scrollToForm = searchParams.get('scrollToForm');
     // Auto-scroll to form when coming from calculator or "Request Quote" CTA
-    if (fromCalc || serviceParam) {
+    if (fromCalc || serviceParam || scrollToForm) {
       const target = document.getElementById('subscription-form');
       if (target) {
         setTimeout(() => {
