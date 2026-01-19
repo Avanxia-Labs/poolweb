@@ -135,21 +135,21 @@ export function SubscriptionCalculator({ isMobile = false, onTabChange }: Subscr
         <div className="relative z-20 flex flex-col gap-4 w-full">
 
           {/* Service Type Toggles */}
-          <div className="flex bg-slate-100 p-1 rounded-xl mb-2">
+          <div className="flex bg-slate-100/80 p-1.5 rounded-xl mb-6">
             <button
               onClick={() => handleTabChange('maintenance')}
-              className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'maintenance'
-                ? 'bg-white text-[#485AFF] shadow-sm'
-                : 'text-slate-500 hover:text-slate-700'
+              className={`flex-1 py-3 text-sm rounded-lg transition-all duration-300 ${activeTab === 'maintenance'
+                ? 'bg-white text-[#485AFF] shadow-sm font-bold ring-1 ring-black/5'
+                : 'text-slate-500 font-medium hover:text-slate-700 hover:bg-slate-200/50'
                 }`}
             >
               Subscription
             </button>
             <button
               onClick={() => handleTabChange('construction')}
-              className={`flex-1 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'construction'
-                ? 'bg-white text-[#485AFF] shadow-sm'
-                : 'text-slate-500 hover:text-slate-700'
+              className={`flex-1 py-3 text-sm rounded-lg transition-all duration-300 ${activeTab === 'construction'
+                ? 'bg-white text-[#485AFF] shadow-sm font-bold ring-1 ring-black/5'
+                : 'text-slate-500 font-medium hover:text-slate-700 hover:bg-slate-200/50'
                 }`}
             >
               Construction
@@ -237,33 +237,33 @@ export function SubscriptionCalculator({ isMobile = false, onTabChange }: Subscr
             </div>
           ) : (
             <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="flex gap-2 w-full aspect-[16/9]">
+              <div className="flex gap-4 w-full aspect-[16/9]">
                 {/* Left Image */}
-                <div className="relative flex-1 rounded-2xl overflow-hidden shadow-md group">
+                <div className="relative flex-1 rounded-3xl overflow-hidden shadow-lg group">
                   <img
                     src="/images/projects/new-construction-3/new-construction-3-1.jpeg"
                     alt="Custom Pool Building"
-                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-3 left-3">
-                    <span className="px-2 py-1 text-[10px] font-bold bg-white/90 text-[#485AFF] rounded-full uppercase tracking-wider">
-                      Design
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="px-3 py-1.5 text-[10px] font-bold backdrop-blur-md bg-white/20 border border-white/30 text-white rounded-full uppercase tracking-wider shadow-sm">
+                      Concept Phase
                     </span>
                   </div>
                 </div>
 
                 {/* Right Image */}
-                <div className="relative flex-1 rounded-2xl overflow-hidden shadow-md group">
+                <div className="relative flex-1 rounded-3xl overflow-hidden shadow-lg group">
                   <img
                     src="/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg"
                     alt="Finished Pool"
-                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-3 left-3">
-                    <span className="px-2 py-1 text-[10px] font-bold bg-white/90 text-[#485AFF] rounded-full uppercase tracking-wider">
-                      Result
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="px-3 py-1.5 text-[10px] font-bold backdrop-blur-md bg-white/20 border border-white/30 text-white rounded-full uppercase tracking-wider shadow-sm">
+                      Final Build
                     </span>
                   </div>
                 </div>
