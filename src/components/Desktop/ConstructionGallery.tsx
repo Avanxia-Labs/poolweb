@@ -35,6 +35,25 @@ const galleryItems = [
 export default function ConstructionGallery() {
     const [activeId, setActiveId] = useState<number | null>(1);
 
+    React.useEffect(() => {
+        const handleResize = () => {
+            // If desktop, default to Quality Materials (2)
+            if (window.innerWidth >= 768) {
+                setActiveId(2);
+            } else {
+                // If mobile, default to Precision Design (1)
+                setActiveId(1);
+            }
+        };
+
+        // Set initial state
+        handleResize();
+
+        // Optional: Listen to resize if dynamic switching is desired, 
+        // though usually initial load is enough. I'll stick to initial load to avoid aggressive state changes during resize unless necessary.
+        // Actually, let's just run it once on mount to respect the "when you open the page" request.
+    }, []);
+
     return (
         <div className="w-full h-full flex items-center justify-center p-4">
             <div className="relative w-full max-w-[900px] flex flex-col md:flex-row justify-start md:justify-center items-center gap-3 md:gap-4 h-auto md:h-[500px] py-2 md:py-0">
