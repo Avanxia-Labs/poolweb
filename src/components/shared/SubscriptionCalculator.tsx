@@ -237,17 +237,35 @@ export function SubscriptionCalculator({ isMobile = false, onTabChange }: Subscr
             </div>
           ) : (
             <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-md">
-                <img
-                  src="/images/custom_comparative2@2x.png"
-                  alt="Custom Pool Construction"
-                  className="object-cover w-full h-full"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-3 left-3">
-                  <span className="px-2 py-1 text-[10px] font-bold bg-white/90 text-[#485AFF] rounded-full uppercase tracking-wider">
-                    Premium Design
-                  </span>
+              <div className="flex gap-2 w-full aspect-[16/9]">
+                {/* Left Image */}
+                <div className="relative flex-1 rounded-2xl overflow-hidden shadow-md group">
+                  <img
+                    src="/images/projects/new-construction-3/new-construction-3-1.jpeg"
+                    alt="Custom Pool Building"
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3">
+                    <span className="px-2 py-1 text-[10px] font-bold bg-white/90 text-[#485AFF] rounded-full uppercase tracking-wider">
+                      Design
+                    </span>
+                  </div>
+                </div>
+
+                {/* Right Image */}
+                <div className="relative flex-1 rounded-2xl overflow-hidden shadow-md group">
+                  <img
+                    src="/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg"
+                    alt="Finished Pool"
+                    className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3">
+                    <span className="px-2 py-1 text-[10px] font-bold bg-white/90 text-[#485AFF] rounded-full uppercase tracking-wider">
+                      Result
+                    </span>
+                  </div>
                 </div>
               </div>
 
