@@ -22,6 +22,11 @@ export const categoryConfig: Record<ConstructionCategory, {
   color: string;
   description: string;
 }> = {
+  POOL_SPA_INFINITY: {
+    label: 'Pool + Spa Infinity',
+    color: '#06B6D4',
+    description: 'Luxury pools with infinity edge and spa'
+  },
   NEW_BUILD: {
     label: 'New Construction',
     color: '#10B981',
@@ -41,16 +46,23 @@ export const categoryConfig: Record<ConstructionCategory, {
     label: 'Pebble Finish',
     color: '#8B5CF6',
     description: 'Premium pebble surface installations'
-  },
-  POOL_SPA_INFINITY: {
-    label: 'Pool + Spa Infinity',
-    color: '#06B6D4',
-    description: 'Luxury pools with infinity edge and spa'
   }
 };
 
 // Real projects imported from filesystem assets
 export const constructionProjects: ConstructionProject[] = [
+  // POOL SPA INFINITY - Moved to top as featured
+  {
+    id: 'infinity-1',
+    category: 'POOL_SPA_INFINITY',
+    title: 'Pool & Spa Infinity Edge',
+    description: 'Luxury pool and spa combination featuring a stunning infinity edge design.',
+    images: [
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-3.mp4',
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg',
+      '/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg'
+    ]
+  },
   // NEW BUILD - Custom Project 1 (New Construction)
   {
     id: 'new-cust-1',
@@ -153,18 +165,6 @@ export const constructionProjects: ConstructionProject[] = [
     title: 'Pebble Finish Installation',
     description: 'High-quality pebble finish application for superior durability and aesthetics.',
     images: ['/images/projects/pebble-installation/pebble-installation-1.jpeg']
-  },
-
-  // POOL SPA INFINITY
-  {
-    id: 'infinity-1',
-    category: 'POOL_SPA_INFINITY',
-    title: 'Pool & Spa Infinity Edge',
-    description: 'Luxury pool and spa combination featuring a stunning infinity edge design.',
-    images: [
-      '/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg',
-      '/images/projects/pool-spa-infinity/pool-spa-infinity-2.jpeg'
-    ]
   }
 ];
 

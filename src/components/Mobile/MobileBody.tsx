@@ -12,6 +12,7 @@ import MobileProjectsSection from './ProjectsSection';
 import CarouselPagination from '@/components/shared/CarouselPagination';
 
 import ConstructionGallery from '@/components/Desktop/ConstructionGallery';
+import FeaturedVideoSectionMobile from './FeaturedVideoSectionMobile';
 
 const MobileBody = () => {
   const router = useRouter();
@@ -315,6 +316,11 @@ const MobileBody = () => {
           </div>
         </div>
       </section>
+
+      {/* Featured Video Section */}
+      <div className="relative z-30">
+        <FeaturedVideoSectionMobile />
+      </div>
 
       {/* Projects Section */}
       <div className="relative z-30">

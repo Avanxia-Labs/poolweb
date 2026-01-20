@@ -9,9 +9,12 @@ import {
   getProjectsByCategory
 } from '@/data/constructionProjects';
 import CarouselPagination from '@/components/shared/CarouselPagination';
+import { Play } from 'lucide-react';
+
+const isVideo = (url: string) => url.toLowerCase().endsWith('.mp4');
 
 const ConstructionGalleryMobile: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<ConstructionCategory>('NEW_BUILD');
+  const [activeCategory, setActiveCategory] = useState<ConstructionCategory>('POOL_SPA_INFINITY');
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -176,11 +179,26 @@ const ConstructionGalleryMobile: React.FC = () => {
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          <img
-            src={currentProject.images[currentImageIndex]}
-            alt={currentProject.title}
-            className="w-full h-56 object-cover"
-          />
+
+          {isVideo(currentProject.images[currentImageIndex]) ? (
+            <div className="relative w-full h-56 bg-black">
+              <video
+                src={currentProject.images[currentImageIndex]}
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+              />
+            </div>
+          ) : (
+            <img
+              src={currentProject.images[currentImageIndex]}
+              alt={currentProject.title}
+              className="w-full h-56 object-cover"
+            />
+          )}
 
           {/* Category badge */}
           <div

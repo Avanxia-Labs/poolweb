@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NavBar from "@/components/Desktop/NavBar";
 import Section1 from "./Desktop/Section1"
 import Section2 from './Desktop/Section2';
+import FeaturedVideoSection from './Desktop/FeaturedVideoSection';
 import ProjectsSection from './Desktop/ProjectsSection';
 import Section3 from './Desktop/Section3';
 import Section4 from './Desktop/Section4';
@@ -22,6 +23,7 @@ function DesktopPage() {
       <NavBar />
       <Section1 activeTab={activeTab} setActiveTab={setActiveTab} />
       <Section2 activeTab={activeTab} />
+      <FeaturedVideoSection />
       <ProjectsSection />
       <Section3 />
       <Section4 />

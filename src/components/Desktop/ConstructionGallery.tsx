@@ -7,6 +7,14 @@ import Image from 'next/image';
 
 const galleryItems = [
     {
+        id: 3,
+        title: "Modern Finishes",
+        category: "Final Touch",
+        color: "from-emerald-500 to-teal-600",
+        icon: <Sparkles className="w-6 h-6 text-white/80" />,
+        image: "/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg"
+    },
+    {
         id: 1,
         title: "Precision Design",
         category: "Blueprint Phase",
@@ -21,28 +29,20 @@ const galleryItems = [
         color: "from-slate-600 to-slate-800",
         icon: <BrickWall className="w-6 h-6 text-white/80" />,
         image: "/images/projects/commercial-renovation/commercial-renovation-1.jpeg"
-    },
-    {
-        id: 3,
-        title: "Modern Finishes",
-        category: "Final Touch",
-        color: "from-emerald-500 to-teal-600",
-        icon: <Sparkles className="w-6 h-6 text-white/80" />,
-        image: "/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg"
     }
 ];
 
 export default function ConstructionGallery() {
-    const [activeId, setActiveId] = useState<number | null>(1);
+    const [activeId, setActiveId] = useState<number | null>(3);
 
     React.useEffect(() => {
         const handleResize = () => {
-            // If desktop, default to Quality Materials (2)
+            // If desktop, default to Quality Materials (2) -> Now Modern Finishes (3)
             if (window.innerWidth >= 768) {
-                setActiveId(2);
+                setActiveId(3);
             } else {
-                // If mobile, default to Precision Design (1)
-                setActiveId(1);
+                // If mobile, default to Modern Finishes (3)
+                setActiveId(3);
             }
         };
 

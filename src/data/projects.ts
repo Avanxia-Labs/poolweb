@@ -26,6 +26,13 @@ export const categoryLabels: Record<ProjectCategory, string> = {
 
 export const projects: Project[] = [
   {
+    id: 'project-3',
+    image: '/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg',
+    category: 'INFINITY',
+    title: "Infinity Edge Spa",
+    subtitle: 'Luxury pool and spa combination',
+  },
+  {
     id: 'project-1',
     image: '/images/projects/new-construction-1/new-construction-1-1.jpeg',
     category: 'NEW_BUILD',
@@ -38,13 +45,6 @@ export const projects: Project[] = [
     category: 'RENOVATION',
     title: "Commercial Modernization",
     subtitle: 'Hotel pool complete renovation',
-  },
-  {
-    id: 'project-3',
-    image: '/images/projects/pool-spa-infinity/pool-spa-infinity-1.jpeg',
-    category: 'INFINITY',
-    title: "Infinity Edge Spa",
-    subtitle: 'Luxury pool and spa combination',
   },
   {
     id: 'project-4',

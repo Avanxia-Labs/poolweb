@@ -36,7 +36,7 @@ const ConstructionServiceEnhanced: React.FC = () => {
 
       {/* Construction Gallery */}
       <ConstructionGallery
-        initialCategory="NEW_BUILD"
+        initialCategory="POOL_SPA_INFINITY"
         onCategoryChange={setActiveCategory}
         onProjectChange={setCurrentProject}
       />

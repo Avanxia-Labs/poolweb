@@ -8,6 +8,9 @@ import {
   getProjectsByCategory
 } from '@/data/constructionProjects';
 import CarouselPagination from '@/components/shared/CarouselPagination';
+import { Play } from 'lucide-react';
+
+const isVideo = (url: string) => url.toLowerCase().endsWith('.mp4');
 
 interface ConstructionGalleryProps {
   initialCategory?: ConstructionCategory;
@@ -140,7 +143,7 @@ const ConstructionGallery: React.FC<ConstructionGalleryProps> = ({
         transition-opacity duration-150
         ${isTransitioning ? 'opacity-0' : 'opacity-100'}
       `}>
-        {/* Image Carousel - 3 images visible */}
+        {/* Image/Video Carousel - 3 items visible */}
         <div className="relative mt-6">
           <div className="flex items-center justify-center gap-4">
             {/* Previous Image (smaller) */}
@@ -149,22 +152,48 @@ const ConstructionGallery: React.FC<ConstructionGalleryProps> = ({
                 onClick={handlePrevImage}
                 className="hidden md:block relative w-24 h-32 lg:w-32 lg:h-44 overflow-hidden rounded-lg gallery-image side cursor-pointer hover:opacity-80 transition-opacity"
               >
-                <img
-                  src={currentProject.images[getPrevImageIndex()]}
-                  alt="Previous"
-                  className="w-full h-full object-cover"
-                />
+                {isVideo(currentProject.images[getPrevImageIndex()]) ? (
+                  <div className="w-full h-full bg-black flex items-center justify-center">
+                    <video
+                      src={currentProject.images[getPrevImageIndex()]}
+                      className="w-full h-full object-cover opacity-60"
+                      muted
+                      playsInline
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white/80 fill-white/20" />
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={currentProject.images[getPrevImageIndex()]}
+                    alt="Previous"
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/20"></div>
               </button>
             )}
 
             {/* Current Image (large) */}
-            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl overflow-hidden rounded-xl gallery-image current shadow-2xl">
-              <img
-                src={currentProject.images[currentImageIndex]}
-                alt={currentProject.title}
-                className="w-full h-64 md:h-80 lg:h-96 object-cover"
-              />
+            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl overflow-hidden rounded-xl gallery-image current shadow-2xl bg-black">
+              {isVideo(currentProject.images[currentImageIndex]) ? (
+                <video
+                  src={currentProject.images[currentImageIndex]}
+                  className="w-full h-64 md:h-80 lg:h-96 object-cover"
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <img
+                  src={currentProject.images[currentImageIndex]}
+                  alt={currentProject.title}
+                  className="w-full h-64 md:h-80 lg:h-96 object-cover"
+                />
+              )}
 
               {/* Navigation arrows on image - Only if multiple images */}
               {currentProject.images.length > 1 && (
@@ -203,11 +232,25 @@ const ConstructionGallery: React.FC<ConstructionGalleryProps> = ({
                 onClick={handleNextImage}
                 className="hidden md:block relative w-24 h-32 lg:w-32 lg:h-44 overflow-hidden rounded-lg gallery-image side cursor-pointer hover:opacity-80 transition-opacity"
               >
-                <img
-                  src={currentProject.images[getNextImageIndex()]}
-                  alt="Next"
-                  className="w-full h-full object-cover"
-                />
+                {isVideo(currentProject.images[getNextImageIndex()]) ? (
+                  <div className="w-full h-full bg-black flex items-center justify-center">
+                    <video
+                      src={currentProject.images[getNextImageIndex()]}
+                      className="w-full h-full object-cover opacity-60"
+                      muted
+                      playsInline
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white/80 fill-white/20" />
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={currentProject.images[getNextImageIndex()]}
+                    alt="Next"
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/20"></div>
               </button>
             )}
