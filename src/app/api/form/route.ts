@@ -70,8 +70,21 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error('Error Resend:', error);
+      console.error('Error Resend (Owner):', error);
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
+
+    // Enviar confirmación al usuario (submitter)
+    try {
+      await resend.emails.send({
+        from: 'Pool Quality Solutions <notifications@guimarais.com>',
+        to: [formData.email],
+        subject: 'Hemos recibido tu solicitud - Pool Quality Solutions',
+        html: generateConfirmationEmailHTML(formData),
+      });
+    } catch (userError) {
+      // No fallamos la request completa si falla el correo de confirmación, pero lo logueamos
+      console.error('Error enviando confirmación al usuario:', userError);
     }
 
     console.log('Correo enviado con éxito:', data?.id);
@@ -137,6 +150,48 @@ function generateEmailHTML(formData: FormData): string {
 
       <p style="font-size: 12px; color: #888; margin-top: 30px; text-align: center;">
         Este correo fue enviado desde el formulario web de Pool Quality Solutions.
+      </p>
+    </div>
+  `;
+}
+
+function generateConfirmationEmailHTML(formData: FormData): string {
+  const { name, projectDetails, services } = formData;
+
+  const servicesList = services && services.length > 0
+    ? `<ul>${services.map(s => `<li>${s}</li>`).join('')}</ul>`
+    : '<p>N/A</p>';
+
+  return `
+    <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+      <h1 style="color: #0284c7; margin-bottom: 20px;">¡Gracias por contactarnos!</h1>
+      
+      <p>Hola <strong>${name}</strong>,</p>
+      
+      <p>Hemos recibido tu solicitud correctamente. Nuestro equipo revisará la información y se pondrá en contacto contigo a la brevedad posible.</p>
+      
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+      
+      <h3 style="color: #444;">Resumen de tu solicitud:</h3>
+      
+      <p><strong>Servicios de interés:</strong></p>
+      ${servicesList}
+      
+      ${projectDetails ? `
+        <p><strong>Detalles del proyecto:</strong></p>
+        <div style="background-color: #f9fafb; padding: 10px; border-radius: 4px; font-style: italic;">
+          "${projectDetails}"
+        </div>
+      ` : ''}
+      
+      <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+      
+      <p style="color: #666; font-size: 14px;">
+        Si tienes alguna duda adicional, puedes responder a este correo o llamarnos directamente.
+      </p>
+      
+      <p style="color: #0284c7; font-weight: bold; margin-top: 30px;">
+        Pool Quality Solutions
       </p>
     </div>
   `;
