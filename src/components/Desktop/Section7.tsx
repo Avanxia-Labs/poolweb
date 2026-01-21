@@ -33,9 +33,7 @@ function Section7() {
                         <p className="self-stretch text-[#0F172A] font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
                             Let's elevate your <br /> pool care, together.
                         </p>
-                        <p className="text-[#667085] font-inter text-base sm:text-lg lg:text-xl font-normal leading-relaxed">
-                            You can reach us anytime via:  <a href="mailto:poolqualitysolutions@hotmail.com" className="text-[#485AFF] font-medium hover:underline">poolqualitysolutions@hotmail.com</a>
-                        </p>
+
                     </div>
 
 

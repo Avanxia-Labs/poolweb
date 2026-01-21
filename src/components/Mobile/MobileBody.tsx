@@ -495,14 +495,7 @@ const MobileBody = () => {
             <h2 className="text-3xl font-bold text-[#101828] font-['Plus_Jakarta_Sans'] leading-tight mb-4">
               Let's elevate your pool care, together.
             </h2>
-            <p className="text-sm leading-relaxed font-normal text-[#667085] font-inter">
-              You can reach us anytime via <br />
-              <a href="mailto:poolqualitysolutions@hotmail.com">
-                <span className="text-[#485AFF] font-medium underline hover:text-[#7F56D9] transition-colors">
-                  poolqualitysolutions@hotmail.com
-                </span>
-              </a>
-            </p>
+
           </div>
 
           <ContactFormSection />
