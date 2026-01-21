@@ -79,7 +79,7 @@ export async function POST(request: Request) {
       await resend.emails.send({
         from: 'Pool Quality Solutions <notifications@guimarais.com>',
         to: [formData.email],
-        subject: 'Hemos recibido tu solicitud - Pool Quality Solutions',
+        subject: 'We have received your request - Pool Quality Solutions',
         html: generateConfirmationEmailHTML(formData),
       });
     } catch (userError) {
@@ -164,21 +164,21 @@ function generateConfirmationEmailHTML(formData: FormData): string {
 
   return `
     <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
-      <h1 style="color: #0284c7; margin-bottom: 20px;">¡Gracias por contactarnos!</h1>
+      <h1 style="color: #0284c7; margin-bottom: 20px;">Thank you for contacting us!</h1>
       
-      <p>Hola <strong>${name}</strong>,</p>
+      <p>Hello <strong>${name}</strong>,</p>
       
-      <p>Hemos recibido tu solicitud correctamente. Nuestro equipo revisará la información y se pondrá en contacto contigo a la brevedad posible.</p>
+      <p>We have received your request successfully. Our team will review the information and get back to you as soon as possible.</p>
       
       <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
       
-      <h3 style="color: #444;">Resumen de tu solicitud:</h3>
+      <h3 style="color: #444;">Request Summary:</h3>
       
-      <p><strong>Servicios de interés:</strong></p>
+      <p><strong>Services of Interest:</strong></p>
       ${servicesList}
       
       ${projectDetails ? `
-        <p><strong>Detalles del proyecto:</strong></p>
+        <p><strong>Project Details:</strong></p>
         <div style="background-color: #f9fafb; padding: 10px; border-radius: 4px; font-style: italic;">
           "${projectDetails}"
         </div>
@@ -187,7 +187,7 @@ function generateConfirmationEmailHTML(formData: FormData): string {
       <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
       
       <p style="color: #666; font-size: 14px;">
-        Si tienes alguna duda adicional, puedes responder a este correo o llamarnos directamente.
+        If you have any questions, you can reply to this email or call us directly.
       </p>
       
       <p style="color: #0284c7; font-weight: bold; margin-top: 30px;">
