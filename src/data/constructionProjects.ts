@@ -147,6 +147,20 @@ export const constructionProjects: ConstructionProject[] = [
 
   // RESIDENTIAL RENOVATION
   {
+    id: 'res-reno-2',
+    category: 'RESIDENTIAL_RENOVATION',
+    title: 'Complete Pool Refinish & Tile Renovation',
+    description: 'Full residential pool refurbishment by our in-house crew: removed aged plaster, installed new waterline tile and pavers coping, and applied a fresh white quartz finish for a clean, modern look. Swipe through to see the full story: cover, before, during, and after.',
+    images: [
+      '/images/projects/residential-renovation-2026-04/04-after-pano.jpeg',
+      '/images/projects/residential-renovation-2026-04/01-before.jpeg',
+      '/images/projects/residential-renovation-2026-04/02-tile-detail.jpeg',
+      '/images/projects/residential-renovation-2026-04/03-crew-plastering.jpeg',
+      '/images/projects/residential-renovation-2026-04/05-after-steps.jpeg',
+      '/images/projects/residential-renovation-2026-04/06-after-water.jpeg'
+    ]
+  },
+  {
     id: 'res-reno-1',
     category: 'RESIDENTIAL_RENOVATION',
     title: 'Residential Renovation',

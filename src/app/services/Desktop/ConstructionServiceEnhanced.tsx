@@ -2,16 +2,25 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import ConstructionGallery from '@/components/shared/ConstructionGallery';
 import {
   ConstructionProject,
   ConstructionCategory,
-  categoryConfig
+  categoryConfig,
+  constructionProjects
 } from '@/data/constructionProjects';
 
 const ConstructionServiceEnhanced: React.FC = () => {
+  const searchParams = useSearchParams();
+  const requestedProjectId = searchParams.get('project');
+  const requestedProject = requestedProjectId
+    ? constructionProjects.find(p => p.id === requestedProjectId)
+    : undefined;
+  const initialCategory: ConstructionCategory = requestedProject?.category ?? 'POOL_SPA_INFINITY';
+
   const [currentProject, setCurrentProject] = useState<ConstructionProject | null>(null);
-  const [activeCategory, setActiveCategory] = useState<ConstructionCategory>('NEW_BUILD');
+  const [activeCategory, setActiveCategory] = useState<ConstructionCategory>(initialCategory);
 
   return (
     <div className="w-full">
@@ -36,7 +45,8 @@ const ConstructionServiceEnhanced: React.FC = () => {
 
       {/* Construction Gallery */}
       <ConstructionGallery
-        initialCategory="POOL_SPA_INFINITY"
+        initialCategory={initialCategory}
+        initialProjectId={requestedProjectId ?? undefined}
         onCategoryChange={setActiveCategory}
         onProjectChange={setCurrentProject}
       />
