@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import ProjectCard from '@/components/shared/ProjectCard';
 import CarouselPagination from '@/components/shared/CarouselPagination';
-import { projects } from '@/data/projects';
+import { projects, type Project } from '@/data/projects';
 
 export default function ProjectsSection() {
   const router = useRouter();
@@ -15,8 +15,10 @@ export default function ProjectsSection() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const handleViewDetails = () => {
-    router.push('/services?service=design-and-construction');
+  const handleViewDetails = (project: Project) => {
+    const params = new URLSearchParams({ service: 'design-and-construction' });
+    if (project.constructionId) params.set('project', project.constructionId);
+    router.push(`/services?${params.toString()}`);
   };
 
   const cardWidth = 320;
@@ -162,7 +164,7 @@ export default function ProjectsSection() {
                   category={project.category}
                   title={project.title}
                   subtitle={project.subtitle}
-                  onClick={handleViewDetails}
+                  onClick={() => handleViewDetails(project)}
                 />
               </div>
             ))}

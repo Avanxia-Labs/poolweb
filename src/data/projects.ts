@@ -6,6 +6,9 @@ export interface Project {
   category: ProjectCategory;
   title: string;
   subtitle: string;
+  /** Optional: ID of the matching project in constructionProjects.ts so the
+   *  home carousel can deep-link into the services gallery on that project. */
+  constructionId?: string;
 }
 
 export const categoryColors: Record<ProjectCategory, string> = {
@@ -59,6 +62,7 @@ export const projects: Project[] = [
     category: 'RENOVATION',
     title: "Complete Pool Refinish",
     subtitle: 'Tile, coping & quartz finish',
+    constructionId: 'res-reno-2',
   },
   {
     id: 'project-5',

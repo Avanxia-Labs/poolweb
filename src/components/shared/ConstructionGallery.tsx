@@ -14,17 +14,23 @@ const isVideo = (url: string) => url.toLowerCase().endsWith('.mp4');
 
 interface ConstructionGalleryProps {
   initialCategory?: ConstructionCategory;
+  /** When set, the gallery opens on this project (within `initialCategory`) instead of the first one. */
+  initialProjectId?: string;
   onCategoryChange?: (category: ConstructionCategory) => void;
   onProjectChange?: (project: ConstructionProject) => void;
 }
 
 const ConstructionGallery: React.FC<ConstructionGalleryProps> = ({
   initialCategory = 'NEW_BUILD',
+  initialProjectId,
   onCategoryChange,
   onProjectChange
 }) => {
   const [activeCategory, setActiveCategory] = useState<ConstructionCategory>(initialCategory);
-  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+  const initialIndex = initialProjectId
+    ? Math.max(0, getProjectsByCategory(initialCategory).findIndex(p => p.id === initialProjectId))
+    : 0;
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(initialIndex);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
@@ -33,8 +39,14 @@ const ConstructionGallery: React.FC<ConstructionGalleryProps> = ({
   const projects = getProjectsByCategory(activeCategory);
   const currentProject = projects[currentProjectIndex];
 
-  // Reset indices when category changes
+  // Reset to first project when the user changes category manually.
+  // Skip on initial mount so a deep-linked project (initialProjectId) is preserved.
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     setCurrentProjectIndex(0);
     setCurrentImageIndex(0);
   }, [activeCategory]);
