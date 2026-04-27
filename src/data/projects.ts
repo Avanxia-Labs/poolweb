@@ -54,6 +54,13 @@ export const projects: Project[] = [
     subtitle: "24' x 12' Custom Design",
   },
   {
+    id: 'project-7',
+    image: '/images/projects/residential-renovation-2026-04/04-after-pano.jpeg',
+    category: 'RENOVATION',
+    title: "Complete Pool Refinish",
+    subtitle: 'Tile, coping & quartz finish',
+  },
+  {
     id: 'project-5',
     image: '/images/projects/residential-renovation/residential-renovation-1.jpeg',
     category: 'RENOVATION',
