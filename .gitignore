@@ -69,3 +69,9 @@ logs/
 *.temp
 *.bak
 *.backup
+
+# Material de investigación de competencia (no versionar — pesado/local)
+competencia-pool-quality/
+competencia-pool-quality-fuerte/
+competencia-pool-quality.zip
+competencia-pool-quality-fuerte.zip
